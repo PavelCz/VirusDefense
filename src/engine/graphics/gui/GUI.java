@@ -12,5 +12,5 @@ public abstract class GUI {
 		this.y = y;
 	}
 	
-	public abstract void draw(Graphics graphics);
+	public abstract void draw();
 }

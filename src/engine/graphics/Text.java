@@ -1,27 +1,29 @@
 package engine.graphics;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.TrueTypeFont;
 
 public class Text extends RenderObject {
-	private Graphics graphics;
+	private TrueTypeFont font;
 	private String text;
+	private Color color;
 
-	public Text(String text, Graphics graphics) {
-		this.graphics = graphics;
+	public Text(TrueTypeFont font, String text, Color color) {
+		this.font = font;
 		this.text = text;
+		this.color = color;
 	}
 
 	public void setText(String text) {
 		this.text = text;
 	}
 
-	public void setGraphics(Graphics graphics) {
-		this.graphics = graphics;
-	}
+	
 
 	@Override
 	public void draw(float x, float y) {
-		this.graphics.drawString(this.text, x, y);
+		this.font.drawString( x, y, this.text, this.color);
 
 	}
 
