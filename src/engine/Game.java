@@ -11,7 +11,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 
-import engine.graphics.gui.StaticText;
+import engine.gui.Button;
+import engine.gui.StaticText;
 
 public class Game extends BasicGame {
 	private boolean showFPS = false;
@@ -19,6 +20,7 @@ public class Game extends BasicGame {
 	TrueTypeFont overallFont;
 	private TestEntity t;
 	private StaticText text;
+	private Button b;
 
 	public Game() {
 		super("TowerDefense");
@@ -33,6 +35,7 @@ public class Game extends BasicGame {
 		// initializing all game objects
 		this.t = new TestEntity(10, 10, 180, "./data/A.bmp");
 		this.text = new StaticText(overallFont, 100, 100, Color.green, "Hello World");
+		this.b = new Button(300, 300, "./data/button1.png", "./data/button2.png");
 
 		container.setShowFPS(this.showFPS);
 
@@ -42,6 +45,7 @@ public class Game extends BasicGame {
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		t.draw();
 		text.draw();
+		b.draw();
 
 	}
 
@@ -49,7 +53,15 @@ public class Game extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			System.out.println(input.getMouseX() + ", " + input.getMouseY());
+			float x = input.getMouseX();
+			float y = input.getMouseY();
+			if(b.checkCollision(x, y)) {
+				b.setClicked(true);
+			}
+			
+		}
+		if(!input.isMouseButtonDown(0)) {
+			b.setClicked(false);
 		}
 
 		// if(Mouse.isButtonDown(0)) {

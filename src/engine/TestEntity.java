@@ -1,22 +1,15 @@
 package engine;
 
-import org.newdawn.slick.SlickException;
-
 import engine.graphics.Sprite;
 
 public class TestEntity extends RotatableEntity implements Drawable {
-	
+
 	private Sprite sprite;
-	
+
 	public TestEntity(float x, float y, float rotation, String spritePath) {
-		super(x,y, rotation);
-		
-		try {
-			this.sprite = new Sprite(spritePath);
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		super(x, y, rotation);
+
+		this.sprite = new Sprite(spritePath);
 	}
 
 	@Override
@@ -28,7 +21,7 @@ public class TestEntity extends RotatableEntity implements Drawable {
 	@Override
 	public void rotate(float degrees) {
 		this.rotation += rotation;
-		
+
 	}
 
 }

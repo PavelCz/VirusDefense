@@ -1,4 +1,4 @@
-package engine.graphics.gui;
+package engine.gui;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;

@@ -6,9 +6,14 @@ import org.newdawn.slick.SlickException;
 public class Sprite extends RotatableRenderObject{
 	private Image image;
 	
-	public Sprite(String imagePath) throws SlickException  {
+	public Sprite(String imagePath)   {
 
-		this.image = new Image(imagePath);
+		try {
+			this.image = new Image(imagePath);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 	
@@ -19,6 +24,14 @@ public class Sprite extends RotatableRenderObject{
 	public void draw(float xCoordinate, float yCoordinate, float rotation, float scale) {
 		this.image.setRotation(rotation);
 		this.image.draw(xCoordinate, yCoordinate, scale);
+	}
+	
+	public int getWidth() {
+		return this.image.getWidth();
+	}
+	
+	public int getHeight() {
+		return this.image.getHeight();
 	}
 
 }
