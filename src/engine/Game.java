@@ -71,7 +71,7 @@ public class Game extends BasicGame {
 	private void mouseEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-		
+
 			float x = input.getMouseX();
 			float y = input.getMouseY();
 			if (button1.checkCollision(x, y)) {
@@ -85,26 +85,12 @@ public class Game extends BasicGame {
 		}
 		// checks if mouse button was released again after being pressed
 		if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			
+
 			this.mouseWasClicked = false;
-			
+
 			button1.onRelease();
 			button2.onRelease();
 		}
-	}
-
-	public static void main(String[] args) {
-		Game game = new Game();
-		AppGameContainer appGameContainer;
-		try {
-			appGameContainer = new AppGameContainer(game, 800, 600, false);
-			appGameContainer.start();
-
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 
 }
