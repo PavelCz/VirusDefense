@@ -1,16 +1,20 @@
 package engine.graphics;
 
+import java.awt.Font;
+
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
 
 public class Text extends RenderObject {
 	private TrueTypeFont font;
 	private String text;
 	private Color color;
+	private int height;
 
-	public Text(TrueTypeFont font, String text, Color color) {
-		this.font = font;
+	public Text(int height, String text, Color color) {
+		this.height = height;
+		Font fontSettings = new Font("Verdana", Font.PLAIN, this.height);
+		font = new TrueTypeFont(fontSettings, true);
 		this.text = text;
 		this.color = color;
 	}

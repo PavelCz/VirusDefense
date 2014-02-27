@@ -1,7 +1,5 @@
 package engine.gui;
 
-import org.newdawn.slick.Graphics;
-
 
 public abstract class GUI {
 	protected float x, y;
