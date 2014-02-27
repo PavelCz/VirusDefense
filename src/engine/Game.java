@@ -83,7 +83,8 @@ public class Game extends BasicGame {
 			this.mouseWasClicked = true;
 
 		}
-		if (this.mouseWasClicked && !input.isMouseButtonDown(0)) {
+		// checks if mouse button was released again after being pressed
+		if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 			
 			this.mouseWasClicked = false;
 			

@@ -2,7 +2,7 @@ package engine.gui;
 
 import engine.graphics.Sprite;
 
-public class Button extends GUI {
+public class Button extends GUI implements Clickable {
 	private Sprite unclickedButton;
 	private Sprite clickedButton;
 	private boolean clicked;
