@@ -29,8 +29,11 @@ public class Button extends GUI {
 
 	}
 	
-	public void setClicked(boolean clicked) {
-		this.clicked = clicked;
+	public void onClick() {
+		this.clicked = true;
+	}
+	public void onRelease() {
+		this.clicked = false;
 	}
 	
 	public boolean checkCollision(float x, float y) {

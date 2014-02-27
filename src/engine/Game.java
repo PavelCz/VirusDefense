@@ -19,7 +19,7 @@ public class Game extends BasicGame {
 	private List <Drawable>drawables;
 	private List <GUI>guiElements;
 	private boolean showFPS = false;
-	Button button1;
+	Button button1, button2;
 
 	public Game() {
 		super("TowerDefense");
@@ -32,11 +32,16 @@ public class Game extends BasicGame {
 		
 		
 		button1 = new Button(300, 300, "./data/button1.png", "./data/button2.png");
+		button2 = new Button(200, 300, "./data/button1.png", "./data/button2.png");
 		
 		
 		// add all objects that need to be drawn to the respectable arrays 
+		//entities
 		this.drawables.add(new TestEntity(10, 10, 180, "./data/A.bmp"));
+		
+		//GUI
 		this.guiElements.add(this.button1);
+		this.guiElements.add(this.button2);
 		this.guiElements.add(new StaticText(100, 100, 10, Color.green, "Hello World"));
 		
 		
@@ -65,12 +70,12 @@ public class Game extends BasicGame {
 			float x = input.getMouseX();
 			float y = input.getMouseY();
 			if (button1.checkCollision(x, y)) {
-				button1.setClicked(true);
+				button1.onClick();
 			}
 
 		}
 		if (!input.isMouseButtonDown(0)) {
-			button1.setClicked(false);
+			button1.onRelease();
 		}
 
 		// if(Mouse.isButtonDown(0)) {
