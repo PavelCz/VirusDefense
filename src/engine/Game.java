@@ -1,5 +1,8 @@
 package engine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
@@ -9,13 +12,14 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import engine.gui.Button;
+import engine.gui.GUI;
 import engine.gui.StaticText;
 
 public class Game extends BasicGame {
+	private List <Drawable>drawables;
+	private List <GUI>guiElements;
 	private boolean showFPS = false;
-	private TestEntity t;
-	private StaticText text;
-	private Button b;
+	Button button1;
 
 	public Game() {
 		super("TowerDefense");
@@ -23,11 +27,19 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-
-		// initializing all game objects
-		this.t = new TestEntity(10, 10, 180, "./data/A.bmp");
-		this.text = new StaticText(100, 100, 10, Color.green, "Hello World");
-		this.b = new Button(300, 300, "./data/button1.png", "./data/button2.png");
+		this.drawables = new  ArrayList<Drawable>();
+		this.guiElements = new  ArrayList<GUI>();
+		
+		
+		button1 = new Button(300, 300, "./data/button1.png", "./data/button2.png");
+		
+		
+		// add all objects that need to be drawn to the respectable arrays 
+		this.drawables.add(new TestEntity(10, 10, 180, "./data/A.bmp"));
+		this.guiElements.add(this.button1);
+		this.guiElements.add(new StaticText(100, 100, 10, Color.green, "Hello World"));
+		
+		
 
 		container.setShowFPS(this.showFPS);
 
@@ -35,9 +47,14 @@ public class Game extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		t.draw();
-		text.draw();
-		b.draw();
+		
+		
+		for (Drawable entity : this.drawables) {
+			entity.draw();
+		}
+		for (GUI guiElement : this.guiElements) {
+			guiElement.draw();
+		}
 
 	}
 
@@ -47,13 +64,13 @@ public class Game extends BasicGame {
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			float x = input.getMouseX();
 			float y = input.getMouseY();
-			if (b.checkCollision(x, y)) {
-				b.setClicked(true);
+			if (button1.checkCollision(x, y)) {
+				button1.setClicked(true);
 			}
 
 		}
 		if (!input.isMouseButtonDown(0)) {
-			b.setClicked(false);
+			button1.setClicked(false);
 		}
 
 		// if(Mouse.isButtonDown(0)) {
