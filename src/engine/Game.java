@@ -7,24 +7,32 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 public class Game extends BasicGame {
+	
+	
+	private TestEntity t;
+	
+	
 	public Game() {
 		super("TowerDefense");
 	}
 
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
-		// TODO Auto-generated method stub
+		t.draw();
 		
 	}
 
 	@Override
-	public void init(GameContainer arg0) throws SlickException {
-		// TODO Auto-generated method stub
+	public void init(GameContainer container) throws SlickException {
+		this.t = new TestEntity(10, 10, 180, "./data/A.bmp");
+		
+		container.setShowFPS(false);
+		
 		
 	}
 
 	@Override
-	public void update(GameContainer arg0, int arg1) throws SlickException {
+	public void update(GameContainer arg0, int delta) throws SlickException {
 		// TODO Auto-generated method stub
 		
 	}
