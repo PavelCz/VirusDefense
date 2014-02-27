@@ -20,7 +20,9 @@ public class Game extends BasicGame {
 	private List<GUI> guiElements;
 	private boolean showFPS;
 	private boolean mouseWasClicked;
-	Button button1, button2;
+	
+	private Background gameBackground;
+	private Button button1, button2;
 
 	public Game() {
 		super("TowerDefense");
@@ -32,6 +34,7 @@ public class Game extends BasicGame {
 		this.guiElements = new ArrayList<GUI>();
 		this.mouseWasClicked = false;
 		this.showFPS = false;
+		this.gameBackground = new Background(1.6f);
 
 		button1 = new Button(300, 300, "./data/button1.png", "./data/button2.png");
 		button2 = new Button(200, 300, "./data/button1.png", "./data/button2.png");
@@ -51,6 +54,7 @@ public class Game extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		this.gameBackground.draw();
 
 		for (Drawable entity : this.drawables) {
 			entity.draw();
