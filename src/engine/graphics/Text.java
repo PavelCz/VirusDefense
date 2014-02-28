@@ -21,7 +21,6 @@ public class Text extends RenderObject {
 
 	public void setText(String text) {
 		this.text = text;
-		System.out.println("Hallo Pavel");
 	}
 
 	
