@@ -1,13 +1,16 @@
 package engine;
 
+import engine.graphics.Sprite;
+
 public class ShootingTower extends Tower {
-	public ShootingTower(float x, float y) {
-		super(x,y, 200, 200, new ShootingWeapon());
+	public ShootingTower(float x, float y, Sprite sprite) {
+		super(x * 50, y * 50, 200, 200, new ShootingWeapon());
+	this.sprite = sprite;
 	}
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
-		
+		this.sprite.draw(this.x, this.y);
+
 	}
 }

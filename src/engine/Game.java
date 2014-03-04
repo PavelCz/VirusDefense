@@ -11,6 +11,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.GUI;
 import engine.gui.StaticText;
@@ -23,6 +24,7 @@ public class Game extends BasicGame {
 	
 	private Background gameBackground;
 	private Button button1, button2;
+	private Tower t;
 
 	public Game() {
 		super("TowerDefense");
@@ -30,6 +32,8 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
+		this.t = new ShootingTower(1, 4,new Sprite("./data/Unbenannt-2.png"));
+		
 		this.drawables = new ArrayList<Drawable>();
 		this.guiElements = new ArrayList<GUI>();
 		this.mouseWasClicked = false;
@@ -42,6 +46,7 @@ public class Game extends BasicGame {
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
 		this.drawables.add(new TestEntity(10, 10, 180, "./data/A.bmp"));
+		this.drawables.add(this.t);
 
 		// GUI
 		this.guiElements.add(this.button1);
@@ -78,12 +83,14 @@ public class Game extends BasicGame {
 
 			float x = input.getMouseX();
 			float y = input.getMouseY();
+			
 			if (button1.checkCollision(x, y)) {
 				button1.onClick();
 			}
 			if (button2.checkCollision(x, y)) {
 				button2.onClick();
 			}
+			
 			this.mouseWasClicked = true;
 
 		}
