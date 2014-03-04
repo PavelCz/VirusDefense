@@ -38,22 +38,35 @@ public class Game extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		this.t = new ShootingTower(1, 2, new Sprite("./data/Unbenannt-2.png"));
-		this.tb = new TowerButton(13 * 50, 0, "./data/button1.png", "./data/button2.png", new ShootingTower(0, 0, new Sprite(
-				"./data/Unbenannt-2.png")));
+		this.tb = new TowerButton(13 * 50, 0, "./data/button1.png",
+				"./data/button2.png", new ShootingTower(0, 0, new Sprite(
+						"./data/Unbenannt-2.png")));
 		this.path = new boolean[12][13];
 		this.towers = new Tower[12][13];
-		this.path[0] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
-		this.path[1] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
-		this.path[2] = new boolean[] { false, true, true, true, true, true, true, true, true, true, true, false, false };
-		this.path[3] = new boolean[] { false, false, false, false, false, false, false, false, false, false, true, false, false };
-		this.path[4] = new boolean[] { false, false, false, false, false, false, false, false, false, false, true, false, false };
-		this.path[5] = new boolean[] { false, true, true, true, true, true, true, true, true, true, true, false, false };
-		this.path[6] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
-		this.path[7] = new boolean[] { false, true, false, false, false, false, false, false, false, true, true, true, false };
-		this.path[8] = new boolean[] { false, true, false, false, true, true, true, true, false, true, false, true, false };
-		this.path[9] = new boolean[] { false, true, false, false, true, false, false, true, false, true, false, true, false };
-		this.path[10] = new boolean[] { false, true, true, true, true, false, false, true, true, true, false, true, false };
-		this.path[11] = new boolean[] { false, false, false, false, false, false, false, false, false, false, false, true, false };
+		this.path[0] = new boolean[] { false, true, false, false, false, false,
+				false, false, false, false, false, false, false };
+		this.path[1] = new boolean[] { false, true, false, false, false, false,
+				false, false, false, false, false, false, false };
+		this.path[2] = new boolean[] { false, true, true, true, true, true,
+				true, true, true, true, true, false, false };
+		this.path[3] = new boolean[] { false, false, false, false, false,
+				false, false, false, false, false, true, false, false };
+		this.path[4] = new boolean[] { false, false, false, false, false,
+				false, false, false, false, false, true, false, false };
+		this.path[5] = new boolean[] { false, true, true, true, true, true,
+				true, true, true, true, true, false, false };
+		this.path[6] = new boolean[] { false, true, false, false, false, false,
+				false, false, false, false, false, false, false };
+		this.path[7] = new boolean[] { false, true, false, false, false, false,
+				false, false, false, true, true, true, false };
+		this.path[8] = new boolean[] { false, true, false, false, true, true,
+				true, true, false, true, false, true, false };
+		this.path[9] = new boolean[] { false, true, false, false, true, false,
+				false, true, false, true, false, true, false };
+		this.path[10] = new boolean[] { false, true, true, true, true, false,
+				false, true, true, true, false, true, false };
+		this.path[11] = new boolean[] { false, false, false, false, false,
+				false, false, false, false, false, false, true, false };
 
 		this.drawables = new ArrayList<Drawable>();
 		this.guiElements = new ArrayList<GUI>();
@@ -61,8 +74,10 @@ public class Game extends BasicGame {
 		this.showFPS = false;
 		this.gameBackground = new Background(1f);
 
-		button1 = new Button(300, 300, "./data/button1.png", "./data/button2.png");
-		button2 = new Button(200, 300, "./data/button1.png", "./data/button2.png");
+		button1 = new Button(300, 300, "./data/button1.png",
+				"./data/button2.png");
+		button2 = new Button(200, 300, "./data/button1.png",
+				"./data/button2.png");
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
@@ -72,7 +87,8 @@ public class Game extends BasicGame {
 		// GUI
 		this.guiElements.add(this.button1);
 		this.guiElements.add(this.button2);
-		this.guiElements.add(new StaticText(100, 100, 10, Color.green, "Hello World"));
+		this.guiElements.add(new StaticText(100, 100, 10, Color.green,
+				"Hello World"));
 		this.guiElements.add(this.tb);
 
 		container.setShowFPS(this.showFPS);
@@ -80,7 +96,8 @@ public class Game extends BasicGame {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics)
+			throws SlickException {
 		this.gameBackground.draw();
 		for (Tower[] towerArray : this.towers) {
 			for (Tower tower : towerArray) {
@@ -99,7 +116,8 @@ public class Game extends BasicGame {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update(GameContainer container, int delta)
+			throws SlickException {
 
 		this.mouseEvents(container, delta);
 
@@ -124,14 +142,18 @@ public class Game extends BasicGame {
 				this.currentTower = this.tb.getTower();
 				this.tb.onClick();
 			} else {
-				if (this.currentTower != null) {
-					if (x < 650) {
-						Tower bufferTower = this.currentTower.clone();
-						bufferTower.setX((int) x / 50);
-						bufferTower.setY((int) y / 50);
-						this.towers[(int) y / 50][(int) x / 50] = bufferTower;
-						this.tb.onRelease();
-						this.currentTower = null;
+				int newX = (int) x / 50;
+				int newY = (int) y / 50;
+				if (!path[newY][newX]) {
+					if (this.currentTower != null) {
+						if (x < 650) {
+							Tower bufferTower = this.currentTower.clone();
+							bufferTower.setX(newX);
+							bufferTower.setY(newY);
+							this.towers[newY][newX] = bufferTower;
+							this.tb.onRelease();
+							this.currentTower = null;
+						}
 					}
 				}
 			}
@@ -140,7 +162,8 @@ public class Game extends BasicGame {
 
 		}
 		// checks if mouse button was released again after being pressed
-		if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		if (this.mouseWasClicked
+				&& !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 
 			this.mouseWasClicked = false;
 
