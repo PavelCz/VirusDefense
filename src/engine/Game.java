@@ -144,7 +144,7 @@ public class Game extends BasicGame {
 			} else {
 				int newX = (int) x / 50;
 				int newY = (int) y / 50;
-				if (!path[newY][newX]) {
+				if (!path[newY][newX] && towers[newY][newX] == null) {
 					if (this.currentTower != null) {
 						if (x < 650) {
 							Tower bufferTower = this.currentTower.clone();
