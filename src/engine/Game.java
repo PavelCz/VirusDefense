@@ -34,7 +34,7 @@ public class Game extends BasicGame {
 		this.guiElements = new ArrayList<GUI>();
 		this.mouseWasClicked = false;
 		this.showFPS = false;
-		this.gameBackground = new Background(1.6f);
+		this.gameBackground = new Background(1f);
 
 		button1 = new Button(300, 300, "./data/button1.png", "./data/button2.png");
 		button2 = new Button(200, 300, "./data/button1.png", "./data/button2.png");

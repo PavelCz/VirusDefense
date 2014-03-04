@@ -15,7 +15,5 @@ public class StartGame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
-
 }
