@@ -114,15 +114,26 @@ public class Game extends BasicGame {
 
 			if (button1.checkCollision(x, y)) {
 				button1.onClick();
+				this.tb.onRelease();
+				this.currentTower = null;
 			} else if (button2.checkCollision(x, y)) {
 				button2.onClick();
+				this.tb.onRelease();
+				this.currentTower = null;
 			} else if (this.tb.checkCollision(x, y)) {
 				this.currentTower = this.tb.getTower();
+				this.tb.onClick();
 			} else {
-				Tower bufferTower = this.currentTower.clone();
-				bufferTower.setX((int) x / 50);
-				bufferTower.setY((int) y / 50);
-				this.towers[(int) y / 50][(int) x / 50] = bufferTower;
+				if (this.currentTower != null) {
+					if (x < 650) {
+						Tower bufferTower = this.currentTower.clone();
+						bufferTower.setX((int) x / 50);
+						bufferTower.setY((int) y / 50);
+						this.towers[(int) y / 50][(int) x / 50] = bufferTower;
+						this.tb.onRelease();
+						this.currentTower = null;
+					}
+				}
 			}
 
 			this.mouseWasClicked = true;
@@ -135,6 +146,7 @@ public class Game extends BasicGame {
 
 			button1.onRelease();
 			button2.onRelease();
+
 		}
 	}
 
