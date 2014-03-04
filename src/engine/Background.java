@@ -6,7 +6,7 @@ public class Background implements Drawable{
 	private Sprite picture;
 	
 	Background(float scale) {
-		this.picture = new Sprite("./data/background.png", scale);
+		this.picture = new Sprite("./data/background.jpg", scale);
 	}
 	@Override
 	public void draw() {
