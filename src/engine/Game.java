@@ -21,10 +21,12 @@ public class Game extends BasicGame {
 	private List<GUI> guiElements;
 	private boolean showFPS;
 	private boolean mouseWasClicked;
-	
+
 	private Background gameBackground;
 	private Button button1, button2;
 	private Tower t;
+	private boolean[][] path;
+	Sprite s;
 
 	public Game() {
 		super("TowerDefense");
@@ -32,8 +34,22 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		this.t = new ShootingTower(1, 4,new Sprite("./data/Unbenannt-2.png"));
-		
+		this.t = new ShootingTower(1, 2, new Sprite("./data/Unbenannt-2.png"));
+		this.s = new Sprite("./data/Unbenannt-2.png");
+		this.path = new boolean[12][13];
+		this.path[0] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
+		this.path[1] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
+		this.path[2] = new boolean[] { false, true, true, true, true, true, true, true, true, true, true, false, false };
+		this.path[3] = new boolean[] { false, false, false, false, false, false, false, false, false, false, true, false, false };
+		this.path[4] = new boolean[] { false, false, false, false, false, false, false, false, false, false, true, false, false };
+		this.path[5] = new boolean[] { false, true, true, true, true, true, true, true, true, true, true, false, false };
+		this.path[6] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
+		this.path[7] = new boolean[] { false, true, false, false, false, false, false, false, false, true, true, true, false };
+		this.path[8] = new boolean[] { false, true, false, false, true, true, true, true, false, true, false, true, false };
+		this.path[9] = new boolean[] { false, true, false, false, true, false, false, true, false, true, false, true, false };
+		this.path[10] = new boolean[] { false, true, true, true, true, false, false, true, true, true, false, true, false };
+		this.path[11] = new boolean[] { false, false, false, false, false, false, false, false, false, false, false, true, false };
+
 		this.drawables = new ArrayList<Drawable>();
 		this.guiElements = new ArrayList<GUI>();
 		this.mouseWasClicked = false;
@@ -59,7 +75,7 @@ public class Game extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		this.gameBackground.draw();
+		//this.gameBackground.draw();
 
 		for (Drawable entity : this.drawables) {
 			entity.draw();
@@ -67,6 +83,9 @@ public class Game extends BasicGame {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
+		
+		this.debugPath();
+		
 
 	}
 
@@ -83,14 +102,14 @@ public class Game extends BasicGame {
 
 			float x = input.getMouseX();
 			float y = input.getMouseY();
-			
+
 			if (button1.checkCollision(x, y)) {
 				button1.onClick();
 			}
 			if (button2.checkCollision(x, y)) {
 				button2.onClick();
 			}
-			
+
 			this.mouseWasClicked = true;
 
 		}
@@ -101,6 +120,18 @@ public class Game extends BasicGame {
 
 			button1.onRelease();
 			button2.onRelease();
+		}
+	}
+	
+	private void debugPath() {
+		for (int i = 0; i < this.path.length; ++i) {
+			for (int j = 0; j < this.path[0].length; ++j) {
+				if(this.path[i][j]) {
+					s.draw(j *50, i*50);
+				}
+			}
+			
+			
 		}
 	}
 
