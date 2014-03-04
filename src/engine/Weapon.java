@@ -1,5 +1,5 @@
 package engine;
 
-public class Weapon {
+public abstract class Weapon {
 
 }
