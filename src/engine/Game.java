@@ -15,6 +15,7 @@ import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.GUI;
 import engine.gui.StaticText;
+import engine.gui.TowerButton;
 
 public class Game extends BasicGame {
 	private List<Drawable> drawables;
@@ -26,7 +27,9 @@ public class Game extends BasicGame {
 	private Button button1, button2;
 	private Tower t;
 	private boolean[][] path;
-	Sprite s;
+	private Tower[][] towers;
+	private TowerButton tb;
+	private Tower currentTower;
 
 	public Game() {
 		super("TowerDefense");
@@ -35,8 +38,10 @@ public class Game extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		this.t = new ShootingTower(1, 2, new Sprite("./data/Unbenannt-2.png"));
-		this.s = new Sprite("./data/Unbenannt-2.png");
+		this.tb = new TowerButton(13 * 50, 0, "./data/button1.png", "./data/button2.png", new ShootingTower(0, 0, new Sprite(
+				"./data/Unbenannt-2.png")));
 		this.path = new boolean[12][13];
+		this.towers = new Tower[12][13];
 		this.path[0] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
 		this.path[1] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
 		this.path[2] = new boolean[] { false, true, true, true, true, true, true, true, true, true, true, false, false };
@@ -68,6 +73,7 @@ public class Game extends BasicGame {
 		this.guiElements.add(this.button1);
 		this.guiElements.add(this.button2);
 		this.guiElements.add(new StaticText(100, 100, 10, Color.green, "Hello World"));
+		this.guiElements.add(this.tb);
 
 		container.setShowFPS(this.showFPS);
 
@@ -75,17 +81,20 @@ public class Game extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		//this.gameBackground.draw();
-
+		this.gameBackground.draw();
+		for (Tower[] towerArray : this.towers) {
+			for (Tower tower : towerArray) {
+				if (tower != null) {
+					tower.draw();
+				}
+			}
+		}
 		for (Drawable entity : this.drawables) {
 			entity.draw();
 		}
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
-		
-		this.debugPath();
-		
 
 	}
 
@@ -105,9 +114,15 @@ public class Game extends BasicGame {
 
 			if (button1.checkCollision(x, y)) {
 				button1.onClick();
-			}
-			if (button2.checkCollision(x, y)) {
+			} else if (button2.checkCollision(x, y)) {
 				button2.onClick();
+			} else if (this.tb.checkCollision(x, y)) {
+				this.currentTower = this.tb.getTower();
+			} else {
+				Tower bufferTower = this.currentTower.clone();
+				bufferTower.setX((int) x / 50);
+				bufferTower.setY((int) y / 50);
+				this.towers[(int) y / 50][(int) x / 50] = bufferTower;
 			}
 
 			this.mouseWasClicked = true;
@@ -122,16 +137,17 @@ public class Game extends BasicGame {
 			button2.onRelease();
 		}
 	}
-	
+
 	private void debugPath() {
+		Sprite s = new Sprite("./data/Unbenannt-2.png");
+		;
 		for (int i = 0; i < this.path.length; ++i) {
 			for (int j = 0; j < this.path[0].length; ++j) {
-				if(this.path[i][j]) {
-					s.draw(j *50, i*50);
+				if (this.path[i][j]) {
+					s.draw(j * 50, i * 50);
 				}
 			}
-			
-			
+
 		}
 	}
 
