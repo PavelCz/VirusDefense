@@ -37,10 +37,10 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		this.t = new ShootingTower(1, 2, new Sprite("./data/Unbenannt-2.png"));
+		this.t = new ShootingTower(1, 2, new Sprite("./data/roteBlutk_klein.png"));
 		this.tb = new TowerButton(13 * 50, 0, "./data/button1.png",
 				"./data/button2.png", new ShootingTower(0, 0, new Sprite(
-						"./data/Unbenannt-2.png")));
+						"./data/roteBlutk_klein.png")));
 		this.path = new boolean[12][13];
 		this.towers = new Tower[12][13];
 		this.path[0] = new boolean[] { false, true, false, false, false, false,
