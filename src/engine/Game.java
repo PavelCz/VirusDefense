@@ -22,6 +22,7 @@ public class Game extends BasicGame {
 	private List<GUI> guiElements;
 	private boolean showFPS;
 	private boolean mouseWasClicked;
+	private static int lives;
 
 	private Background gameBackground;
 	private Button button1, button2;
@@ -42,8 +43,8 @@ public class Game extends BasicGame {
 		this.t = new ShootingTower(1, 2, new Sprite("./data/roteBlutk_klein.png"));
 		this.tb = new TowerButton(13 * 50, 0, "./data/button1.png", "./data/button2.png", new ShootingTower(0, 0, new Sprite(
 				"./data/roteBlutk_klein.png")));
+		this.lives = 10;
 
-		
 		this.path = new boolean[12][13];
 		this.towers = new Tower[12][13];
 		this.path[0] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
@@ -61,8 +62,21 @@ public class Game extends BasicGame {
 
 		this.drawables = new ArrayList<Drawable>();
 		this.guiElements = new ArrayList<GUI>();
-		this.startingWaypoint = new Waypoint(75, 125, Waypoint.RIGHT, new Waypoint(525, 125, Waypoint.DOWN, null));
-		
+		this.startingWaypoint = new Waypoint(75, 125, Waypoint.RIGHT);
+		this.startingWaypoint.add(new Waypoint(525, 125, Waypoint.DOWN));
+		this.startingWaypoint.add(new Waypoint(525, 275, Waypoint.LEFT));
+		this.startingWaypoint.add(new Waypoint(75, 275, Waypoint.DOWN));
+		this.startingWaypoint.add(new Waypoint(75, 525, Waypoint.RIGHT));
+		this.startingWaypoint.add(new Waypoint(225, 525, Waypoint.UP));
+		this.startingWaypoint.add(new Waypoint(225, 425, Waypoint.RIGHT));
+		this.startingWaypoint.add(new Waypoint(375, 425, Waypoint.DOWN));
+		this.startingWaypoint.add(new Waypoint(425, 525, Waypoint.RIGHT));
+		this.startingWaypoint.add(new Waypoint(475, 525, Waypoint.UP));
+
+		this.startingWaypoint.add(new Waypoint(475, 375, Waypoint.RIGHT));
+		this.startingWaypoint.add(new Waypoint(575, 375, Waypoint.DOWN));
+		this.startingWaypoint.add(new Waypoint(575, 550, Waypoint.DOWN));
+
 		this.e = new Enemy1(this.startingWaypoint);
 
 		this.mouseWasClicked = false;
@@ -114,6 +128,11 @@ public class Game extends BasicGame {
 		this.e.update(delta);
 
 		this.mouseEvents(container, delta);
+		
+		
+		if(Game.lives <= 0) {
+			System.out.println("Game Over!");
+		}
 
 	}
 
@@ -177,6 +196,10 @@ public class Game extends BasicGame {
 			}
 
 		}
+	}
+
+	public static void reduceLife() {
+		Game.lives--;
 	}
 
 }

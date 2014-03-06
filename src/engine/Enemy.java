@@ -17,6 +17,7 @@ public abstract class Enemy extends Entity implements Drawable {
 		this.sprite = sprite;
 		this.velocity = new MyVector2f(0, speed);
 		this.waypoint = startingWaypoint;
+		this.direction = direction;
 	}
 
 	public void setX(float x) {
@@ -28,19 +29,21 @@ public abstract class Enemy extends Entity implements Drawable {
 	}
 
 	public void update(int delta) {
-		this.x += this.velocity.getX() * delta;
-		this.y += this.velocity.getY() * delta;
-		if (this.waypoint.getNextWaypoint() == null) {
-
-		}
-		if (this.direction == Waypoint.DOWN && this.getY() >= this.waypoint.getY()) {
-			this.newDirection();
-		} else if(this.direction == Waypoint.RIGHT && this.getX() >= this.waypoint.getX()) {
-			this.newDirection();
-		} else if (this.direction == Waypoint.UP && this.getY() <= this.waypoint.getY()) {
-			this.newDirection();
-		} else if(this.direction == Waypoint.LEFT && this.getX() <= this.waypoint.getX()) {
-			this.newDirection();
+		if (this.health > 0) {
+			System.out.println(this.direction);
+			this.x += this.velocity.getX() * delta;
+			this.y += this.velocity.getY() * delta;
+			if (this.waypoint == null) {
+				this.health = 0;
+			} else if (this.direction == Waypoint.DOWN && this.getY() >= this.waypoint.getY()) {
+				this.newDirection();
+			} else if (this.direction == Waypoint.RIGHT && this.getX() >= this.waypoint.getX()) {
+				this.newDirection();
+			} else if (this.direction == Waypoint.UP && this.getY() <= this.waypoint.getY()) {
+				this.newDirection();
+			} else if (this.direction == Waypoint.LEFT && this.getX() <= this.waypoint.getX()) {
+				this.newDirection();
+			}
 		}
 	}
 
@@ -61,4 +64,11 @@ public abstract class Enemy extends Entity implements Drawable {
 
 		this.waypoint = this.waypoint.getNextWaypoint();
 	}
+
+	public void draw() {
+		if (this.health > 0) {
+			this.sprite.draw(this.x - this.sprite.getWidth() / 2, this.y - this.sprite.getHeight() / 2);
+		}
+	}
+
 }

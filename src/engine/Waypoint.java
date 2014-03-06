@@ -8,12 +8,12 @@ public class Waypoint extends Entity {
 	private int nextDirection;
 	private Waypoint nextWaypoint;
 
-	public Waypoint(float x, float y, int nextDirection, Waypoint nextWaypoint) {
+	public Waypoint(float x, float y, int nextDirection) {
 		super(x, y);
 		this.nextDirection = nextDirection;
-		this.nextWaypoint = nextWaypoint;
+		this.nextWaypoint = null;
 	}
-	
+
 	public int getDirection() {
 		return this.nextDirection;
 	}
@@ -21,8 +21,13 @@ public class Waypoint extends Entity {
 	public Waypoint getNextWaypoint() {
 		return nextWaypoint;
 	}
-	
-	
-	
+
+	public void add(Waypoint nextWaypoint) {
+		if (this.nextWaypoint == null) {
+			this.nextWaypoint = nextWaypoint;
+		} else {
+			this.nextWaypoint.add(nextWaypoint);
+		}
+	}
 
 }
