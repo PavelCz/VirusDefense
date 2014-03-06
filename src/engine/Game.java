@@ -19,6 +19,7 @@ import engine.gui.TowerButton;
 public class Game extends BasicGame {
 	private List<Drawable> drawables;
 	private List<GUI> guiElements;
+	private List<Button> buttons;
 	private boolean showFPS;
 	private boolean mouseWasClicked;
 
@@ -65,21 +66,18 @@ public class Game extends BasicGame {
 		// this.path[11] = new boolean[] { false, false, false, false, false, false, false, false, false, false, false, true, false };
 
 		this.drawables = new ArrayList<Drawable>();
-		this.guiElements = new ArrayList<GUI>();
-		 /*this.startingWaypoint = new Waypoint(75, 125, Waypoint.RIGHT);
-		 this.startingWaypoint.add(new Waypoint(525, 125, Waypoint.DOWN));
-		 this.startingWaypoint.add(new Waypoint(525, 275, Waypoint.LEFT));
-		 this.startingWaypoint.add(new Waypoint(75, 275, Waypoint.DOWN));
-		 this.startingWaypoint.add(new Waypoint(75, 525, Waypoint.RIGHT));
-		 this.startingWaypoint.add(new Waypoint(225, 525, Waypoint.UP));
-		 this.startingWaypoint.add(new Waypoint(225, 425, Waypoint.RIGHT));
-		 this.startingWaypoint.add(new Waypoint(375, 425, Waypoint.DOWN));
-		 this.startingWaypoint.add(new Waypoint(425, 525, Waypoint.RIGHT));
-		 this.startingWaypoint.add(new Waypoint(475, 525, Waypoint.UP));
-		
-		 this.startingWaypoint.add(new Waypoint(475, 375, Waypoint.RIGHT));
-		 this.startingWaypoint.add(new Waypoint(575, 375, Waypoint.DOWN));
-		 this.startingWaypoint.add(new Waypoint(575, 550, Waypoint.DOWN));*/
+
+		/*
+		 * this.startingWaypoint = new Waypoint(75, 125, Waypoint.RIGHT); this.startingWaypoint.add(new Waypoint(525, 125,
+		 * Waypoint.DOWN)); this.startingWaypoint.add(new Waypoint(525, 275, Waypoint.LEFT)); this.startingWaypoint.add(new
+		 * Waypoint(75, 275, Waypoint.DOWN)); this.startingWaypoint.add(new Waypoint(75, 525, Waypoint.RIGHT));
+		 * this.startingWaypoint.add(new Waypoint(225, 525, Waypoint.UP)); this.startingWaypoint.add(new Waypoint(225, 425,
+		 * Waypoint.RIGHT)); this.startingWaypoint.add(new Waypoint(375, 425, Waypoint.DOWN)); this.startingWaypoint.add(new
+		 * Waypoint(425, 525, Waypoint.RIGHT)); this.startingWaypoint.add(new Waypoint(475, 525, Waypoint.UP));
+		 * 
+		 * this.startingWaypoint.add(new Waypoint(475, 375, Waypoint.RIGHT)); this.startingWaypoint.add(new Waypoint(575, 375,
+		 * Waypoint.DOWN)); this.startingWaypoint.add(new Waypoint(575, 550, Waypoint.DOWN));
+		 */
 
 		this.e = new Enemy1(this.startingWaypoint);
 
@@ -96,11 +94,20 @@ public class Game extends BasicGame {
 		this.drawables.add(this.t);
 
 		// GUI
+		this.guiElements = new ArrayList<GUI>();
 		lives = new StaticText(700, 200, 10, Color.black, "" + player.getLives());
 		this.guiElements.add(this.button1);
 		this.guiElements.add(this.button2);
 		this.guiElements.add(lives);
 		this.guiElements.add(this.towerButton1);
+
+		// Buttons; this has nothing to do with the draw sequence
+		this.buttons = new ArrayList<Button>();
+		this.buttons.add(this.button1);
+		this.buttons.add(this.button2);
+		this.buttons.add(this.towerButton1);
+
+		//
 
 		container.setShowFPS(this.showFPS);
 
@@ -147,33 +154,63 @@ public class Game extends BasicGame {
 			float x = input.getMouseX();
 			float y = input.getMouseY();
 
-			if (button1.checkCollision(x, y)) {
-				button1.onClick();
-				this.towerButton1.onRelease();
-				this.currentTower = null;
-			} else if (button2.checkCollision(x, y)) {
-				button2.onClick();
-				this.towerButton1.onRelease();
-				this.currentTower = null;
-			} else if (this.towerButton1.checkCollision(x, y)) {
-				this.currentTower = this.towerButton1.getTower();
-				this.towerButton1.onClick();
-			} else {
+			boolean buttonWasPressed = false;
+			for (Button button : this.buttons) {
+				if (button.checkCollision(x, y)) {
+					buttonWasPressed = true;
+					this.releaseAllButtons();
+					button.onClick();
+					this.currentTower = button.getTower();
+					if (this.currentTower != null) {
+						this.towerButton1.onClick();
+					}
+				}
+			}
+			if (!buttonWasPressed) {
 				int newX = (int) x / 50;
 				int newY = (int) y / 50;
-				if (path[newY][newX] == 1 && towers[newY][newX] == null) {
-					if (this.currentTower != null) {
+				if (this.currentTower != null) {
+					if (path[newY][newX] == 1 && towers[newY][newX] == null) {
 						if (x < 650) {
 							Tower bufferTower = this.currentTower.clone();
 							bufferTower.setX(newX);
 							bufferTower.setY(newY);
 							this.towers[newY][newX] = bufferTower;
-							this.towerButton1.onRelease();
+
 							this.currentTower = null;
+							this.releaseAllButtons();
 						}
 					}
 				}
 			}
+
+			// if (button1.checkCollision(x, y)) {
+			// button1.onClick();
+			// this.towerButton1.onRelease();
+			// this.currentTower = null;
+			// } else if (button2.checkCollision(x, y)) {
+			// button2.onClick();
+			// this.towerButton1.onRelease();
+			// this.currentTower = null;
+			// } else if (this.towerButton1.checkCollision(x, y)) {
+			// this.currentTower = this.towerButton1.getTower();
+			// this.towerButton1.onClick();
+			// } else {
+			// int newX = (int) x / 50;
+			// int newY = (int) y / 50;
+			// if (path[newY][newX] == 1 && towers[newY][newX] == null) {
+			// if (this.currentTower != null) {
+			// if (x < 650) {
+			// Tower bufferTower = this.currentTower.clone();
+			// bufferTower.setX(newX);
+			// bufferTower.setY(newY);
+			// this.towers[newY][newX] = bufferTower;
+			// this.towerButton1.onRelease();
+			// this.currentTower = null;
+			// }
+			// }
+			// }
+			// }
 
 			this.mouseWasClicked = true;
 
@@ -182,9 +219,7 @@ public class Game extends BasicGame {
 		if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 
 			this.mouseWasClicked = false;
-
-			button1.onRelease();
-			button2.onRelease();
+			this.releaseAllButtonsNotTowerButton();
 
 		}
 	}
@@ -199,6 +234,20 @@ public class Game extends BasicGame {
 				}
 			}
 
+		}
+	}
+
+	private void releaseAllButtons() {
+		for (Button button : this.buttons) {
+			button.onRelease();
+		}
+	}
+
+	private void releaseAllButtonsNotTowerButton() {
+		for (Button button : this.buttons) {
+			if (button.getTower() == null) {
+				button.onRelease();
+			}
 		}
 	}
 

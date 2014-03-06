@@ -1,5 +1,6 @@
 package engine.gui;
 
+import engine.Tower;
 import engine.graphics.Sprite;
 
 public class Button extends GUI implements Clickable {
@@ -39,6 +40,10 @@ public class Button extends GUI implements Clickable {
 	public boolean checkCollision(float x, float y) {
 		return (x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y
 				+ this.height);
+	}
+	
+	public Tower getTower() {
+		return null;
 	}
 
 }
