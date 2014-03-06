@@ -37,12 +37,12 @@ public class Sprite extends RotatableRenderObject {
 		this.image.draw(xCoordinate, yCoordinate, scale * this.defaultScale);
 	}
 
-	public int getWidth() {
-		return this.image.getWidth();
+	public float getWidth() {
+		return this.image.getWidth() * this.defaultScale;
 	}
 
-	public int getHeight() {
-		return this.image.getHeight();
+	public float getHeight() {
+		return this.image.getHeight() * this.defaultScale;
 	}
 
 }
