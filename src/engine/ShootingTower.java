@@ -10,7 +10,7 @@ public class ShootingTower extends Tower {
 
 	@Override
 	public Tower clone() {
-		return new ShootingTower(this.x, this.y, this.sprite);
+		return new ShootingTower(this.x, this.y, this.sprite.clone());
 	}
 
 	@Override

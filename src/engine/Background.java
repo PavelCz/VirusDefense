@@ -5,7 +5,7 @@ import engine.graphics.Sprite;
 public class Background implements Drawable{
 	private Sprite picture;
 	
-	Background(float scale, String backgroundPath) {
+	public Background(float scale, String backgroundPath) {
 		this.picture = new Sprite(backgroundPath,scale);
 	}
 	@Override

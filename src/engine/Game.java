@@ -13,6 +13,7 @@ import org.newdawn.slick.SlickException;
 import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.GUI;
+import engine.gui.InterfaceBackground;
 import engine.gui.StaticText;
 import engine.gui.TowerButton;
 
@@ -33,13 +34,14 @@ public class Game extends BasicGame {
 	private static Player player;
 	private StaticText lives;
 	private static StaticText numberLives;
+	private InterfaceBackground interfaceBackground;
 
 	// Constants:
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE = 15;
 
 	public Game() {
-		super("TowerDefense");
+		super("Tower Defense");
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class Game extends BasicGame {
 
 		Game.INTERFACE_START_X = this.currentMapLayout.getNumberTilesWidth() * this.currentTileLength;
 		//
-
+		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
 				new Sprite("roteBlutk_klein.png")));
 		Game.player = new Player();
@@ -77,6 +79,8 @@ public class Game extends BasicGame {
 		// GUI
 		this.guiElements = new ArrayList<GUI>();
 		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.black, "" + player.getLives());
+
+		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(this.button1);
 		this.guiElements.add(this.button2);
 		this.guiElements.add(numberLives);
@@ -109,6 +113,14 @@ public class Game extends BasicGame {
 		}
 		for (Drawable entity : this.drawables) {
 			entity.draw();
+		}
+
+		if (this.currentTower != null) {
+			Sprite sprite = this.currentTower.getSprite();
+			Input input = container.getInput();
+			float x = input.getMouseX();
+			float y = input.getMouseY();
+			sprite.draw(x - sprite.getWidth() / 2, y - sprite.getHeight() / 2);
 		}
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
@@ -143,6 +155,7 @@ public class Game extends BasicGame {
 					this.releaseAllButtons();
 					button.onClick();
 					this.currentTower = button.getTower();
+					this.currentTower.getSprite().setAlpha(0.5f);
 					if (this.currentTower != null) {
 						this.towerButton1.onClick();
 					}
@@ -153,16 +166,16 @@ public class Game extends BasicGame {
 				int newY = (int) y / this.currentTileLength;
 				if (this.currentTower != null) {
 					int[][] path = this.currentMapLayout.getPath();
-					if (path[newY][newX] == 1 && towers[newY][newX] == null) {
-						if (x < 650) {
-							Tower bufferTower = this.currentTower.clone();
-							bufferTower.setX(newX);
-							bufferTower.setY(newY);
-							this.towers[newY][newX] = bufferTower;
+					if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && towers[newY][newX] == null) {
+						Tower bufferTower = this.currentTower.clone();
+						bufferTower.setX(newX);
+						bufferTower.setY(newY);
+						bufferTower.getSprite().setAlpha(1f);
+						this.towers[newY][newX] = bufferTower;
 
-							this.currentTower = null;
-							this.releaseAllButtons();
-						}
+						this.currentTower = null;
+						this.releaseAllButtons();
+
 					}
 				}
 			}
