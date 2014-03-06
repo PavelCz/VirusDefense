@@ -46,7 +46,7 @@ public class Game extends BasicGame {
 				"roteBlutk_klein.png")));
 
 		this.player = new Player();
-		MapLayoutFromImage mapLayout = new MapLayoutFromImage("map.png");
+		MapLayoutFromImage mapLayout = new MapLayoutFromImage("/maps/map.png");
 		this.path = mapLayout.getPath();
 		this.startingWaypoint = mapLayout.getStartingPoint();
 
@@ -109,7 +109,6 @@ public class Game extends BasicGame {
 			guiElement.draw();
 		}
 		
-		this.debugPath();
 
 	}
 
