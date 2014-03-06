@@ -27,7 +27,7 @@ public class Game extends BasicGame {
 	private Tower t;
 	private int[][] path;
 	private Tower[][] towers;
-	private TowerButton tb;
+	private TowerButton towerButton1;
 	private Tower currentTower;
 	private Enemy1 e;
 	private Waypoint startingWaypoint;
@@ -40,14 +40,14 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		this.t = new ShootingTower(1, 2, new Sprite("./data/roteBlutk_klein.png"));
-		this.tb = new TowerButton(13 * 50, 0, "./data/button1.png", "./data/button2.png", new ShootingTower(0, 0, new Sprite(
-				"./data/roteBlutk_klein.png")));
+		this.t = new ShootingTower(1, 2, new Sprite("roteBlutk_klein.png"));
+		this.towerButton1 = new TowerButton(13 * 50, 0, "button1.png", "button2.png", new ShootingTower(0, 0, new Sprite(
+				"roteBlutk_klein.png")));
 
 		this.player = new Player();
-		MapLayoutFromImage iaa = new MapLayoutFromImage("./data/map.png");
-		this.path = iaa.getPath();
-		this.startingWaypoint = iaa.getStartingPoint();
+		MapLayoutFromImage mapLayout = new MapLayoutFromImage("map.png");
+		this.path = mapLayout.getPath();
+		this.startingWaypoint = mapLayout.getStartingPoint();
 
 		// this.path = new boolean[12][13];
 		this.towers = new Tower[12][13];
@@ -66,20 +66,20 @@ public class Game extends BasicGame {
 
 		this.drawables = new ArrayList<Drawable>();
 		this.guiElements = new ArrayList<GUI>();
-		// this.startingWaypoint = new Waypoint(75, 125, Waypoint.RIGHT);
-		// this.startingWaypoint.add(new Waypoint(525, 125, Waypoint.DOWN));
-		// this.startingWaypoint.add(new Waypoint(525, 275, Waypoint.LEFT));
-		// this.startingWaypoint.add(new Waypoint(75, 275, Waypoint.DOWN));
-		// this.startingWaypoint.add(new Waypoint(75, 525, Waypoint.RIGHT));
-		// this.startingWaypoint.add(new Waypoint(225, 525, Waypoint.UP));
-		// this.startingWaypoint.add(new Waypoint(225, 425, Waypoint.RIGHT));
-		// this.startingWaypoint.add(new Waypoint(375, 425, Waypoint.DOWN));
-		// this.startingWaypoint.add(new Waypoint(425, 525, Waypoint.RIGHT));
-		// this.startingWaypoint.add(new Waypoint(475, 525, Waypoint.UP));
-		//
-		// this.startingWaypoint.add(new Waypoint(475, 375, Waypoint.RIGHT));
-		// this.startingWaypoint.add(new Waypoint(575, 375, Waypoint.DOWN));
-		// this.startingWaypoint.add(new Waypoint(575, 550, Waypoint.DOWN));
+		 /*this.startingWaypoint = new Waypoint(75, 125, Waypoint.RIGHT);
+		 this.startingWaypoint.add(new Waypoint(525, 125, Waypoint.DOWN));
+		 this.startingWaypoint.add(new Waypoint(525, 275, Waypoint.LEFT));
+		 this.startingWaypoint.add(new Waypoint(75, 275, Waypoint.DOWN));
+		 this.startingWaypoint.add(new Waypoint(75, 525, Waypoint.RIGHT));
+		 this.startingWaypoint.add(new Waypoint(225, 525, Waypoint.UP));
+		 this.startingWaypoint.add(new Waypoint(225, 425, Waypoint.RIGHT));
+		 this.startingWaypoint.add(new Waypoint(375, 425, Waypoint.DOWN));
+		 this.startingWaypoint.add(new Waypoint(425, 525, Waypoint.RIGHT));
+		 this.startingWaypoint.add(new Waypoint(475, 525, Waypoint.UP));
+		
+		 this.startingWaypoint.add(new Waypoint(475, 375, Waypoint.RIGHT));
+		 this.startingWaypoint.add(new Waypoint(575, 375, Waypoint.DOWN));
+		 this.startingWaypoint.add(new Waypoint(575, 550, Waypoint.DOWN));*/
 
 		this.e = new Enemy1(this.startingWaypoint);
 
@@ -87,12 +87,12 @@ public class Game extends BasicGame {
 		this.showFPS = false;
 		this.gameBackground = new Background(1f);
 
-		button1 = new Button(300, 300, "./data/button1.png", "./data/button2.png");
-		button2 = new Button(200, 300, "./data/button1.png", "./data/button2.png");
+		button1 = new Button(300, 300, "button1.png", "button2.png");
+		button2 = new Button(200, 300, "button1.png", "button2.png");
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
-		this.drawables.add(new TestEntity(10, 10, 180, "./data/A.bmp"));
+		this.drawables.add(new TestEntity(10, 10, 180, "A.bmp"));
 		this.drawables.add(this.t);
 
 		// GUI
@@ -100,7 +100,7 @@ public class Game extends BasicGame {
 		this.guiElements.add(this.button1);
 		this.guiElements.add(this.button2);
 		this.guiElements.add(lives);
-		this.guiElements.add(this.tb);
+		this.guiElements.add(this.towerButton1);
 
 		container.setShowFPS(this.showFPS);
 
@@ -149,15 +149,15 @@ public class Game extends BasicGame {
 
 			if (button1.checkCollision(x, y)) {
 				button1.onClick();
-				this.tb.onRelease();
+				this.towerButton1.onRelease();
 				this.currentTower = null;
 			} else if (button2.checkCollision(x, y)) {
 				button2.onClick();
-				this.tb.onRelease();
+				this.towerButton1.onRelease();
 				this.currentTower = null;
-			} else if (this.tb.checkCollision(x, y)) {
-				this.currentTower = this.tb.getTower();
-				this.tb.onClick();
+			} else if (this.towerButton1.checkCollision(x, y)) {
+				this.currentTower = this.towerButton1.getTower();
+				this.towerButton1.onClick();
 			} else {
 				int newX = (int) x / 50;
 				int newY = (int) y / 50;
@@ -168,7 +168,7 @@ public class Game extends BasicGame {
 							bufferTower.setX(newX);
 							bufferTower.setY(newY);
 							this.towers[newY][newX] = bufferTower;
-							this.tb.onRelease();
+							this.towerButton1.onRelease();
 							this.currentTower = null;
 						}
 					}
@@ -190,7 +190,7 @@ public class Game extends BasicGame {
 	}
 
 	private void debugPath() {
-		Sprite s = new Sprite("./data/Unbenannt-2.png");
+		Sprite s = new Sprite("Unbenannt-2.png");
 		;
 		for (int i = 0; i < this.path.length; ++i) {
 			for (int j = 0; j < this.path[0].length; ++j) {

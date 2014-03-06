@@ -10,7 +10,7 @@ public class Sprite extends RotatableRenderObject {
 	public Sprite(String imagePath) {
 
 		try {
-			this.image = new Image(imagePath);
+			this.image = new Image("./data/" + imagePath);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
