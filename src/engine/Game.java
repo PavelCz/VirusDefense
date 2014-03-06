@@ -23,15 +23,14 @@ public class Game extends BasicGame {
 	private boolean showFPS;
 	private boolean mouseWasClicked;
 
-	private Background gameBackground;
+	private MapLayout currentMapLayout;
+	private int currentTileLength;
 	private Button button1, button2;
 	private Tower t;
-	private int[][] path;
 	private Tower[][] towers;
 	private TowerButton towerButton1;
 	private Tower currentTower;
 	private Enemy1 e;
-	private Waypoint startingWaypoint;
 	private static Player player;
 	private static StaticText lives;
 
@@ -41,26 +40,24 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		this.t = new ShootingTower(1, 2, new Sprite("roteBlutk_klein.png"));
-		this.towerButton1 = new TowerButton(13 * 50, 0, "button1.png", "button2.png", new ShootingTower(0, 0, new Sprite(
-				"roteBlutk_klein.png")));
+		
 
+		this.currentMapLayout = new MapLayout("/maps/map.png", "/maps/background.jpg", 50);
+		this.currentTileLength = this.currentMapLayout.getTileLength();
+		
+		this.t = new ShootingTower(1, 2, new Sprite("roteBlutk_klein.png"));
+		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0, new Sprite(
+				"roteBlutk_klein.png")));
 		this.player = new Player();
-		MapLayoutFromImage mapLayout = new MapLayoutFromImage("/maps/map.png");
-		this.path = mapLayout.getPath();
-		this.startingWaypoint = mapLayout.getStartingPoint();
 
 		this.towers = new Tower[12][13];
 
 		this.drawables = new ArrayList<Drawable>();
 
-		
-
-		this.e = new Enemy1(this.startingWaypoint);
+		this.e = new Enemy1(this.currentMapLayout.getWaypoints());
 
 		this.mouseWasClicked = false;
 		this.showFPS = false;
-		this.gameBackground = new Background(1f);
 
 		button1 = new Button(300, 300, "button1.png", "button2.png");
 		button2 = new Button(200, 300, "button1.png", "button2.png");
@@ -92,7 +89,7 @@ public class Game extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		this.gameBackground.draw();
+		this.currentMapLayout.drawBackground();
 
 		this.e.draw();
 		for (Tower[] towerArray : this.towers) {
@@ -108,7 +105,6 @@ public class Game extends BasicGame {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
-		
 
 	}
 
@@ -145,9 +141,10 @@ public class Game extends BasicGame {
 				}
 			}
 			if (!buttonWasPressed) {
-				int newX = (int) x / 50;
-				int newY = (int) y / 50;
+				int newX = (int) x / this.currentTileLength;
+				int newY = (int) y / this.currentTileLength;
 				if (this.currentTower != null) {
+					int[][] path = this.currentMapLayout.getPath();
 					if (path[newY][newX] == 1 && towers[newY][newX] == null) {
 						if (x < 650) {
 							Tower bufferTower = this.currentTower.clone();
@@ -176,11 +173,11 @@ public class Game extends BasicGame {
 
 	private void debugPath() {
 		Sprite s = new Sprite("Unbenannt-2.png");
-		;
-		for (int i = 0; i < this.path.length; ++i) {
-			for (int j = 0; j < this.path[0].length; ++j) {
-				if (this.path[i][j] == 5) {// for now th epath has not the value 0 in the array path, but 5
-					s.draw(j * 50, i * 50);
+		int[][] path = this.currentMapLayout.getPath();
+		for (int i = 0; i < path.length; ++i) {
+			for (int j = 0; j < path[0].length; ++j) {
+				if (path[i][j] == 5) {// for now th epath has not the value 0 in the array path, but 5
+					s.draw(j * this.currentTileLength, i * this.currentTileLength);
 				}
 			}
 
