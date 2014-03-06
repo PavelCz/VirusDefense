@@ -10,8 +10,8 @@ public abstract class Enemy extends Entity implements Drawable {
 	protected Waypoint waypoint;
 	protected int direction;
 
-	public Enemy(float x, float y, int health, float speed, Sprite sprite, Waypoint startingWaypoint, int direction) {
-		super(x, y);
+	public Enemy(int health, float speed, Sprite sprite, Waypoint startingWaypoint, int direction) {
+		super(startingWaypoint.getX(), startingWaypoint.getY());
 		this.health = health;
 		this.speed = speed;
 		this.sprite = sprite;

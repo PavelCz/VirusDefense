@@ -13,6 +13,16 @@ public class Waypoint extends Entity {
 		this.nextDirection = nextDirection;
 		this.nextWaypoint = null;
 	}
+	
+	/**
+	 * @param x 
+	 * @param y
+	 * 
+	 * 	a constructor with the default value RIGHT for direction
+	 */
+	public Waypoint(float x, float y) {
+		this(x,y, Waypoint.RIGHT);
+	}
 
 	public int getDirection() {
 		return this.nextDirection;
@@ -28,6 +38,10 @@ public class Waypoint extends Entity {
 		} else {
 			this.nextWaypoint.add(nextWaypoint);
 		}
+	}
+	
+	public void setDirection(int direction) {
+		this.nextDirection = direction;
 	}
 
 }

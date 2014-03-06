@@ -21,12 +21,11 @@ public class Game extends BasicGame {
 	private List<GUI> guiElements;
 	private boolean showFPS;
 	private boolean mouseWasClicked;
-	
 
 	private Background gameBackground;
 	private Button button1, button2;
 	private Tower t;
-	private boolean[][] path;
+	private int[][] path;
 	private Tower[][] towers;
 	private TowerButton tb;
 	private Tower currentTower;
@@ -44,39 +43,43 @@ public class Game extends BasicGame {
 		this.t = new ShootingTower(1, 2, new Sprite("./data/roteBlutk_klein.png"));
 		this.tb = new TowerButton(13 * 50, 0, "./data/button1.png", "./data/button2.png", new ShootingTower(0, 0, new Sprite(
 				"./data/roteBlutk_klein.png")));
-		
+
 		this.player = new Player();
-		this.path = new boolean[12][13];
+		MapLayoutFromImage iaa = new MapLayoutFromImage("./data/map.png");
+		this.path = iaa.getPath();
+		this.startingWaypoint = iaa.getStartingPoint();
+
+		// this.path = new boolean[12][13];
 		this.towers = new Tower[12][13];
-		this.path[0] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
-		this.path[1] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
-		this.path[2] = new boolean[] { false, true, true, true, true, true, true, true, true, true, true, false, false };
-		this.path[3] = new boolean[] { false, false, false, false, false, false, false, false, false, false, true, false, false };
-		this.path[4] = new boolean[] { false, false, false, false, false, false, false, false, false, false, true, false, false };
-		this.path[5] = new boolean[] { false, true, true, true, true, true, true, true, true, true, true, false, false };
-		this.path[6] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
-		this.path[7] = new boolean[] { false, true, false, false, false, false, false, false, false, true, true, true, false };
-		this.path[8] = new boolean[] { false, true, false, false, true, true, true, true, false, true, false, true, false };
-		this.path[9] = new boolean[] { false, true, false, false, true, false, false, true, false, true, false, true, false };
-		this.path[10] = new boolean[] { false, true, true, true, true, false, false, true, true, true, false, true, false };
-		this.path[11] = new boolean[] { false, false, false, false, false, false, false, false, false, false, false, true, false };
+		// this.path[0] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
+		// this.path[1] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
+		// this.path[2] = new boolean[] { false, true, true, true, true, true, true, true, true, true, true, false, false };
+		// this.path[3] = new boolean[] { false, false, false, false, false, false, false, false, false, false, true, false, false };
+		// this.path[4] = new boolean[] { false, false, false, false, false, false, false, false, false, false, true, false, false };
+		// this.path[5] = new boolean[] { false, true, true, true, true, true, true, true, true, true, true, false, false };
+		// this.path[6] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
+		// this.path[7] = new boolean[] { false, true, false, false, false, false, false, false, false, true, true, true, false };
+		// this.path[8] = new boolean[] { false, true, false, false, true, true, true, true, false, true, false, true, false };
+		// this.path[9] = new boolean[] { false, true, false, false, true, false, false, true, false, true, false, true, false };
+		// this.path[10] = new boolean[] { false, true, true, true, true, false, false, true, true, true, false, true, false };
+		// this.path[11] = new boolean[] { false, false, false, false, false, false, false, false, false, false, false, true, false };
 
 		this.drawables = new ArrayList<Drawable>();
 		this.guiElements = new ArrayList<GUI>();
-		this.startingWaypoint = new Waypoint(75, 125, Waypoint.RIGHT);
-		this.startingWaypoint.add(new Waypoint(525, 125, Waypoint.DOWN));
-		this.startingWaypoint.add(new Waypoint(525, 275, Waypoint.LEFT));
-		this.startingWaypoint.add(new Waypoint(75, 275, Waypoint.DOWN));
-		this.startingWaypoint.add(new Waypoint(75, 525, Waypoint.RIGHT));
-		this.startingWaypoint.add(new Waypoint(225, 525, Waypoint.UP));
-		this.startingWaypoint.add(new Waypoint(225, 425, Waypoint.RIGHT));
-		this.startingWaypoint.add(new Waypoint(375, 425, Waypoint.DOWN));
-		this.startingWaypoint.add(new Waypoint(425, 525, Waypoint.RIGHT));
-		this.startingWaypoint.add(new Waypoint(475, 525, Waypoint.UP));
-
-		this.startingWaypoint.add(new Waypoint(475, 375, Waypoint.RIGHT));
-		this.startingWaypoint.add(new Waypoint(575, 375, Waypoint.DOWN));
-		this.startingWaypoint.add(new Waypoint(575, 550, Waypoint.DOWN));
+		// this.startingWaypoint = new Waypoint(75, 125, Waypoint.RIGHT);
+		// this.startingWaypoint.add(new Waypoint(525, 125, Waypoint.DOWN));
+		// this.startingWaypoint.add(new Waypoint(525, 275, Waypoint.LEFT));
+		// this.startingWaypoint.add(new Waypoint(75, 275, Waypoint.DOWN));
+		// this.startingWaypoint.add(new Waypoint(75, 525, Waypoint.RIGHT));
+		// this.startingWaypoint.add(new Waypoint(225, 525, Waypoint.UP));
+		// this.startingWaypoint.add(new Waypoint(225, 425, Waypoint.RIGHT));
+		// this.startingWaypoint.add(new Waypoint(375, 425, Waypoint.DOWN));
+		// this.startingWaypoint.add(new Waypoint(425, 525, Waypoint.RIGHT));
+		// this.startingWaypoint.add(new Waypoint(475, 525, Waypoint.UP));
+		//
+		// this.startingWaypoint.add(new Waypoint(475, 375, Waypoint.RIGHT));
+		// this.startingWaypoint.add(new Waypoint(575, 375, Waypoint.DOWN));
+		// this.startingWaypoint.add(new Waypoint(575, 550, Waypoint.DOWN));
 
 		this.e = new Enemy1(this.startingWaypoint);
 
@@ -93,7 +96,7 @@ public class Game extends BasicGame {
 		this.drawables.add(this.t);
 
 		// GUI
-		lives = new StaticText(700, 200, 10, Color.black, ""+player.getLives());
+		lives = new StaticText(700, 200, 10, Color.black, "" + player.getLives());
 		this.guiElements.add(this.button1);
 		this.guiElements.add(this.button2);
 		this.guiElements.add(lives);
@@ -128,11 +131,10 @@ public class Game extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 
 		this.e.update(delta);
-		
+
 		this.mouseEvents(container, delta);
-		
-		
-		if(Game.player.getLives() <= 0) {
+
+		if (Game.player.getLives() <= 0) {
 			System.out.println("Game Over!");
 		}
 
@@ -159,7 +161,7 @@ public class Game extends BasicGame {
 			} else {
 				int newX = (int) x / 50;
 				int newY = (int) y / 50;
-				if (!path[newY][newX] && towers[newY][newX] == null) {
+				if (path[newY][newX] == 1 && towers[newY][newX] == null) {
 					if (this.currentTower != null) {
 						if (x < 650) {
 							Tower bufferTower = this.currentTower.clone();
@@ -192,7 +194,7 @@ public class Game extends BasicGame {
 		;
 		for (int i = 0; i < this.path.length; ++i) {
 			for (int j = 0; j < this.path[0].length; ++j) {
-				if (this.path[i][j]) {
+				if (this.path[i][j] < 1) {
 					s.draw(j * 50, i * 50);
 				}
 			}
@@ -202,7 +204,7 @@ public class Game extends BasicGame {
 
 	public static void reduceLives() {
 		Game.player.reduceLives();
-		lives.setText(""+Game.player.getLives());
+		lives.setText("" + Game.player.getLives());
 	}
 
 }
