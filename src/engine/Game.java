@@ -50,34 +50,11 @@ public class Game extends BasicGame {
 		this.path = mapLayout.getPath();
 		this.startingWaypoint = mapLayout.getStartingPoint();
 
-		// this.path = new boolean[12][13];
 		this.towers = new Tower[12][13];
-		// this.path[0] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
-		// this.path[1] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
-		// this.path[2] = new boolean[] { false, true, true, true, true, true, true, true, true, true, true, false, false };
-		// this.path[3] = new boolean[] { false, false, false, false, false, false, false, false, false, false, true, false, false };
-		// this.path[4] = new boolean[] { false, false, false, false, false, false, false, false, false, false, true, false, false };
-		// this.path[5] = new boolean[] { false, true, true, true, true, true, true, true, true, true, true, false, false };
-		// this.path[6] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
-		// this.path[7] = new boolean[] { false, true, false, false, false, false, false, false, false, true, true, true, false };
-		// this.path[8] = new boolean[] { false, true, false, false, true, true, true, true, false, true, false, true, false };
-		// this.path[9] = new boolean[] { false, true, false, false, true, false, false, true, false, true, false, true, false };
-		// this.path[10] = new boolean[] { false, true, true, true, true, false, false, true, true, true, false, true, false };
-		// this.path[11] = new boolean[] { false, false, false, false, false, false, false, false, false, false, false, true, false };
 
 		this.drawables = new ArrayList<Drawable>();
 
-		/*
-		 * this.startingWaypoint = new Waypoint(75, 125, Waypoint.RIGHT); this.startingWaypoint.add(new Waypoint(525, 125,
-		 * Waypoint.DOWN)); this.startingWaypoint.add(new Waypoint(525, 275, Waypoint.LEFT)); this.startingWaypoint.add(new
-		 * Waypoint(75, 275, Waypoint.DOWN)); this.startingWaypoint.add(new Waypoint(75, 525, Waypoint.RIGHT));
-		 * this.startingWaypoint.add(new Waypoint(225, 525, Waypoint.UP)); this.startingWaypoint.add(new Waypoint(225, 425,
-		 * Waypoint.RIGHT)); this.startingWaypoint.add(new Waypoint(375, 425, Waypoint.DOWN)); this.startingWaypoint.add(new
-		 * Waypoint(425, 525, Waypoint.RIGHT)); this.startingWaypoint.add(new Waypoint(475, 525, Waypoint.UP));
-		 * 
-		 * this.startingWaypoint.add(new Waypoint(475, 375, Waypoint.RIGHT)); this.startingWaypoint.add(new Waypoint(575, 375,
-		 * Waypoint.DOWN)); this.startingWaypoint.add(new Waypoint(575, 550, Waypoint.DOWN));
-		 */
+		
 
 		this.e = new Enemy1(this.startingWaypoint);
 
@@ -131,6 +108,8 @@ public class Game extends BasicGame {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
+		
+		this.debugPath();
 
 	}
 
@@ -184,34 +163,6 @@ public class Game extends BasicGame {
 				}
 			}
 
-			// if (button1.checkCollision(x, y)) {
-			// button1.onClick();
-			// this.towerButton1.onRelease();
-			// this.currentTower = null;
-			// } else if (button2.checkCollision(x, y)) {
-			// button2.onClick();
-			// this.towerButton1.onRelease();
-			// this.currentTower = null;
-			// } else if (this.towerButton1.checkCollision(x, y)) {
-			// this.currentTower = this.towerButton1.getTower();
-			// this.towerButton1.onClick();
-			// } else {
-			// int newX = (int) x / 50;
-			// int newY = (int) y / 50;
-			// if (path[newY][newX] == 1 && towers[newY][newX] == null) {
-			// if (this.currentTower != null) {
-			// if (x < 650) {
-			// Tower bufferTower = this.currentTower.clone();
-			// bufferTower.setX(newX);
-			// bufferTower.setY(newY);
-			// this.towers[newY][newX] = bufferTower;
-			// this.towerButton1.onRelease();
-			// this.currentTower = null;
-			// }
-			// }
-			// }
-			// }
-
 			this.mouseWasClicked = true;
 
 		}
@@ -229,7 +180,7 @@ public class Game extends BasicGame {
 		;
 		for (int i = 0; i < this.path.length; ++i) {
 			for (int j = 0; j < this.path[0].length; ++j) {
-				if (this.path[i][j] < 1) {
+				if (this.path[i][j] == 5) {// for now th epath has not the value 0 in the array path, but 5
 					s.draw(j * 50, i * 50);
 				}
 			}

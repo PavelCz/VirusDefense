@@ -8,12 +8,12 @@ import org.newdawn.slick.SlickException;
 /**
  * @author Pavel
  * 
- *         Color:	Blue 	Black		Red			White			Green
- *         RGB:		(0,0,1) (0,0,0)		(1,0,0)		(1,1,1)			(0,1,0)
- *         Short:	End 	Path		Start		T-Area			NoBuild
- *         Rule:	ending 	Only for 	starting	Build Towers	Neither Towers
- *         			point 	Enemies		point		here			nor enemies
- *         Number:	-1 		0			(0)			1				2
+ *         Color:	Black		Red			White			Green
+ *         RGB:		(0,0,0)		(1,0,0)		(1,1,1)			(0,1,0)
+ *         Short:	Path		Start		T-Area			NoBuild
+ *         Rule:	Only for 	starting	Build Towers	Neither Towers
+ *         			Enemies		point		here			nor enemies
+ *         Number:	0			(0)			1				2
  *         (in path Array)
  *         
  *         the starting point can only be connected to one path
