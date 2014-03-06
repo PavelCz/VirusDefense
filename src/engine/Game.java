@@ -9,6 +9,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.fills.GradientFill;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 
 import engine.graphics.Sprite;
 import engine.gui.Button;
@@ -121,6 +124,18 @@ public class Game extends BasicGame {
 			float x = input.getMouseX();
 			float y = input.getMouseY();
 			sprite.draw(x - sprite.getWidth() / 2, y - sprite.getHeight() / 2);
+			int newX = (int) x / this.currentTileLength;
+			int newY = (int) y / this.currentTileLength;
+			int[][] path = this.currentMapLayout.getPath();
+			if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && towers[newY][newX] == null) {
+				graphics.draw(new Rectangle(newX * this.currentTileLength, newY * this.currentTileLength, this.currentTileLength,
+						this.currentTileLength),
+						new GradientFill(0, 0, Color.green, currentTileLength, currentTileLength, Color.green));
+			} else {
+				graphics.draw(new Rectangle(newX * this.currentTileLength, newY * this.currentTileLength, this.currentTileLength,
+						this.currentTileLength),
+						new GradientFill(0, 0, Color.red, currentTileLength, currentTileLength, Color.red));
+			}
 		}
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
