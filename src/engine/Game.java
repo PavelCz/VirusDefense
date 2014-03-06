@@ -11,6 +11,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import sun.rmi.transport.LiveRef;
 import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.GUI;
@@ -22,7 +23,7 @@ public class Game extends BasicGame {
 	private List<GUI> guiElements;
 	private boolean showFPS;
 	private boolean mouseWasClicked;
-	private static int lives;
+	
 
 	private Background gameBackground;
 	private Button button1, button2;
@@ -33,6 +34,8 @@ public class Game extends BasicGame {
 	private Tower currentTower;
 	private Enemy1 e;
 	private Waypoint startingWaypoint;
+	private static Player player;
+	private static StaticText lives;
 
 	public Game() {
 		super("TowerDefense");
@@ -43,8 +46,8 @@ public class Game extends BasicGame {
 		this.t = new ShootingTower(1, 2, new Sprite("./data/roteBlutk_klein.png"));
 		this.tb = new TowerButton(13 * 50, 0, "./data/button1.png", "./data/button2.png", new ShootingTower(0, 0, new Sprite(
 				"./data/roteBlutk_klein.png")));
-		this.lives = 10;
-
+		
+		this.player = new Player();
 		this.path = new boolean[12][13];
 		this.towers = new Tower[12][13];
 		this.path[0] = new boolean[] { false, true, false, false, false, false, false, false, false, false, false, false, false };
@@ -92,9 +95,10 @@ public class Game extends BasicGame {
 		this.drawables.add(this.t);
 
 		// GUI
+		lives = new StaticText(700, 200, 10, Color.black, ""+player.getLives());
 		this.guiElements.add(this.button1);
 		this.guiElements.add(this.button2);
-		this.guiElements.add(new StaticText(100, 100, 10, Color.green, "Hello World"));
+		this.guiElements.add(lives);
 		this.guiElements.add(this.tb);
 
 		container.setShowFPS(this.showFPS);
@@ -126,11 +130,11 @@ public class Game extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 
 		this.e.update(delta);
-
+		
 		this.mouseEvents(container, delta);
 		
 		
-		if(Game.lives <= 0) {
+		if(Game.player.getLives() <= 0) {
 			System.out.println("Game Over!");
 		}
 
@@ -198,8 +202,9 @@ public class Game extends BasicGame {
 		}
 	}
 
-	public static void reduceLife() {
-		Game.lives--;
+	public static void reduceLives() {
+		Game.player.reduceLives();
+		lives.setText(""+Game.player.getLives());
 	}
 
 }

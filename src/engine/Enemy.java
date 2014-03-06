@@ -35,6 +35,7 @@ public abstract class Enemy extends Entity implements Drawable {
 			this.y += this.velocity.getY() * delta;
 			if (this.waypoint == null) {
 				this.health = 0;
+				Game.reduceLives();
 			} else if (this.direction == Waypoint.DOWN && this.getY() >= this.waypoint.getY()) {
 				this.newDirection();
 			} else if (this.direction == Waypoint.RIGHT && this.getX() >= this.waypoint.getX()) {
