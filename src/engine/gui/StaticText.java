@@ -2,6 +2,7 @@ package engine.gui;
 
 import org.newdawn.slick.Color;
 
+import engine.Game;
 import engine.graphics.Text;
 
 public class StaticText extends GUI {
@@ -11,6 +12,12 @@ public class StaticText extends GUI {
 		super(x, y);
 
 		this.text = new Text(height, text, color);
+
+	}
+	
+	public StaticText(float x, float y,  Color color, String text) {
+		this(x, y, Game.STANDARD_TEXT_SCALE, color, text);
+
 
 	}
 

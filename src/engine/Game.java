@@ -26,13 +26,17 @@ public class Game extends BasicGame {
 	private MapLayout currentMapLayout;
 	private int currentTileLength;
 	private Button button1, button2;
-	private Tower t;
 	private Tower[][] towers;
 	private TowerButton towerButton1;
 	private Tower currentTower;
 	private Enemy1 e;
 	private static Player player;
-	private static StaticText lives;
+	private StaticText lives;
+	private static StaticText numberLives;
+
+	// Constants:
+	public static int INTERFACE_START_X;
+	public static int STANDARD_TEXT_SCALE = 15;
 
 	public Game() {
 		super("TowerDefense");
@@ -40,15 +44,19 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		
 
 		this.currentMapLayout = new MapLayout("/maps/map.png", "/maps/background.jpg", 50);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
-		
-		this.t = new ShootingTower(1, 2, new Sprite("roteBlutk_klein.png"));
-		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0, new Sprite(
-				"roteBlutk_klein.png")));
-		this.player = new Player();
+
+		// Set Constants:
+
+		Game.INTERFACE_START_X = this.currentMapLayout.getNumberTilesWidth() * this.currentTileLength;
+		//
+
+		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
+				new Sprite("roteBlutk_klein.png")));
+		Game.player = new Player();
+		this.lives = new StaticText(Game.INTERFACE_START_X + 5, 200, Color.black, "Lives:");
 
 		this.towers = new Tower[12][13];
 
@@ -65,15 +73,15 @@ public class Game extends BasicGame {
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
 		this.drawables.add(new TestEntity(10, 10, 180, "A.bmp"));
-		this.drawables.add(this.t);
 
 		// GUI
 		this.guiElements = new ArrayList<GUI>();
-		lives = new StaticText(700, 200, 10, Color.black, "" + player.getLives());
+		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.black, "" + player.getLives());
 		this.guiElements.add(this.button1);
 		this.guiElements.add(this.button2);
-		this.guiElements.add(lives);
+		this.guiElements.add(numberLives);
 		this.guiElements.add(this.towerButton1);
+		this.guiElements.add(this.lives);
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.buttons = new ArrayList<Button>();
@@ -166,7 +174,7 @@ public class Game extends BasicGame {
 		if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 
 			this.mouseWasClicked = false;
-			this.releaseAllButtonsNotTowerButton();
+			this.releaseAllButtonsNotTowerButtons();
 
 		}
 	}
@@ -190,7 +198,7 @@ public class Game extends BasicGame {
 		}
 	}
 
-	private void releaseAllButtonsNotTowerButton() {
+	private void releaseAllButtonsNotTowerButtons() {
 		for (Button button : this.buttons) {
 			if (button.getTower() == null) {
 				button.onRelease();
@@ -200,7 +208,7 @@ public class Game extends BasicGame {
 
 	public static void reduceLives() {
 		Game.player.reduceLives();
-		lives.setText("" + Game.player.getLives());
+		numberLives.setText("" + Game.player.getLives());
 	}
 
 }
