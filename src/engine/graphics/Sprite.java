@@ -5,12 +5,13 @@ import org.newdawn.slick.SlickException;
 
 public class Sprite extends RotatableRenderObject {
 	private Image image;
+	private String imagePath;
 	private float defaultScale;
 
 	public Sprite(String imagePath) {
-
+		this.imagePath = imagePath;
 		try {
-			this.image = new Image(imagePath);
+			this.image = new Image("./data/" + imagePath);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,12 +38,25 @@ public class Sprite extends RotatableRenderObject {
 		this.image.draw(xCoordinate, yCoordinate, scale * this.defaultScale);
 	}
 
-	public int getWidth() {
-		return this.image.getWidth();
+	public float getWidth() {
+		return this.image.getWidth() * this.defaultScale;
 	}
 
-	public int getHeight() {
-		return this.image.getHeight();
+	public float getHeight() {
+		return this.image.getHeight() * this.defaultScale;
+	}
+	
+	public void setAlpha(float alpha) {
+		this.image.setAlpha(alpha);
+		
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 * returns a completely new Sprite with no references to the old one or attribute to the old one
+	 */
+	public Sprite clone(){
+		return new Sprite(this. imagePath, this.defaultScale);
 	}
 
 }
