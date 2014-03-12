@@ -38,7 +38,7 @@ public class Game extends BasicGame {
 	private StaticText lives;
 	private static StaticText numberLives;
 	private InterfaceBackground interfaceBackground;
-
+	//hallo
 	// Constants:
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE = 15;
