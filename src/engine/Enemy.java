@@ -3,6 +3,7 @@ package engine;
 import engine.graphics.Sprite;
 
 public abstract class Enemy extends Entity implements Drawable {
+	private float radius;
 	private int health;
 	private float speed;
 	protected Sprite sprite;
@@ -18,6 +19,7 @@ public abstract class Enemy extends Entity implements Drawable {
 		this.velocity = new MyVector2f(0, speed);
 		this.waypoint = startingWaypoint;
 		this.direction = direction;
+		this.radius = sprite.getWidth();
 	}
 
 	public void setX(float x) {
@@ -45,6 +47,7 @@ public abstract class Enemy extends Entity implements Drawable {
 			} else if (this.direction == Waypoint.LEFT && this.getX() <= this.waypoint.getX()) {
 				this.newDirection();
 			}
+		} else {
 		}
 	}
 
@@ -70,6 +73,18 @@ public abstract class Enemy extends Entity implements Drawable {
 		if (this.health > 0) {
 			this.sprite.draw(this.x - this.sprite.getWidth() / 2, this.y - this.sprite.getHeight() / 2);
 		}
+	}
+	
+	public float getRadius() {
+		return this.radius;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
 	}
 
 }

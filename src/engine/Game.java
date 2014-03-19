@@ -59,7 +59,7 @@ public class Game extends BasicGame {
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
-				new Sprite("roteBlutk_klein.png")));
+				new Sprite("roteBlutk_klein.png"), this));
 		Game.player = new Player();
 		this.lives = new StaticText(Game.INTERFACE_START_X + 5, 200, Color.black, "Lives:");
 
@@ -147,6 +147,13 @@ public class Game extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 
 		this.e.update(delta);
+		for(int i = 0; i < this.towers.length; ++i) {
+			for(int j = 0; j < this.towers[0].length; ++j) {
+				if(this.towers[i][j] != null) {
+					this.towers[i][j].shoot();
+				}
+			}
+		}
 
 		this.mouseEvents(container, delta);
 
@@ -234,6 +241,9 @@ public class Game extends BasicGame {
 		}
 	}
 
+	public Enemy getEnemy() {
+		return this.e;
+	}
 	public static void reduceLives() {
 		Game.player.reduceLives();
 		numberLives.setText("" + Game.player.getLives());
