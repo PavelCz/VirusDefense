@@ -32,7 +32,7 @@ public abstract class Enemy extends Entity implements Drawable {
 
 	public void update(int delta) {
 		if (this.health > 0) {
-			System.out.println(this.direction);
+			//System.out.println(this.direction);
 			this.x += this.velocity.getX() * delta;
 			this.y += this.velocity.getY() * delta;
 			if (this.waypoint == null) {
