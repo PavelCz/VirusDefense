@@ -24,6 +24,7 @@ public class Game extends BasicGame {
 	private List<Drawable> drawables;
 	private List<GUI> guiElements;
 	private List<Button> buttons;
+	private List<Enemy> enemy;
 	private boolean showFPS;
 	private boolean mouseWasClicked;
 
@@ -32,12 +33,11 @@ public class Game extends BasicGame {
 	private Tower[][] towers;
 	private TowerButton towerButton1;
 	private Tower currentTower;
-	private Enemy1 e;
+	// private Enemy1 e;
 	private static Player player;
 	private StaticText lives;
 	private static StaticText numberLives;
 	private InterfaceBackground interfaceBackground;
-	// hallo
 	// Constants:
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE = 15;
@@ -69,8 +69,9 @@ public class Game extends BasicGame {
 		this.towers = new Tower[12][13];
 
 		this.drawables = new ArrayList<Drawable>();
+		this.enemy = new ArrayList<Enemy>();
 
-		this.e = new Enemy1(this.currentMapLayout.getWaypoints());
+		enemy.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
 
 		this.mouseWasClicked = false;
 		this.showFPS = false;
@@ -104,7 +105,9 @@ public class Game extends BasicGame {
 			throws SlickException {
 		this.currentMapLayout.drawBackground();
 
-		this.e.draw();
+		for (Enemy enemy : this.enemy) {
+			enemy.draw();
+		}
 		for (Tower[] towerArray : this.towers) {
 			for (Tower tower : towerArray) {
 				if (tower != null) {
@@ -150,7 +153,10 @@ public class Game extends BasicGame {
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 
-		this.e.update(delta);
+		for (Enemy enemy : this.enemy) {
+			if (enemy != null)
+				enemy.update(delta);
+		}
 		for (int i = 0; i < this.towers.length; ++i) {
 			for (int j = 0; j < this.towers[0].length; ++j) {
 				if (this.towers[i][j] != null) {
@@ -249,8 +255,8 @@ public class Game extends BasicGame {
 		}
 	}
 
-	public Enemy getEnemy() {
-		return this.e;
+	public List<Enemy> getEnemy() {
+		return enemy;
 	}
 
 	public static void reduceLives() {
