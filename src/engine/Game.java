@@ -61,7 +61,7 @@ public class Game extends BasicGame {
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0,
 				"button1.png", "button2.png", new ShootingTower(0, 0,
-						new Sprite("roteBlutk_klein.png"), this));
+						new Sprite("tower/t1.png"), this));
 		Game.player = new Player();
 		this.lives = new StaticText(Game.INTERFACE_START_X + 5, 200,
 				Color.white, "Lives:");
@@ -78,7 +78,6 @@ public class Game extends BasicGame {
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
-		this.drawables.add(new TestEntity(10, 10, 180, "A.bmp"));
 
 		// GUI
 		this.guiElements = new ArrayList<GUI>();

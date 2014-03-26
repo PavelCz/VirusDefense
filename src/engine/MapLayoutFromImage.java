@@ -58,7 +58,7 @@ public class MapLayoutFromImage {
 		for (int y = 0; y < colors.length; ++y) {
 			for (int x = 0; x < colors[0].length; ++x) {
 				Color currentColor = this.colors[y][x];
-				System.out.println(currentColor);
+				//System.out.println(currentColor);
 				// currentColor has no Blue value
 				if (currentColor.getBlue() / 255 <= 0.2f) {
 					// currentColor has a green value AND NO blue value => NoBuild
