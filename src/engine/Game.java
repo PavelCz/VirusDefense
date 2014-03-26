@@ -1,6 +1,7 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.newdawn.slick.BasicGame;
@@ -11,7 +12,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
 
 import engine.graphics.Sprite;
 import engine.gui.Button;
@@ -64,12 +64,12 @@ public class Game extends BasicGame {
 						new Sprite("roteBlutk_klein.png"), this));
 		Game.player = new Player();
 		this.lives = new StaticText(Game.INTERFACE_START_X + 5, 200,
-				Color.black, "Lives:");
+				Color.white, "Lives:");
 
 		this.towers = new Tower[12][13];
 
 		this.drawables = new ArrayList<Drawable>();
-		this.enemy = new ArrayList<Enemy>();
+		this.enemy = new LinkedList<Enemy>();
 
 		enemy.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
 
@@ -83,7 +83,7 @@ public class Game extends BasicGame {
 		// GUI
 		this.guiElements = new ArrayList<GUI>();
 		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200,
-				Color.black, "" + player.getLives());
+				Color.white, "" + player.getLives());
 
 		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(numberLives);
@@ -104,9 +104,9 @@ public class Game extends BasicGame {
 	public void render(GameContainer container, Graphics graphics)
 			throws SlickException {
 		this.currentMapLayout.drawBackground();
-
 		for (Enemy enemy : this.enemy) {
-			enemy.draw();
+			if (enemy != null)
+				enemy.draw();
 		}
 		for (Tower[] towerArray : this.towers) {
 			for (Tower tower : towerArray) {
@@ -255,8 +255,8 @@ public class Game extends BasicGame {
 		}
 	}
 
-	public List<Enemy> getEnemy() {
-		return enemy;
+	public LinkedList<Enemy> getEnemy() {
+		return (LinkedList<Enemy>) enemy;
 	}
 
 	public static void reduceLives() {
