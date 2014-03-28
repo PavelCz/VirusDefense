@@ -62,7 +62,7 @@ public class Game extends BasicGame {
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0,
 				"button1.png", "button2.png", new ShootingTower(0, 0,
-						new Sprite("tower/t1.png"), this));
+						new Sprite("tower/t1.png", 0.05f), this));
 		Game.player = new Player();
 		this.lives = new StaticText(Game.INTERFACE_START_X + 5, 200,
 				Color.white, "Lives:");
@@ -162,6 +162,7 @@ public class Game extends BasicGame {
 		}
 
 		this.mouseEvents(container, delta);
+		this.keyboardEvents(container, delta);
 
 		if (Game.player.getLives() <= 0) {
 			System.out.println("Game Over!");
@@ -170,11 +171,9 @@ public class Game extends BasicGame {
 	}
 
 	private void keyboardEvents(GameContainer container, int delta) {
-		while (Keyboard.next()) {
-			if (Keyboard.getEventKey() == Keyboard.KEY_L) {
-				if (Keyboard.getEventKeyState()) {
-				}
-			}
+		Input input = container.getInput();
+		if(input.isKeyPressed(Input.KEY_L)){
+			enemy.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
 		}
 	}
 
