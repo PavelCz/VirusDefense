@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -167,9 +168,16 @@ public class Game extends BasicGame {
 		}
 
 	}
-	private void keyboardEvents(GameContainer container, int delta){
-		
+
+	private void keyboardEvents(GameContainer container, int delta) {
+		while (Keyboard.next()) {
+			if (Keyboard.getEventKey() == Keyboard.KEY_L) {
+				if (Keyboard.getEventKeyState()) {
+				}
+			}
+		}
 	}
+
 	private void mouseEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
