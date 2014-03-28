@@ -42,6 +42,10 @@ public class Game extends BasicGame {
 	// Constants:
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE = 15;
+	// Tests:
+	private engine.graphics.UnfilledRectangle r= new engine.graphics.UnfilledRectangle(10, 20);;
+	
+	//
 
 	public Game() {
 		super("Tower Defense");
@@ -100,6 +104,7 @@ public class Game extends BasicGame {
 	public void render(GameContainer container, Graphics graphics)
 			throws SlickException {
 		this.currentMapLayout.drawBackground();
+		this.r.draw(105, 105);
 		for (Enemy enemy : this.enemy) {
 			if (enemy != null)
 				enemy.draw();
