@@ -67,12 +67,10 @@ public class Game extends BasicGame {
 				Color.white, "Lives:");
 
 		this.towers = new Tower[12][13];
-
 		this.drawables = new ArrayList<Drawable>();
 		this.enemy = new LinkedList<Enemy>();
 
 		enemy.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
-
 		this.mouseWasClicked = false;
 		this.showFPS = false;
 
@@ -94,9 +92,7 @@ public class Game extends BasicGame {
 		this.buttons.add(this.towerButton1);
 
 		//
-
 		container.setShowFPS(this.showFPS);
-
 	}
 
 	@Override
@@ -171,7 +167,9 @@ public class Game extends BasicGame {
 		}
 
 	}
-
+	private void keyboardEvents(GameContainer container, int delta){
+		
+	}
 	private void mouseEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
@@ -211,7 +209,6 @@ public class Game extends BasicGame {
 					}
 				}
 			}
-
 			this.mouseWasClicked = true;
 
 		}

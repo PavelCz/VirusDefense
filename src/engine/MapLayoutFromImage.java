@@ -69,7 +69,6 @@ public class MapLayoutFromImage {
 
 						// currentColor has no blue value, no green value, but red value => Start
 						if (currentColor.getRed() / 255 >= 0.8f) {
-							System.out.println("JO");
 							this.startingPoint = new Waypoint(x * 50 + 50 / 2, y * 50 + 50 / 2);
 						} else { // currentColor has no blue, no green, no red value => Path
 							//
