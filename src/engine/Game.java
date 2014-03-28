@@ -3,8 +3,8 @@ package engine;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -13,6 +13,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.geom.Rectangle;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 import engine.graphics.Sprite;
 import engine.gui.Button;
@@ -25,7 +27,7 @@ public class Game extends BasicGame {
 	private List<Drawable> drawables;
 	private List<GUI> guiElements;
 	private List<Button> buttons;
-	private List<Enemy> enemy;
+	private ConcurrentLinkedQueue<Enemy> enemy;
 	private boolean showFPS;
 	private boolean mouseWasClicked;
 
@@ -69,7 +71,7 @@ public class Game extends BasicGame {
 
 		this.towers = new Tower[12][13];
 		this.drawables = new ArrayList<Drawable>();
-		this.enemy = new LinkedList<Enemy>();
+		this.enemy = new ConcurrentLinkedQueue<Enemy>();
 
 		enemy.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
 		this.mouseWasClicked = false;
@@ -258,8 +260,8 @@ public class Game extends BasicGame {
 		}
 	}
 
-	public LinkedList<Enemy> getEnemy() {
-		return (LinkedList<Enemy>) enemy;
+	public ConcurrentLinkedQueue<Enemy> getEnemy() {
+		return (ConcurrentLinkedQueue<Enemy>) enemy;
 	}
 
 	public static void reduceLives() {
