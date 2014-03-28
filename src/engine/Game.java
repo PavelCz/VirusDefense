@@ -19,6 +19,7 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.GUI;
+import engine.gui.Healthbar;
 import engine.gui.InterfaceBackground;
 import engine.gui.StaticText;
 import engine.gui.TowerButton;
@@ -45,7 +46,7 @@ public class Game extends BasicGame {
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE = 15;
 	// Tests:
-	private engine.graphics.UnfilledRectangle r= new engine.graphics.UnfilledRectangle(10, 20);;
+	private Healthbar h= new Healthbar(105, 107, 100, 20, 10);
 	
 	//
 
@@ -106,7 +107,7 @@ public class Game extends BasicGame {
 	public void render(GameContainer container, Graphics graphics)
 			throws SlickException {
 		this.currentMapLayout.drawBackground();
-		this.r.draw(105, 105);
+		this.h.draw();
 		for (Enemy enemy : this.enemy) {
 			if (enemy != null)
 				enemy.draw();
