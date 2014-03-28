@@ -46,7 +46,6 @@ public class Game extends BasicGame {
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE = 15;
 	// Tests:
-	private Healthbar h= new Healthbar(105, 107, 100, 20, 10);
 	
 	//
 
@@ -107,7 +106,6 @@ public class Game extends BasicGame {
 	public void render(GameContainer container, Graphics graphics)
 			throws SlickException {
 		this.currentMapLayout.drawBackground();
-		this.h.draw();
 		for (Enemy enemy : this.enemy) {
 			if (enemy != null)
 				enemy.draw();
@@ -150,6 +148,13 @@ public class Game extends BasicGame {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
+		
+		for (Enemy enemy : this.enemy) {
+			Healthbar h = new Healthbar(enemy.getX(), enemy.getY() , enemy.getMaxHealth(), 50, 10);
+			h.setHealth(enemy.getHealth());
+			h.draw();
+		}
+		
 
 	}
 
