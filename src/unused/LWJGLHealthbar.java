@@ -1,7 +1,6 @@
-package engine.gui;
+package unused;
 
-import engine.MyVector2f;
-import engine.graphics.LWJGLTwoColoredBar;
+import engine.gui.GUI;
 
 /**
  * @author Pavel see LWJGLRectangle

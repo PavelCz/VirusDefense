@@ -1,7 +1,13 @@
-package engine.graphics;
+package unused;
+
+import engine.graphics.RenderObject;
 
 
-public class Square extends RenderObject {
+/**
+ * @author Pavel
+ * see LWJGLRectangle
+ */
+public class LWJGLSquare extends RenderObject {
 	private LWJGLRectangle rectangle;
 
 	private int length;
@@ -9,16 +15,16 @@ public class Square extends RenderObject {
 	/**
 	 * Default Square length is 1, just like a pixel
 	 */
-	public Square() {
+	public LWJGLSquare() {
 		this(1);
 
 	}
-	public Square(int length) {
+	public LWJGLSquare(int length) {
 		this.rectangle = new LWJGLRectangle(length, length);
 		this.length = length;
 
 	}
-	public Square(int length, float r, float g, float b) {
+	public LWJGLSquare(int length, float r, float g, float b) {
 		this(length);
 		this.setColor(r, g, b);
 	}

@@ -1,7 +1,6 @@
 package engine;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -11,11 +10,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.fills.GradientFill;
-import org.newdawn.slick.geom.Rectangle;
-
-import engine.graphics.SlickEllipse;
-import engine.graphics.SlickRectangle;
 import engine.graphics.SlickUnfilledEllipse;
 import engine.graphics.SlickUnfilledRectangle;
 import engine.graphics.Sprite;
@@ -33,7 +27,7 @@ public class Game extends BasicGame {
 	private List<Drawable> drawables;
 	private List<GUI> guiElements;
 	private List<Button> buttons;
-	private ConcurrentLinkedQueue<Enemy> enemy;
+	private ConcurrentLinkedQueue<Enemy> enemies;
 	private boolean showFPS;
 	private boolean mouseWasClicked;
 	private boolean debugMode = false;
@@ -78,9 +72,9 @@ public class Game extends BasicGame {
 
 		this.towers = new Tower[12][13];
 		this.drawables = new ArrayList<Drawable>();
-		this.enemy = new ConcurrentLinkedQueue<Enemy>();
+		this.enemies = new ConcurrentLinkedQueue<Enemy>();
 
-		enemy.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
+		enemies.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
 		this.mouseWasClicked = false;
 		this.showFPS = false;
 
@@ -107,7 +101,7 @@ public class Game extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		this.currentMapLayout.drawBackground();
-		for (Enemy enemy : this.enemy) {
+		for (Enemy enemy : this.enemies) {
 			if (enemy != null)
 				enemy.draw();
 		}
@@ -142,7 +136,7 @@ public class Game extends BasicGame {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
-		for (Enemy enemy : this.enemy) {
+		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
 			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength / 2, enemy.getY() - 25 - barHeight,
@@ -152,7 +146,7 @@ public class Game extends BasicGame {
 			h.draw();
 		}
 		if (this.debugMode) {
-			for (Enemy enemy : this.enemy) {
+			for (Enemy enemy : this.enemies) {
 				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX(),
 						enemy.getY());
 			}
@@ -172,7 +166,7 @@ public class Game extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 
-		for (Enemy enemy : this.enemy) {
+		for (Enemy enemy : this.enemies) {
 			if (enemy != null)
 				enemy.update(delta);
 		}
@@ -196,7 +190,7 @@ public class Game extends BasicGame {
 	private void keyboardEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
 		if (input.isKeyPressed(Input.KEY_L)) {
-			enemy.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
+			enemies.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
 		}
 		if (input.isKeyPressed(Input.KEY_I)) {
 			this.debugMode = !this.debugMode;
@@ -287,7 +281,7 @@ public class Game extends BasicGame {
 	}
 
 	public ConcurrentLinkedQueue<Enemy> getEnemy() {
-		return (ConcurrentLinkedQueue<Enemy>) enemy;
+		return (ConcurrentLinkedQueue<Enemy>) enemies;
 	}
 
 	public static void reduceLives() {

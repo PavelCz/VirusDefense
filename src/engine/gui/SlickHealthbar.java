@@ -2,10 +2,7 @@ package engine.gui;
 
 import org.newdawn.slick.Graphics;
 
-import engine.MyVector2f;
-import engine.graphics.LWJGLTwoColoredBar;
 import engine.graphics.SlickTwoColoredBar;
-import engine.graphics.SlickUnfilledRectangle;
 
 /**
  * @author Pavel see LWJGLRectangle
@@ -20,7 +17,6 @@ public class SlickHealthbar extends GUI {
 
 	public SlickHealthbar(Graphics graphics, float x, float y, int maxHealth, int length, int height) {
 		super(x, y);
-		// this.coordinates = new MyVector2f(x, y);
 		this.maxHealth = maxHealth;
 		this.healthLeft = maxHealth;
 		this.length = length;

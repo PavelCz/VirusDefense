@@ -1,4 +1,6 @@
-package engine.graphics;
+package unused;
+
+import engine.graphics.RenderObject;
 
 public class LWJGLTwoColoredBar extends RenderObject {
 	private LWJGLRectangle base;
