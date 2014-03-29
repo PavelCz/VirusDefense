@@ -143,16 +143,26 @@ public class Game extends BasicGame {
 			guiElement.draw();
 		}
 		for (Enemy enemy : this.enemy) {
-			int barLength = 20;
-			int barHeight = 10;
+			int barLength = 30;
+			int barHeight = 7;
 			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength / 2, enemy.getY() - 25 - barHeight,
 					enemy.getMaxHealth(), barLength, barHeight);
 			h.setHealth(enemy.getHealth());
 			h.draw();
 		}
-		if(this.debugMode) {
+		if (this.debugMode) {
 			for (Enemy enemy : this.enemy) {
-				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX(), enemy.getY());
+				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX(),
+						enemy.getY());
+			}
+			for (int i = 0; i < this.towers.length; ++i) {
+				for (int j = 0; j < this.towers[0].length; ++j) {
+					if (this.towers[i][j] != null) {
+						Tower currentTower = this.towers[i][j];
+						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red).draw(
+								currentTower.getX() * this.currentTileLength + 25, currentTower.getY() * this.currentTileLength + 25);
+					}
+				}
 			}
 		}
 

@@ -43,5 +43,9 @@ public abstract class Tower extends Entity implements Drawable {
 	public Sprite getSprite() {
 		return this.sprite;
 	}
+	
+	public int getRadius() {
+		return this.radius;
+	}
 
 }
