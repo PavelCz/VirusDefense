@@ -12,26 +12,26 @@ import org.newdawn.slick.geom.Rectangle;
  * @author Pavel A Rectangle based on my other Project JBreakout. This Rectangle is based on LWJGL. I tworked once, but now it doesn't
  *         seem to work anymore
  */
-public class SlickRectangle extends GraphicsRenderObject {
+public class SlickUnfilledRectangle extends GraphicsRenderObject {
 	private Color color;
 
 	private int width;
 	private int height;
 
-	public SlickRectangle(int width, int height) {
+	public SlickUnfilledRectangle(int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.color = new Color(Color.cyan);
 	}
 
-	public SlickRectangle(int width, int height, float r, float g, float b) {
+	public SlickUnfilledRectangle(int width, int height, float r, float g, float b) {
 		this.width = width;
 		this.height = height;
 		this.color = new Color(r,g,b);
 
 	}
 	
-	public SlickRectangle(int width, int height, Color color) {
+	public SlickUnfilledRectangle(int width, int height, Color color) {
 		this.width = width;
 		this.height = height;
 		this.color = color;

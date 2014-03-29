@@ -14,7 +14,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.geom.Rectangle;
 
-import engine.graphics.SlickRectangle;
+import engine.graphics.SlickUnfilledRectangle;
 import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.GUI;
@@ -127,11 +127,9 @@ public class Game extends BasicGame {
 			int newY = (int) y / this.currentTileLength;
 			int[][] path = this.currentMapLayout.getPath();
 			if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && towers[newY][newX] == null) {
-				new SlickRectangle(50, 50, Color.green).draw(newX * this.currentTileLength, newY * this.currentTileLength, graphics);
-				;
+				new SlickUnfilledRectangle(50, 50, Color.green).draw(newX * this.currentTileLength, newY * this.currentTileLength, graphics);
 			} else {
-				graphics.draw(new Rectangle(newX * this.currentTileLength, newY * this.currentTileLength, this.currentTileLength,
-						this.currentTileLength), new GradientFill(0, 0, Color.red, currentTileLength, currentTileLength, Color.red));
+				new SlickUnfilledRectangle(50, 50, Color.red).draw(newX * this.currentTileLength, newY * this.currentTileLength, graphics);
 			}
 		}
 		for (GUI guiElement : this.guiElements) {
