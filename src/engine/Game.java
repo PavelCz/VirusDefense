@@ -146,7 +146,6 @@ public class Game extends BasicGame {
 					enemy.getMaxHealth(), barLength, barHeight);
 			h.setHealth(enemy.getHealth());
 			h.draw();
-			// System.out.println(h.toString());
 		}
 
 	}

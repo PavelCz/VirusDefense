@@ -20,8 +20,9 @@ public class ShootingTower extends Tower {
 	}
 
 	public void shoot() {
+		boolean done = false;
 		for (Enemy enemy : this.game.getEnemy()) {
-			if (enemy != null) {
+			if (enemy != null && !done) {
 				float enemyX = enemy.getX();
 				float enemyY = enemy.getY();
 				float deltaX = enemyX - this.getX() * 50;
@@ -31,6 +32,7 @@ public class ShootingTower extends Tower {
 						* deltaY);
 				if (distance < this.radius + enemy.getRadius()) {
 					enemy.setHealth(enemy.getHealth() - 1);
+					done = true;
 				}
 			}
 		}
