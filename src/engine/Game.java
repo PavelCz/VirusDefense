@@ -148,15 +148,11 @@ public class Game extends BasicGame {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
-		new engine.graphics.LWJGLRectangle(100, 100).draw(100,100);
-		this.r.draw(800, 500);
 		for (Enemy enemy : this.enemy) {
 //			Healthbar h = new Healthbar(enemy.getX(), enemy.getY() , enemy.getMaxHealth(), 100, 50);
 //			h.setHealth(enemy.getHealth());
 //			h.draw();
 //			System.out.println(h.toString());
-			engine.graphics.LWJGLRectangle r = new engine.graphics.LWJGLRectangle(100, 100);
-			r.draw(enemy.getX(), enemy.getY());
 		}
 		
 
@@ -184,7 +180,6 @@ public class Game extends BasicGame {
 		if (Game.player.getLives() <= 0) {
 			System.out.println("Game Over!");
 		}
-		this.r.draw(105, 380);
 
 	}
 
