@@ -16,6 +16,7 @@ import org.newdawn.slick.geom.Rectangle;
 
 import engine.graphics.SlickEllipse;
 import engine.graphics.SlickRectangle;
+import engine.graphics.SlickUnfilledEllipse;
 import engine.graphics.SlickUnfilledRectangle;
 import engine.graphics.Sprite;
 import engine.gui.Button;
@@ -35,6 +36,7 @@ public class Game extends BasicGame {
 	private ConcurrentLinkedQueue<Enemy> enemy;
 	private boolean showFPS;
 	private boolean mouseWasClicked;
+	private boolean debugMode = false;
 
 	private MapLayout currentMapLayout;
 	private int currentTileLength;
@@ -148,6 +150,11 @@ public class Game extends BasicGame {
 			h.setHealth(enemy.getHealth());
 			h.draw();
 		}
+		if(this.debugMode) {
+			for (Enemy enemy : this.enemy) {
+				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX(), enemy.getY());
+			}
+		}
 
 	}
 
@@ -179,6 +186,14 @@ public class Game extends BasicGame {
 		Input input = container.getInput();
 		if (input.isKeyPressed(Input.KEY_L)) {
 			enemy.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
+		}
+		if (input.isKeyPressed(Input.KEY_I)) {
+			this.debugMode = !this.debugMode;
+			if (this.debugMode) {
+				System.out.println("debug");
+			} else {
+				System.out.println("not debug");
+			}
 		}
 	}
 

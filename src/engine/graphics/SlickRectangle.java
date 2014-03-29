@@ -12,19 +12,19 @@ import org.newdawn.slick.geom.Rectangle;
 public class SlickRectangle extends RenderObject {
 	protected Color color;
 	protected Graphics graphics;
-	protected int width;
-	protected int height;
+	protected float width;
+	protected float height;
 
-	public SlickRectangle(Graphics graphics, int width, int height) {
+	public SlickRectangle(Graphics graphics, float width, float height) {
 		this(graphics, width,height, Color.pink);
 	}
 
-	public SlickRectangle(Graphics graphics, int width, int height, float r, float g, float b) {
+	public SlickRectangle(Graphics graphics, float width, float height, float r, float g, float b) {
 		this(graphics, width,height, new Color(r, g, b));
 
 	}
 
-	public SlickRectangle(Graphics graphics, int width, int height, Color color) {
+	public SlickRectangle(Graphics graphics, float width, float height, Color color) {
 		this.width = width;
 		this.height = height;
 		this.color = color;
