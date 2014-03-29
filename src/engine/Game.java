@@ -20,6 +20,7 @@ import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.GUI;
 import engine.gui.InterfaceBackground;
+import engine.gui.SlickHealthbar;
 import engine.gui.StaticText;
 import engine.gui.TowerButton;
 
@@ -137,9 +138,9 @@ public class Game extends BasicGame {
 			guiElement.draw();
 		}
 		for (Enemy enemy : this.enemy) {
-			// Healthbar h = new Healthbar(enemy.getX(), enemy.getY() , enemy.getMaxHealth(), 100, 50);
-			// h.setHealth(enemy.getHealth());
-			// h.draw();
+			SlickHealthbar h = new SlickHealthbar(graphics,enemy.getX(), enemy.getY() , enemy.getMaxHealth(), 20, 10);
+			 h.setHealth(enemy.getHealth());
+			 h.draw();
 			// System.out.println(h.toString());
 		}
 
