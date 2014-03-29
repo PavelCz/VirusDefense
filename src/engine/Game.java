@@ -129,18 +129,23 @@ public class Game extends BasicGame {
 			int newY = (int) y / this.currentTileLength;
 			int[][] path = this.currentMapLayout.getPath();
 			if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && towers[newY][newX] == null) {
-				new SlickUnfilledRectangle(graphics,50, 50, Color.green ).draw(newX * this.currentTileLength, newY * this.currentTileLength);
+				new SlickUnfilledRectangle(graphics, 50, 50, Color.green).draw(newX * this.currentTileLength, newY
+						* this.currentTileLength);
 			} else {
-				new SlickUnfilledRectangle(graphics, 50, 50, Color.red ).draw(newX * this.currentTileLength, newY * this.currentTileLength);
+				new SlickUnfilledRectangle(graphics, 50, 50, Color.red).draw(newX * this.currentTileLength, newY
+						* this.currentTileLength);
 			}
 		}
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
 		for (Enemy enemy : this.enemy) {
-			SlickHealthbar h = new SlickHealthbar(graphics,enemy.getX(), enemy.getY() , enemy.getMaxHealth(), 20, 10);
-			 h.setHealth(enemy.getHealth());
-			 h.draw();
+			int barLength = 20;
+			int barHeight = 10;
+			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength / 2, enemy.getY() - 25 - barHeight,
+					enemy.getMaxHealth(), barLength, barHeight);
+			h.setHealth(enemy.getHealth());
+			h.draw();
 			// System.out.println(h.toString());
 		}
 
