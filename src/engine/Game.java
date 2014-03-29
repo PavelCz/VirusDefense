@@ -128,9 +128,9 @@ public class Game extends BasicGame {
 			int newY = (int) y / this.currentTileLength;
 			int[][] path = this.currentMapLayout.getPath();
 			if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && towers[newY][newX] == null) {
-				new SlickUnfilledRectangle(50, 50, Color.green).draw(newX * this.currentTileLength, newY * this.currentTileLength, graphics);
+				new SlickUnfilledRectangle(graphics,50, 50, Color.green ).draw(newX * this.currentTileLength, newY * this.currentTileLength);
 			} else {
-				new SlickUnfilledRectangle(50, 50, Color.red).draw(newX * this.currentTileLength, newY * this.currentTileLength, graphics);
+				new SlickUnfilledRectangle(graphics, 50, 50, Color.red ).draw(newX * this.currentTileLength, newY * this.currentTileLength);
 			}
 		}
 		for (GUI guiElement : this.guiElements) {

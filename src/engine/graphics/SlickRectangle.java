@@ -9,37 +9,32 @@ import org.newdawn.slick.geom.Rectangle;
  * @author Pavel A Rectangle based on my other Project JBreakout. This Rectangle is based on LWJGL. I tworked once, but now it doesn't
  *         seem to work anymore
  */
-public class SlickRectangle extends GraphicsRenderObject {
-	private Color color;
+public class SlickRectangle extends RenderObject {
+	protected Color color;
+	protected Graphics graphics;
+	protected int width;
+	protected int height;
 
-	private int width;
-	private int height;
-
-	public SlickRectangle(int width, int height) {
-		this.width = width;
-		this.height = height;
-		this.color = new Color(Color.cyan);
+	public SlickRectangle(Graphics graphics, int width, int height) {
+		this(graphics, width,height, Color.pink);
 	}
 
-	public SlickRectangle(int width, int height, float r, float g, float b) {
-		this.width = width;
-		this.height = height;
-		this.color = new Color(r,g,b);
+	public SlickRectangle(Graphics graphics, int width, int height, float r, float g, float b) {
+		this(graphics, width,height, new Color(r, g, b));
 
 	}
-	
-	public SlickRectangle(int width, int height, Color color) {
+
+	public SlickRectangle(Graphics graphics, int width, int height, Color color) {
 		this.width = width;
 		this.height = height;
 		this.color = color;
+		this.graphics = graphics;
 	}
 
-	public void draw(float x, float y, Graphics graphics) {
-		graphics.fill(new Rectangle(x, y, this.width,
-				this.height), new GradientFill(0, 0,this.color, this.width, this.height,
+	public void draw(float x, float y) {
+		this.graphics.fill(new Rectangle(x, y, this.width, this.height), new GradientFill(0, 0, this.color, this.width, this.height,
 				this.color));
 	}
-
 
 	public void setWidth(float width) {
 		this.width = (int) width;
