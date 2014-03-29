@@ -10,6 +10,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+
+import engine.graphics.SlickRectangle;
 import engine.graphics.SlickUnfilledEllipse;
 import engine.graphics.SlickUnfilledRectangle;
 import engine.graphics.Sprite;
@@ -28,7 +30,6 @@ public class Game extends BasicGame {
 	private List<GUI> guiElements;
 	private List<Button> buttons;
 	private ConcurrentLinkedQueue<Enemy> enemies;
-	private boolean showFPS;
 	private boolean mouseWasClicked;
 	private boolean debugMode = false;
 
@@ -76,7 +77,6 @@ public class Game extends BasicGame {
 
 		enemies.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
 		this.mouseWasClicked = false;
-		this.showFPS = false;
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
@@ -95,7 +95,7 @@ public class Game extends BasicGame {
 		this.buttons.add(this.towerButton1);
 
 		//
-		container.setShowFPS(this.showFPS);
+		container.setShowFPS(this.debugMode);
 	}
 
 	@Override
@@ -159,7 +159,10 @@ public class Game extends BasicGame {
 					}
 				}
 			}
+			// create a black box that the FPS are visible
+			new SlickRectangle(graphics, 100, 20, Color.black).draw(5,10);
 		}
+		
 
 	}
 
@@ -194,12 +197,14 @@ public class Game extends BasicGame {
 		}
 		if (input.isKeyPressed(Input.KEY_I)) {
 			this.debugMode = !this.debugMode;
+			container.setShowFPS(this.debugMode);
 			if (this.debugMode) {
 				System.out.println("debug");
 			} else {
 				System.out.println("not debug");
 			}
 		}
+		
 	}
 
 	private void mouseEvents(GameContainer container, int delta) {
