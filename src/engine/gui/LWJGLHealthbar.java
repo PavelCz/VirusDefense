@@ -1,7 +1,7 @@
 package engine.gui;
 
 import engine.MyVector2f;
-import engine.graphics.TwoColoredBar;
+import engine.graphics.LWJGLTwoColoredBar;
 
 /**
  * @author Pavel see LWJGLRectangle
@@ -12,7 +12,7 @@ public class LWJGLHealthbar extends GUI {
 	private float healthLeft;
 	private int length;
 	private int height;
-	private TwoColoredBar bar;
+	private LWJGLTwoColoredBar bar;
 
 	public LWJGLHealthbar(float x, float y, int maxHealth, int length, int height) {
 		super(x, y);
@@ -22,7 +22,7 @@ public class LWJGLHealthbar extends GUI {
 		this.length = length;
 		this.height = height;
 
-		this.bar = new TwoColoredBar(this.length, this.height);
+		this.bar = new LWJGLTwoColoredBar(this.length, this.height);
 
 	}
 

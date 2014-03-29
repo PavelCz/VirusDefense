@@ -14,16 +14,17 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.geom.Rectangle;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
-
+import engine.graphics.SlickRectangle;
 import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.GUI;
-import engine.gui.LWJGLHealthbar;
 import engine.gui.InterfaceBackground;
 import engine.gui.StaticText;
 import engine.gui.TowerButton;
 
+/**
+ * @author Pavel see LWJGLRectangle
+ */
 public class Game extends BasicGame {
 	private List<Drawable> drawables;
 	private List<GUI> guiElements;
@@ -45,8 +46,9 @@ public class Game extends BasicGame {
 	// Constants:
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE = 15;
+
 	// Tests:
-	
+
 	//
 
 	public Game() {
@@ -56,22 +58,18 @@ public class Game extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 
-		this.currentMapLayout = new MapLayout("/maps/map.png",
-				"/maps/background.jpg", 50);
+		this.currentMapLayout = new MapLayout("/maps/map.png", "/maps/background.jpg", 50);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
 
 		// Set Constants:
 
-		Game.INTERFACE_START_X = this.currentMapLayout.getNumberTilesWidth()
-				* this.currentTileLength;
+		Game.INTERFACE_START_X = this.currentMapLayout.getNumberTilesWidth() * this.currentTileLength;
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
-		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0,
-				"button1.png", "button2.png", new ShootingTower(0, 0,
-						new Sprite("tower/t1.png", 0.05f), this));
+		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
+				new Sprite("tower/t1.png", 0.05f), this));
 		Game.player = new Player();
-		this.lives = new StaticText(Game.INTERFACE_START_X + 5, 200,
-				Color.white, "Lives:");
+		this.lives = new StaticText(Game.INTERFACE_START_X + 5, 200, Color.white, "Lives:");
 
 		this.towers = new Tower[12][13];
 		this.drawables = new ArrayList<Drawable>();
@@ -86,8 +84,7 @@ public class Game extends BasicGame {
 
 		// GUI
 		this.guiElements = new ArrayList<GUI>();
-		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200,
-				Color.white, "" + player.getLives());
+		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.white, "" + player.getLives());
 
 		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(numberLives);
@@ -103,8 +100,7 @@ public class Game extends BasicGame {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics)
-			throws SlickException {
+	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		this.currentMapLayout.drawBackground();
 		for (Enemy enemy : this.enemy) {
 			if (enemy != null)
@@ -130,37 +126,28 @@ public class Game extends BasicGame {
 			int newX = (int) x / this.currentTileLength;
 			int newY = (int) y / this.currentTileLength;
 			int[][] path = this.currentMapLayout.getPath();
-			if (x < Game.INTERFACE_START_X && path[newY][newX] == 1
-					&& towers[newY][newX] == null) {
-				graphics.draw(new Rectangle(newX * this.currentTileLength, newY
-						* this.currentTileLength, this.currentTileLength,
-						this.currentTileLength), new GradientFill(0, 0,
-						Color.green, currentTileLength, currentTileLength,
-						Color.green));
+			if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && towers[newY][newX] == null) {
+				new SlickRectangle(50, 50, Color.green).draw(newX * this.currentTileLength, newY * this.currentTileLength, graphics);
+				;
 			} else {
-				graphics.draw(new Rectangle(newX * this.currentTileLength, newY
-						* this.currentTileLength, this.currentTileLength,
-						this.currentTileLength), new GradientFill(0, 0,
-						Color.red, currentTileLength, currentTileLength,
-						Color.red));
+				graphics.draw(new Rectangle(newX * this.currentTileLength, newY * this.currentTileLength, this.currentTileLength,
+						this.currentTileLength), new GradientFill(0, 0, Color.red, currentTileLength, currentTileLength, Color.red));
 			}
 		}
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
 		for (Enemy enemy : this.enemy) {
-//			Healthbar h = new Healthbar(enemy.getX(), enemy.getY() , enemy.getMaxHealth(), 100, 50);
-//			h.setHealth(enemy.getHealth());
-//			h.draw();
-//			System.out.println(h.toString());
+			// Healthbar h = new Healthbar(enemy.getX(), enemy.getY() , enemy.getMaxHealth(), 100, 50);
+			// h.setHealth(enemy.getHealth());
+			// h.draw();
+			// System.out.println(h.toString());
 		}
-		
 
 	}
 
 	@Override
-	public void update(GameContainer container, int delta)
-			throws SlickException {
+	public void update(GameContainer container, int delta) throws SlickException {
 
 		for (Enemy enemy : this.enemy) {
 			if (enemy != null)
@@ -185,7 +172,7 @@ public class Game extends BasicGame {
 
 	private void keyboardEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
-		if(input.isKeyPressed(Input.KEY_L)){
+		if (input.isKeyPressed(Input.KEY_L)) {
 			enemy.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
 		}
 	}
@@ -215,8 +202,7 @@ public class Game extends BasicGame {
 				int newY = (int) y / this.currentTileLength;
 				if (this.currentTower != null) {
 					int[][] path = this.currentMapLayout.getPath();
-					if (x < Game.INTERFACE_START_X && path[newY][newX] == 1
-							&& towers[newY][newX] == null) {
+					if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && towers[newY][newX] == null) {
 						Tower bufferTower = this.currentTower.clone();
 						bufferTower.setX(newX);
 						bufferTower.setY(newY);
@@ -233,8 +219,7 @@ public class Game extends BasicGame {
 
 		}
 		// checks if mouse button was released again after being pressed
-		if (this.mouseWasClicked
-				&& !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 
 			this.mouseWasClicked = false;
 			this.releaseAllButtonsNotTowerButtons();
@@ -249,8 +234,7 @@ public class Game extends BasicGame {
 			for (int j = 0; j < path[0].length; ++j) {
 				if (path[i][j] == 5) {// for now th epath has not the value 0 in
 										// the array path, but 5
-					s.draw(j * this.currentTileLength, i
-							* this.currentTileLength);
+					s.draw(j * this.currentTileLength, i * this.currentTileLength);
 				}
 			}
 

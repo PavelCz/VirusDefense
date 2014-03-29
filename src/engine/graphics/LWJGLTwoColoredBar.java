@@ -1,6 +1,6 @@
 package engine.graphics;
 
-public class TwoColoredBar extends RenderObject {
+public class LWJGLTwoColoredBar extends RenderObject {
 	private LWJGLRectangle base;
 	private LWJGLRectangle health;
 	private float length;
@@ -9,7 +9,7 @@ public class TwoColoredBar extends RenderObject {
 	
 	
 	
-	public TwoColoredBar(float length, float height) {
+	public LWJGLTwoColoredBar(float length, float height) {
 		this.length = length;
 		this.height = height;
 		
