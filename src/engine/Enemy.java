@@ -21,7 +21,7 @@ public abstract class Enemy extends Entity implements Drawable {
 		this.velocity = new MyVector2f(0, speed);
 		this.waypoint = startingWaypoint;
 		this.direction = direction;
-		this.radius = sprite.getWidth();
+		this.radius = sprite.getWidth()/2;
 		this.game = game;
 	}
 

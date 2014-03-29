@@ -7,8 +7,8 @@ public class Button extends GUI implements Clickable {
 	private Sprite unclickedButton;
 	private Sprite clickedButton;
 	private boolean clicked;
-	private float width;
-	private float height;
+	protected float width;
+	protected float height;
 	
 	public Button(float x, float y, String unclickedButtonPath, String clickedButtonPath) {
 		super(x, y);

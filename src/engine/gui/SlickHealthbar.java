@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import engine.MyVector2f;
 import engine.graphics.LWJGLTwoColoredBar;
 import engine.graphics.SlickTwoColoredBar;
+import engine.graphics.SlickUnfilledRectangle;
 
 /**
  * @author Pavel see LWJGLRectangle
@@ -43,7 +44,11 @@ public class SlickHealthbar extends GUI {
 	public void draw() {
 		this.bar.setFractionLeft(this.healthLeft / this.maxHealth);
 		this.bar.draw(this.x, this.y);
+		
 
+	}
+	public void setBordered(boolean bordered) {
+		this.bar.setBordered(bordered);
 	}
 
 	public String toString() {

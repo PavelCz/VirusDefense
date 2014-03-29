@@ -12,15 +12,15 @@ import org.newdawn.slick.geom.Rectangle;
 public class SlickUnfilledRectangle extends SlickRectangle {
 
 	
-	public SlickUnfilledRectangle(Graphics graphics, int width, int height, Color color) {
+	public SlickUnfilledRectangle(Graphics graphics, float width, float height, Color color) {
 		super(graphics, width, height, color);
 	}
 
-	public SlickUnfilledRectangle(Graphics graphics, int width, int height) {
+	public SlickUnfilledRectangle(Graphics graphics, float width, float height) {
 		super(graphics, width, height);
 	}
 
-	public SlickUnfilledRectangle(Graphics graphics, int width, int height, float r, float g, float b) {
+	public SlickUnfilledRectangle(Graphics graphics, float width, float height, float r, float g, float b) {
 		super(graphics, width, height, r, g, b);
 	}
 

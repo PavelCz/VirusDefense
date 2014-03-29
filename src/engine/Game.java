@@ -148,6 +148,7 @@ public class Game extends BasicGame {
 			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength / 2, enemy.getY() - 25 - barHeight,
 					enemy.getMaxHealth(), barLength, barHeight);
 			h.setHealth(enemy.getHealth());
+			h.setBordered(true);
 			h.draw();
 		}
 		if (this.debugMode) {
