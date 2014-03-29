@@ -19,7 +19,7 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.GUI;
-import engine.gui.Healthbar;
+import engine.gui.LWJGLHealthbar;
 import engine.gui.InterfaceBackground;
 import engine.gui.StaticText;
 import engine.gui.TowerButton;
@@ -148,11 +148,15 @@ public class Game extends BasicGame {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
-		
+		new engine.graphics.LWJGLRectangle(100, 100).draw(100,100);
+		this.r.draw(800, 500);
 		for (Enemy enemy : this.enemy) {
-			Healthbar h = new Healthbar(enemy.getX(), enemy.getY() , enemy.getMaxHealth(), 50, 10);
-			h.setHealth(enemy.getHealth());
-			h.draw();
+//			Healthbar h = new Healthbar(enemy.getX(), enemy.getY() , enemy.getMaxHealth(), 100, 50);
+//			h.setHealth(enemy.getHealth());
+//			h.draw();
+//			System.out.println(h.toString());
+			engine.graphics.LWJGLRectangle r = new engine.graphics.LWJGLRectangle(100, 100);
+			r.draw(enemy.getX(), enemy.getY());
 		}
 		
 
@@ -180,6 +184,7 @@ public class Game extends BasicGame {
 		if (Game.player.getLives() <= 0) {
 			System.out.println("Game Over!");
 		}
+		this.r.draw(105, 380);
 
 	}
 

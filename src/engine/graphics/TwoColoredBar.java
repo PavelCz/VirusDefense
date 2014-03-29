@@ -1,8 +1,8 @@
 package engine.graphics;
 
 public class TwoColoredBar extends RenderObject {
-	private Rectangle base;
-	private Rectangle health;
+	private LWJGLRectangle base;
+	private LWJGLRectangle health;
 	private float length;
 	private float height;
 	private float length2;
@@ -13,9 +13,9 @@ public class TwoColoredBar extends RenderObject {
 		this.length = length;
 		this.height = height;
 		
-		this.base = new Rectangle((int)this.length, (int)this.height);
+		this.base = new LWJGLRectangle((int)this.length, (int)this.height);
 		this.base.setColor(0.5f, 0.1f, 0.1f);
-		this.health = new Rectangle((int)this.length, (int)this.height);
+		this.health = new LWJGLRectangle((int)this.length, (int)this.height);
 		this.health.setColor(0.1f, 0.5f, 0.1f);
 		
 		this.length2 = length;

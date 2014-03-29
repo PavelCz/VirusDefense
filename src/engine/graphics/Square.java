@@ -2,7 +2,7 @@ package engine.graphics;
 
 
 public class Square extends RenderObject {
-	private Rectangle rectangle;
+	private LWJGLRectangle rectangle;
 
 	private int length;
 
@@ -14,7 +14,7 @@ public class Square extends RenderObject {
 
 	}
 	public Square(int length) {
-		this.rectangle = new Rectangle(length, length);
+		this.rectangle = new LWJGLRectangle(length, length);
 		this.length = length;
 
 	}
