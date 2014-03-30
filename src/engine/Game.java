@@ -46,6 +46,7 @@ public class Game extends BasicGame {
 	// Constants:
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE = 15;
+	private float speed = 1f;
 
 	// Tests:
 
@@ -167,8 +168,8 @@ public class Game extends BasicGame {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
-
+	public void update(GameContainer container, int originalDelta) throws SlickException {
+		int delta = (int)(originalDelta * this.speed);
 		for (Enemy enemy : this.enemies) {
 			if (enemy != null)
 				enemy.update(delta);
@@ -192,9 +193,7 @@ public class Game extends BasicGame {
 
 	private void keyboardEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
-		if (input.isKeyPressed(Input.KEY_L)) {
-			enemies.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
-		}
+		
 		if (input.isKeyPressed(Input.KEY_I)) {
 			this.debugMode = !this.debugMode;
 			container.setShowFPS(this.debugMode);
@@ -202,9 +201,25 @@ public class Game extends BasicGame {
 				System.out.println("debug");
 			} else {
 				System.out.println("not debug");
+				this.speed = 1f;
 			}
 		}
+		if(this.debugMode) {
+			this.debugKeyboardEvents(container, delta);
+		}
 		
+	}
+	private void debugKeyboardEvents(GameContainer container, int delta) {
+		Input input = container.getInput();
+		if (input.isKeyPressed(Input.KEY_ADD)) {
+			this.speed *= 2f;
+		}
+		if (input.isKeyPressed(Input.KEY_SUBTRACT)) {
+			this.speed /= 2f;
+		}
+		if (input.isKeyPressed(Input.KEY_L)) {
+			enemies.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
+		}
 	}
 
 	private void mouseEvents(GameContainer container, int delta) {
