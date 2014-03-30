@@ -147,7 +147,7 @@ public class MapLayoutFromImage {
 		return false;
 	}
 	private boolean isGreen(Color color) {
-		if (color.getRed() / 255 <= 0.2f && color.getBlue() / 255 <= 0.2f && color.getGreen() / 255 >= 0.7f) {
+		if (color.getRed() / 255 <= 0.2f && color.getBlue() / 255 <= 0.2f && color.getGreen() / 255 >= 0.8f) {
 			System.out.println(true);
 			return true;
 		}
