@@ -54,16 +54,18 @@ public class MapLayoutFromImage {
 	 * generates the path from the image and gets the coordinates of the starting point for enemies
 	 */
 	private void setPath() {
+		int counter = 0;
 		this.path = new int[this.colors.length][this.colors[0].length];
 		for (int y = 0; y < colors.length; ++y) {
 			for (int x = 0; x < colors[0].length; ++x) {
 				Color currentColor = this.colors[y][x];
 				if (this.isGreen(currentColor)) {
 					this.path[y][x] = 2;
+					
 				} else if (this.isWhite(currentColor)) {
 					this.path[y][x] = 1;
 				} else {
-					this.path[y][x] = 0;
+					this.path[y][x] = 0;System.out.println("YO" + counter++);
 					if (this.isRed(currentColor)) {
 						this.startingPoint = new Waypoint(x * 50 + 50 / 2, y * 50 + 50 / 2);
 					} else { // currentColor has no blue, no green, no red value => Path
@@ -121,6 +123,7 @@ public class MapLayoutFromImage {
 		} else if (currentY - 1 >= 0 && path[currentY - 1][currentX] < 1) {
 			return Waypoint.UP;
 		} else {
+			
 			return 5;
 		}
 	}
@@ -144,10 +147,13 @@ public class MapLayoutFromImage {
 		return false;
 	}
 	private boolean isGreen(Color color) {
-		if (color.getRed() / 255 <= 0.2f && color.getBlue() / 255 <= 0.2f && color.getGreen() / 255 >= 0.8f) {
+		if (color.getRed() / 255 <= 0.2f && color.getBlue() / 255 <= 0.2f && color.getGreen() / 255 >= 0.7f) {
+			System.out.println(true);
 			return true;
 		}
+		System.out.println(false);
 		return false;
+		
 	}
 	
 	private boolean isWhite(Color color) {
