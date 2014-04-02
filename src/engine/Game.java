@@ -171,8 +171,12 @@ public class Game extends BasicGame {
 	public void update(GameContainer container, int originalDelta) throws SlickException {
 		int delta = (int)(originalDelta * this.speed);
 		for (Enemy enemy : this.enemies) {
+			if (delta > 100){
+				delta = 100;
+			}
 			if (enemy != null)
 				enemy.update(delta);
+			System.out.println("Act");
 		}
 		for (int i = 0; i < this.towers.length; ++i) {
 			for (int j = 0; j < this.towers[0].length; ++j) {
