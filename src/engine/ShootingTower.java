@@ -3,11 +3,11 @@ package engine;
 import engine.graphics.Sprite;
 
 public class ShootingTower extends Tower {
-	private int delta;
+	protected int delta;
 	protected final int shootingInterval;
 
-	public ShootingTower(float x, float y, Sprite sprite, Game game, int shootingInterval) {
-		super(x * 50, y * 50, 100, 100, 30, game);
+	public ShootingTower(float x, float y, Sprite sprite, Game game, int shootingInterval, float damage) {
+		super(x * 50, y * 50, 100, 100, damage, game);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
 		this.delta = this.shootingInterval;
@@ -15,7 +15,7 @@ public class ShootingTower extends Tower {
 
 	@Override
 	public Tower clone() {
-		return new ShootingTower(this.x, this.y, this.sprite.clone(), this.game, this.shootingInterval);
+		return new ShootingTower(this.x, this.y, this.sprite.clone(), this.game, this.shootingInterval, this.damage);
 	}
 
 	@Override
@@ -55,5 +55,24 @@ public class ShootingTower extends Tower {
 			}
 		}
 
+	}
+
+	protected boolean inRangeOfAnyEnemy() {
+		boolean done = false;
+		for (Enemy enemy : this.game.getEnemies()) {
+			if (enemy != null && !done) {
+				float enemyX = enemy.getX();
+				float enemyY = enemy.getY();
+				float deltaX = enemyX - (this.getX() * 50 + 25);
+				float deltaY = enemyY - (this.getY() * 50 + 25);
+
+				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+				if (distance < this.radius + enemy.getRadius()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

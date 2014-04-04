@@ -5,11 +5,11 @@ import engine.graphics.Sprite;
 public abstract class Tower extends Entity implements Drawable {
 	private int cost;
 	protected int radius;
-	protected int damage;
+	protected float damage;
 	protected Game game;
 	protected Sprite sprite;
 
-	public Tower(float x, float y, int cost, int radius, int damage, Game game) {
+	public Tower(float x, float y, int cost, int radius, float damage, Game game) {
 		super(x, y);
 
 		this.cost = cost;

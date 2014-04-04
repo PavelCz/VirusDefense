@@ -4,7 +4,8 @@ import engine.graphics.Sprite;
 
 public class Enemy extends Entity implements Drawable {
 	private float radius;
-	private int health, maxHealth;
+	private float health;
+	private int maxHealth;
 	private float speed;
 	private Game game;
 	protected Sprite sprite;
@@ -13,10 +14,11 @@ public class Enemy extends Entity implements Drawable {
 	protected int direction;
 	private int worth;
 
-	private Enemy(int health, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Game game, float radius, int worth) {
+	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Game game, float radius,
+			int worth) {
 		super(startingWaypoint.getX(), startingWaypoint.getY());
-		this.health = health;
-		this.maxHealth = this.health;
+		this.health = maxHealth;
+		this.maxHealth = maxHealth;
 		this.speed = speed;
 		this.sprite = sprite;
 		this.velocity = new MyVector2f(0, speed);
@@ -92,7 +94,7 @@ public class Enemy extends Entity implements Drawable {
 		return this.radius;
 	}
 
-	public int getHealth() {
+	public float getHealth() {
 		return this.health;
 	}
 
@@ -100,7 +102,7 @@ public class Enemy extends Entity implements Drawable {
 		return this.worth;
 	}
 
-	public void setHealth(int health) {
+	public void setHealth(float health) {
 		this.health = health;
 	}
 
