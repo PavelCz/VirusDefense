@@ -34,6 +34,7 @@ public class Game extends BasicGame {
 	private boolean mouseWasClicked = false;
 	private boolean debugMode = false;
 	private EnemyTypes enemyTypes;
+	private float passedTime = 0;
 
 	private MapLayout currentMapLayout;
 	private int currentTileLength;
@@ -198,29 +199,31 @@ public class Game extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int originalDelta) throws SlickException {
-		int delta = (int) (originalDelta * this.speed);
-		for (Enemy enemy : this.enemies) {
-			if (delta > 100) {
-				delta = 0;
+		if (originalDelta < 100) {
+
+			int delta = (int) (originalDelta * this.speed);
+
+			for (Enemy enemy : this.enemies) {
+
+				if (enemy != null)
+					enemy.update(delta);
 			}
-			if (enemy != null)
-				enemy.update(delta);
-		}
-		for (int i = 0; i < this.towers.length; ++i) {
-			for (int j = 0; j < this.towers[0].length; ++j) {
-				if (this.towers[i][j] != null) {
-					this.towers[i][j].shoot();
+			for (int i = 0; i < this.towers.length; ++i) {
+				for (int j = 0; j < this.towers[0].length; ++j) {
+					if (this.towers[i][j] != null) {
+						this.towers[i][j].shoot();
+					}
 				}
 			}
-		}
 
-		this.waveHandler.update(delta);
+			this.waveHandler.update(delta);
 
-		this.mouseEvents(container, delta);
-		this.keyboardEvents(container, delta);
+			this.mouseEvents(container, delta);
+			this.keyboardEvents(container, delta);
 
-		if (Game.player.getLives() <= 0) {
-			System.out.println("Game Over!");
+			if (Game.player.getLives() <= 0) {
+				System.out.println("Game Over!");
+			}
 		}
 
 	}
