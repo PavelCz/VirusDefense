@@ -9,12 +9,15 @@ public class WaveHandler {
 	private Game game;
 	private int index = 0;
 	private Waves currentWave;
-	private int delta = 1000;
+	private int delta;
+	private int timeBetweenWaves;
+	private int timeBetweenEnemies = 500;
 
-	public WaveHandler(Game game) {
+	public WaveHandler(Game game, int timeBetweenWaves) {
 		this.game = game;
 		waves = new LinkedList<Waves>();
-
+		this.timeBetweenWaves = timeBetweenWaves;
+		this.delta = this.timeBetweenWaves;
 	}
 
 	public void addWave(Waves wave) {
@@ -37,15 +40,16 @@ public class WaveHandler {
 	public void update(int delta) {
 		this.delta -= delta;
 		if (game.getEnemy().isEmpty() && index <= 0) {
-
+			
 			if (!waves.isEmpty()) {
 				index = waves.peek().getNumber();
 				currentWave = waves.poll();
+				this.delta = this.timeBetweenWaves;
 			}
 		}
 		if (this.delta <= 0) {
-			this.delta = 1000;
-			if (index != 0) {
+			this.delta = this.timeBetweenEnemies;
+			if (index > 0) {
 				if (this.calculateEnemy(currentWave) == 0) {
 					game.getEnemy().add(new Enemy1(game.getWaypoints(), game));
 				}

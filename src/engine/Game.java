@@ -76,7 +76,7 @@ public class Game extends BasicGame {
 		this.towers = new Tower[12][13];
 		this.drawables = new ArrayList<Drawable>();
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
-		this.waveHandler = new WaveHandler(this);
+		this.waveHandler = new WaveHandler(this, 5000);
 		waveHandler.addWave(new Waves(3, new int[] {100}));
 		waveHandler.addWave(new Waves(2, new int[] {100}));
 		waveHandler.addWave(new Waves(1, new int[] {100}));
