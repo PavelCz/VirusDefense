@@ -1,6 +1,5 @@
 package engine;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -44,8 +43,8 @@ public class Game extends BasicGame {
 	private Tower currentTower;
 	// private Enemy1 e;
 	private Player player;
-	private StaticText lives;
 	private static StaticText numberLives;
+	private StaticText moneyAmount;
 
 	private StaticText passedTime;
 	private InterfaceBackground interfaceBackground;
@@ -94,14 +93,16 @@ public class Game extends BasicGame {
 		// GUI
 		this.guiElements = new ArrayList<GUI>();
 		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.white, "" + this.player.getLives());
-		this.lives = new StaticText(Game.INTERFACE_START_X + 5, 200, Color.white, "Lives:");
-		this.passedTime = new StaticText(Game.INTERFACE_START_X + 5, 580, Color.white, new Time(this.passedMilliseconds).toString());
+		this.passedTime = new StaticText(Game.INTERFACE_START_X + 5, 580, Color.white, this.passedTimeToString());
+		this.moneyAmount = new StaticText(Game.INTERFACE_START_X + 60, 100, Color.white, "" + this.player.getMoney());
 
 		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(numberLives);
 		this.guiElements.add(this.towerButton1);
-		this.guiElements.add(this.lives);
+		this.guiElements.add(new StaticText(Game.INTERFACE_START_X + 5, 200, Color.white, "Lives:"));
 		this.guiElements.add(this.passedTime);
+		this.guiElements.add(new StaticText(Game.INTERFACE_START_X + 5, 100, Color.white, "Money:"));
+		this.guiElements.add(this.moneyAmount);
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.buttons = new ArrayList<Button>();
@@ -207,6 +208,7 @@ public class Game extends BasicGame {
 		if (originalDelta < 100) {
 			this.passedMilliseconds += originalDelta;
 			this.passedTime.setText(this.passedTimeToString());
+			this.moneyAmount.setText("" + this.player.getMoney());
 			int delta = (int) (originalDelta * this.speed);
 
 			for (Enemy enemy : this.enemies) {
@@ -400,5 +402,9 @@ public class Game extends BasicGame {
 
 	private String passedTimeToString() {
 		return this.millisecondsToTimeString(this.passedMilliseconds);
+	}
+
+	public Player getPlayer() {
+		return this.player;
 	}
 }

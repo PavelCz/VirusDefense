@@ -31,6 +31,7 @@ public class EnemyType {
 		this.radius = radius;
 		this.sprite = new Sprite(sprite, 0.05f);
 		this.game = game;
+		this.worth = worth;
 	}
 
 	/**

@@ -96,6 +96,10 @@ public class Enemy extends Entity implements Drawable {
 		return this.health;
 	}
 
+	public int getMoney() {
+		return this.worth;
+	}
+
 	public void setHealth(int health) {
 		this.health = health;
 	}
