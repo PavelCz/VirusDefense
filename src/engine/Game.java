@@ -1,5 +1,6 @@
 package engine;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -34,7 +35,7 @@ public class Game extends BasicGame {
 	private boolean mouseWasClicked = false;
 	private boolean debugMode = false;
 	private EnemyTypes enemyTypes;
-	private float passedTime = 0;
+	private int passedMilliseconds = 0;
 
 	private MapLayout currentMapLayout;
 	private int currentTileLength;
@@ -45,6 +46,8 @@ public class Game extends BasicGame {
 	private static Player player;
 	private StaticText lives;
 	private static StaticText numberLives;
+
+	private StaticText passedTime;
 	private InterfaceBackground interfaceBackground;
 	// Constants:
 	public static int INTERFACE_START_X;
@@ -73,7 +76,6 @@ public class Game extends BasicGame {
 		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
 				new Sprite("tower/t1.png", 0.05f), this));
 		Game.player = new Player();
-		this.lives = new StaticText(Game.INTERFACE_START_X + 5, 200, Color.white, "Lives:");
 
 		this.towers = new Tower[12][13];
 		this.drawables = new ArrayList<Drawable>();
@@ -92,11 +94,14 @@ public class Game extends BasicGame {
 		// GUI
 		this.guiElements = new ArrayList<GUI>();
 		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.white, "" + player.getLives());
+		this.lives = new StaticText(Game.INTERFACE_START_X + 5, 200, Color.white, "Lives:");
+		this.passedTime = new StaticText(Game.INTERFACE_START_X + 5, 580, Color.white, new Time(this.passedMilliseconds).toString());
 
 		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(numberLives);
 		this.guiElements.add(this.towerButton1);
 		this.guiElements.add(this.lives);
+		this.guiElements.add(this.passedTime);
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.buttons = new ArrayList<Button>();
@@ -200,7 +205,8 @@ public class Game extends BasicGame {
 	@Override
 	public void update(GameContainer container, int originalDelta) throws SlickException {
 		if (originalDelta < 100) {
-			this.passedTime += originalDelta;
+			this.passedMilliseconds += originalDelta;
+			this.passedTime.setText(this.passedTimeToString());
 			int delta = (int) (originalDelta * this.speed);
 
 			for (Enemy enemy : this.enemies) {
@@ -367,4 +373,32 @@ public class Game extends BasicGame {
 		return this.enemyTypes;
 	}
 
+	private String millisecondsToTimeString(int milliseconds) {
+		int seconds = milliseconds / 1000;
+		int minutes = seconds / 60;
+		int hours = minutes / 60;
+		seconds %= 100;
+		minutes %= 60;
+		String secondsString = this.makeTwoDecimals(seconds);
+		String minutesString = this.makeTwoDecimals(minutes);
+		String hoursString = this.makeTwoDecimals(hours);
+
+		if (hours > 0) {
+			return hoursString + ":" + minutesString + ":" + secondsString;
+		} else {
+			return minutesString + ":" + secondsString;
+		}
+	}
+
+	private String makeTwoDecimals(int number) {
+		if (number >= 10) {
+			return "" + number;
+		} else {
+			return "0" + number;
+		}
+	}
+
+	private String passedTimeToString() {
+		return this.millisecondsToTimeString(this.passedMilliseconds);
+	}
 }
