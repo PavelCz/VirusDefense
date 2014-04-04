@@ -31,7 +31,7 @@ public class Game extends BasicGame {
 	private List<Button> buttons;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private WaveHandler waveHandler;
-	private boolean mouseWasClicked;
+	private boolean mouseWasClicked = false;
 	private boolean debugMode = false;
 
 	private MapLayout currentMapLayout;
@@ -77,12 +77,11 @@ public class Game extends BasicGame {
 		this.drawables = new ArrayList<Drawable>();
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
 		this.waveHandler = new WaveHandler(this, 5000);
-		waveHandler.addWave(new Wave(3, new int[] {100}));
-		waveHandler.addWave(new Wave(2, new int[] {100}));
-		waveHandler.addWave(new Wave(1, new int[] {100}));
+		waveHandler.addWave(new Wave(3, new int[] { 100 }));
+		waveHandler.addWave(new Wave(2, new int[] { 100 }));
+		waveHandler.addWave(new Wave(1, new int[] { 100 }));
 
 		enemies.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
-		this.mouseWasClicked = false;
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
@@ -122,6 +121,32 @@ public class Game extends BasicGame {
 			entity.draw();
 		}
 
+		this.renderTowerShadow(container, graphics);
+
+		for (GUI guiElement : this.guiElements) {
+			guiElement.draw();
+		}
+		for (Enemy enemy : this.enemies) {
+			int barLength = 30;
+			int barHeight = 7;
+			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength / 2, enemy.getY() - 25 - barHeight,
+					enemy.getMaxHealth(), barLength, barHeight);
+			h.setHealth(enemy.getHealth());
+			h.setBordered(true);
+			h.draw();
+		}
+		this.renderDebug(container, graphics);
+
+	}
+
+	/**
+	 * renders the transparent version of the tower's sprite when choosing a place
+	 * 
+	 * @param container
+	 * @param graphics
+	 */
+	private void renderTowerShadow(GameContainer container, Graphics graphics) {
+
 		if (this.currentTower != null) {
 			Sprite sprite = this.currentTower.getSprite();
 			Input input = container.getInput();
@@ -139,18 +164,15 @@ public class Game extends BasicGame {
 						* this.currentTileLength);
 			}
 		}
-		for (GUI guiElement : this.guiElements) {
-			guiElement.draw();
-		}
-		for (Enemy enemy : this.enemies) {
-			int barLength = 30;
-			int barHeight = 7;
-			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength / 2, enemy.getY() - 25 - barHeight,
-					enemy.getMaxHealth(), barLength, barHeight);
-			h.setHealth(enemy.getHealth());
-			h.setBordered(true);
-			h.draw();
-		}
+	}
+
+	/**
+	 * renders circles for tower radius and enemy radius and black box for FPS
+	 * 
+	 * @param container
+	 * @param graphics
+	 */
+	private void renderDebug(GameContainer container, Graphics graphics) {
 		if (this.debugMode) {
 			for (Enemy enemy : this.enemies) {
 				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX(),
@@ -160,23 +182,22 @@ public class Game extends BasicGame {
 				for (int j = 0; j < this.towers[0].length; ++j) {
 					if (this.towers[i][j] != null) {
 						Tower currentTower = this.towers[i][j];
-						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red).draw(
-								currentTower.getX() * this.currentTileLength + 25, currentTower.getY() * this.currentTileLength + 25);
+						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red)
+								.draw(currentTower.getX() * this.currentTileLength + 25, currentTower.getY() * this.currentTileLength
+										+ 25);
 					}
 				}
 			}
 			// create a black box that the FPS are visible
-			new SlickRectangle(graphics, 100, 20, Color.black).draw(5,10);
+			new SlickRectangle(graphics, 100, 20, Color.black).draw(5, 10);
 		}
-		
-
 	}
 
 	@Override
 	public void update(GameContainer container, int originalDelta) throws SlickException {
-		int delta = (int)(originalDelta * this.speed);
+		int delta = (int) (originalDelta * this.speed);
 		for (Enemy enemy : this.enemies) {
-			if (delta > 100){
+			if (delta > 100) {
 				delta = 0;
 			}
 			if (enemy != null)
@@ -189,8 +210,8 @@ public class Game extends BasicGame {
 				}
 			}
 		}
-		
-		waveHandler.update(delta);
+
+		this.waveHandler.update(delta);
 
 		this.mouseEvents(container, delta);
 		this.keyboardEvents(container, delta);
@@ -201,9 +222,15 @@ public class Game extends BasicGame {
 
 	}
 
+	/**
+	 * updates keyboard events i.e. button presses
+	 * 
+	 * @param container
+	 * @param delta
+	 */
 	private void keyboardEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
-		
+
 		if (input.isKeyPressed(Input.KEY_I)) {
 			this.debugMode = !this.debugMode;
 			container.setShowFPS(this.debugMode);
@@ -214,11 +241,18 @@ public class Game extends BasicGame {
 				this.speed = 1f;
 			}
 		}
-		if(this.debugMode) {
+		if (this.debugMode) {
 			this.debugKeyboardEvents(container, delta);
 		}
-		
+
 	}
+
+	/**
+	 * updates the keyboard events(button presse) only occuring in debug mode
+	 * 
+	 * @param container
+	 * @param delta
+	 */
 	private void debugKeyboardEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
 		if (input.isKeyPressed(Input.KEY_ADD)) {
@@ -232,6 +266,12 @@ public class Game extends BasicGame {
 		}
 	}
 
+	/**
+	 * handles mouse events like clicks
+	 * 
+	 * @param container
+	 * @param delta
+	 */
 	private void mouseEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
@@ -282,19 +322,13 @@ public class Game extends BasicGame {
 		}
 	}
 
-	private void debugPath() {
-		Sprite s = new Sprite("Unbenannt-2.png");
-		int[][] path = this.currentMapLayout.getPath();
-		for (int i = 0; i < path.length; ++i) {
-			for (int j = 0; j < path[0].length; ++j) {
-				if (path[i][j] == 5) {// for now th epath has not the value 0 in
-										// the array path, but 5
-					s.draw(j * this.currentTileLength, i * this.currentTileLength);
-				}
-			}
-
-		}
-	}
+	/*
+	 * private void debugPath() { Sprite s = new Sprite("Unbenannt-2.png"); int[][] path = this.currentMapLayout.getPath(); for (int i
+	 * = 0; i < path.length; ++i) { for (int j = 0; j < path[0].length; ++j) { if (path[i][j] == 5) {// for now th epath has not the
+	 * value 0 in // the array path, but 5 s.draw(j * this.currentTileLength, i * this.currentTileLength); } }
+	 * 
+	 * } }
+	 */
 
 	private void releaseAllButtons() {
 		for (Button button : this.buttons) {
@@ -313,7 +347,8 @@ public class Game extends BasicGame {
 	public ConcurrentLinkedQueue<Enemy> getEnemies() {
 		return (ConcurrentLinkedQueue<Enemy>) enemies;
 	}
-	public Waypoint getWaypoints(){
+
+	public Waypoint getWaypoints() {
 		return currentMapLayout.getWaypoints();
 	}
 
