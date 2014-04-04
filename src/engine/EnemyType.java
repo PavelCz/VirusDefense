@@ -37,7 +37,30 @@ public class EnemyType {
 	 * @return an instance of Enemy with the properties specified in this EnemyType
 	 */
 	public Enemy createEnemy() {
-		return new Enemy(this.health, this.speed, this.sprite, this.game.getWaypoints(), this.game.getWaypoints().getDirection(),
-				this.game, this.radius, this.worth);
+		return new Enemy(this);
+	}
+
+	public float getRadius() {
+		return this.radius;
+	}
+
+	public int getHealth() {
+		return this.health;
+	}
+
+	public float getSpeed() {
+		return this.speed;
+	}
+
+	public Sprite getSprite() {
+		return this.sprite;
+	}
+
+	public Game getGame() {
+		return this.game;
+	}
+
+	public int getWorth() {
+		return this.worth;
 	}
 }

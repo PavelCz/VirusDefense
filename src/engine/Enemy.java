@@ -13,7 +13,7 @@ public class Enemy extends Entity implements Drawable {
 	protected int direction;
 	private int worth;
 
-	public Enemy(int health, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Game game, float radius, int worth) {
+	private Enemy(int health, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Game game, float radius, int worth) {
 		super(startingWaypoint.getX(), startingWaypoint.getY());
 		this.health = health;
 		this.maxHealth = this.health;
@@ -25,6 +25,12 @@ public class Enemy extends Entity implements Drawable {
 		this.radius = radius;
 		this.game = game;
 		this.worth = worth;
+	}
+
+	public Enemy(EnemyType enemyType) {
+		this(enemyType.getHealth(), enemyType.getSpeed(), enemyType.getSprite(), enemyType.getGame().getWaypoints(), enemyType
+				.getGame().getWaypoints().getDirection(), enemyType.getGame(), enemyType.getRadius(), enemyType.getWorth());
+
 	}
 
 	public void setX(float x) {
