@@ -1,7 +1,6 @@
 package unused;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import engine.graphics.RenderObject;
@@ -31,6 +30,7 @@ public class LWJGLUnfilledRectangle extends RenderObject {
 
 	}
 
+	@Override
 	public void draw(float x, float y) {
 		// set the color of the quad (R,G,B,A)
 		GL11.glColor3f(this.colorsRGB.getX(), this.colorsRGB.getY(), this.colorsRGB.getZ());

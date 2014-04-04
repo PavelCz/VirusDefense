@@ -14,10 +14,9 @@ public class StaticText extends GUI {
 		this.text = new Text(height, text, color);
 
 	}
-	
-	public StaticText(float x, float y,  Color color, String text) {
-		this(x, y, Game.STANDARD_TEXT_SCALE, color, text);
 
+	public StaticText(float x, float y, Color color, String text) {
+		this(x, y, Game.STANDARD_TEXT_SCALE, color, text);
 
 	}
 
@@ -26,9 +25,10 @@ public class StaticText extends GUI {
 		this.text.draw(this.x, this.y);
 
 	}
-	
+
 	public void setText(String text) {
-		this.text.setText(text);;
+		this.text.setText(text);
+		;
 	}
 
 }

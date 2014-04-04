@@ -27,10 +27,11 @@ public class SlickTwoColoredBar extends RenderObject {
 	@Override
 	public void draw(float x, float y) {
 		this.base.draw(x, y);
-		this.health.setWidth(length2);
+		this.health.setWidth(this.length2);
 		this.health.draw(x, y);
 		if (this.bordered) {
-			new SlickUnfilledRectangle(this.graphics, this.length, this.height, Color.black).draw(x, y);;
+			new SlickUnfilledRectangle(this.graphics, this.length, this.height, Color.black).draw(x, y);
+			;
 		}
 
 	}

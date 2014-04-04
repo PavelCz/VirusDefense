@@ -18,9 +18,10 @@ public class SlickUnfilledEllipse extends SlickEllipse {
 	public SlickUnfilledEllipse(Graphics graphics, float width, float height) {
 		super(graphics, width, height);
 	}
+
+	@Override
 	public void draw(float x, float y) {
-		graphics.draw(new Ellipse(x, y, this.width/2,
-				this.height/2), new GradientFill(0, 0,this.color, this.width/2, this.height/2,
-				this.color));
+		this.graphics.draw(new Ellipse(x, y, this.width / 2, this.height / 2), new GradientFill(0, 0, this.color, this.width / 2,
+				this.height / 2, this.color));
 	}
 }

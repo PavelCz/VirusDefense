@@ -11,7 +11,6 @@ import org.newdawn.slick.geom.Ellipse;
  */
 public class SlickEllipse extends SlickRectangle {
 
-	
 	public SlickEllipse(Graphics graphics, float width, float height, Color color) {
 		super(graphics, width, height, color);
 	}
@@ -24,11 +23,10 @@ public class SlickEllipse extends SlickRectangle {
 		super(graphics, width, height, r, g, b);
 	}
 
+	@Override
 	public void draw(float x, float y) {
-		graphics.fill(new Ellipse(x , y, this.width/2,
-				this.height/2), new GradientFill(0, 0,this.color, this.width/2, this.height/2,
-				this.color));
+		this.graphics.fill(new Ellipse(x, y, this.width / 2, this.height / 2), new GradientFill(0, 0, this.color, this.width / 2,
+				this.height / 2, this.color));
 	}
-
 
 }

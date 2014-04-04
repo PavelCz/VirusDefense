@@ -31,6 +31,7 @@ public class LWJGLRectangle extends RenderObject {
 
 	}
 
+	@Override
 	public void draw(float x, float y) {
 		// set the color of the quad (R,G,B,A)
 		GL11.glColor3f(this.colorsRGB.getX(), this.colorsRGB.getY(), this.colorsRGB.getZ());

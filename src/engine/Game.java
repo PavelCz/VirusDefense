@@ -77,10 +77,9 @@ public class Game extends BasicGame {
 		this.drawables = new ArrayList<Drawable>();
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
 		this.waveHandler = new WaveHandler(this, 5000);
-		waveHandler.addWave(new Wave(3, new int[] { 100 }));
-		waveHandler.addWave(new Wave(2, new int[] { 100 }));
-		waveHandler.addWave(new Wave(1, new int[] { 100 }));
-
+		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(2, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
@@ -100,6 +99,7 @@ public class Game extends BasicGame {
 
 		//
 		container.setShowFPS(this.debugMode);
+
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public class Game extends BasicGame {
 			int newX = (int) x / this.currentTileLength;
 			int newY = (int) y / this.currentTileLength;
 			int[][] path = this.currentMapLayout.getPath();
-			if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && towers[newY][newX] == null) {
+			if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
 				new SlickUnfilledRectangle(graphics, 50, 50, Color.green).draw(newX * this.currentTileLength, newY
 						* this.currentTileLength);
 			} else {
@@ -261,7 +261,7 @@ public class Game extends BasicGame {
 			this.speed /= 2f;
 		}
 		if (input.isKeyPressed(Input.KEY_L)) {
-			enemies.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
+			this.enemies.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
 		}
 	}
 
@@ -296,7 +296,7 @@ public class Game extends BasicGame {
 				int newY = (int) y / this.currentTileLength;
 				if (this.currentTower != null) {
 					int[][] path = this.currentMapLayout.getPath();
-					if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && towers[newY][newX] == null) {
+					if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
 						Tower bufferTower = this.currentTower.clone();
 						bufferTower.setX(newX);
 						bufferTower.setY(newY);
@@ -344,11 +344,11 @@ public class Game extends BasicGame {
 	}
 
 	public ConcurrentLinkedQueue<Enemy> getEnemies() {
-		return (ConcurrentLinkedQueue<Enemy>) enemies;
+		return this.enemies;
 	}
 
 	public Waypoint getWaypoints() {
-		return currentMapLayout.getWaypoints();
+		return this.currentMapLayout.getWaypoints();
 	}
 
 	public static void reduceLives() {

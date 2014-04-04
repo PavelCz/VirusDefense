@@ -11,7 +11,6 @@ import org.newdawn.slick.geom.Rectangle;
  */
 public class SlickUnfilledRectangle extends SlickRectangle {
 
-	
 	public SlickUnfilledRectangle(Graphics graphics, float width, float height, Color color) {
 		super(graphics, width, height, color);
 	}
@@ -24,11 +23,10 @@ public class SlickUnfilledRectangle extends SlickRectangle {
 		super(graphics, width, height, r, g, b);
 	}
 
+	@Override
 	public void draw(float x, float y) {
-		graphics.draw(new Rectangle(x, y, this.width,
-				this.height), new GradientFill(0, 0,this.color, this.width, this.height,
+		this.graphics.draw(new Rectangle(x, y, this.width, this.height), new GradientFill(0, 0, this.color, this.width, this.height,
 				this.color));
 	}
-
 
 }

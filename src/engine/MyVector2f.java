@@ -21,29 +21,29 @@ public class MyVector2f {
 	 */
 	public MyVector2f(float x, float y) {
 		this.vector = new Vector2f(x, y);
-		
+
 		this.length = (float) (Math.sqrt(x * x + y * y));
-		
+
 		this.angleRadians = calculateAngle(x, y);
 		this.angleRadians = normalizeAngle(this.angleRadians);
 	}
 
 	public float getX() {
-		return vector.getX();
+		return this.vector.getX();
 	}
 
 	public float getY() {
-		return vector.getY();
+		return this.vector.getY();
 	}
 
 	public void setX(float x) {
-		vector.setX(x);
+		this.vector.setX(x);
 		this.angleRadians = calculateAngle(x, this.vector.getY());
 		this.angleRadians = normalizeAngle(this.angleRadians);
 	}
 
 	public void setY(float y) {
-		vector.setY(y);
+		this.vector.setY(y);
 		this.angleRadians = calculateAngle(this.vector.getX(), y);
 		this.angleRadians = normalizeAngle(this.angleRadians);
 	}
@@ -184,7 +184,8 @@ public class MyVector2f {
 			return (float) (result - Math.PI);
 		}
 	}
-	
+
+	@Override
 	public MyVector2f clone() {
 		return new MyVector2f(this.vector.getX(), this.vector.getY());
 	}

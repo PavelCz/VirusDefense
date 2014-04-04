@@ -14,7 +14,7 @@ public class Text extends RenderObject {
 	public Text(int height, String text, Color color) {
 		this.height = height;
 		Font fontSettings = new Font("Verdana", Font.PLAIN, this.height);
-		font = new TrueTypeFont(fontSettings, true);
+		this.font = new TrueTypeFont(fontSettings, true);
 		this.text = text;
 		this.color = color;
 	}
@@ -23,11 +23,9 @@ public class Text extends RenderObject {
 		this.text = text;
 	}
 
-	
-
 	@Override
 	public void draw(float x, float y) {
-		this.font.drawString( x, y, this.text, this.color);
+		this.font.drawString(x, y, this.text, this.color);
 
 	}
 

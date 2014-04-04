@@ -40,13 +40,14 @@ public class SlickHealthbar extends GUI {
 	public void draw() {
 		this.bar.setFractionLeft(this.healthLeft / this.maxHealth);
 		this.bar.draw(this.x, this.y);
-		
 
 	}
+
 	public void setBordered(boolean bordered) {
 		this.bar.setBordered(bordered);
 	}
 
+	@Override
 	public String toString() {
 		return "(" + this.x + ", " + this.y + ")";
 	}

@@ -8,7 +8,6 @@ public abstract class Tower extends Entity implements Drawable {
 	private Weapon weapon;
 	protected Game game;
 	protected Sprite sprite;
-	
 
 	public Tower(float x, float y, int cost, int radius, Weapon weapon, Game game) {
 		super(x, y);
@@ -19,12 +18,15 @@ public abstract class Tower extends Entity implements Drawable {
 		this.game = game;
 
 	}
+
 	public abstract void shoot();
 
+	@Override
 	public float getX() {
 		return this.x;
 	}
 
+	@Override
 	public float getY() {
 		return this.y;
 	}
@@ -37,13 +39,13 @@ public abstract class Tower extends Entity implements Drawable {
 		this.y = y;
 	}
 
+	@Override
 	public abstract Tower clone();
-	
-	
+
 	public Sprite getSprite() {
 		return this.sprite;
 	}
-	
+
 	public int getRadius() {
 		return this.radius;
 	}

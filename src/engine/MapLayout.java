@@ -3,13 +3,13 @@ package engine;
 public class MapLayout {
 	private int[][] path;
 	private Waypoint waypoints;
-	
+
 	private Background mapBackground;
 	private int tileLength;
 	private int numberTilesWidth, numberTilesHeight;
-	
+
 	public MapLayout(String mapLayoutPath, String backgroundPath, int tileLength) {
-		MapLayoutFromImage mapLayout= new MapLayoutFromImage(mapLayoutPath);
+		MapLayoutFromImage mapLayout = new MapLayoutFromImage(mapLayoutPath);
 		this.path = mapLayout.getPath();
 		this.waypoints = mapLayout.getStartingPoint();
 		this.mapBackground = new Background(1f, backgroundPath);
@@ -17,34 +17,33 @@ public class MapLayout {
 		this.numberTilesHeight = this.path.length;
 		this.tileLength = tileLength;
 	}
-	
+
 	public void drawBackground() {
 		this.mapBackground.draw();
 	}
 
 	public int[][] getPath() {
-		return path;
+		return this.path;
 	}
 
 	public Waypoint getWaypoints() {
-		return waypoints;
+		return this.waypoints;
 	}
 
 	public Background getMapBackground() {
-		return mapBackground;
+		return this.mapBackground;
 	}
 
 	public int getTileLength() {
-		return tileLength;
+		return this.tileLength;
 	}
 
 	public int getNumberTilesWidth() {
-		return numberTilesWidth;
+		return this.numberTilesWidth;
 	}
 
 	public int getNumberTilesHeight() {
-		return numberTilesHeight;
+		return this.numberTilesHeight;
 	}
-	
-	
+
 }

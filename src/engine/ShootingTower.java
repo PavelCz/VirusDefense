@@ -15,10 +15,11 @@ public class ShootingTower extends Tower {
 
 	@Override
 	public void draw() {
-		this.sprite.draw(x * 50, y * 50);
+		this.sprite.draw(this.x * 50, this.y * 50);
 
 	}
 
+	@Override
 	public void shoot() {
 		boolean done = false;
 		for (Enemy enemy : this.game.getEnemies()) {
@@ -28,9 +29,8 @@ public class ShootingTower extends Tower {
 				float deltaX = enemyX - (this.getX() * 50 + 25);
 				float deltaY = enemyY - (this.getY() * 50 + 25);
 
-				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY
-						* deltaY);
-				//System.out.println(distance);
+				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+				// System.out.println(distance);
 				if (distance < this.radius + enemy.getRadius()) {
 					enemy.setHealth(enemy.getHealth() - 1);
 					done = true;

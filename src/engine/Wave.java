@@ -10,16 +10,17 @@ public class Wave {
 	}
 
 	public int getNumber() {
-		return number;
+		return this.number;
 
 	}
 
 	public int getPercentage(int index) {
-		return percentages[index];
-		
+		return this.percentages[index];
+
 	}
-	public int[] getPercentages(){
-		return percentages;
+
+	public int[] getPercentages() {
+		return this.percentages;
 	}
 
 	private Enemy1 e1;

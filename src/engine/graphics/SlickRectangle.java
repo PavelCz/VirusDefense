@@ -16,11 +16,11 @@ public class SlickRectangle extends RenderObject {
 	protected float height;
 
 	public SlickRectangle(Graphics graphics, float width, float height) {
-		this(graphics, width,height, Color.pink);
+		this(graphics, width, height, Color.pink);
 	}
 
 	public SlickRectangle(Graphics graphics, float width, float height, float r, float g, float b) {
-		this(graphics, width,height, new Color(r, g, b));
+		this(graphics, width, height, new Color(r, g, b));
 
 	}
 
@@ -31,6 +31,7 @@ public class SlickRectangle extends RenderObject {
 		this.graphics = graphics;
 	}
 
+	@Override
 	public void draw(float x, float y) {
 		this.graphics.fill(new Rectangle(x, y, this.width, this.height), new GradientFill(0, 0, this.color, this.width, this.height,
 				this.color));

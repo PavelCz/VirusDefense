@@ -9,7 +9,7 @@ public class Button extends GUI implements Clickable {
 	private boolean clicked;
 	protected float width;
 	protected float height;
-	
+
 	public Button(float x, float y, String unclickedButtonPath, String clickedButtonPath) {
 		super(x, y);
 		this.clicked = false;
@@ -21,27 +21,29 @@ public class Button extends GUI implements Clickable {
 
 	@Override
 	public void draw() {
-		if(!this.clicked) {
+		if (!this.clicked) {
 			this.unclickedButton.draw(this.x, this.y);
-			
+
 		} else {
 			this.clickedButton.draw(this.x, this.y);
 		}
 
 	}
-	
+
+	@Override
 	public void onClick() {
 		this.clicked = true;
 	}
+
+	@Override
 	public void onRelease() {
 		this.clicked = false;
 	}
-	
+
 	public boolean checkCollision(float x, float y) {
-		return (x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y
-				+ this.height);
+		return (x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y + this.height);
 	}
-	
+
 	public Tower getTower() {
 		return null;
 	}

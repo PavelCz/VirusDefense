@@ -13,13 +13,13 @@ public class WaveHandler {
 
 	public WaveHandler(Game game, int timeBetweenWaves) {
 		this.game = game;
-		waves = new LinkedList<Wave>();
+		this.waves = new LinkedList<Wave>();
 		this.timeBetweenWaves = timeBetweenWaves;
 		this.delta = this.timeBetweenWaves;
 	}
 
 	public void addWave(Wave wave) {
-		waves.add(wave);
+		this.waves.add(wave);
 	}
 
 	private int calculateEnemy(Wave wave) {
@@ -37,21 +37,21 @@ public class WaveHandler {
 
 	public void update(int delta) {
 		this.delta -= delta;
-		if (game.getEnemies().isEmpty() && index <= 0) {
-			
-			if (!waves.isEmpty()) {
-				index = waves.peek().getNumber();
-				currentWave = waves.poll();
+		if (this.game.getEnemies().isEmpty() && this.index <= 0) {
+
+			if (!this.waves.isEmpty()) {
+				this.index = this.waves.peek().getNumber();
+				this.currentWave = this.waves.poll();
 				this.delta = this.timeBetweenWaves;
 			}
 		}
 		if (this.delta <= 0) {
 			this.delta = this.timeBetweenEnemies;
-			if (index > 0) {
-				if (this.calculateEnemy(currentWave) == 0) {
-					game.getEnemies().add(new Enemy1(game.getWaypoints(), game));
+			if (this.index > 0) {
+				if (this.calculateEnemy(this.currentWave) == 0) {
+					this.game.getEnemies().add(new Enemy1(this.game.getWaypoints(), this.game));
 				}
-				index--;
+				this.index--;
 			}
 		}
 	}

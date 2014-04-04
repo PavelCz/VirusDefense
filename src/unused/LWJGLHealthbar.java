@@ -42,6 +42,7 @@ public class LWJGLHealthbar extends GUI {
 
 	}
 
+	@Override
 	public String toString() {
 		return "(" + this.x + ", " + this.y + ")";
 	}
