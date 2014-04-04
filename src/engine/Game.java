@@ -80,7 +80,7 @@ public class Game extends BasicGame {
 		// entities
 
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
+		this.towerButton1 = new TowerButton(Game.INTERFACE_START_X, 200, "button1.png", "button2.png", new ShootingTower(0, 0,
 				new Sprite("tower/t1.png", 0.05f), this));
 		this.buttons.add(this.towerButton1);
 
@@ -97,16 +97,19 @@ public class Game extends BasicGame {
 	}
 
 	private void initGUI() {
-		this.numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.white, "" + this.player.getLives());
-		this.passedTime = new StaticText(Game.INTERFACE_START_X + 5, 580, Color.white, this.passedTimeToString());
-		this.moneyAmount = new StaticText(Game.INTERFACE_START_X + 65, 100, Color.white, "" + this.player.getMoney());
+		int guiX = 3;
+		int livesY = 150;
+		int moneyY = 165;
+		this.numberLives = new StaticText(Game.INTERFACE_START_X + 50, livesY, Color.white, "" + this.player.getLives());
+		this.passedTime = new StaticText(Game.INTERFACE_START_X + guiX, 580, Color.white, this.passedTimeToString());
+		this.moneyAmount = new StaticText(Game.INTERFACE_START_X + 65, moneyY, Color.white, "" + this.player.getMoney());
 
 		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(this.numberLives);
 		this.guiElements.add(this.towerButton1);
-		this.guiElements.add(new StaticText(Game.INTERFACE_START_X + 5, 200, Color.white, "Lives:"));
+		this.guiElements.add(new StaticText(Game.INTERFACE_START_X + guiX, livesY, Color.white, "Lives:"));
 		this.guiElements.add(this.passedTime);
-		this.guiElements.add(new StaticText(Game.INTERFACE_START_X + 5, 100, Color.white, "Money:"));
+		this.guiElements.add(new StaticText(Game.INTERFACE_START_X + guiX, moneyY, Color.white, "Money:"));
 		this.guiElements.add(this.moneyAmount);
 	}
 
