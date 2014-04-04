@@ -41,7 +41,6 @@ public class Game extends BasicGame {
 	private Tower[][] towers;
 	private TowerButton towerButton1;
 	private Tower currentTower;
-	// private Enemy1 e;
 	private Player player;
 	private static StaticText numberLives;
 	private StaticText moneyAmount;
@@ -116,26 +115,27 @@ public class Game extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		this.currentMapLayout.drawBackground();
-		for (Enemy enemy : this.enemies) {
-			if (enemy != null)
-				enemy.draw();
-		}
-		for (Tower[] towerArray : this.towers) {
-			for (Tower tower : towerArray) {
-				if (tower != null) {
-					tower.draw();
-				}
-			}
-		}
+		this.renderEnemies();
+		this.renderTowers();
+
 		for (Drawable entity : this.drawables) {
 			entity.draw();
 		}
 
 		this.renderTowerShadow(container, graphics);
+		this.renderGUI();
+		this.renderHealthBars(container, graphics);
+		this.renderDebug(container, graphics);
 
+	}
+
+	private void renderGUI() {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
+	}
+
+	private void renderHealthBars(GameContainer container, Graphics graphics) {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
@@ -145,8 +145,23 @@ public class Game extends BasicGame {
 			h.setBordered(true);
 			h.draw();
 		}
-		this.renderDebug(container, graphics);
+	}
 
+	private void renderTowers() {
+		for (Tower[] towerArray : this.towers) {
+			for (Tower tower : towerArray) {
+				if (tower != null) {
+					tower.draw();
+				}
+			}
+		}
+	}
+
+	private void renderEnemies() {
+		for (Enemy enemy : this.enemies) {
+			if (enemy != null)
+				enemy.draw();
+		}
 	}
 
 	/**
