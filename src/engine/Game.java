@@ -23,7 +23,7 @@ import engine.gui.StaticText;
 import engine.gui.TowerButton;
 
 /**
- * @author Pavel see LWJGLRectangle
+ * @author Pavel
  */
 public class Game extends BasicGame {
 	private List<Drawable> drawables;
@@ -81,7 +81,6 @@ public class Game extends BasicGame {
 		waveHandler.addWave(new Wave(2, new int[] { 100 }));
 		waveHandler.addWave(new Wave(1, new int[] { 100 }));
 
-		enemies.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
