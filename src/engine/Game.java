@@ -74,14 +74,14 @@ public class Game extends BasicGame {
 
 		this.towers = new Tower[12][13];
 		this.initWaves();
-		this.enemyTypes.add(new EnemyType(1000, 0.1f, "enemy/v1.png", this, 25, 50));
+		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1.png", this, 25, 50));
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Game.INTERFACE_START_X, 200, "button1.png", "button2.png", new ShootingTower(0, 0,
-				new Sprite("tower/t1.png", 0.05f), this));
+				new Sprite("tower/t1.png", 0.05f), this, 500));
 		this.buttons.add(this.towerButton1);
 
 		//
@@ -236,7 +236,7 @@ public class Game extends BasicGame {
 			for (int i = 0; i < this.towers.length; ++i) {
 				for (int j = 0; j < this.towers[0].length; ++j) {
 					if (this.towers[i][j] != null) {
-						this.towers[i][j].shoot();
+						this.towers[i][j].update(delta);
 					}
 				}
 			}
