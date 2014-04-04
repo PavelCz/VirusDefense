@@ -71,8 +71,6 @@ public class Game extends BasicGame {
 		Game.INTERFACE_START_X = this.currentMapLayout.getNumberTilesWidth() * this.currentTileLength;
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
-		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
-				new Sprite("tower/t1.png", 0.05f), this));
 
 		this.towers = new Tower[12][13];
 		this.initWaves();
@@ -81,12 +79,13 @@ public class Game extends BasicGame {
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
 
-		this.initGUI();
-
 		// Buttons; this has nothing to do with the draw sequence
+		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
+				new Sprite("tower/t1.png", 0.05f), this));
 		this.buttons.add(this.towerButton1);
 
 		//
+		this.initGUI();
 		container.setShowFPS(this.debugMode);
 
 	}
