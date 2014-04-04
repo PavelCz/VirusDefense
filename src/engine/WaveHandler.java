@@ -3,32 +3,34 @@ package engine;
 import java.util.LinkedList;
 
 public class WaveHandler {
-	private LinkedList<Wave> waves;
+	private LinkedList<Waves> waves;
 	private Game game;
 	private int index = 0;
-	private Wave currentWave;
-	private int delta;
-	private int timeBetweenWaves;
-	private int timeBetweenEnemies = 500;
+	private Waves currentWave;
+	private int delta = 1000;
 
-	public WaveHandler(Game game, int timeBetweenWaves) {
+	public WaveHandler(Game game) {
 		this.game = game;
-		this.waves = new LinkedList<Wave>();
-		this.timeBetweenWaves = timeBetweenWaves;
-		this.delta = this.timeBetweenWaves;
+		waves = new LinkedList<Waves>();
+		
+	}
+	public void initWaves(){
+		this.addWave(new Waves(3, new int[] {100}));
+		this.addWave(new Waves(2, new int[] {100}));
+		this.addWave(new Waves(1, new int[] {100}));
 	}
 
-	public void addWave(Wave wave) {
-		this.waves.add(wave);
+	public void addWave(Waves wave) {
+		waves.add(wave);
 	}
 
-	private int calculateEnemy(Wave wave) {
+	private int calculateEnemy(Waves wave) {
 		int n = (int) (Math.random() * 100);
-		int[] waves = wave.getPercentages();
+		int[] waves = wave.getEnemy();
 		int p = 100;
 		for (int i = 0; i < waves.length; i++) {
 			p = p - waves[i];
-			if (n >= p) {
+			if (n > p) {
 				return i;
 			}
 		}
@@ -37,20 +39,20 @@ public class WaveHandler {
 
 	public void update(int delta) {
 		this.delta -= delta;
-		if (this.game.getEnemies().isEmpty() && this.index <= 0) {
+		if (game.getEnemy().isEmpty() && index <= 0) {
 
-			if (!this.waves.isEmpty()) {
-				this.index = this.waves.peek().getNumber();
-				this.currentWave = this.waves.poll();
-				this.delta = this.timeBetweenWaves;
+			if (!waves.isEmpty()) {
+				index = waves.peek().getNumber();
+				currentWave = waves.poll();
 			}
 		}
 		if (this.delta <= 0) {
-			this.delta = this.timeBetweenEnemies;
-			if (this.index > 0) {
-				// calculates the next enemy type, creates a new object with that type and adds the object to the enemies of the game
-				this.game.getEnemies().add(this.game.getEnemyTypes().createEnemy(this.calculateEnemy(this.currentWave)));
-				this.index--;
+			this.delta = 1000;
+			if (index != 0) {
+				if (this.calculateEnemy(currentWave) == 0) {
+					game.getEnemy().add(new Enemy1(game.getWaypoints(), game));
+				}
+				index--;
 			}
 		}
 	}
