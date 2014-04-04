@@ -27,13 +27,13 @@ import engine.gui.TowerButton;
  */
 public class Game extends BasicGame {
 	private List<Drawable> drawables = new ArrayList<Drawable>();
-	private List<GUI> guiElements;
-	private List<Button> buttons;
-	private ConcurrentLinkedQueue<Enemy> enemies = new ConcurrentLinkedQueue<Enemy>();
-	private WaveHandler waveHandler;
+	private List<GUI> guiElements = new ArrayList<GUI>();
+	private List<Button> buttons = new ArrayList<Button>();
+	private ConcurrentLinkedQueue<Enemy> enemies = new ConcurrentLinkedQueue<Enemy>();;
+	private WaveHandler waveHandler = new WaveHandler(this, 2000);
 	private boolean mouseWasClicked = false;
 	private boolean debugMode = false;
-	private EnemyTypes enemyTypes;
+	private EnemyTypes enemyTypes = new EnemyTypes();
 	private int passedMilliseconds = 0;
 
 	private MapLayout currentMapLayout;
@@ -71,21 +71,19 @@ public class Game extends BasicGame {
 		Game.INTERFACE_START_X = this.currentMapLayout.getNumberTilesWidth() * this.currentTileLength;
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
+		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
+				new Sprite("tower/t1.png", 0.05f), this));
 
 		this.towers = new Tower[12][13];
 		this.initWaves();
-		this.enemyTypes = new EnemyTypes();
 		this.enemyTypes.add(new EnemyType(1000, 0.1f, "enemy/v1.png", this, 25, 50));
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
 
-		// GUI
 		this.initGUI();
+
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
-				new Sprite("tower/t1.png", 0.05f), this));
-		this.buttons = new ArrayList<Button>();
 		this.buttons.add(this.towerButton1);
 
 		//
@@ -94,14 +92,12 @@ public class Game extends BasicGame {
 	}
 
 	private void initWaves() {
-		this.waveHandler = new WaveHandler(this, 5000);
 		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
 		this.waveHandler.addWave(new Wave(2, new int[] { 100 }));
 		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
 	}
 
 	private void initGUI() {
-		this.guiElements = new ArrayList<GUI>();
 		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.white, "" + this.player.getLives());
 		this.passedTime = new StaticText(Game.INTERFACE_START_X + 5, 580, Color.white, this.passedTimeToString());
 		this.moneyAmount = new StaticText(Game.INTERFACE_START_X + 60, 100, Color.white, "" + this.player.getMoney());
