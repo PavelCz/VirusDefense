@@ -30,6 +30,7 @@ public class Game extends BasicGame {
 	private List<GUI> guiElements;
 	private List<Button> buttons;
 	private ConcurrentLinkedQueue<Enemy> enemies;
+	private WaveHandler waveHandler;
 	private boolean mouseWasClicked;
 	private boolean debugMode = false;
 
@@ -75,6 +76,10 @@ public class Game extends BasicGame {
 		this.towers = new Tower[12][13];
 		this.drawables = new ArrayList<Drawable>();
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
+		this.waveHandler = new WaveHandler(this);
+		waveHandler.addWave(new Waves(3, new int[] {100}));
+		waveHandler.addWave(new Waves(2, new int[] {100}));
+		waveHandler.addWave(new Waves(1, new int[] {100}));
 
 		enemies.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
 		this.mouseWasClicked = false;
@@ -172,11 +177,10 @@ public class Game extends BasicGame {
 		int delta = (int)(originalDelta * this.speed);
 		for (Enemy enemy : this.enemies) {
 			if (delta > 100){
-				delta = 100;
+				delta = 0;
 			}
 			if (enemy != null)
 				enemy.update(delta);
-			System.out.println("Act");
 		}
 		for (int i = 0; i < this.towers.length; ++i) {
 			for (int j = 0; j < this.towers[0].length; ++j) {
@@ -185,6 +189,8 @@ public class Game extends BasicGame {
 				}
 			}
 		}
+		
+		waveHandler.update(delta);
 
 		this.mouseEvents(container, delta);
 		this.keyboardEvents(container, delta);
@@ -306,6 +312,9 @@ public class Game extends BasicGame {
 
 	public ConcurrentLinkedQueue<Enemy> getEnemy() {
 		return (ConcurrentLinkedQueue<Enemy>) enemies;
+	}
+	public Waypoint getWaypoints(){
+		return currentMapLayout.getWaypoints();
 	}
 
 	public static void reduceLives() {

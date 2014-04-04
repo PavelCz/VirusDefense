@@ -30,7 +30,7 @@ public class ShootingTower extends Tower {
 
 				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY
 						* deltaY);
-				System.out.println(distance);
+				//System.out.println(distance);
 				if (distance < this.radius + enemy.getRadius()) {
 					enemy.setHealth(enemy.getHealth() - 1);
 					done = true;

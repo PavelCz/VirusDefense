@@ -65,7 +65,8 @@ public class MapLayoutFromImage {
 				} else if (this.isWhite(currentColor)) {
 					this.path[y][x] = 1;
 				} else {
-					this.path[y][x] = 0;System.out.println("YO" + counter++);
+					this.path[y][x] = 0;
+					//System.out.println("YO" + counter++);
 					if (this.isRed(currentColor)) {
 						this.startingPoint = new Waypoint(x * 50 + 50 / 2, y * 50 + 50 / 2);
 					} else { // currentColor has no blue, no green, no red value => Path
@@ -148,10 +149,10 @@ public class MapLayoutFromImage {
 	}
 	private boolean isGreen(Color color) {
 		if (color.getRed() / 255 <= 0.2f && color.getBlue() / 255 <= 0.2f && color.getGreen() / 255 >= 0.8f) {
-			System.out.println(true);
+			//System.out.println(true);
 			return true;
 		}
-		System.out.println(false);
+		//System.out.println(false);
 		return false;
 		
 	}
