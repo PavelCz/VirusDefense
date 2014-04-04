@@ -50,4 +50,8 @@ public abstract class Tower extends Entity implements Drawable {
 		return this.radius;
 	}
 
+	public int getCost() {
+		return this.cost;
+	}
+
 }

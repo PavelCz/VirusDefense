@@ -4,7 +4,7 @@ import engine.graphics.Sprite;
 
 public class ShootingTower extends Tower {
 	public ShootingTower(float x, float y, Sprite sprite, Game game) {
-		super(x * 50, y * 50, 200, 100, new ShootingWeapon(), game);
+		super(x * 50, y * 50, 100, 100, new ShootingWeapon(), game);
 		this.sprite = sprite;
 	}
 

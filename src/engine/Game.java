@@ -331,7 +331,7 @@ public class Game extends BasicGame {
 						bufferTower.setY(newY);
 						bufferTower.getSprite().setAlpha(1f);
 						this.towers[newY][newX] = bufferTower;
-
+						this.player.reduceMoney(this.currentTower.getCost());
 						this.currentTower = null;
 						this.releaseAllButtons();
 
