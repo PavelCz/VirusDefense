@@ -200,7 +200,7 @@ public class Game extends BasicGame {
 	@Override
 	public void update(GameContainer container, int originalDelta) throws SlickException {
 		if (originalDelta < 100) {
-
+			this.passedTime += originalDelta;
 			int delta = (int) (originalDelta * this.speed);
 
 			for (Enemy enemy : this.enemies) {
