@@ -51,7 +51,7 @@ public abstract class Enemy extends Entity implements Drawable {
 				this.newDirection();
 			}
 		} else {
-			game.getEnemy().remove(this);
+			game.getEnemies().remove(this);
 		}
 	}
 

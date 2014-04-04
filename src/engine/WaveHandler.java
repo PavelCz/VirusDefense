@@ -1,32 +1,30 @@
 package engine;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class WaveHandler {
-	private LinkedList<Waves> waves;
+	private LinkedList<Wave> waves;
 	private Game game;
 	private int index = 0;
-	private Waves currentWave;
+	private Wave currentWave;
 	private int delta;
 	private int timeBetweenWaves;
 	private int timeBetweenEnemies = 500;
 
 	public WaveHandler(Game game, int timeBetweenWaves) {
 		this.game = game;
-		waves = new LinkedList<Waves>();
+		waves = new LinkedList<Wave>();
 		this.timeBetweenWaves = timeBetweenWaves;
 		this.delta = this.timeBetweenWaves;
 	}
 
-	public void addWave(Waves wave) {
+	public void addWave(Wave wave) {
 		waves.add(wave);
 	}
 
-	private int calculateEnemy(Waves wave) {
+	private int calculateEnemy(Wave wave) {
 		int n = (int) (Math.random() * 100);
-		int[] waves = wave.getEnemy();
+		int[] waves = wave.getPercentages();
 		int p = 100;
 		for (int i = 0; i < waves.length; i++) {
 			p = p - waves[i];
@@ -39,7 +37,7 @@ public class WaveHandler {
 
 	public void update(int delta) {
 		this.delta -= delta;
-		if (game.getEnemy().isEmpty() && index <= 0) {
+		if (game.getEnemies().isEmpty() && index <= 0) {
 			
 			if (!waves.isEmpty()) {
 				index = waves.peek().getNumber();
@@ -51,7 +49,7 @@ public class WaveHandler {
 			this.delta = this.timeBetweenEnemies;
 			if (index > 0) {
 				if (this.calculateEnemy(currentWave) == 0) {
-					game.getEnemy().add(new Enemy1(game.getWaypoints(), game));
+					game.getEnemies().add(new Enemy1(game.getWaypoints(), game));
 				}
 				index--;
 			}

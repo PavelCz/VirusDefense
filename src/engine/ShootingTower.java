@@ -21,7 +21,7 @@ public class ShootingTower extends Tower {
 
 	public void shoot() {
 		boolean done = false;
-		for (Enemy enemy : this.game.getEnemy()) {
+		for (Enemy enemy : this.game.getEnemies()) {
 			if (enemy != null && !done) {
 				float enemyX = enemy.getX();
 				float enemyY = enemy.getY();
