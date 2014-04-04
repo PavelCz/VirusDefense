@@ -26,10 +26,10 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Game extends BasicGame {
-	private List<Drawable> drawables;
+	private List<Drawable> drawables = new ArrayList<Drawable>();
 	private List<GUI> guiElements;
 	private List<Button> buttons;
-	private ConcurrentLinkedQueue<Enemy> enemies;
+	private ConcurrentLinkedQueue<Enemy> enemies = new ConcurrentLinkedQueue<Enemy>();
 	private WaveHandler waveHandler;
 	private boolean mouseWasClicked = false;
 	private boolean debugMode = false;
@@ -41,7 +41,7 @@ public class Game extends BasicGame {
 	private Tower[][] towers;
 	private TowerButton towerButton1;
 	private Tower currentTower;
-	private Player player;
+	private Player player = new Player();
 	private static StaticText numberLives;
 	private StaticText moneyAmount;
 
@@ -71,18 +71,9 @@ public class Game extends BasicGame {
 		Game.INTERFACE_START_X = this.currentMapLayout.getNumberTilesWidth() * this.currentTileLength;
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
-		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
-				new Sprite("tower/t1.png", 0.05f), this));
-		this.player = new Player();
 
 		this.towers = new Tower[12][13];
-		this.drawables = new ArrayList<Drawable>();
-		this.enemies = new ConcurrentLinkedQueue<Enemy>();
-		this.waveHandler = new WaveHandler(this, 5000);
-		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(2, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
-
+		this.initWaves();
 		this.enemyTypes = new EnemyTypes();
 		this.enemyTypes.add(new EnemyType(1000, 0.1f, "enemy/v1.png", this, 25, 50));
 
@@ -90,6 +81,26 @@ public class Game extends BasicGame {
 		// entities
 
 		// GUI
+		this.initGUI();
+		// Buttons; this has nothing to do with the draw sequence
+		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
+				new Sprite("tower/t1.png", 0.05f), this));
+		this.buttons = new ArrayList<Button>();
+		this.buttons.add(this.towerButton1);
+
+		//
+		container.setShowFPS(this.debugMode);
+
+	}
+
+	private void initWaves() {
+		this.waveHandler = new WaveHandler(this, 5000);
+		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(2, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
+	}
+
+	private void initGUI() {
 		this.guiElements = new ArrayList<GUI>();
 		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.white, "" + this.player.getLives());
 		this.passedTime = new StaticText(Game.INTERFACE_START_X + 5, 580, Color.white, this.passedTimeToString());
@@ -102,14 +113,6 @@ public class Game extends BasicGame {
 		this.guiElements.add(this.passedTime);
 		this.guiElements.add(new StaticText(Game.INTERFACE_START_X + 5, 100, Color.white, "Money:"));
 		this.guiElements.add(this.moneyAmount);
-
-		// Buttons; this has nothing to do with the draw sequence
-		this.buttons = new ArrayList<Button>();
-		this.buttons.add(this.towerButton1);
-
-		//
-		container.setShowFPS(this.debugMode);
-
 	}
 
 	@Override
