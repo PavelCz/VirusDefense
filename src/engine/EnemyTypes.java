@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Pavel Handles all enemy types. You can add a new enemy type. This Type will be saved at a specific index and later you can
- *         create an Object with that number
+ * Handles all enemy types. You can add a new enemy type. This Type will be saved at a specific index and later you can create an
+ * Object with that number
+ * 
+ * @author Pavel
  */
 public class EnemyTypes {
 	private List<EnemyType> enemyTypes;
 
 	public EnemyTypes() {
-		enemyTypes = new ArrayList<EnemyType>();
+		this.enemyTypes = new ArrayList<EnemyType>();
 	}
 
 	/**
@@ -19,7 +21,7 @@ public class EnemyTypes {
 	 *            adds a new EnemyType to your EnemyTypes
 	 */
 	public void add(EnemyType enemyType) {
-		enemyTypes.add(enemyType);
+		this.enemyTypes.add(enemyType);
 	}
 
 	/**
@@ -28,6 +30,6 @@ public class EnemyTypes {
 	 * @return return a new Enemy with the properties that the specified EnemyType has
 	 */
 	public Enemy createEnemy(int type) {
-		return enemyTypes.get(type).createEnemy();
+		return this.enemyTypes.get(type).createEnemy();
 	}
 }
