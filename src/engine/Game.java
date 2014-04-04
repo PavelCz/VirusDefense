@@ -81,7 +81,7 @@ public class Game extends BasicGame {
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Game.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0, 0,
-				new Sprite("tower/t1.png", 0.05f), this, 700, 0.09f, 200));
+				new Sprite("tower/t1.png", 0.05f), this, 4000, 0.09f, 2000));
 		this.buttons.add(this.towerButton1);
 
 		//

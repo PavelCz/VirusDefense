@@ -58,6 +58,32 @@ public class ShootingTower extends Tower {
 	}
 
 	protected boolean inRangeOfAnyEnemy() {
+		if (this.getEnemyInRange() != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	protected boolean inRange(Enemy enemy) {
+		if (enemy != null) {
+			float enemyX = enemy.getX();
+			float enemyY = enemy.getY();
+			float deltaX = enemyX - (this.getX() * 50 + 25);
+			float deltaY = enemyY - (this.getY() * 50 + 25);
+
+			float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+			if (distance < this.radius + enemy.getRadius()) {
+				return true;
+			}
+
+		}
+		return false;
+
+	}
+
+	protected Enemy getEnemyInRange() {
 		boolean done = false;
 		for (Enemy enemy : this.game.getEnemies()) {
 			if (enemy != null && !done) {
@@ -69,10 +95,10 @@ public class ShootingTower extends Tower {
 				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
 				if (distance < this.radius + enemy.getRadius()) {
-					return true;
+					return enemy;
 				}
 			}
 		}
-		return false;
+		return null;
 	}
 }
