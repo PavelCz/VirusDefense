@@ -28,7 +28,8 @@ public class EnemyType {
 		this.health = health;
 		this.speed = speed;
 		this.radius = radius;
-		this.sprite = new Sprite(sprite);
+		this.sprite = new Sprite(sprite, 0.05f);
+		this.game = game;
 	}
 
 	/**

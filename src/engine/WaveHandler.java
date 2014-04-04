@@ -28,7 +28,7 @@ public class WaveHandler {
 		int p = 100;
 		for (int i = 0; i < waves.length; i++) {
 			p = p - waves[i];
-			if (n > p) {
+			if (n >= p) {
 				return i;
 			}
 		}
@@ -48,9 +48,8 @@ public class WaveHandler {
 		if (this.delta <= 0) {
 			this.delta = this.timeBetweenEnemies;
 			if (this.index > 0) {
-				if (this.calculateEnemy(this.currentWave) == 0) {
-					this.game.getEnemies().add(new Enemy1(this.game.getWaypoints(), this.game));
-				}
+				// calculates the next enemy type, creates a new object with that type and adds the object to the enemies of the game
+				this.game.getEnemies().add(this.game.getEnemyTypes().createEnemy(this.calculateEnemy(this.currentWave)));
 				this.index--;
 			}
 		}

@@ -33,6 +33,7 @@ public class Game extends BasicGame {
 	private WaveHandler waveHandler;
 	private boolean mouseWasClicked = false;
 	private boolean debugMode = false;
+	private EnemyTypes enemyTypes;
 
 	private MapLayout currentMapLayout;
 	private int currentTileLength;
@@ -80,6 +81,9 @@ public class Game extends BasicGame {
 		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
 		this.waveHandler.addWave(new Wave(2, new int[] { 100 }));
 		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
+
+		this.enemyTypes = new EnemyTypes();
+		this.enemyTypes.add(new EnemyType(1000, 0.1f, "enemy/v1.png", this, 25));
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
@@ -261,7 +265,7 @@ public class Game extends BasicGame {
 			this.speed /= 2f;
 		}
 		if (input.isKeyPressed(Input.KEY_L)) {
-			this.enemies.add(new Enemy1(this.currentMapLayout.getWaypoints(), this));
+			this.enemies.add(this.enemyTypes.createEnemy(0));
 		}
 	}
 
@@ -354,6 +358,10 @@ public class Game extends BasicGame {
 	public static void reduceLives() {
 		Game.player.reduceLives();
 		numberLives.setText("" + Game.player.getLives());
+	}
+
+	public EnemyTypes getEnemyTypes() {
+		return this.enemyTypes;
 	}
 
 }
