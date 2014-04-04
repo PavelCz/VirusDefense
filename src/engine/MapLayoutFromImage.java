@@ -29,23 +29,23 @@ public class MapLayoutFromImage {
 	public MapLayoutFromImage(String imagePath) {
 
 		try {
-			this.image = new Image("./data/" + imagePath);
+			image = new Image("./data/" + imagePath);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		this.setColorArray();
-		this.setPath();
-		this.setWaypoints();
+		setColorArray();
+		setPath();
+		setWaypoints();
 
 	}
 
 	private void setColorArray() {
-		this.colors = new Color[this.image.getHeight()][this.image.getWidth()];
-		for (int y = 0; y < this.colors.length; ++y) {
-			for (int x = 0; x < this.colors[0].length; ++x) {
-				this.colors[y][x] = this.image.getColor(x, y);
+		colors = new Color[image.getHeight()][image.getWidth()];
+		for (int y = 0; y < colors.length; ++y) {
+			for (int x = 0; x < colors[0].length; ++x) {
+				colors[y][x] = image.getColor(x, y);
 			}
 		}
 	}
@@ -54,21 +54,19 @@ public class MapLayoutFromImage {
 	 * generates the path from the image and gets the coordinates of the starting point for enemies
 	 */
 	private void setPath() {
-		int counter = 0;
-		this.path = new int[this.colors.length][this.colors[0].length];
-		for (int y = 0; y < this.colors.length; ++y) {
-			for (int x = 0; x < this.colors[0].length; ++x) {
-				Color currentColor = this.colors[y][x];
-				if (this.isGreen(currentColor)) {
-					this.path[y][x] = 2;
+		path = new int[colors.length][colors[0].length];
+		for (int y = 0; y < colors.length; ++y) {
+			for (int x = 0; x < colors[0].length; ++x) {
+				Color currentColor = colors[y][x];
+				if (isGreen(currentColor)) {
+					path[y][x] = 2;
 
-				} else if (this.isWhite(currentColor)) {
-					this.path[y][x] = 1;
+				} else if (isWhite(currentColor)) {
+					path[y][x] = 1;
 				} else {
-					this.path[y][x] = 0;
-					// System.out.println("YO" + counter++);
-					if (this.isRed(currentColor)) {
-						this.startingPoint = new Waypoint(x * 50 + 50 / 2, y * 50 + 50 / 2);
+					path[y][x] = 0;
+					if (isRed(currentColor)) {
+						startingPoint = new Waypoint(x * 50 + 50 / 2, y * 50 + 50 / 2);
 					} else { // currentColor has no blue, no green, no red value => Path
 						//
 					}
@@ -79,12 +77,12 @@ public class MapLayoutFromImage {
 	}
 
 	private void setWaypoints() {
-		int currentX = (int) this.startingPoint.getX() / 50;
-		int currentY = (int) this.startingPoint.getY() / 50;
+		int currentX = (int) startingPoint.getX() / 50;
+		int currentY = (int) startingPoint.getY() / 50;
 		int[][] path = this.path.clone();
 
-		int relativePositionOfNextPath = this.relativePositionOfNextCoordinate(path, currentX, currentY);
-		this.startingPoint.setDirection(relativePositionOfNextPath);
+		int relativePositionOfNextPath = relativePositionOfNextCoordinate(path, currentX, currentY);
+		startingPoint.setDirection(relativePositionOfNextPath);
 
 		int relativePositionOfPreviousPath;
 		relativePositionOfPreviousPath = relativePositionOfNextPath;
@@ -92,9 +90,9 @@ public class MapLayoutFromImage {
 		while (currentX >= 0 && currentY >= 0 && currentX < this.path.length && currentY < this.path.length
 				&& this.path[currentY][currentX] < 1) {
 			path[currentY][currentX] = 5;
-			relativePositionOfNextPath = this.relativePositionOfNextCoordinate(path, currentX, currentY);
+			relativePositionOfNextPath = relativePositionOfNextCoordinate(path, currentX, currentY);
 			if (relativePositionOfNextPath != relativePositionOfPreviousPath) {
-				this.startingPoint.add(new Waypoint(currentX * 50 + 50 / 2, currentY * 50 + 50 / 2, relativePositionOfNextPath));
+				startingPoint.add(new Waypoint(currentX * 50 + 50 / 2, currentY * 50 + 50 / 2, relativePositionOfNextPath));
 			}
 			if (relativePositionOfNextPath == Waypoint.RIGHT) {
 				++currentX;
@@ -130,15 +128,15 @@ public class MapLayoutFromImage {
 	}
 
 	public int[][] getPath() {
-		return this.path;
+		return path;
 	}
 
 	public Waypoint getStartingPoint() {
-		return this.startingPoint;
+		return startingPoint;
 	}
 
 	public Color getColors(int x, int y) {
-		return this.colors[y][x];
+		return colors[y][x];
 	}
 
 	private boolean isRed(Color color) {
@@ -150,10 +148,8 @@ public class MapLayoutFromImage {
 
 	private boolean isGreen(Color color) {
 		if (color.getRed() / 255 <= 0.2f && color.getBlue() / 255 <= 0.2f && color.getGreen() / 255 >= 0.8f) {
-			// System.out.println(true);
 			return true;
 		}
-		// System.out.println(false);
 		return false;
 
 	}
