@@ -42,7 +42,7 @@ public class Game extends BasicGame {
 	private TowerButton towerButton1;
 	private Tower currentTower;
 	private Player player = new Player();
-	private static StaticText numberLives;
+	private StaticText numberLives;
 	private StaticText moneyAmount;
 
 	private StaticText passedTime;
@@ -98,12 +98,12 @@ public class Game extends BasicGame {
 	}
 
 	private void initGUI() {
-		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.white, "" + this.player.getLives());
+		this.numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.white, "" + this.player.getLives());
 		this.passedTime = new StaticText(Game.INTERFACE_START_X + 5, 580, Color.white, this.passedTimeToString());
 		this.moneyAmount = new StaticText(Game.INTERFACE_START_X + 60, 100, Color.white, "" + this.player.getMoney());
 
 		this.guiElements.add(this.interfaceBackground);
-		this.guiElements.add(numberLives);
+		this.guiElements.add(this.numberLives);
 		this.guiElements.add(this.towerButton1);
 		this.guiElements.add(new StaticText(Game.INTERFACE_START_X + 5, 200, Color.white, "Lives:"));
 		this.guiElements.add(this.passedTime);
@@ -382,7 +382,7 @@ public class Game extends BasicGame {
 
 	public void reduceLives() {
 		this.player.reduceLives();
-		numberLives.setText("" + this.player.getLives());
+		this.numberLives.setText("" + this.player.getLives());
 	}
 
 	public EnemyTypes getEnemyTypes() {
