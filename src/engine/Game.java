@@ -180,7 +180,8 @@ public class Game extends BasicGame {
 			int newX = (int) x / this.currentTileLength;
 			int newY = (int) y / this.currentTileLength;
 			int[][] path = this.currentMapLayout.getPath();
-			if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
+			System.out.println(newY);
+			if (newY < 12 && x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
 				new SlickUnfilledRectangle(graphics, 50, 50, Color.green).draw(newX * this.currentTileLength, newY
 						* this.currentTileLength);
 			} else {
@@ -325,13 +326,15 @@ public class Game extends BasicGame {
 				int newY = (int) y / this.currentTileLength;
 				if (this.currentTower != null) {
 					int[][] path = this.currentMapLayout.getPath();
-					if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
+					int cost = this.currentTower.getCost();
+					if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null
+							&& this.player.getMoney() - cost >= 0) {
 						Tower bufferTower = this.currentTower.clone();
 						bufferTower.setX(newX);
 						bufferTower.setY(newY);
 						bufferTower.getSprite().setAlpha(1f);
 						this.towers[newY][newX] = bufferTower;
-						this.player.reduceMoney(this.currentTower.getCost());
+						this.player.reduceMoney(cost);
 						this.currentTower = null;
 						this.releaseAllButtons();
 
@@ -340,6 +343,9 @@ public class Game extends BasicGame {
 			}
 			this.mouseWasClicked = true;
 
+		} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
+			this.currentTower = null;
+			this.releaseAllButtons();
 		}
 		// checks if mouse button was released again after being pressed
 		if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
