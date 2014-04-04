@@ -100,7 +100,7 @@ public class Game extends BasicGame {
 	private void initGUI() {
 		this.numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.white, "" + this.player.getLives());
 		this.passedTime = new StaticText(Game.INTERFACE_START_X + 5, 580, Color.white, this.passedTimeToString());
-		this.moneyAmount = new StaticText(Game.INTERFACE_START_X + 60, 100, Color.white, "" + this.player.getMoney());
+		this.moneyAmount = new StaticText(Game.INTERFACE_START_X + 65, 100, Color.white, "" + this.player.getMoney());
 
 		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(this.numberLives);
