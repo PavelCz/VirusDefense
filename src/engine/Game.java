@@ -43,7 +43,7 @@ public class Game extends BasicGame {
 	private TowerButton towerButton1;
 	private Tower currentTower;
 	// private Enemy1 e;
-	private static Player player;
+	private Player player;
 	private StaticText lives;
 	private static StaticText numberLives;
 
@@ -75,7 +75,7 @@ public class Game extends BasicGame {
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 		this.towerButton1 = new TowerButton(13 * this.currentTileLength, 0, "button1.png", "button2.png", new ShootingTower(0, 0,
 				new Sprite("tower/t1.png", 0.05f), this));
-		Game.player = new Player();
+		this.player = new Player();
 
 		this.towers = new Tower[12][13];
 		this.drawables = new ArrayList<Drawable>();
@@ -93,7 +93,7 @@ public class Game extends BasicGame {
 
 		// GUI
 		this.guiElements = new ArrayList<GUI>();
-		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.white, "" + player.getLives());
+		numberLives = new StaticText(Game.INTERFACE_START_X + 50, 200, Color.white, "" + this.player.getLives());
 		this.lives = new StaticText(Game.INTERFACE_START_X + 5, 200, Color.white, "Lives:");
 		this.passedTime = new StaticText(Game.INTERFACE_START_X + 5, 580, Color.white, new Time(this.passedMilliseconds).toString());
 
@@ -227,7 +227,7 @@ public class Game extends BasicGame {
 			this.mouseEvents(container, delta);
 			this.keyboardEvents(container, delta);
 
-			if (Game.player.getLives() <= 0) {
+			if (this.player.getLives() <= 0) {
 				System.out.println("Game Over!");
 			}
 		}
@@ -364,9 +364,9 @@ public class Game extends BasicGame {
 		return this.currentMapLayout.getWaypoints();
 	}
 
-	public static void reduceLives() {
-		Game.player.reduceLives();
-		numberLives.setText("" + Game.player.getLives());
+	public void reduceLives() {
+		this.player.reduceLives();
+		numberLives.setText("" + this.player.getLives());
 	}
 
 	public EnemyTypes getEnemyTypes() {
