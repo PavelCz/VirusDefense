@@ -17,6 +17,7 @@ public class EnemyType {
 	}
 
 	public Enemy createEnemy() {
-		return new Enemy(health, speed, sprite, game.getWaypoints(), game.getWaypoints().getDirection(), game);
+		return new Enemy(this.health, this.speed, this.sprite, this.game.getWaypoints(), this.game.getWaypoints().getDirection(),
+				this.game, this.radius);
 	}
 }

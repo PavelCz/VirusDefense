@@ -12,7 +12,7 @@ public class Enemy extends Entity implements Drawable {
 	protected Waypoint waypoint;
 	protected int direction;
 
-	public Enemy(int health, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Game game) {
+	public Enemy(int health, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Game game, float radius) {
 		super(startingWaypoint.getX(), startingWaypoint.getY());
 		this.health = health;
 		maxHealth = this.health;
@@ -21,7 +21,7 @@ public class Enemy extends Entity implements Drawable {
 		velocity = new MyVector2f(0, speed);
 		waypoint = startingWaypoint;
 		this.direction = direction;
-		radius = sprite.getWidth() / 2;
+		this.radius = radius;
 		this.game = game;
 	}
 
