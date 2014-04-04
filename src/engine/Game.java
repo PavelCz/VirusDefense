@@ -86,7 +86,7 @@ public class Game extends BasicGame {
 		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
 
 		this.enemyTypes = new EnemyTypes();
-		this.enemyTypes.add(new EnemyType(1000, 0.1f, "enemy/v1.png", this, 25));
+		this.enemyTypes.add(new EnemyType(1000, 0.1f, "enemy/v1.png", this, 25, 50));
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities

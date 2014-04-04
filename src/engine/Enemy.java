@@ -11,18 +11,20 @@ public class Enemy extends Entity implements Drawable {
 	protected MyVector2f velocity;
 	protected Waypoint waypoint;
 	protected int direction;
+	private int worth;
 
-	public Enemy(int health, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Game game, float radius) {
+	public Enemy(int health, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Game game, float radius, int worth) {
 		super(startingWaypoint.getX(), startingWaypoint.getY());
 		this.health = health;
-		maxHealth = this.health;
+		this.maxHealth = this.health;
 		this.speed = speed;
 		this.sprite = sprite;
-		velocity = new MyVector2f(0, speed);
-		waypoint = startingWaypoint;
+		this.velocity = new MyVector2f(0, speed);
+		this.waypoint = startingWaypoint;
 		this.direction = direction;
 		this.radius = radius;
 		this.game = game;
+		this.worth = worth;
 	}
 
 	public void setX(float x) {
@@ -34,58 +36,58 @@ public class Enemy extends Entity implements Drawable {
 	}
 
 	public void update(int delta) {
-		if (health > 0) {
+		if (this.health > 0) {
 			// System.out.println(this.direction);
-			x += velocity.getX() * delta;
-			y += velocity.getY() * delta;
-			if (waypoint == null) {
-				health = 0;
+			this.x += this.velocity.getX() * delta;
+			this.y += this.velocity.getY() * delta;
+			if (this.waypoint == null) {
+				this.health = 0;
 				Game.reduceLives();
-			} else if (direction == Waypoint.DOWN && getY() >= waypoint.getY()) {
-				newDirection();
-			} else if (direction == Waypoint.RIGHT && getX() >= waypoint.getX()) {
-				newDirection();
-			} else if (direction == Waypoint.UP && getY() <= waypoint.getY()) {
-				newDirection();
-			} else if (direction == Waypoint.LEFT && getX() <= waypoint.getX()) {
-				newDirection();
+			} else if (this.direction == Waypoint.DOWN && this.getY() >= this.waypoint.getY()) {
+				this.newDirection();
+			} else if (this.direction == Waypoint.RIGHT && this.getX() >= this.waypoint.getX()) {
+				this.newDirection();
+			} else if (this.direction == Waypoint.UP && this.getY() <= this.waypoint.getY()) {
+				this.newDirection();
+			} else if (this.direction == Waypoint.LEFT && this.getX() <= this.waypoint.getX()) {
+				this.newDirection();
 			}
 		} else {
-			game.getEnemies().remove(this);
+			this.game.getEnemies().remove(this);
 		}
 	}
 
 	private void newDirection() {
-		if (waypoint.getDirection() == Waypoint.RIGHT) {
-			velocity = new MyVector2f(speed, 0);
-			direction = Waypoint.RIGHT;
-		} else if (waypoint.getDirection() == Waypoint.UP) {
-			velocity = new MyVector2f(0, -speed);
-			direction = Waypoint.UP;
-		} else if (waypoint.getDirection() == Waypoint.LEFT) {
-			velocity = new MyVector2f(-speed, 0);
-			direction = Waypoint.LEFT;
-		} else if (waypoint.getDirection() == Waypoint.DOWN) {
-			velocity = new MyVector2f(0, speed);
-			direction = Waypoint.DOWN;
+		if (this.waypoint.getDirection() == Waypoint.RIGHT) {
+			this.velocity = new MyVector2f(this.speed, 0);
+			this.direction = Waypoint.RIGHT;
+		} else if (this.waypoint.getDirection() == Waypoint.UP) {
+			this.velocity = new MyVector2f(0, -this.speed);
+			this.direction = Waypoint.UP;
+		} else if (this.waypoint.getDirection() == Waypoint.LEFT) {
+			this.velocity = new MyVector2f(-this.speed, 0);
+			this.direction = Waypoint.LEFT;
+		} else if (this.waypoint.getDirection() == Waypoint.DOWN) {
+			this.velocity = new MyVector2f(0, this.speed);
+			this.direction = Waypoint.DOWN;
 		}
 
-		waypoint = waypoint.getNextWaypoint();
+		this.waypoint = this.waypoint.getNextWaypoint();
 	}
 
 	@Override
 	public void draw() {
-		if (health > 0) {
-			sprite.draw(x - sprite.getWidth() / 2, y - sprite.getHeight() / 2);
+		if (this.health > 0) {
+			this.sprite.draw(this.x - this.sprite.getWidth() / 2, this.y - this.sprite.getHeight() / 2);
 		}
 	}
 
 	public float getRadius() {
-		return radius;
+		return this.radius;
 	}
 
 	public int getHealth() {
-		return health;
+		return this.health;
 	}
 
 	public void setHealth(int health) {
@@ -94,7 +96,7 @@ public class Enemy extends Entity implements Drawable {
 
 	public int getMaxHealth() {
 
-		return maxHealth;
+		return this.maxHealth;
 	}
 
 }
