@@ -49,6 +49,7 @@ public class ShootingTower extends Tower {
 					enemy.setHealth(enemy.getHealth() - this.damage);
 					if (enemy.getHealth() <= 0) {
 						this.game.getPlayer().addMoney(enemy.getMoney());
+						System.out.println("jo");
 					}
 					done = true;
 				}

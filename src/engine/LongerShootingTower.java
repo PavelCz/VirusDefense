@@ -18,7 +18,6 @@ public class LongerShootingTower extends ShootingTower {
 		if (this.currentlyAttacking != null) {
 			this.shootAt(this.currentlyAttacking);
 			if (this.currentlyAttacking.getHealth() <= 0) {
-				this.game.getPlayer().addMoney(this.currentlyAttacking.getMoney());
 				this.currentlyAttacking = null;
 				this.delta = this.shootingInterval;
 			}

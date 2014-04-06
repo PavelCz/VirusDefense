@@ -81,7 +81,7 @@ public class Game extends BasicGame {
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Game.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0, 0,
-				new Sprite("tower/t1.png", 0.05f), this, 4000, 0.09f, 2000));
+				new Sprite("tower/t1.png", 0.05f), this, 400, 0.09f, 400));
 		this.buttons.add(this.towerButton1);
 
 		//
@@ -91,9 +91,9 @@ public class Game extends BasicGame {
 	}
 
 	private void initWaves() {
-		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(2, new int[] { 100 }));
 		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
 	}
 
 	private void initGUI() {
@@ -182,7 +182,6 @@ public class Game extends BasicGame {
 			int newX = (int) x / this.currentTileLength;
 			int newY = (int) y / this.currentTileLength;
 			int[][] path = this.currentMapLayout.getPath();
-			System.out.println(newY);
 			if (newY < 12 && x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
 				new SlickUnfilledRectangle(graphics, 50, 50, Color.green).draw(newX * this.currentTileLength, newY
 						* this.currentTileLength);
