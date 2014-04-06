@@ -10,6 +10,7 @@ public class WaveHandler {
 	private int delta;
 	private int timeBetweenWaves;
 	private int timeBetweenEnemies = 500;
+	private boolean done = false;
 
 	public WaveHandler(Game game, int timeBetweenWaves) {
 		this.game = game;
@@ -37,12 +38,17 @@ public class WaveHandler {
 
 	public void update(int delta) {
 		this.delta -= delta;
+		if (this.waves.isEmpty() && this.done) {
+			this.game.setMode(1);
+		}
 		if (this.game.getEnemies().isEmpty() && this.index <= 0) {
 
 			if (!this.waves.isEmpty()) {
 				this.index = this.waves.peek().getNumber();
 				this.currentWave = this.waves.poll();
 				this.delta = this.timeBetweenWaves;
+			} else {
+				this.done = true;
 			}
 		}
 		if (this.delta <= 0) {

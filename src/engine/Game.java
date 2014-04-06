@@ -35,7 +35,7 @@ public class Game extends BasicGame {
 	private boolean debugMode = false;
 	private EnemyTypes enemyTypes = new EnemyTypes();
 	private int passedMilliseconds = 0;
-
+	private int mode = 0;
 	private MapLayout currentMapLayout;
 	private int currentTileLength;
 	private Tower[][] towers;
@@ -93,7 +93,9 @@ public class Game extends BasicGame {
 	private void initWaves() {
 		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
 		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(4, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(5, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(6, new int[] { 100 }));
 	}
 
 	private void initGUI() {
@@ -133,6 +135,12 @@ public class Game extends BasicGame {
 	private void renderGUI() {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
+		}
+
+		if (this.mode == 1) {
+			new Sprite("You Win.png").draw(0, 0);
+		} else if (this.mode == -1) {
+			new Sprite("Game Over.png").draw(0, 0);
 		}
 	}
 
@@ -221,32 +229,34 @@ public class Game extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int originalDelta) throws SlickException {
-		if (originalDelta < 100) {
-			this.passedMilliseconds += originalDelta;
-			this.passedTime.setText(this.passedTimeToString());
-			this.moneyAmount.setText("" + this.player.getMoney());
-			int delta = (int) (originalDelta * this.speed);
+		if (this.mode == 0) {
+			if (originalDelta < 100) {
+				this.passedMilliseconds += originalDelta;
+				this.passedTime.setText(this.passedTimeToString());
+				this.moneyAmount.setText("" + this.player.getMoney());
+				int delta = (int) (originalDelta * this.speed);
 
-			for (Enemy enemy : this.enemies) {
+				for (Enemy enemy : this.enemies) {
 
-				if (enemy != null)
-					enemy.update(delta);
-			}
-			for (int i = 0; i < this.towers.length; ++i) {
-				for (int j = 0; j < this.towers[0].length; ++j) {
-					if (this.towers[i][j] != null) {
-						this.towers[i][j].update(delta);
+					if (enemy != null)
+						enemy.update(delta);
+				}
+				for (int i = 0; i < this.towers.length; ++i) {
+					for (int j = 0; j < this.towers[0].length; ++j) {
+						if (this.towers[i][j] != null) {
+							this.towers[i][j].update(delta);
+						}
 					}
 				}
-			}
 
-			this.waveHandler.update(delta);
+				this.waveHandler.update(delta);
 
-			this.mouseEvents(container, delta);
-			this.keyboardEvents(container, delta);
+				this.mouseEvents(container, delta);
+				this.keyboardEvents(container, delta);
 
-			if (this.player.getLives() <= 0) {
-				System.out.println("Game Over!");
+				if (this.player.getLives() <= 0) {
+					this.mode = -1;
+				}
 			}
 		}
 
@@ -428,4 +438,13 @@ public class Game extends BasicGame {
 	public Player getPlayer() {
 		return this.player;
 	}
+
+	public int getMode() {
+		return this.mode;
+	}
+
+	public void setMode(int mode) {
+		this.mode = mode;
+	}
+
 }
