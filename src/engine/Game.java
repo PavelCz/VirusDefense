@@ -26,22 +26,22 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Game extends BasicGame {
-	private List<Drawable> drawables = new ArrayList<Drawable>();
-	private List<GUI> guiElements = new ArrayList<GUI>();
-	private List<Button> buttons = new ArrayList<Button>();
-	private ConcurrentLinkedQueue<Enemy> enemies = new ConcurrentLinkedQueue<Enemy>();;
-	private WaveHandler waveHandler = new WaveHandler(this, 2000);
-	private boolean mouseWasClicked = false;
-	private boolean debugMode = false;
-	private EnemyTypes enemyTypes = new EnemyTypes();
-	private int passedMilliseconds = 0;
-	private int mode = 0;
+	private List<Drawable> drawables;
+	private List<GUI> guiElements;
+	private List<Button> buttons;
+	private ConcurrentLinkedQueue<Enemy> enemies;
+	private WaveHandler waveHandler;
+	private boolean mouseWasClicked;
+	private boolean debugMode;
+	private EnemyTypes enemyTypes;
+	private int passedMilliseconds;
+	private int mode;
 	private MapLayout currentMapLayout;
 	private int currentTileLength;
 	private Tower[][] towers;
 	private TowerButton towerButton1;
 	private Tower currentTower;
-	private Player player = new Player();
+	private Player player;
 	private StaticText numberLives;
 	private StaticText moneyAmount;
 
@@ -49,8 +49,8 @@ public class Game extends BasicGame {
 	private InterfaceBackground interfaceBackground;
 	// Constants:
 	public static int INTERFACE_START_X;
-	public static int STANDARD_TEXT_SCALE = 15;
-	private float speed = 1f;
+	public static int STANDARD_TEXT_SCALE;
+	private float speed;
 
 	// Tests:
 
@@ -62,6 +62,7 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
+		this.initDefaults();
 
 		this.currentMapLayout = new MapLayout("/maps/map.png", "/maps/background.jpg", 50);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
@@ -81,7 +82,7 @@ public class Game extends BasicGame {
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Game.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0, 0,
-				new Sprite("tower/t1.png", 0.05f), this, 400, 0.09f, 400));
+				new Sprite("tower/t1.png", 0.05f), this, 400, 0.1f, 400));
 		this.buttons.add(this.towerButton1);
 
 		//
@@ -90,12 +91,28 @@ public class Game extends BasicGame {
 
 	}
 
+	private void initDefaults() {
+		this.drawables = new ArrayList<Drawable>();
+		this.guiElements = new ArrayList<GUI>();
+		this.buttons = new ArrayList<Button>();
+		this.enemies = new ConcurrentLinkedQueue<Enemy>();
+		this.waveHandler = new WaveHandler(this, 2000);
+		this.mouseWasClicked = false;
+		this.debugMode = false;
+		this.enemyTypes = new EnemyTypes();
+		this.passedMilliseconds = 0;
+		this.mode = 0;
+		this.player = new Player();
+		STANDARD_TEXT_SCALE = 15;
+		this.speed = 1f;
+	}
+
 	private void initWaves() {
 		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(4, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(5, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(6, new int[] { 100 }));
+		// this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
+		// this.waveHandler.addWave(new Wave(4, new int[] { 100 }));
+		// this.waveHandler.addWave(new Wave(5, new int[] { 100 }));
+		// this.waveHandler.addWave(new Wave(6, new int[] { 100 }));
 	}
 
 	private void initGUI() {
@@ -259,7 +276,6 @@ public class Game extends BasicGame {
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -279,6 +295,18 @@ public class Game extends BasicGame {
 			} else {
 				System.out.println("not debug");
 				this.speed = 1f;
+			}
+		}
+		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+			container.exit();
+		}
+		if (input.isKeyPressed(Input.KEY_R)) {
+			this.setMode(0);
+			try {
+				container.reinit();
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		if (this.debugMode) {
