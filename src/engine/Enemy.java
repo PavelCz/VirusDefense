@@ -13,6 +13,7 @@ public class Enemy extends Entity implements Drawable {
 	protected Waypoint waypoint;
 	protected int direction;
 	private int worth;
+	private boolean dead = false;
 
 	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Game game, float radius,
 			int worth) {
@@ -110,4 +111,11 @@ public class Enemy extends Entity implements Drawable {
 		return this.maxHealth;
 	}
 
+	public boolean isDead() {
+		return this.dead;
+	}
+
+	public void setDead() {
+		this.dead = true;
+	}
 }

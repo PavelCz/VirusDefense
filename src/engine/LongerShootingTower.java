@@ -48,7 +48,10 @@ public class LongerShootingTower extends ShootingTower {
 		if (this.inRange(enemy)) {
 			enemy.setHealth(enemy.getHealth() - this.damage);
 			if (enemy.getHealth() <= 0) {
-				this.game.getPlayer().addMoney(enemy.getMoney());
+				if (!enemy.isDead()) {
+					this.game.getPlayer().addMoney(enemy.getMoney());
+					enemy.setDead();
+				}
 			}
 		}
 	}
