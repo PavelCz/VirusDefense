@@ -64,7 +64,7 @@ public class Game extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 		this.initDefaults();
 
-		this.currentMapLayout = new MapLayout("/maps/map.png", "/maps/background.jpg", 50);
+		this.currentMapLayout = new MapLayout("maps/map.png", "maps/background.jpg", 50);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
 
 		// Set Constants:
