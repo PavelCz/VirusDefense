@@ -109,10 +109,10 @@ public class Game extends BasicGame {
 
 	private void initWaves() {
 		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(4, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(5, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(6, new int[] { 100 }));
+		// this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
+		// this.waveHandler.addWave(new Wave(4, new int[] { 100 }));
+		// this.waveHandler.addWave(new Wave(5, new int[] { 100 }));
+		// this.waveHandler.addWave(new Wave(6, new int[] { 100 }));
 	}
 
 	private void initGUI() {
@@ -198,7 +198,7 @@ public class Game extends BasicGame {
 	 */
 	private void renderTowerShadow(GameContainer container, Graphics graphics) {
 
-		if (this.currentTower != null) {
+		if (this.currentTower != null && this.getMode() == 0) {
 			Sprite sprite = this.currentTower.getSprite();
 			Input input = container.getInput();
 			float x = input.getMouseX();
@@ -340,57 +340,59 @@ public class Game extends BasicGame {
 	 * @param delta
 	 */
 	private void mouseEvents(GameContainer container, int delta) {
-		Input input = container.getInput();
-		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		if (this.mode == 0) {
+			Input input = container.getInput();
+			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
-			float x = input.getMouseX();
-			float y = input.getMouseY();
+				float x = input.getMouseX();
+				float y = input.getMouseY();
 
-			boolean buttonWasPressed = false;
-			for (Button button : this.buttons) {
-				if (button.checkCollision(x, y)) {
-					buttonWasPressed = true;
-					this.releaseAllButtons();
-					button.onClick();
-					this.currentTower = button.getTower();
-					this.currentTower.getSprite().setAlpha(0.5f);
-					if (this.currentTower != null) {
-						this.towerButton1.onClick();
-					}
-				}
-			}
-			if (!buttonWasPressed) {
-				int newX = (int) x / this.currentTileLength;
-				int newY = (int) y / this.currentTileLength;
-				if (this.currentTower != null) {
-					int[][] path = this.currentMapLayout.getPath();
-					int cost = this.currentTower.getCost();
-					if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null
-							&& this.player.getMoney() - cost >= 0) {
-						Tower bufferTower = this.currentTower.clone();
-						bufferTower.setX(newX);
-						bufferTower.setY(newY);
-						bufferTower.getSprite().setAlpha(1f);
-						this.towers[newY][newX] = bufferTower;
-						this.player.reduceMoney(cost);
-						this.currentTower = null;
+				boolean buttonWasPressed = false;
+				for (Button button : this.buttons) {
+					if (button.checkCollision(x, y)) {
+						buttonWasPressed = true;
 						this.releaseAllButtons();
-
+						button.onClick();
+						this.currentTower = button.getTower();
+						this.currentTower.getSprite().setAlpha(0.5f);
+						if (this.currentTower != null) {
+							this.towerButton1.onClick();
+						}
 					}
 				}
+				if (!buttonWasPressed) {
+					int newX = (int) x / this.currentTileLength;
+					int newY = (int) y / this.currentTileLength;
+					if (this.currentTower != null) {
+						int[][] path = this.currentMapLayout.getPath();
+						int cost = this.currentTower.getCost();
+						if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null
+								&& this.player.getMoney() - cost >= 0) {
+							Tower bufferTower = this.currentTower.clone();
+							bufferTower.setX(newX);
+							bufferTower.setY(newY);
+							bufferTower.getSprite().setAlpha(1f);
+							this.towers[newY][newX] = bufferTower;
+							this.player.reduceMoney(cost);
+							this.currentTower = null;
+							this.releaseAllButtons();
+
+						}
+					}
+				}
+				this.mouseWasClicked = true;
+
+			} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
+				this.currentTower = null;
+				this.releaseAllButtons();
 			}
-			this.mouseWasClicked = true;
+			// checks if mouse button was released again after being pressed
+			if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 
-		} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
-			this.currentTower = null;
-			this.releaseAllButtons();
-		}
-		// checks if mouse button was released again after being pressed
-		if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+				this.mouseWasClicked = false;
+				this.releaseAllButtonsNotTowerButtons();
 
-			this.mouseWasClicked = false;
-			this.releaseAllButtonsNotTowerButtons();
-
+			}
 		}
 	}
 
