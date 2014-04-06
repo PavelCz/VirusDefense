@@ -109,10 +109,10 @@ public class Game extends BasicGame {
 
 	private void initWaves() {
 		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
-		// this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
-		// this.waveHandler.addWave(new Wave(4, new int[] { 100 }));
-		// this.waveHandler.addWave(new Wave(5, new int[] { 100 }));
-		// this.waveHandler.addWave(new Wave(6, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(4, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(5, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(6, new int[] { 100 }));
 	}
 
 	private void initGUI() {
