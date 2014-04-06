@@ -246,13 +246,13 @@ public class Game extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int originalDelta) throws SlickException {
-		if (this.mode == 0) {
-			if (originalDelta < 100) {
-				this.passedMilliseconds += originalDelta;
-				this.passedTime.setText(this.passedTimeToString());
-				this.moneyAmount.setText("" + this.player.getMoney());
-				int delta = (int) (originalDelta * this.speed);
 
+		if (originalDelta < 100) {
+			this.passedMilliseconds += originalDelta;
+			this.passedTime.setText(this.passedTimeToString());
+			this.moneyAmount.setText("" + this.player.getMoney());
+			int delta = (int) (originalDelta * this.speed);
+			if (this.mode == 0) {
 				for (Enemy enemy : this.enemies) {
 
 					if (enemy != null)
@@ -267,13 +267,13 @@ public class Game extends BasicGame {
 				}
 
 				this.waveHandler.update(delta);
+			}
+			this.mouseEvents(container, delta);
+			this.keyboardEvents(container, delta);
 
-				this.mouseEvents(container, delta);
-				this.keyboardEvents(container, delta);
+			if (this.player.getLives() <= 0) {
+				this.mode = -1;
 
-				if (this.player.getLives() <= 0) {
-					this.mode = -1;
-				}
 			}
 		}
 	}
