@@ -1,9 +1,9 @@
 package engine;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -25,7 +25,7 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Gameplay extends GameComponent {
-	private List<Clickable> clickables;
+
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private WaveHandler waveHandler;
 	private boolean mouseWasClicked;
@@ -54,6 +54,9 @@ public class Gameplay extends GameComponent {
 	// Tests:
 
 	//
+	public Gameplay(BasicGame game) {
+		super(game);
+	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
@@ -263,9 +266,7 @@ public class Gameplay extends GameComponent {
 
 			}
 			this.updateTowerShadow(container);
-			for (Clickable clickable : this.clickables) {
-				clickable.update(container);
-			}
+
 		}
 	}
 
