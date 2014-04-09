@@ -25,7 +25,6 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Gameplay {
-	private List<Drawable> drawables;
 	private List<GUI> guiElements;
 	private List<Clickable> clickables;
 	private ConcurrentLinkedQueue<Enemy> enemies;
@@ -88,7 +87,6 @@ public class Gameplay {
 	}
 
 	private void initDefaults() {
-		this.drawables = new ArrayList<Drawable>();
 		this.guiElements = new ArrayList<GUI>();
 		this.clickables = new ArrayList<Clickable>();
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
@@ -134,10 +132,6 @@ public class Gameplay {
 		this.currentMapLayout.drawBackground();
 		this.renderEnemies();
 		this.renderTowers();
-
-		for (Drawable entity : this.drawables) {
-			entity.draw();
-		}
 
 		this.renderTowerShadow(container, graphics);
 		this.renderGUI();
@@ -410,14 +404,6 @@ public class Gameplay {
 			}
 		}
 	}
-
-	/*
-	 * private void debugPath() { Sprite s = new Sprite("Unbenannt-2.png"); int[][] path = this.currentMapLayout.getPath(); for (int i
-	 * = 0; i < path.length; ++i) { for (int j = 0; j < path[0].length; ++j) { if (path[i][j] == 5) {// for now th epath has not the
-	 * value 0 in // the array path, but 5 s.draw(j * this.currentTileLength, i * this.currentTileLength); } }
-	 * 
-	 * } }
-	 */
 
 	private void releaseAllClickables() {
 		for (Clickable clickable : this.clickables) {
