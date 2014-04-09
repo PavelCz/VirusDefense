@@ -86,7 +86,7 @@ public class Game extends BasicGame {
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Game.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0, 0,
-				new Sprite("tower/t1.png", 0.05f), this, 400, 0.1f, 400));
+				new Sprite("tower/t1.png", 0.05f), this, 400, 0.1f, 400), this);
 		this.buttons.add(this.towerButton1);
 
 		//
@@ -382,11 +382,10 @@ public class Game extends BasicGame {
 						buttonWasPressed = true;
 						this.releaseAllButtons();
 						button.onClick();
-						this.currentTower = button.getTower();
-						this.currentTower.getSprite().setAlpha(0.5f);
-						if (this.currentTower != null) {
-							this.towerButton1.onClick();
-						}
+
+						// if (this.currentTower != null) {
+						// this.towerButton1.onClick();
+						// }
 					}
 				}
 				if (!buttonWasPressed) {
@@ -503,6 +502,14 @@ public class Game extends BasicGame {
 
 	public void setMode(int mode) {
 		this.mode = mode;
+	}
+
+	public Tower getCurrentTower() {
+		return this.currentTower;
+	}
+
+	public void setCurrentTower(Tower currentTower) {
+		this.currentTower = currentTower;
 	}
 
 }
