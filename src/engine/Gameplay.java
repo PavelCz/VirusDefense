@@ -1,9 +1,7 @@
 package engine;
 
-import java.util.ArrayList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -54,12 +52,13 @@ public class Gameplay extends GameComponent {
 	// Tests:
 
 	//
-	public Gameplay(BasicGame game) {
+	public Gameplay(TowerDefense game) {
 		super(game);
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
+		super.init(container);
 		this.initDefaults();
 
 		this.currentMapLayout = new MapLayout("maps/map.png", "maps/background.jpg", 50);
@@ -90,8 +89,6 @@ public class Gameplay extends GameComponent {
 	}
 
 	private void initDefaults() {
-		this.guiElements = new ArrayList<GUI>();
-		this.clickables = new ArrayList<Clickable>();
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
 		this.waveHandler = new WaveHandler(this, 2000);
 		this.mouseWasClicked = false;

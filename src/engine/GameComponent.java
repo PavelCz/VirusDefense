@@ -1,8 +1,8 @@
 package engine;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -14,20 +14,33 @@ import engine.gui.GUI;
 public abstract class GameComponent {
 
 	protected List<GUI> guiElements;
-
 	protected List<Clickable> clickables;
-	protected BasicGame game;
+
+	protected TowerDefense game;
 	private boolean mouseWasClicked;
 
-	public GameComponent(BasicGame game) {
+	public GameComponent(TowerDefense game) {
 		this.game = game;
 	}
 
-	public abstract void init(GameContainer container) throws SlickException;
+	private void renderGUI() {
+		for (GUI guiElement : this.guiElements) {
+			guiElement.draw();
+		}
+	}
 
-	public abstract void update(GameContainer container, int delta) throws SlickException;
+	public void init(GameContainer container) throws SlickException {
+		this.guiElements = new ArrayList<GUI>();
+		this.clickables = new ArrayList<Clickable>();
+	}
 
-	public abstract void render(GameContainer container, Graphics graphics) throws SlickException;
+	public void update(GameContainer container, int delta) throws SlickException {
+		this.updateClickables(container, delta);
+	}
+
+	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		this.renderGUI();
+	}
 
 	private void updateClickables(GameContainer container, int delta) {
 		for (Clickable clickable : this.clickables) {

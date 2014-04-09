@@ -23,6 +23,7 @@ public class TowerDefense extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 		this.gameplay = new Gameplay(this);
 		this.menu = new Menu(this);
+		this.menu.init(container);
 		this.gameplay.init(container);
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
@@ -44,4 +45,9 @@ public class TowerDefense extends BasicGame {
 		this.currentGameComponent.render(container, graphics);
 
 	}
+
+	public void setMode(int mode) {
+		this.mode = mode;
+	}
+
 }
