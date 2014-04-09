@@ -15,7 +15,7 @@ import engine.graphics.SlickRectangle;
 import engine.graphics.SlickUnfilledEllipse;
 import engine.graphics.SlickUnfilledRectangle;
 import engine.graphics.Sprite;
-import engine.gui.Button;
+import engine.gui.Clickable;
 import engine.gui.ClickableText;
 import engine.gui.GUI;
 import engine.gui.InterfaceBackground;
@@ -29,7 +29,7 @@ import engine.gui.TowerButton;
 public class Game extends BasicGame {
 	private List<Drawable> drawables;
 	private List<GUI> guiElements;
-	private List<Button> buttons;
+	private List<Clickable> clickables;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private WaveHandler waveHandler;
 	private boolean mouseWasClicked;
@@ -87,7 +87,8 @@ public class Game extends BasicGame {
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Game.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0, 0,
 				new Sprite("tower/t1.png", 0.05f), this, 400, 0.1f, 400), this);
-		this.buttons.add(this.towerButton1);
+		this.clickables.add(this.towerButton1);
+		this.clickables.add(this.c);
 
 		//
 		this.initGUI();
@@ -98,7 +99,7 @@ public class Game extends BasicGame {
 	private void initDefaults() {
 		this.drawables = new ArrayList<Drawable>();
 		this.guiElements = new ArrayList<GUI>();
-		this.buttons = new ArrayList<Button>();
+		this.clickables = new ArrayList<Clickable>();
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
 		this.waveHandler = new WaveHandler(this, 2000);
 		this.mouseWasClicked = false;
@@ -377,15 +378,12 @@ public class Game extends BasicGame {
 				float y = input.getMouseY();
 
 				boolean buttonWasPressed = false;
-				for (Button button : this.buttons) {
-					if (button.checkCollision((int) x, (int) y)) {
+				for (Clickable clickable : this.clickables) {
+					if (clickable.checkCollision((int) x, (int) y)) {
 						buttonWasPressed = true;
-						this.releaseAllButtons();
-						button.onClick();
+						this.releaseAllClickables();
+						clickable.onClick();
 
-						// if (this.currentTower != null) {
-						// this.towerButton1.onClick();
-						// }
 					}
 				}
 				if (!buttonWasPressed) {
@@ -403,7 +401,7 @@ public class Game extends BasicGame {
 							this.towers[newY][newX] = bufferTower;
 							this.player.reduceMoney(cost);
 							this.currentTower = null;
-							this.releaseAllButtons();
+							this.releaseAllClickables();
 
 						}
 					}
@@ -412,13 +410,13 @@ public class Game extends BasicGame {
 
 			} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
 				this.currentTower = null;
-				this.releaseAllButtons();
+				this.releaseAllClickables();
 			}
 			// checks if mouse button was released again after being pressed
 			if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 
 				this.mouseWasClicked = false;
-				this.releaseAllButtonsNotTowerButtons();
+				this.releaseAllClickablesNotTowerButtons();
 
 			}
 		}
@@ -432,16 +430,16 @@ public class Game extends BasicGame {
 	 * } }
 	 */
 
-	private void releaseAllButtons() {
-		for (Button button : this.buttons) {
-			button.onRelease();
+	private void releaseAllClickables() {
+		for (Clickable clickable : this.clickables) {
+			clickable.onRelease();
 		}
 	}
 
-	private void releaseAllButtonsNotTowerButtons() {
-		for (Button button : this.buttons) {
-			if (button.getTower() == null) {
-				button.onRelease();
+	private void releaseAllClickablesNotTowerButtons() {
+		for (Clickable clickable : this.clickables) {
+			if (!(clickable.getClass() == this.towerButton1.getClass())) {
+				clickable.onRelease();
 			}
 		}
 	}

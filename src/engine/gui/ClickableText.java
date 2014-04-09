@@ -10,6 +10,8 @@ public class ClickableText extends Clickable {
 	public ClickableText(float x, float y, String text) {
 		super(x, y);
 		this.text = new Text(15, text, Color.white);
+		this.collisionWidth = this.text.getWidth();
+		this.collisionHeight = this.text.getHeight();
 	}
 
 	@Override
@@ -27,6 +29,12 @@ public class ClickableText extends Clickable {
 	@Override
 	public void draw() {
 		this.text.draw(this.x, this.y);
+
+	}
+
+	@Override
+	public void onHover() {
+		// TODO Auto-generated method stub
 
 	}
 }

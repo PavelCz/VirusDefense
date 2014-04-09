@@ -32,4 +32,12 @@ public class Text extends RenderObject {
 	public void setColor(Color color) {
 		this.color = color;
 	}
+
+	public int getWidth() {
+		return this.font.getWidth(this.text);
+	}
+
+	public int getHeight() {
+		return this.font.getHeight();
+	}
 }

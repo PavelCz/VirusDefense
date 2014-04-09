@@ -45,4 +45,10 @@ public class Button extends Clickable {
 		return null;
 	}
 
+	@Override
+	public void onHover() {
+		// TODO Auto-generated method stub
+
+	}
+
 }
