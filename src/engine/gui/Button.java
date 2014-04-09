@@ -3,20 +3,18 @@ package engine.gui;
 import engine.Tower;
 import engine.graphics.Sprite;
 
-public class Button extends GUI implements Clickable {
+public class Button extends Clickable {
 	private Sprite unclickedButton;
 	private Sprite clickedButton;
 	private boolean clicked;
-	protected float width;
-	protected float height;
 
 	public Button(float x, float y, String unclickedButtonPath, String clickedButtonPath) {
 		super(x, y);
 		this.clicked = false;
 		this.unclickedButton = new Sprite(unclickedButtonPath);
 		this.clickedButton = new Sprite(clickedButtonPath);
-		this.width = this.unclickedButton.getWidth();
-		this.height = this.unclickedButton.getHeight();
+		this.collisionWidth = this.unclickedButton.getWidth();
+		this.collisionHeight = this.unclickedButton.getHeight();
 	}
 
 	@Override
@@ -38,10 +36,6 @@ public class Button extends GUI implements Clickable {
 	@Override
 	public void onRelease() {
 		this.clicked = false;
-	}
-
-	public boolean checkCollision(float x, float y) {
-		return (x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y + this.height);
 	}
 
 	public Tower getTower() {

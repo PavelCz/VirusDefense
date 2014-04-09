@@ -1,7 +1,17 @@
 package engine.gui;
 
-public interface Clickable {
-	public void onClick();
+public abstract class Clickable extends GUI {
+	protected float collisionWidth, collisionHeight;
 
-	public void onRelease();
+	public Clickable(float x, float y) {
+		super(x, y);
+	}
+
+	public abstract void onClick();
+
+	public abstract void onRelease();
+
+	public boolean checkCollision(int x, int y) {
+		return (x >= this.x && x <= this.x + this.collisionWidth && y >= this.y && y <= this.y + this.collisionHeight);
+	}
 }

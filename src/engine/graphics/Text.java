@@ -29,4 +29,7 @@ public class Text extends RenderObject {
 
 	}
 
+	public void setColor(Color color) {
+		this.color = color;
+	}
 }

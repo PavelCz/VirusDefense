@@ -16,6 +16,7 @@ import engine.graphics.SlickUnfilledEllipse;
 import engine.graphics.SlickUnfilledRectangle;
 import engine.graphics.Sprite;
 import engine.gui.Button;
+import engine.gui.ClickableText;
 import engine.gui.GUI;
 import engine.gui.InterfaceBackground;
 import engine.gui.SlickHealthbar;
@@ -53,6 +54,7 @@ public class Game extends BasicGame {
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE;
 	private float speed;
+	private ClickableText c;
 
 	// Tests:
 
@@ -108,6 +110,8 @@ public class Game extends BasicGame {
 		STANDARD_TEXT_SCALE = 15;
 		this.speed = 1f;
 		this.currentTowerPlaceable = true;
+
+		this.c = new ClickableText(600, 100, "YOYOYOOY");
 	}
 
 	private void initWaves() {
@@ -149,6 +153,8 @@ public class Game extends BasicGame {
 		this.renderGUI();
 		this.renderHealthBars(container, graphics);
 		this.renderDebug(container, graphics);
+
+		this.c.draw();
 
 	}
 
@@ -372,7 +378,7 @@ public class Game extends BasicGame {
 
 				boolean buttonWasPressed = false;
 				for (Button button : this.buttons) {
-					if (button.checkCollision(x, y)) {
+					if (button.checkCollision((int) x, (int) y)) {
 						buttonWasPressed = true;
 						this.releaseAllButtons();
 						button.onClick();
