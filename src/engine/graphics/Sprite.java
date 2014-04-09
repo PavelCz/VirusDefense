@@ -53,6 +53,10 @@ public class Sprite extends RotatableRenderObject {
 
 	}
 
+	public void setColor(float r, float g, float b) {
+		this.image.setImageColor(r, g, b);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

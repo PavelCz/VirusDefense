@@ -44,6 +44,8 @@ public class Game extends BasicGame {
 	private Player player;
 	private StaticText numberLives;
 	private StaticText moneyAmount;
+	private boolean currentTowerPlaceable;
+	private int towerShadowX, towerShadowY;
 
 	private StaticText passedTime;
 	private InterfaceBackground interfaceBackground;
@@ -105,6 +107,7 @@ public class Game extends BasicGame {
 		this.player = new Player();
 		STANDARD_TEXT_SCALE = 15;
 		this.speed = 1f;
+		this.currentTowerPlaceable = true;
 	}
 
 	private void initWaves() {
@@ -199,24 +202,16 @@ public class Game extends BasicGame {
 	private void renderTowerShadow(GameContainer container, Graphics graphics) {
 
 		if (this.currentTower != null && this.getMode() == 0) {
-			Sprite sprite = this.currentTower.getSprite();
-			Input input = container.getInput();
-			float x = input.getMouseX();
-			float y = input.getMouseY();
+			Sprite sprite = this.currentTower.getSprite().clone();
 
-			int newX = (int) x / this.currentTileLength;
-			int newY = (int) y / this.currentTileLength;
-			sprite.draw(newX * this.currentTileLength, newY * this.currentTileLength);
-			// old version of drawing the shadow, it follows the mouse accuratly
-			// sprite.draw(x - sprite.getWidth() / 2, y - sprite.getHeight() / 2);
-			int[][] path = this.currentMapLayout.getPath();
-			if (newY < 12 && x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
-				new SlickUnfilledRectangle(graphics, 50, 50, Color.green).draw(newX * this.currentTileLength, newY
-						* this.currentTileLength);
+			if (this.currentTowerPlaceable) {
+				new SlickUnfilledRectangle(graphics, 50, 50, Color.green).draw(this.towerShadowX, this.towerShadowY);
 			} else {
-				new SlickUnfilledRectangle(graphics, 50, 50, Color.red).draw(newX * this.currentTileLength, newY
-						* this.currentTileLength);
+				new SlickUnfilledRectangle(graphics, 50, 50, Color.red).draw(this.towerShadowX, this.towerShadowY);
+				sprite.setColor(1f, 0, 0);
 			}
+
+			sprite.draw(this.towerShadowX, this.towerShadowY);
 		}
 	}
 
@@ -277,6 +272,30 @@ public class Game extends BasicGame {
 			if (this.player.getLives() <= 0) {
 				this.mode = -1;
 
+			}
+			this.updateTowerShadow(container);
+		}
+	}
+
+	private void updateTowerShadow(GameContainer container) {
+		if (this.currentTower != null && this.getMode() == 0) {
+			Input input = container.getInput();
+			// old version of shadow Coordinates, with pixel accurate coordinates
+			// this.towerShadowX = (int) (input.getMouseX() - this.currentTower.getSprite().getWidth() / 2);
+			// this.towerShadowY = (int) (input.getMouseY() - this.currentTower.getSprite().getHeight() / 2);
+			int x = input.getMouseX();
+			int y = input.getMouseY();
+			int newX = x / 50;
+			int newY = y / 50;
+			this.towerShadowX = newX * 50;
+			this.towerShadowY = newY * 50;
+			int[][] path = this.currentMapLayout.getPath();
+			if (this.player.getMoney() < this.currentTower.getCost()) {
+				this.currentTowerPlaceable = false;
+			} else if (newY < 12 && x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
+				this.currentTowerPlaceable = true;
+			} else {
+				this.currentTowerPlaceable = false;
 			}
 		}
 	}
