@@ -292,6 +292,7 @@ public class Game extends BasicGame {
 			container.setShowFPS(this.debugMode);
 			if (this.debugMode) {
 				System.out.println("debug");
+				player.setMoney(100000);
 			} else {
 				System.out.println("not debug");
 				this.speed = 1f;
