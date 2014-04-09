@@ -6,10 +6,10 @@ public abstract class Tower extends Entity implements Drawable {
 	private int cost;
 	protected int radius;
 	protected float damage;
-	protected Game game;
+	protected Gameplay game;
 	protected Sprite sprite;
 
-	public Tower(float x, float y, int cost, int radius, float damage, Game game) {
+	public Tower(float x, float y, int cost, int radius, float damage, Gameplay game) {
 		super(x, y);
 
 		this.cost = cost;

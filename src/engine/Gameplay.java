@@ -26,7 +26,7 @@ import engine.gui.TowerButton;
 /**
  * @author Pavel
  */
-public class Game extends BasicGame {
+public class Gameplay extends BasicGame {
 	private List<Drawable> drawables;
 	private List<GUI> guiElements;
 	private List<Clickable> clickables;
@@ -60,7 +60,7 @@ public class Game extends BasicGame {
 
 	//
 
-	public Game() {
+	public Gameplay() {
 		super("Tower Defense");
 	}
 
@@ -73,7 +73,7 @@ public class Game extends BasicGame {
 
 		// Set Constants:
 
-		Game.INTERFACE_START_X = this.currentMapLayout.getNumberTilesWidth() * this.currentTileLength;
+		Gameplay.INTERFACE_START_X = this.currentMapLayout.getNumberTilesWidth() * this.currentTileLength;
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 
@@ -85,7 +85,7 @@ public class Game extends BasicGame {
 		// entities
 
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(Game.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0, 0,
+		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0, 0,
 				new Sprite("tower/t1.png", 0.05f), this, 400, 0.1f, 400), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.c);
@@ -127,16 +127,16 @@ public class Game extends BasicGame {
 		int guiX = 3;
 		int livesY = 150;
 		int moneyY = 165;
-		this.numberLives = new StaticText(Game.INTERFACE_START_X + 50, livesY, Color.white, "" + this.player.getLives());
-		this.passedTime = new StaticText(Game.INTERFACE_START_X + guiX, 580, Color.white, this.passedTimeToString());
-		this.moneyAmount = new StaticText(Game.INTERFACE_START_X + 65, moneyY, Color.white, "" + this.player.getMoney());
+		this.numberLives = new StaticText(Gameplay.INTERFACE_START_X + 50, livesY, Color.white, "" + this.player.getLives());
+		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, 580, Color.white, this.passedTimeToString());
+		this.moneyAmount = new StaticText(Gameplay.INTERFACE_START_X + 65, moneyY, Color.white, "" + this.player.getMoney());
 
 		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(this.numberLives);
 		this.guiElements.add(this.towerButton1);
-		this.guiElements.add(new StaticText(Game.INTERFACE_START_X + guiX, livesY, Color.white, "Lives:"));
+		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, livesY, Color.white, "Lives:"));
 		this.guiElements.add(this.passedTime);
-		this.guiElements.add(new StaticText(Game.INTERFACE_START_X + guiX, moneyY, Color.white, "Money:"));
+		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, moneyY, Color.white, "Money:"));
 		this.guiElements.add(this.moneyAmount);
 	}
 
@@ -302,7 +302,7 @@ public class Game extends BasicGame {
 			int[][] path = this.currentMapLayout.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
-			} else if (newY < 12 && x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
+			} else if (newY < 12 && x < Gameplay.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
 				this.currentTowerPlaceable = true;
 			} else {
 				this.currentTowerPlaceable = false;
@@ -395,7 +395,7 @@ public class Game extends BasicGame {
 					if (this.currentTower != null) {
 						int[][] path = this.currentMapLayout.getPath();
 						int cost = this.currentTower.getCost();
-						if (x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null
+						if (x < Gameplay.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null
 								&& this.player.getMoney() - cost >= 0) {
 							Tower bufferTower = this.currentTower.clone();
 							bufferTower.setX(newX);

@@ -6,7 +6,7 @@ public class ShootingTower extends Tower {
 	protected int delta;
 	protected final int shootingInterval;
 
-	public ShootingTower(float x, float y, Sprite sprite, Game game, int shootingInterval, float damage) {
+	public ShootingTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage) {
 		super(x * 50, y * 50, 100, 100, damage, game);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;

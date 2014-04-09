@@ -5,7 +5,7 @@ import org.newdawn.slick.SlickException;
 
 public class StartGame {
 	public static void main(String[] args) {
-		Game game = new Game();
+		Gameplay game = new Gameplay();
 		AppGameContainer appGameContainer;
 		try {
 			appGameContainer = new AppGameContainer(game, 800, 600, false);

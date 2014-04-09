@@ -1,14 +1,14 @@
 package engine.gui;
 
-import engine.Game;
+import engine.Gameplay;
 import engine.graphics.Sprite;
 
 public class Button extends Clickable {
 	private Sprite unclickedButton;
 	private Sprite clickedButton;
-	protected Game game;
+	protected Gameplay game;
 
-	public Button(float x, float y, String unclickedButtonPath, String clickedButtonPath, Game game) {
+	public Button(float x, float y, String unclickedButtonPath, String clickedButtonPath, Gameplay game) {
 		super(x, y);
 		this.unclickedButton = new Sprite(unclickedButtonPath);
 		this.clickedButton = new Sprite(clickedButtonPath);

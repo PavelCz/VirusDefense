@@ -6,7 +6,7 @@ public class LongerShootingTower extends ShootingTower {
 	private final int shootingDuration;
 	private Enemy currentlyAttacking = null;
 
-	public LongerShootingTower(float x, float y, Sprite sprite, Game game, int shootingInterval, float damage, int shootingDuration) {
+	public LongerShootingTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage, int shootingDuration) {
 		super(x, y, sprite, game, shootingInterval, damage);
 		this.shootingDuration = shootingDuration;
 		this.delta = 0;

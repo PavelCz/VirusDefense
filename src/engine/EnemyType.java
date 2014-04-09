@@ -12,7 +12,7 @@ public class EnemyType {
 	private int health;
 	private float speed;
 	protected Sprite sprite;
-	private Game game;
+	private Gameplay game;
 	private int worth;
 
 	/**
@@ -25,7 +25,7 @@ public class EnemyType {
 	 * @param radius
 	 *            the collision radius for hitting the enemy
 	 */
-	public EnemyType(int health, float speed, String sprite, Game game, float radius, int worth) {
+	public EnemyType(int health, float speed, String sprite, Gameplay game, float radius, int worth) {
 		this.health = health;
 		this.speed = speed;
 		this.radius = radius;
@@ -57,7 +57,7 @@ public class EnemyType {
 		return this.sprite;
 	}
 
-	public Game getGame() {
+	public Gameplay getGame() {
 		return this.game;
 	}
 

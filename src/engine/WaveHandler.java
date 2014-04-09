@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class WaveHandler {
 	private LinkedList<Wave> waves;
-	private Game game;
+	private Gameplay game;
 	private int index = 0;
 	private Wave currentWave;
 	private int delta;
@@ -12,7 +12,7 @@ public class WaveHandler {
 	private int timeBetweenEnemies = 500;
 	private boolean done = false;
 
-	public WaveHandler(Game game, int timeBetweenWaves) {
+	public WaveHandler(Gameplay game, int timeBetweenWaves) {
 		this.game = game;
 		this.waves = new LinkedList<Wave>();
 		this.timeBetweenWaves = timeBetweenWaves;

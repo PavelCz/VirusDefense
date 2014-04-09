@@ -7,7 +7,7 @@ public class Enemy extends Entity implements Drawable {
 	private float health;
 	private int maxHealth;
 	private float speed;
-	private Game game;
+	private Gameplay game;
 	protected Sprite sprite;
 	protected MyVector2f velocity;
 	protected Waypoint waypoint;
@@ -15,7 +15,7 @@ public class Enemy extends Entity implements Drawable {
 	private int worth;
 	private boolean dead = false;
 
-	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Game game, float radius,
+	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Gameplay game, float radius,
 			int worth) {
 		super(startingWaypoint.getX(), startingWaypoint.getY());
 		this.health = maxHealth;

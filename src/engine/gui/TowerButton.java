@@ -1,13 +1,13 @@
 package engine.gui;
 
-import engine.Game;
+import engine.Gameplay;
 import engine.Tower;
 import engine.graphics.Sprite;
 
 public class TowerButton extends Button {
 	private Tower tower;
 
-	public TowerButton(float x, float y, String unclickedButtonPath, String clickedButtonPath, Tower tower, Game game) {
+	public TowerButton(float x, float y, String unclickedButtonPath, String clickedButtonPath, Tower tower, Gameplay game) {
 		super(x, y, unclickedButtonPath, clickedButtonPath, game);
 		this.tower = tower;
 	}
