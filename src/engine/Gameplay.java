@@ -24,8 +24,7 @@ import engine.gui.TowerButton;
 /**
  * @author Pavel
  */
-public class Gameplay {
-	private List<GUI> guiElements;
+public class Gameplay extends GameComponent {
 	private List<Clickable> clickables;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private WaveHandler waveHandler;
@@ -56,6 +55,7 @@ public class Gameplay {
 
 	//
 
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		this.initDefaults();
 
@@ -128,6 +128,7 @@ public class Gameplay {
 		this.guiElements.add(this.moneyAmount);
 	}
 
+	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		this.currentMapLayout.drawBackground();
 		this.renderEnemies();
@@ -230,6 +231,7 @@ public class Gameplay {
 		}
 	}
 
+	@Override
 	public void update(GameContainer container, int originalDelta) throws SlickException {
 
 		if (originalDelta < 100) {
