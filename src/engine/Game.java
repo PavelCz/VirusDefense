@@ -203,9 +203,12 @@ public class Game extends BasicGame {
 			Input input = container.getInput();
 			float x = input.getMouseX();
 			float y = input.getMouseY();
-			sprite.draw(x - sprite.getWidth() / 2, y - sprite.getHeight() / 2);
+
 			int newX = (int) x / this.currentTileLength;
 			int newY = (int) y / this.currentTileLength;
+			sprite.draw(newX * this.currentTileLength, newY * this.currentTileLength);
+			// old version of drawing the shadow, it follows the mouse accuratly
+			// sprite.draw(x - sprite.getWidth() / 2, y - sprite.getHeight() / 2);
 			int[][] path = this.currentMapLayout.getPath();
 			if (newY < 12 && x < Game.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
 				new SlickUnfilledRectangle(graphics, 50, 50, Color.green).draw(newX * this.currentTileLength, newY
@@ -292,7 +295,7 @@ public class Game extends BasicGame {
 			container.setShowFPS(this.debugMode);
 			if (this.debugMode) {
 				System.out.println("debug");
-				player.setMoney(100000);
+				this.player.setMoney(100000);
 			} else {
 				System.out.println("not debug");
 				this.speed = 1f;
