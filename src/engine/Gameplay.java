@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -16,7 +15,6 @@ import engine.graphics.SlickUnfilledEllipse;
 import engine.graphics.SlickUnfilledRectangle;
 import engine.graphics.Sprite;
 import engine.gui.Clickable;
-import engine.gui.ClickableText;
 import engine.gui.GUI;
 import engine.gui.InterfaceBackground;
 import engine.gui.SlickHealthbar;
@@ -26,7 +24,7 @@ import engine.gui.TowerButton;
 /**
  * @author Pavel
  */
-public class Gameplay extends BasicGame {
+public class Gameplay {
 	private List<Drawable> drawables;
 	private List<GUI> guiElements;
 	private List<Clickable> clickables;
@@ -54,17 +52,11 @@ public class Gameplay extends BasicGame {
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE;
 	private float speed;
-	private ClickableText c;
 
 	// Tests:
 
 	//
 
-	public Gameplay() {
-		super("Tower Defense");
-	}
-
-	@Override
 	public void init(GameContainer container) throws SlickException {
 		this.initDefaults();
 
@@ -85,10 +77,9 @@ public class Gameplay extends BasicGame {
 		// entities
 
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0, 0,
-				new Sprite("tower/t1.png", 0.05f), this, 400, 0.1f, 400), this);
+		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0,
+				0, new Sprite("tower/t1.png", 0.05f), this, 400, 0.1f, 400), this);
 		this.clickables.add(this.towerButton1);
-		this.clickables.add(this.c);
 
 		//
 		this.initGUI();
@@ -112,7 +103,6 @@ public class Gameplay extends BasicGame {
 		this.speed = 1f;
 		this.currentTowerPlaceable = true;
 
-		this.c = new ClickableText(600, 100, "YOYOYOOY");
 	}
 
 	private void initWaves() {
@@ -140,7 +130,6 @@ public class Gameplay extends BasicGame {
 		this.guiElements.add(this.moneyAmount);
 	}
 
-	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		this.currentMapLayout.drawBackground();
 		this.renderEnemies();
@@ -154,8 +143,6 @@ public class Gameplay extends BasicGame {
 		this.renderGUI();
 		this.renderHealthBars(container, graphics);
 		this.renderDebug(container, graphics);
-
-		this.c.draw();
 
 	}
 
@@ -249,7 +236,6 @@ public class Gameplay extends BasicGame {
 		}
 	}
 
-	@Override
 	public void update(GameContainer container, int originalDelta) throws SlickException {
 
 		if (originalDelta < 100) {
