@@ -16,12 +16,14 @@ public class ClickableText extends Clickable {
 
 	@Override
 	public void onClick() {
+		super.onClick();
 		this.text.setColor(Color.blue);
 
 	}
 
 	@Override
 	public void onRelease() {
+		super.onRelease();
 		this.text.setColor(Color.white);
 
 	}
@@ -34,7 +36,7 @@ public class ClickableText extends Clickable {
 
 	@Override
 	public void onHover() {
-		// TODO Auto-generated method stub
+		this.text.setColor(Color.gray);
 
 	}
 }

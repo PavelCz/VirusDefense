@@ -30,7 +30,6 @@ public class TowerButton extends Button {
 
 	}
 
-	@Override
 	public Tower getTower() {
 		return this.tower;
 	}

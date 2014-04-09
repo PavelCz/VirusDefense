@@ -281,6 +281,9 @@ public class Game extends BasicGame {
 
 			}
 			this.updateTowerShadow(container);
+			for (Clickable clickable : this.clickables) {
+				clickable.update(container);
+			}
 		}
 	}
 
@@ -379,7 +382,7 @@ public class Game extends BasicGame {
 
 				boolean buttonWasPressed = false;
 				for (Clickable clickable : this.clickables) {
-					if (clickable.checkCollision((int) x, (int) y)) {
+					if (clickable.collides((int) x, (int) y)) {
 						buttonWasPressed = true;
 						this.releaseAllClickables();
 						clickable.onClick();
