@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import engine.gui.ExitClickable;
 import engine.gui.StartClickable;
 
 public class Menu extends GameComponent {
@@ -18,6 +19,10 @@ public class Menu extends GameComponent {
 		StartClickable c = new StartClickable(0, 0, this.game);
 		this.clickables.add(c);
 		this.guiElements.add(c);
+
+		ExitClickable e = new ExitClickable(0, 20, this.game);
+		this.clickables.add(e);
+		this.guiElements.add(e);
 	}
 
 	@Override

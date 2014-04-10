@@ -12,6 +12,7 @@ public class TowerDefense extends BasicGame {
 	private Gameplay gameplay;
 	private Menu menu;
 	private GameComponent currentGameComponent;
+	private boolean quitGame = false;
 
 	private int mode;
 
@@ -31,6 +32,9 @@ public class TowerDefense extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
+		if (this.quitGame) {
+			container.exit();
+		}
 		if (this.mode == TowerDefense.MODE_GAME) {
 			this.currentGameComponent = this.gameplay;
 		} else {
@@ -50,4 +54,7 @@ public class TowerDefense extends BasicGame {
 		this.mode = mode;
 	}
 
+	public void quitGame() {
+		this.quitGame = true;
+	}
 }
