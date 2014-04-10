@@ -56,7 +56,6 @@ public abstract class GameComponent {
 			for (Clickable clickable : this.clickables) {
 				if (clickable.collides((int) x, (int) y)) {
 					buttonWasPressed = true;
-					this.releaseAllClickables();
 					clickable.onClick();
 
 				}

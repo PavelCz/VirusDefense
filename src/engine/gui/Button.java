@@ -34,4 +34,10 @@ public class Button extends Clickable {
 
 	}
 
+	@Override
+	public void onUnHover() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

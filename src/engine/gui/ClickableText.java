@@ -39,4 +39,10 @@ public class ClickableText extends Clickable {
 		this.text.setColor(Color.gray);
 
 	}
+
+	@Override
+	public void onUnHover() {
+		this.text.setColor(Color.white);
+
+	}
 }

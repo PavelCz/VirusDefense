@@ -11,8 +11,8 @@ public class StartClickable extends ClickableText {
 	}
 
 	@Override
-	public void onClick() {
-		super.onClick();
+	public void onRelease() {
+		super.onRelease();
 		this.towerDefense.setMode(TowerDefense.MODE_GAME);
 	}
 }

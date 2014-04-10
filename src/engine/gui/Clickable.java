@@ -21,6 +21,8 @@ public abstract class Clickable extends GUI {
 
 	public abstract void onHover();
 
+	public abstract void onUnHover();
+
 	public boolean collides(int x, int y) {
 		return (x >= this.x && x <= this.x + this.collisionWidth && y >= this.y && y <= this.y + this.collisionHeight);
 	}
@@ -32,7 +34,7 @@ public abstract class Clickable extends GUI {
 		if (!this.clicked && this.collides((int) x, (int) y)) {
 			this.onHover();
 		} else if (!this.clicked) {
-			this.onRelease();
+			this.onUnHover();
 		}
 	}
 }
