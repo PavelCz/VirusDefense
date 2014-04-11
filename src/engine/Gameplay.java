@@ -50,7 +50,7 @@ public class Gameplay extends GameComponent {
 	private float speed;
 
 	// Tests:
-
+//test
 	//
 	public Gameplay(TowerDefense game) {
 		super(game);
@@ -450,7 +450,7 @@ public class Gameplay extends GameComponent {
 		int seconds = milliseconds / 1000;
 		int minutes = seconds / 60;
 		int hours = minutes / 60;
-		seconds %= 100;
+		seconds %= 60;
 		minutes %= 60;
 		String secondsString = this.makeTwoDecimals(seconds);
 		String minutesString = this.makeTwoDecimals(minutes);
