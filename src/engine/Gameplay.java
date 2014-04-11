@@ -445,6 +445,9 @@ public class Gameplay extends GameComponent {
 		return this.currentMapLayout.getWaypoints();
 	}
 
+	/**
+	 * @return returns a list of coordinates belonging to the waypoints
+	 */
 	public List<MyVector2f> getWaypointsGrid() {
 		List<MyVector2f> coordinates = new ArrayList<MyVector2f>();
 		for (Waypoint waypoint = this.getWaypoints(); waypoint != null; waypoint = waypoint.getNextWaypoint()) {
