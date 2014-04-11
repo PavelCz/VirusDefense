@@ -72,9 +72,9 @@ public class Gameplay extends GameComponent {
 
 		this.towers = new Tower[12][13];
 		this.initWaves();
-		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1.png", this, 25, 20));
-		this.enemyTypes.add(new EnemyType(300, 0.25f, "enemy/v2.png", this, 25, 200));
-		this.enemyTypes.add(new EnemyType(10000, 0.07f, "enemy/v2.png", this, 25, 1000));
+		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1.png", this, 25, 20, 0.05f));
+		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2.png", this, 25, 100, 0.04f));
+		this.enemyTypes.add(new EnemyType(10000, 0.07f, "enemy/v2.png", this, 25, 1000, 0.04f));
 		
 
 		// add all objects that need to be drawn to the respectable arrays
@@ -82,7 +82,7 @@ public class Gameplay extends GameComponent {
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0,
-				0, new Sprite("tower/t1.png", 0.03f), this, 400, 0.1f, 400), this);
+				0, new Sprite("tower/t1.png", 0.05f), this, 400, 0.08f, 400), this);
 		this.clickables.add(this.towerButton1);
 
 		//
