@@ -6,7 +6,8 @@ public class ShootingTower extends Tower {
 	protected int delta;
 	protected final int shootingInterval;
 
-	public ShootingTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage) {
+	public ShootingTower(float x, float y, Sprite sprite, Gameplay game,
+			int shootingInterval, float damage) {
 		super(x * 50, y * 50, 100, 100, damage, game);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
@@ -15,7 +16,8 @@ public class ShootingTower extends Tower {
 
 	@Override
 	public Tower clone() {
-		return new ShootingTower(this.x, this.y, this.sprite.clone(), this.game, this.shootingInterval, this.damage);
+		return new ShootingTower(this.x, this.y, this.sprite.clone(),
+				this.game, this.shootingInterval, this.damage);
 	}
 
 	@Override
@@ -43,7 +45,8 @@ public class ShootingTower extends Tower {
 				float deltaX = enemyX - (this.getX() * 50 + 25);
 				float deltaY = enemyY - (this.getY() * 50 + 25);
 
-				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY
+						* deltaY);
 
 				if (distance < this.radius + enemy.getRadius()) {
 					enemy.setHealth(enemy.getHealth() - this.damage);
@@ -57,48 +60,4 @@ public class ShootingTower extends Tower {
 
 	}
 
-	protected boolean inRangeOfAnyEnemy() {
-		if (this.getEnemyInRange() != null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	protected boolean inRange(Enemy enemy) {
-		if (enemy != null) {
-			float enemyX = enemy.getX();
-			float enemyY = enemy.getY();
-			float deltaX = enemyX - (this.getX() * 50 + 25);
-			float deltaY = enemyY - (this.getY() * 50 + 25);
-
-			float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-			if (distance < this.radius + enemy.getRadius()) {
-				return true;
-			}
-
-		}
-		return false;
-
-	}
-
-	protected Enemy getEnemyInRange() {
-		boolean done = false;
-		for (Enemy enemy : this.game.getEnemies()) {
-			if (enemy != null && !done) {
-				float enemyX = enemy.getX();
-				float enemyY = enemy.getY();
-				float deltaX = enemyX - (this.getX() * 50 + 25);
-				float deltaY = enemyY - (this.getY() * 50 + 25);
-
-				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-				if (distance < this.radius + enemy.getRadius()) {
-					return enemy;
-				}
-			}
-		}
-		return null;
-	}
 }
