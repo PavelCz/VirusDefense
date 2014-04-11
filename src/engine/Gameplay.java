@@ -50,7 +50,7 @@ public class Gameplay extends GameComponent {
 	private float speed;
 
 	// Tests:
-
+//test
 	//
 	public Gameplay(TowerDefense game) {
 		super(game);
