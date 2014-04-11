@@ -35,7 +35,7 @@ public class Gameplay extends GameComponent {
 	private int currentTileLength;
 	private Tower[][] towers;
 	private TowerButton towerButton1;
-	//private TowerButton towerButton2;
+	private TowerButton towerButton2;
 	private Tower currentTower;
 	private Player player;
 	private StaticText numberLives;
@@ -84,7 +84,10 @@ public class Gameplay extends GameComponent {
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0,
 				0, new Sprite("tower/t1n.png", 0.1f), this, 400, 0.08f, 400), this);
+		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 250, "button1.png", "button2.png", new BombTower(0,
+				0, new Sprite("tower/roteBlutk_klein.png", 0.1f), this, 1000, 20f, 25), this);
 		this.clickables.add(this.towerButton1);
+		this.clickables.add(this.towerButton2);
 
 		//
 		this.initGUI();
@@ -135,6 +138,7 @@ public class Gameplay extends GameComponent {
 		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(this.numberLives);
 		this.guiElements.add(this.towerButton1);
+		this.guiElements.add(this.towerButton2);
 		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, livesY, Color.white, "Lives:"));
 		this.guiElements.add(this.passedTime);
 		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, moneyY, Color.white, "Money:"));
