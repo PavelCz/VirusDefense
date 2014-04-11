@@ -3,7 +3,7 @@ package engine;
 import engine.graphics.Sprite;
 
 public class PathTiler {
-	private Sprite corner1, corner2, corner3, corner4, horizontal, vertical, start, end;
+	private Sprite corner1, corner2, corner3, corner4, horizontal, vertical, top, bottom, left, right;
 	private Sprite[][] path;
 
 	public PathTiler(int[][] path1) {
@@ -13,16 +13,12 @@ public class PathTiler {
 		this.corner4 = new Sprite("VeinCorner4.png");
 		this.horizontal = new Sprite("VeinHoriz.png");
 		this.vertical = new Sprite("VeinVert.png");
-		this.start = new Sprite("VeinVertStart.png");
-		this.end = new Sprite("VeinVertEnd.png");
+		this.top = new Sprite("VeinTopEnd.png");
+		this.bottom = new Sprite("VeinBottomEnd.png");
+		this.left = new Sprite("VeinLeftEnd.png");
+		this.right = new Sprite("VeinRightEnd.png");
 		this.path = new Sprite[path1.length][path1[0].length];
 
-		// Waypoint currentWaypoint = waypoint;
-		//
-		// int x = (int) (currentWaypoint.getX() / 50);
-		// int y = (int) (currentWaypoint.getY() / 50);
-		// this.path[x][y] = this.start;
-		// if(currentWaypoint.getDirection() == )
 		for (int y = 0; y < path1.length; ++y) {
 			for (int x = 0; x < path1[0].length; ++x) {
 				if (path1[y][x] == 5) {
@@ -41,9 +37,13 @@ public class PathTiler {
 					}
 
 					if (below && !above && !right && !left) {
-						this.path[y][x] = this.start;
+						this.path[y][x] = this.top;
 					} else if (!below && above && !right && !left) {
-						this.path[y][x] = this.end;
+						this.path[y][x] = this.bottom;
+					} else if (!below && !above && right && !left) {
+						this.path[y][x] = this.left;
+					} else if (!below && !above && !right && left) {
+						this.path[y][x] = this.right;
 					} else if (below && above && !right && !left) {
 						this.path[y][x] = this.vertical;
 					} else if (!below && !above && right && left) {

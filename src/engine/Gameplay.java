@@ -156,16 +156,16 @@ public class Gameplay extends GameComponent {
 		this.renderTowers();
 
 		this.renderTowerShadow(container, graphics);
-		this.renderGUI();
-		this.renderHealthBars(container, graphics);
-		this.renderDebug(container, graphics);
+		this.renderGUI(container, graphics);
 
 	}
 
-	private void renderGUI() {
+	private void renderGUI(GameContainer container, Graphics graphics) {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
+		this.renderHealthBars(container, graphics);
+		this.renderDebug(container, graphics);
 
 		if (this.mode == 1) {
 			new Sprite("You Win.png").draw(0, 0);
