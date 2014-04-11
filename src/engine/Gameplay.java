@@ -74,7 +74,7 @@ public class Gameplay extends GameComponent {
 		this.initWaves();
 		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1.png", this, 25, 20));
 		this.enemyTypes.add(new EnemyType(300, 0.25f, "enemy/v2.png", this, 25, 200));
-		this.enemyTypes.add(new EnemyType(10000, 0.01f, "enemy/v2.png", this, 25, 1000));
+		this.enemyTypes.add(new EnemyType(10000, 0.07f, "enemy/v2.png", this, 25, 1000));
 		
 
 		// add all objects that need to be drawn to the respectable arrays
@@ -82,7 +82,7 @@ public class Gameplay extends GameComponent {
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0,
-				0, new Sprite("tower/t1.png", 0.05f), this, 400, 0.1f, 400), this);
+				0, new Sprite("tower/t1.png", 0.03f), this, 400, 0.1f, 400), this);
 		this.clickables.add(this.towerButton1);
 
 		//
@@ -99,7 +99,7 @@ public class Gameplay extends GameComponent {
 		this.enemyTypes = new EnemyTypes();
 		this.passedMilliseconds = 0;
 		this.mode = 0;
-		this.player = new Player();
+		this.player = new Player(10,200);
 		STANDARD_TEXT_SCALE = 15;
 		this.speed = 1f;
 		this.currentTowerPlaceable = true;
@@ -110,8 +110,9 @@ public class Gameplay extends GameComponent {
 		this.waveHandler.addWave(new Wave(1, new int[] { 100, 0, 0 }));
 		this.waveHandler.addWave(new Wave(2, new int[] { 100, 0, 0 }));
 		this.waveHandler.addWave(new Wave(2, new int[] { 100, 0, 0 }));
-		this.waveHandler.addWave(new Wave(3, new int[] { 90, 10, 0 }));
-		this.waveHandler.addWave(new Wave(6, new int[] { 80, 20, 0 }));
+		this.waveHandler.addWave(new Wave(3, new int[] { 95, 5, 0 }));
+		this.waveHandler.addWave(new Wave(6, new int[] { 90, 10, 0 }));
+		this.waveHandler.addWave(new Wave(6, new int[] { 70, 30, 0 }));
 		this.waveHandler.addWave(new Wave(9, new int[] { 80, 20, 0 }));
 		this.waveHandler.addWave(new Wave(15, new int[] { 80, 20, 0 }));
 		this.waveHandler.addWave(new Wave(12, new int[] { 50, 50, 0}));
