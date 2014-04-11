@@ -23,16 +23,16 @@ public class PathTiler {
 			for (int x = 0; x < path1[0].length; ++x) {
 				if (path1[y][x] == 5) {
 					boolean above = false, below = false, left = false, right = false;
-					if (path1[y - 1][x] == 5) {
+					if (y - 1 >= 0 && path1[y - 1][x] == 5) {
 						above = true;
 					}
-					if (path1[y + 1][x] == 5) {
+					if (y + 1 < path1.length && path1[y + 1][x] == 5) {
 						below = true;
 					}
-					if (path1[y][x - 1] == 5) {
+					if (x - 1 >= 0 && path1[y][x - 1] == 5) {
 						left = true;
 					}
-					if (path1[y][x + 1] == 5) {
+					if (x + 1 < path1[0].length && path1[y][x + 1] == 5) {
 						right = true;
 					}
 
