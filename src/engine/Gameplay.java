@@ -81,8 +81,8 @@ public class Gameplay extends GameComponent {
 		// entities
 
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0,
-				0, new Sprite("tower/t1n.png", 0.1f), this, 400, 0.08f, 400), this);
+		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "PSButton1.png", "PSButton1_click.png",
+				new LongerShootingTower(0, 0, new Sprite("tower/t1n.png", 0.1f), this, 400, 0.08f, 400), this);
 		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 250, "button1.png", "button2.png", new BombTower(0, 0,
 				new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50), this);
 		this.clickables.add(this.towerButton1);
