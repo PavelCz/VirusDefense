@@ -28,7 +28,7 @@ public class Gameplay extends GameComponent {
 	private WaveHandler waveHandler;
 	private boolean mouseWasClicked;
 	private boolean debugMode;
-	private EnemyTypes enemyTypes;
+	private EnemyTypeHandler enemyTypes;
 	private int passedMilliseconds;
 	private int mode;
 	private MapLayout currentMapLayout;
@@ -51,7 +51,7 @@ public class Gameplay extends GameComponent {
 	private float speed;
 
 	// Tests:
-	// test
+
 	//
 	public Gameplay(TowerDefense game) {
 		super(game);
@@ -99,7 +99,7 @@ public class Gameplay extends GameComponent {
 		this.waveHandler = new WaveHandler(this, 2000);
 		this.mouseWasClicked = false;
 		this.debugMode = false;
-		this.enemyTypes = new EnemyTypes();
+		this.enemyTypes = new EnemyTypeHandler();
 		this.passedMilliseconds = 0;
 		this.mode = 0;
 		this.player = new Player(10, 200);
@@ -448,7 +448,7 @@ public class Gameplay extends GameComponent {
 		this.numberLives.setText("" + this.player.getLives());
 	}
 
-	public EnemyTypes getEnemyTypes() {
+	public EnemyTypeHandler getEnemyTypes() {
 		return this.enemyTypes;
 	}
 

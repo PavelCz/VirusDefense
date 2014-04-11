@@ -9,10 +9,10 @@ import java.util.List;
  * 
  * @author Pavel
  */
-public class EnemyTypes {
+public class EnemyTypeHandler {
 	private List<EnemyType> enemyTypes;
 
-	public EnemyTypes() {
+	public EnemyTypeHandler() {
 		this.enemyTypes = new ArrayList<EnemyType>();
 	}
 
