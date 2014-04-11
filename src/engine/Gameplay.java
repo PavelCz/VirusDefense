@@ -72,7 +72,10 @@ public class Gameplay extends GameComponent {
 
 		this.towers = new Tower[12][13];
 		this.initWaves();
-		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1.png", this, 25, 50));
+		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1.png", this, 25, 20));
+		this.enemyTypes.add(new EnemyType(300, 0.25f, "enemy/v2.png", this, 25, 200));
+		this.enemyTypes.add(new EnemyType(10000, 0.01f, "enemy/v2.png", this, 25, 1000));
+		
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
@@ -104,11 +107,17 @@ public class Gameplay extends GameComponent {
 	}
 
 	private void initWaves() {
-		this.waveHandler.addWave(new Wave(1, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(3, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(4, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(5, new int[] { 100 }));
-		this.waveHandler.addWave(new Wave(6, new int[] { 100 }));
+		this.waveHandler.addWave(new Wave(1, new int[] { 100, 0, 0 }));
+		this.waveHandler.addWave(new Wave(2, new int[] { 100, 0, 0 }));
+		this.waveHandler.addWave(new Wave(2, new int[] { 100, 0, 0 }));
+		this.waveHandler.addWave(new Wave(3, new int[] { 90, 10, 0 }));
+		this.waveHandler.addWave(new Wave(6, new int[] { 80, 20, 0 }));
+		this.waveHandler.addWave(new Wave(9, new int[] { 80, 20, 0 }));
+		this.waveHandler.addWave(new Wave(15, new int[] { 80, 20, 0 }));
+		this.waveHandler.addWave(new Wave(12, new int[] { 50, 50, 0}));
+		this.waveHandler.addWave(new Wave(30, new int[] { 90, 10, 0 }));
+		this.waveHandler.addWave(new Wave(50, new int[] { 100, 0, 0 }));
+		this.waveHandler.addWave(new Wave(1, new int[] { 0,0,100 }));
 	}
 
 	private void initGUI() {
