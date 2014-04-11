@@ -17,7 +17,7 @@ public abstract class GameComponent {
 	protected List<Clickable> clickables;
 
 	protected TowerDefense game;
-	private boolean mouseWasClicked;
+	private Clickable wasClicked;
 
 	public GameComponent(TowerDefense game) {
 		this.game = game;
@@ -57,18 +57,18 @@ public abstract class GameComponent {
 				if (clickable.collides((int) x, (int) y)) {
 					buttonWasPressed = true;
 					clickable.onClick();
-
+					this.wasClicked = clickable;
 				}
 			}
 
-			this.mouseWasClicked = true;
+			
 
 		}
 		// checks if mouse button was released again after being pressed
-		if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		if (this.wasClicked != null && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 
-			this.mouseWasClicked = false;
-			this.releaseAllClickables();
+			this.wasClicked.onRelease();
+			this.wasClicked = null;
 
 		}
 	}

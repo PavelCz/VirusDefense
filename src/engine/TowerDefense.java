@@ -34,6 +34,7 @@ public class TowerDefense extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 		if (this.quitGame) {
 			container.exit();
+			System.out.println("act");
 		}
 		if (this.mode == TowerDefense.MODE_GAME) {
 			this.currentGameComponent = this.gameplay;
