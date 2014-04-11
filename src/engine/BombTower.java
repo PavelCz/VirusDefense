@@ -5,14 +5,16 @@ import engine.graphics.Sprite;
 public class BombTower extends Tower {
 	protected int delta;
 	protected final int shootingInterval;
+	protected int bombRadius;
 
-	public BombTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage) {
-		super(x * 50, y * 50, 100, 100, damage, game);
+	public BombTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage, int bombRadius) {
+		super(x * 50, y * 50, 100, 200, damage, game);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
 		this.delta = this.shootingInterval;
+		this.bombRadius = bombRadius;
 	}
-	
+
 	@Override
 	public void draw() {
 		this.sprite.draw(this.x * 50, this.y * 50);
@@ -21,7 +23,37 @@ public class BombTower extends Tower {
 
 	@Override
 	public void shoot() {
-		// TODO Auto-generated method stub
+		boolean done = false;
+		for (Enemy enemy : this.game.getEnemies()) {
+			if (enemy != null && !done) {
+				float enemyX = enemy.getX();
+				float enemyY = enemy.getY();
+				float deltaX = enemyX - (this.getX() * 50 + 25);
+				float deltaY = enemyY - (this.getY() * 50 + 25);
+
+				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+				if (distance < this.radius + enemy.getRadius()) {
+					for (Enemy bombedEnemy : this.game.getEnemies()) {
+						float bombedEnemyX = bombedEnemy.getX();
+						float bombedEnemyY = bombedEnemy.getY();
+						float bombedDeltaX = bombedEnemyX - (enemyX  + 25);
+						float bombedDeltaY = bombedEnemyY - (enemyY  + 25);
+
+						float bombDistance = (float) Math.sqrt(bombedDeltaX * bombedDeltaX + bombedDeltaY * bombedDeltaY);
+						System.out.println(bombDistance);
+						if (bombDistance < bombRadius + bombedEnemy.getRadius()) {
+							System.out.println("t");
+							bombedEnemy.setHealth(bombedEnemy.getHealth() - this.damage);
+							if (bombedEnemy.getHealth() <= 0) {
+								this.game.getPlayer().addMoney(bombedEnemy.getMoney());
+							}
+						}
+						done = true;
+					}
+				}
+			}
+		}
 
 	}
 
@@ -36,7 +68,7 @@ public class BombTower extends Tower {
 
 	@Override
 	public Tower clone() {
-		return new BombTower(this.x, this.y, this.sprite.clone(), this.game, this.shootingInterval, this.damage);
+		return new BombTower(this.x, this.y, this.sprite.clone(), this.game, this.shootingInterval, this.damage, this.bombRadius);
 	}
 
 }
