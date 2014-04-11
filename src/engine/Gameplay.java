@@ -1,5 +1,7 @@
 package engine;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.newdawn.slick.Color;
@@ -441,6 +443,15 @@ public class Gameplay extends GameComponent {
 
 	public Waypoint getWaypoints() {
 		return this.currentMapLayout.getWaypoints();
+	}
+
+	public List<MyVector2f> getWaypointsGrid() {
+		List<MyVector2f> coordinates = new ArrayList<MyVector2f>();
+		for (Waypoint waypoint = this.getWaypoints(); waypoint != null; waypoint = waypoint.getNextWaypoint()) {
+			coordinates.add(new MyVector2f(waypoint.getX(), waypoint.getY()));
+		}
+		return coordinates;
+
 	}
 
 	public void reduceLives() {
