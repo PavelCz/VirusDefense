@@ -72,9 +72,9 @@ public class Gameplay extends GameComponent {
 
 		this.towers = new Tower[12][13];
 		this.initWaves();
-		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1.png", this, 25, 20, 0.05f));
-		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2.png", this, 25, 100, 0.04f));
-		this.enemyTypes.add(new EnemyType(10000, 0.07f, "enemy/v2.png", this, 25, 1000, 0.04f));
+		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1n.png", this, 25, 20, 0.05f));
+		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2n.png", this, 25, 100, 0.04f));
+		this.enemyTypes.add(new EnemyType(10000, 0.03f, "enemy/v1n.png", this, 25, 1000, 0.07f));
 		
 
 		// add all objects that need to be drawn to the respectable arrays
@@ -82,7 +82,7 @@ public class Gameplay extends GameComponent {
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "button1.png", "button2.png", new LongerShootingTower(0,
-				0, new Sprite("tower/t1.png", 0.05f), this, 400, 0.08f, 400), this);
+				0, new Sprite("tower/t1n.png", 0.1f), this, 400, 0.08f, 400), this);
 		this.clickables.add(this.towerButton1);
 
 		//
@@ -107,6 +107,7 @@ public class Gameplay extends GameComponent {
 	}
 
 	private void initWaves() {
+		
 		this.waveHandler.addWave(new Wave(1, new int[] { 100, 0, 0 }));
 		this.waveHandler.addWave(new Wave(2, new int[] { 100, 0, 0 }));
 		this.waveHandler.addWave(new Wave(2, new int[] { 100, 0, 0 }));
@@ -116,9 +117,10 @@ public class Gameplay extends GameComponent {
 		this.waveHandler.addWave(new Wave(9, new int[] { 80, 20, 0 }));
 		this.waveHandler.addWave(new Wave(15, new int[] { 80, 20, 0 }));
 		this.waveHandler.addWave(new Wave(12, new int[] { 50, 50, 0}));
-		this.waveHandler.addWave(new Wave(30, new int[] { 90, 10, 0 }));
-		this.waveHandler.addWave(new Wave(50, new int[] { 100, 0, 0 }));
+		this.waveHandler.addWave(new Wave(30, new int[] { 70, 30, 0 }));
+		this.waveHandler.addWave(new Wave(50, new int[] { 50, 50, 0 }));
 		this.waveHandler.addWave(new Wave(1, new int[] { 0,0,100 }));
+		
 	}
 
 	private void initGUI() {
