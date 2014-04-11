@@ -25,18 +25,18 @@ public class PathTiler {
 		// if(currentWaypoint.getDirection() == )
 		for (int y = 0; y < path1.length; ++y) {
 			for (int x = 0; x < path1[0].length; ++x) {
-				if (path1[y][x] == 0) {
+				if (path1[y][x] == 5) {
 					boolean above = false, below = false, left = false, right = false;
-					if (path1[y - 1][x] == 0) {
+					if (path1[y - 1][x] == 5) {
 						above = true;
 					}
-					if (path1[y + 1][x] == 0) {
+					if (path1[y + 1][x] == 5) {
 						below = true;
 					}
-					if (path1[y][x - 1] == 0) {
+					if (path1[y][x - 1] == 5) {
 						left = true;
 					}
-					if (path1[y][x + 1] == 0) {
+					if (path1[y][x + 1] == 5) {
 						right = true;
 					}
 
@@ -55,7 +55,7 @@ public class PathTiler {
 					} else if (below && !above && !right && left) {
 						this.path[y][x] = this.corner3;
 					} else if (!below && above && !right && left) {
-						this.path[y][x] = this.vertical;
+						this.path[y][x] = this.corner4;
 					}
 
 				}

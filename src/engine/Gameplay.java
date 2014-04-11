@@ -51,6 +51,7 @@ public class Gameplay extends GameComponent {
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE;
 	private float speed;
+	private PathTiler pathTiler;
 
 	// Tests:
 
@@ -66,6 +67,7 @@ public class Gameplay extends GameComponent {
 
 		this.currentMapLayout = new MapLayout("maps/map.png", "maps/background.jpg", 50);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
+		this.pathTiler = new PathTiler(this.currentMapLayout.getPath());
 
 		// Set Constants:
 
@@ -85,8 +87,8 @@ public class Gameplay extends GameComponent {
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "PSButton1.png", "PSButton1_click.png",
 				new LongerShootingTower(0, 0, new Sprite("tower/t1n.png", 0.1f), this, 400, 0.08f, 400), this);
-		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 250, "button1.png", "button2.png", new BombTower(0, 0,
-				new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50), this);
+		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 250, "PSButton1.png", "PSButton1_click.png", new BombTower(0,
+				0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 
@@ -149,6 +151,7 @@ public class Gameplay extends GameComponent {
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		this.currentMapLayout.drawBackground();
+		this.pathTiler.render();
 		this.renderEnemies();
 		this.renderTowers();
 
