@@ -65,7 +65,7 @@ public class Gameplay extends GameComponent {
 		super.init(container);
 		this.initDefaults();
 
-		this.currentMapLayout = new MapLayout("maps/map.png", "maps/background2.png", 50);
+		this.currentMapLayout = new MapLayout("maps/map.png", "veins/flat.png", 50);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
 		this.pathTiler = new PathTiler(this.currentMapLayout.getPath());
 
