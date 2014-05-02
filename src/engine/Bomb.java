@@ -20,7 +20,7 @@ public class Bomb extends Entity implements Drawable {
 		this.enemyX = enemyX;
 		this.enemyY = enemyY;
 		this.speed = 0.1f;
-		this.velocity = new MyVector2f(enemyX+x, enemyY+y);
+		this.velocity = new MyVector2f(enemyX-x, enemyY-y);
 		System.out.println(enemyX+" "+ enemyY);
 		this.velocity.setLength(speed);
 		this.sprite = new Sprite("enemy/v1.png", 0.05f);
