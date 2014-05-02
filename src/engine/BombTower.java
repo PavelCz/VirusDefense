@@ -34,23 +34,25 @@ public class BombTower extends Tower {
 				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
 				if (distance < this.radius + enemy.getRadius()) {
-					for (Enemy bombedEnemy : this.game.getEnemies()) {
-						float bombedEnemyX = bombedEnemy.getX();
-						float bombedEnemyY = bombedEnemy.getY();
-						float bombedDeltaX = bombedEnemyX - (enemyX);
-						float bombedDeltaY = bombedEnemyY - (enemyY);
-
-						float bombDistance = (float) Math.sqrt(bombedDeltaX * bombedDeltaX + bombedDeltaY * bombedDeltaY);
-						System.out.println(bombDistance);
-						if (bombDistance < this.bombRadius + bombedEnemy.getRadius()) {
-							System.out.println("t");
-							bombedEnemy.setHealth(bombedEnemy.getHealth() - this.damage);
-							if (bombedEnemy.getHealth() <= 0) {
-								this.game.getPlayer().addMoney(bombedEnemy.getMoney());
-							}
-						}
+					Bomb b = new Bomb(x*50,y*50, bombRadius, damage, game, enemyX, enemyY);
+					game.bomb.add(b);
+//					for (Enemy bombedEnemy : this.game.getEnemies()) {
+//						float bombedEnemyX = bombedEnemy.getX();
+//						float bombedEnemyY = bombedEnemy.getY();
+//						float bombedDeltaX = bombedEnemyX - (enemyX);
+//						float bombedDeltaY = bombedEnemyY - (enemyY);
+//
+//						float bombDistance = (float) Math.sqrt(bombedDeltaX * bombedDeltaX + bombedDeltaY * bombedDeltaY);
+//						System.out.println(bombDistance);
+//						if (bombDistance < this.bombRadius + bombedEnemy.getRadius()) {
+//							System.out.println("t");
+//							bombedEnemy.setHealth(bombedEnemy.getHealth() - this.damage);
+//							if (bombedEnemy.getHealth() <= 0) {
+//								this.game.getPlayer().addMoney(bombedEnemy.getMoney());
+//							}
+//						}
 						done = true;
-					}
+//					}
 				}
 			}
 		}

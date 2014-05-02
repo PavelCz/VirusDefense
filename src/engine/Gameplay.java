@@ -44,6 +44,7 @@ public class Gameplay extends GameComponent {
 	private StaticText moneyAmount;
 	private boolean currentTowerPlaceable;
 	private int towerShadowX, towerShadowY;
+	protected List<Bomb> bomb;
 
 	private StaticText passedTime;
 	private InterfaceBackground interfaceBackground;
@@ -83,6 +84,8 @@ public class Gameplay extends GameComponent {
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
+		
+		this.bomb = new ArrayList<Bomb>();
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
@@ -157,6 +160,10 @@ public class Gameplay extends GameComponent {
 
 		this.renderTowerShadow(container, graphics);
 		this.renderGUI(container, graphics);
+		
+		for (Bomb bomb : this.bomb) {
+			bomb.draw();
+		}
 
 	}
 
@@ -284,6 +291,10 @@ public class Gameplay extends GameComponent {
 
 			}
 			this.updateTowerShadow(container);
+			
+			for (Bomb bomb : this.bomb) {
+				bomb.update(delta);
+			}
 
 		}
 	}
