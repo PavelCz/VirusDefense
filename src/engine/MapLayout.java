@@ -12,7 +12,7 @@ public class MapLayout {
 		MapLayoutFromImage mapLayout = new MapLayoutFromImage(mapLayoutPath);
 		this.path = mapLayout.getPath();
 		this.waypoints = mapLayout.getStartingPoint();
-		this.mapBackground = new Background(1f, backgroundPath);
+		this.mapBackground = new BackgroundTiles(0.05f, backgroundPath);
 		this.numberTilesWidth = this.path[0].length;
 		this.numberTilesHeight = this.path.length;
 		this.tileLength = tileLength;

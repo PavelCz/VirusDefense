@@ -7,16 +7,17 @@ public class PathTiler {
 	private Sprite[][] tiles;
 
 	public PathTiler(int[][] path) {
-		this.corner1 = new Sprite("veins/VeinCorner.png");
-		this.corner2 = new Sprite("veins/VeinCorner2.png");
-		this.corner3 = new Sprite("veins/VeinCorner3.png");
-		this.corner4 = new Sprite("veins/VeinCorner4.png");
-		this.horizontal = new Sprite("veins/VeinHoriz.png");
-		this.vertical = new Sprite("veins/VeinVert.png");
-		this.top = new Sprite("veins/VeinTopEnd.png");
-		this.bottom = new Sprite("veins/VeinBottomEnd.png");
-		this.left = new Sprite("veins/VeinLeftEnd.png");
-		this.right = new Sprite("veins/VeinRightEnd.png");
+		float scale = 0.05f;
+		this.corner1 = new Sprite("veins/VeinCorner.png", scale);
+		this.corner2 = new Sprite("veins/VeinCorner2.png", scale);
+		this.corner3 = new Sprite("veins/VeinCorner3.png", scale);
+		this.corner4 = new Sprite("veins/VeinCorner4.png", scale);
+		this.horizontal = new Sprite("veins/VeinHoriz.png", scale);
+		this.vertical = new Sprite("veins/VeinVert.png", scale);
+		this.top = new Sprite("veins/VeinVert.png", scale);
+		this.bottom = new Sprite("veins/VeinVert.png", scale);
+		this.left = new Sprite("veins/VeinHoriz.png", scale);
+		this.right = new Sprite("veins/VeinHoriz.png", scale);
 		this.tiles = new Sprite[path.length][path[0].length];
 
 		for (int y = 0; y < path.length; ++y) {
