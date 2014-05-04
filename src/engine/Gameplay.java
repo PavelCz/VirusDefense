@@ -412,6 +412,7 @@ public class Gameplay extends GameComponent {
 						buttonWasPressed = true;
 						this.releaseAllClickables();
 						clickable.onClick();
+						this.soundHandler.play("press");
 
 					}
 				}
