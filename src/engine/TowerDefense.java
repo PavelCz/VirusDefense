@@ -1,5 +1,6 @@
 package engine;
 
+import org.lwjgl.openal.AL;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -34,7 +35,7 @@ public class TowerDefense extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 		if (this.quitGame) {
 			container.exit();
-			System.out.println("act");
+			AL.destroy();
 		}
 		if (this.mode == TowerDefense.MODE_GAME) {
 			this.currentGameComponent = this.gameplay;
