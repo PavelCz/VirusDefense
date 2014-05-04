@@ -65,7 +65,6 @@ public class Gameplay extends GameComponent {
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
 		this.initDefaults();
-		this.initSounds();
 
 		this.currentMapLayout = new MapLayout("maps/map.png", "veins/flat.png", 50);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
@@ -102,12 +101,6 @@ public class Gameplay extends GameComponent {
 
 	}
 	
-	private void initSounds() {
-		this.soundHandler.add("place", "place.wav");
-		this.soundHandler.addWav("bad");
-		this.soundHandler.addWav("death");
-		this.soundHandler.addWav("spawn");
-	}
 	private void initDefaults() {
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
 		this.waveHandler = new WaveHandler(this, 2000);
@@ -414,7 +407,7 @@ public class Gameplay extends GameComponent {
 						buttonWasPressed = true;
 						this.releaseAllClickables();
 						clickable.onClick();
-						this.soundHandler.play("press");
+						this.game.getSoundHandler().play("press");
 
 					}
 				}
@@ -434,10 +427,10 @@ public class Gameplay extends GameComponent {
 							this.player.reduceMoney(cost);
 							this.currentTower = null;
 							this.releaseAllClickables();
-							this.soundHandler.play("place");
+							this.game.getSoundHandler().play("place");
 
 						} else {
-							this.soundHandler.play("bad");
+							this.game.getSoundHandler().play("bad");
 						}
 						
 					}

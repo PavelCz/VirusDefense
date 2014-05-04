@@ -7,6 +7,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 public class TowerDefense extends BasicGame {
+
+	protected SoundHandler soundHandler = new SoundHandler();
 	public static final int MODE_MENU = 0;
 	public static final int MODE_GAME = 1;
 
@@ -23,6 +25,7 @@ public class TowerDefense extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
+		this.initSounds();
 		this.gameplay = new Gameplay(this);
 		this.menu = new Menu(this);
 		this.menu.init(container);
@@ -30,6 +33,14 @@ public class TowerDefense extends BasicGame {
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
 	}
+	private void initSounds() {
+		this.soundHandler.addWav("press");
+		this.soundHandler.add("place", "place.wav");
+		this.soundHandler.addWav("bad");
+		this.soundHandler.addWav("death");
+		this.soundHandler.addWav("spawn");
+	}
+
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
@@ -58,5 +69,8 @@ public class TowerDefense extends BasicGame {
 
 	public void quitGame() {
 		this.quitGame = true;
+	}
+	public SoundHandler getSoundHandler() {
+		return soundHandler;
 	}
 }

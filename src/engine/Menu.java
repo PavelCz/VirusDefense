@@ -38,6 +38,7 @@ public class Menu extends GameComponent {
 		this.t.setMaxLength(32);
 	}
 
+	
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		super.update(container, delta);
