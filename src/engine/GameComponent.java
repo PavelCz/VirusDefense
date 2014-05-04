@@ -80,6 +80,10 @@ public abstract class GameComponent {
 		}
 	}
 
+	public SoundHandler getSoundHandler() {
+		return soundHandler;
+	}
+
 	private void releaseAllClickables() {
 		for (Clickable clickable : this.clickables) {
 			clickable.onRelease();
