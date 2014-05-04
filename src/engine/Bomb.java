@@ -6,8 +6,8 @@ public class Bomb extends Entity implements Drawable {
 	protected int bombRadius;
 	protected float damage;
 	protected Gameplay game;
-	protected float enemyX;
-	protected float enemyY;
+	protected float targetX;
+	protected float targetY;
 	protected float speed;
 	protected MyVector2f velocity;
 	protected Sprite sprite;
@@ -17,8 +17,8 @@ public class Bomb extends Entity implements Drawable {
 		this.bombRadius = bombRadius;
 		this.damage = damage;
 		this.game = game;
-		this.enemyX = enemyX;
-		this.enemyY = enemyY;
+		this.targetX = enemyX;
+		this.targetY = enemyY;
 		this.speed = 0.1f;
 		this.velocity = new MyVector2f(enemyX-x, enemyY-y);
 		System.out.println(enemyX+" "+ enemyY);
@@ -35,7 +35,7 @@ public class Bomb extends Entity implements Drawable {
 	public void update(int delta) {
 		this.x += velocity.getX()*delta;
 		this.y += velocity.getY()*delta;
-		if(this.x == enemyX && this.y == enemyY){
+		if(this.x == targetX && this.y == targetY){
 			fire();
 		}
 	}
@@ -45,8 +45,8 @@ public class Bomb extends Entity implements Drawable {
 		for (Enemy bombedEnemy : this.game.getEnemies()) {
 			float bombedEnemyX = bombedEnemy.getX();
 			float bombedEnemyY = bombedEnemy.getY();
-			float bombedDeltaX = bombedEnemyX - (enemyX);
-			float bombedDeltaY = bombedEnemyY - (enemyY);
+			float bombedDeltaX = bombedEnemyX - (targetX);
+			float bombedDeltaY = bombedEnemyY - (targetY);
 
 			float bombDistance = (float) Math.sqrt(bombedDeltaX * bombedDeltaX + bombedDeltaY * bombedDeltaY);
 			System.out.println(bombDistance);
