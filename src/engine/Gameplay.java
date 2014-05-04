@@ -26,7 +26,6 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Gameplay extends GameComponent {
-	private SoundHandler soundHandler;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private WaveHandler waveHandler;
 	private boolean mouseWasClicked;

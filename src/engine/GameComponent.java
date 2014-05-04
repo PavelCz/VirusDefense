@@ -13,6 +13,7 @@ import engine.gui.GUI;
 
 public abstract class GameComponent {
 
+	protected SoundHandler soundHandler;
 	protected List<GUI> guiElements;
 	protected List<Clickable> clickables;
 
