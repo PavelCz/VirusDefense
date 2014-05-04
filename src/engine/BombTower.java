@@ -8,7 +8,7 @@ public class BombTower extends Tower {
 	protected int bombRadius;
 
 	public BombTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage, int bombRadius) {
-		super(x * 50, y * 50, 100, 200, damage, game);
+		super(x * 50, y * 50, 100, 150, damage, game);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
 		this.delta = this.shootingInterval;

@@ -61,8 +61,8 @@ public class Bomb extends Entity implements Drawable {
 		for (Enemy bombedEnemy : this.game.getEnemies()) {
 			float bombedEnemyX = bombedEnemy.getX();
 			float bombedEnemyY = bombedEnemy.getY();
-			float bombedDeltaX = bombedEnemyX - (this.velocity.getX());
-			float bombedDeltaY = bombedEnemyY - (this.velocity.getY());
+			float bombedDeltaX = bombedEnemyX - this.x;
+			float bombedDeltaY = bombedEnemyY - this.y;
 
 			float bombDistance = (float) Math.sqrt(bombedDeltaX * bombedDeltaX
 					+ bombedDeltaY * bombedDeltaY);
