@@ -26,7 +26,7 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Gameplay extends GameComponent {
-
+	private SoundHandler soundHandler;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private WaveHandler waveHandler;
 	private boolean mouseWasClicked;
@@ -66,6 +66,7 @@ public class Gameplay extends GameComponent {
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
 		this.initDefaults();
+		this.initSounds();
 
 		this.currentMapLayout = new MapLayout("maps/map.png", "veins/flat.png", 50);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
@@ -101,7 +102,12 @@ public class Gameplay extends GameComponent {
 		container.setShowFPS(this.debugMode);
 
 	}
-
+	
+	private void initSounds() {
+		this.soundHandler  = new SoundHandler();
+		this.soundHandler.add("place", "place.wav");
+		this.soundHandler.addWav("bad");
+	}
 	private void initDefaults() {
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
 		this.waveHandler = new WaveHandler(this, 2000);
@@ -427,8 +433,12 @@ public class Gameplay extends GameComponent {
 							this.player.reduceMoney(cost);
 							this.currentTower = null;
 							this.releaseAllClickables();
+							this.soundHandler.play("place");
 
+						} else {
+							this.soundHandler.play("bad");
 						}
+						
 					}
 				}
 				this.mouseWasClicked = true;

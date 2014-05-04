@@ -1,4 +1,4 @@
-package engine.gui;
+package engine;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,11 +11,15 @@ public class SoundHandler {
 
 	public void add(String name, String location) {
 		try {
-			this.sounds.put(name, new Sound(location));
+			this.sounds.put(name, new Sound("data/sound/" + location));
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void addWav(String name) {
+		this.add(name, name + ".wav");
 	}
 
 	public void play(String name) {
