@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 import engine.graphics.SlickRectangle;
 import engine.graphics.SlickUnfilledEllipse;
@@ -25,7 +26,6 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Gameplay extends GameComponent {
-
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private WaveHandler waveHandler;
 	private boolean mouseWasClicked;
@@ -65,6 +65,7 @@ public class Gameplay extends GameComponent {
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
 		this.initDefaults();
+		this.initSounds();
 
 		this.currentMapLayout = new MapLayout("maps/map.png", "veins/flat.png", 50);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
@@ -100,7 +101,13 @@ public class Gameplay extends GameComponent {
 		container.setShowFPS(this.debugMode);
 
 	}
-
+	
+	private void initSounds() {
+		this.soundHandler.add("place", "place.wav");
+		this.soundHandler.addWav("bad");
+		this.soundHandler.addWav("death");
+		this.soundHandler.addWav("spawn");
+	}
 	private void initDefaults() {
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
 		this.waveHandler = new WaveHandler(this, 2000);
@@ -345,6 +352,15 @@ public class Gameplay extends GameComponent {
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			container.exit();
 		}
+		if (input.isKeyPressed(Input.KEY_S)) {
+			try {
+				new Sound("data/sound/Blip_Select.wav").play();
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		if (input.isKeyPressed(Input.KEY_R)) {
 			try {
 				container.reinit();
@@ -398,6 +414,7 @@ public class Gameplay extends GameComponent {
 						buttonWasPressed = true;
 						this.releaseAllClickables();
 						clickable.onClick();
+						this.soundHandler.play("press");
 
 					}
 				}
@@ -417,8 +434,12 @@ public class Gameplay extends GameComponent {
 							this.player.reduceMoney(cost);
 							this.currentTower = null;
 							this.releaseAllClickables();
+							this.soundHandler.play("place");
 
+						} else {
+							this.soundHandler.play("bad");
 						}
+						
 					}
 				}
 				this.mouseWasClicked = true;

@@ -28,6 +28,7 @@ public class Enemy extends Entity implements Drawable {
 		this.radius = radius;
 		this.game = game;
 		this.worth = worth;
+		this.game.getSoundHandler().play("spawn");
 	}
 
 	public Enemy(EnemyType enemyType) {
@@ -61,6 +62,7 @@ public class Enemy extends Entity implements Drawable {
 				this.newDirection();
 			}
 		} else {
+			this.game.getSoundHandler().play("death");
 			this.game.getEnemies().remove(this);
 		}
 	}

@@ -13,6 +13,7 @@ import engine.gui.GUI;
 
 public abstract class GameComponent {
 
+	protected SoundHandler soundHandler = new SoundHandler();;
 	protected List<GUI> guiElements;
 	protected List<Clickable> clickables;
 
@@ -30,8 +31,13 @@ public abstract class GameComponent {
 	}
 
 	public void init(GameContainer container) throws SlickException {
+		this.initSounds();
 		this.guiElements = new ArrayList<GUI>();
 		this.clickables = new ArrayList<Clickable>();
+	}
+	
+	private void initSounds() {
+		this.soundHandler.addWav("press");
 	}
 
 	public void update(GameContainer container, int delta) throws SlickException {
@@ -58,6 +64,7 @@ public abstract class GameComponent {
 					buttonWasPressed = true;
 					clickable.onClick();
 					this.wasClicked = clickable;
+					this.soundHandler.play("press");
 				}
 			}
 
@@ -71,6 +78,10 @@ public abstract class GameComponent {
 			this.wasClicked = null;
 
 		}
+	}
+
+	public SoundHandler getSoundHandler() {
+		return soundHandler;
 	}
 
 	private void releaseAllClickables() {
