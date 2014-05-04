@@ -44,7 +44,7 @@ public class Gameplay extends GameComponent {
 	private StaticText moneyAmount;
 	private boolean currentTowerPlaceable;
 	private int towerShadowX, towerShadowY;
-	protected List<Bomb> bomb;
+	protected ConcurrentLinkedQueue<Bomb> bombs;
 
 	private StaticText passedTime;
 	private InterfaceBackground interfaceBackground;
@@ -85,13 +85,13 @@ public class Gameplay extends GameComponent {
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
 		
-		this.bomb = new ArrayList<Bomb>();
+		this.bombs = new ConcurrentLinkedQueue<Bomb>();
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
 				new LongerShootingTower(0, 0, new Sprite("tower/t1n.png", 0.1f), this, 400, 0.08f, 400), this);
 		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 250, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
-				new BombTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50), this);
+				new BombTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 100), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 
@@ -161,7 +161,7 @@ public class Gameplay extends GameComponent {
 		this.renderTowerShadow(container, graphics);
 		this.renderGUI(container, graphics);
 		
-		for (Bomb bomb : this.bomb) {
+		for (Bomb bomb : this.bombs) {
 			bomb.draw();
 		}
 
@@ -292,7 +292,7 @@ public class Gameplay extends GameComponent {
 			}
 			this.updateTowerShadow(container);
 			
-			for (Bomb bomb : this.bomb) {
+			for (Bomb bomb : this.bombs) {
 				bomb.update(delta);
 			}
 

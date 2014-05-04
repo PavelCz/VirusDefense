@@ -12,7 +12,8 @@ public class Bomb extends Entity implements Drawable {
 	protected MyVector2f velocity;
 	protected Sprite sprite;
 
-	public Bomb(float x, float y, int bombRadius, float damage, Gameplay game, float enemyX, float enemyY) {
+	public Bomb(float x, float y, int bombRadius, float damage, Gameplay game,
+			float enemyX, float enemyY) {
 		super(x, y);
 		this.bombRadius = bombRadius;
 		this.damage = damage;
@@ -20,10 +21,9 @@ public class Bomb extends Entity implements Drawable {
 		this.targetX = enemyX;
 		this.targetY = enemyY;
 		this.speed = 0.1f;
-		this.velocity = new MyVector2f(enemyX-x-25, enemyY-y-25);
-		System.out.println(enemyX+" "+ enemyY);
+		this.velocity = new MyVector2f(enemyX - x - 25, enemyY - y - 25);
 		this.velocity.setLength(speed);
-		this.sprite = new Sprite("enemy/v1.png", 0.05f);
+		this.sprite = new Sprite("shoot/Frame0001.png", 0.05f);
 	}
 
 	@Override
@@ -33,11 +33,27 @@ public class Bomb extends Entity implements Drawable {
 	}
 
 	public void update(int delta) {
-		this.x += velocity.getX()*delta;
-		this.y += velocity.getY()*delta;
-		if(this.x == targetX && this.y == targetY){
-			fire();
+		this.x += velocity.getX() * delta;
+		this.y += velocity.getY() * delta;
+
+		if (this.velocity.getX() >= 0 && this.velocity.getY() >= 0) {
+			if (this.x >= targetX && this.y >= targetY) {
+				fire();
+			}
+		} else if (this.velocity.getX() <= 0 && this.velocity.getY() <= 0) {
+			if (this.x <= targetX && this.y <= targetY) {
+				fire();
+			}
+		} else if (this.velocity.getX() >= 0 && this.velocity.getY() <= 0) {
+			if (this.x >= targetX && this.y <= targetY) {
+				fire();
+			}
+		} else if (this.velocity.getX() <= 0 && this.velocity.getY() >= 0) {
+			if (this.x <= targetX && this.y >= targetY) {
+				fire();
+			}
 		}
+
 	}
 
 	public void fire() {
@@ -45,10 +61,11 @@ public class Bomb extends Entity implements Drawable {
 		for (Enemy bombedEnemy : this.game.getEnemies()) {
 			float bombedEnemyX = bombedEnemy.getX();
 			float bombedEnemyY = bombedEnemy.getY();
-			float bombedDeltaX = bombedEnemyX - (targetX);
-			float bombedDeltaY = bombedEnemyY - (targetY);
+			float bombedDeltaX = bombedEnemyX - (this.velocity.getX());
+			float bombedDeltaY = bombedEnemyY - (this.velocity.getY());
 
-			float bombDistance = (float) Math.sqrt(bombedDeltaX * bombedDeltaX + bombedDeltaY * bombedDeltaY);
+			float bombDistance = (float) Math.sqrt(bombedDeltaX * bombedDeltaX
+					+ bombedDeltaY * bombedDeltaY);
 			System.out.println(bombDistance);
 			if (bombDistance < this.bombRadius + bombedEnemy.getRadius()) {
 				System.out.println("t");
@@ -58,6 +75,7 @@ public class Bomb extends Entity implements Drawable {
 				}
 			}
 		}
+		this.game.bombs.remove(this);
 	}
 
 }

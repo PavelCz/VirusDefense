@@ -35,7 +35,7 @@ public class BombTower extends Tower {
 
 				if (distance < this.radius + enemy.getRadius()) {
 					Bomb b = new Bomb(x*50,y*50, bombRadius, damage, game, enemyX, enemyY);
-					game.bomb.add(b);
+					game.bombs.add(b);
 //					for (Enemy bombedEnemy : this.game.getEnemies()) {
 //						float bombedEnemyX = bombedEnemy.getX();
 //						float bombedEnemyY = bombedEnemy.getY();
