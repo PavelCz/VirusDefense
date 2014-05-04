@@ -31,6 +31,7 @@ public abstract class GameComponent {
 	}
 
 	public void init(GameContainer container) throws SlickException {
+		this.initSounds();
 		this.guiElements = new ArrayList<GUI>();
 		this.clickables = new ArrayList<Clickable>();
 	}
@@ -63,6 +64,7 @@ public abstract class GameComponent {
 					buttonWasPressed = true;
 					clickable.onClick();
 					this.wasClicked = clickable;
+					this.soundHandler.play("press");
 				}
 			}
 
