@@ -107,6 +107,7 @@ public class Gameplay extends GameComponent {
 		this.soundHandler  = new SoundHandler();
 		this.soundHandler.add("place", "place.wav");
 		this.soundHandler.addWav("bad");
+		this.soundHandler.addWav("press");
 	}
 	private void initDefaults() {
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
