@@ -21,14 +21,14 @@ public class Bomb extends Entity implements Drawable {
 		this.targetX = enemyX;
 		this.targetY = enemyY;
 		this.speed = 0.1f;
-		this.velocity = new MyVector2f(enemyX - x - 25, enemyY - y - 25);
+		this.velocity = new MyVector2f(enemyX - x, enemyY - y);
 		this.velocity.setLength(speed);
 		this.sprite = new Sprite("shoot/Frame0001.png", 0.05f);
 	}
 
 	@Override
 	public void draw() {
-		this.sprite.draw(this.x, this.y);
+		this.sprite.draw(this.x-25, this.y-25);
 
 	}
 
