@@ -7,7 +7,8 @@ public class BombTower extends Tower {
 	protected final int shootingInterval;
 	protected int bombRadius;
 
-	public BombTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage, int bombRadius) {
+	public BombTower(float x, float y, Sprite sprite, Gameplay game,
+			int shootingInterval, float damage, int bombRadius) {
 		super(x * 50, y * 50, 100, 150, damage, game);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
@@ -31,28 +32,16 @@ public class BombTower extends Tower {
 				float deltaX = enemyX - (this.getX() * 50 + 25);
 				float deltaY = enemyY - (this.getY() * 50 + 25);
 
-				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY
+						* deltaY);
 
 				if (distance < this.radius + enemy.getRadius()) {
-					Bomb b = new Bomb(x*50 +25,y*50+25, bombRadius, damage, game, enemyX, enemyY);
+					Bomb b = new Bomb(x * 50 + 25, y * 50 + 25, bombRadius,
+							damage, game, enemyX, enemyY);
 					game.bombs.add(b);
-//					for (Enemy bombedEnemy : this.game.getEnemies()) {
-//						float bombedEnemyX = bombedEnemy.getX();
-//						float bombedEnemyY = bombedEnemy.getY();
-//						float bombedDeltaX = bombedEnemyX - (enemyX);
-//						float bombedDeltaY = bombedEnemyY - (enemyY);
-//
-//						float bombDistance = (float) Math.sqrt(bombedDeltaX * bombedDeltaX + bombedDeltaY * bombedDeltaY);
-//						System.out.println(bombDistance);
-//						if (bombDistance < this.bombRadius + bombedEnemy.getRadius()) {
-//							System.out.println("t");
-//							bombedEnemy.setHealth(bombedEnemy.getHealth() - this.damage);
-//							if (bombedEnemy.getHealth() <= 0) {
-//								this.game.getPlayer().addMoney(bombedEnemy.getMoney());
-//							}
-//						}
-						done = true;
-//					}
+
+					done = true;
+
 				}
 			}
 		}
@@ -70,7 +59,8 @@ public class BombTower extends Tower {
 
 	@Override
 	public Tower clone() {
-		return new BombTower(this.x, this.y, this.sprite.clone(), this.game, this.shootingInterval, this.damage, this.bombRadius);
+		return new BombTower(this.x, this.y, this.sprite.clone(), this.game,
+				this.shootingInterval, this.damage, this.bombRadius);
 	}
 
 }
