@@ -2,7 +2,7 @@ package engine.gui;
 
 import org.newdawn.slick.Color;
 
-import engine.Gameplay;
+import towerDefense.Gameplay;
 import engine.graphics.Text;
 
 public class StaticText extends GUI {

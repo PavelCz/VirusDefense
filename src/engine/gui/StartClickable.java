@@ -1,6 +1,6 @@
 package engine.gui;
 
-import engine.TowerDefense;
+import towerDefense.TowerDefense;
 
 public class StartClickable extends ClickableText {
 	private TowerDefense towerDefense;

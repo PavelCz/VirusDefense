@@ -1,7 +1,7 @@
 package engine.gui;
 
+import towerDefense.Gameplay;
 import engine.Drawable;
-import engine.Gameplay;
 import engine.graphics.Sprite;
 
 public class InterfaceBackground extends GUI implements Drawable {

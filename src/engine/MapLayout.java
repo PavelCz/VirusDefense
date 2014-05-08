@@ -1,5 +1,8 @@
 package engine;
 
+import engine.graphics.Background;
+import engine.graphics.BackgroundTiles;
+
 public class MapLayout {
 	private int[][] path;
 	private Waypoint waypoints;

@@ -1,6 +1,6 @@
 package engine.gui;
 
-import engine.Gameplay;
+import towerDefense.Gameplay;
 import engine.graphics.Sprite;
 
 public class Button extends Clickable {

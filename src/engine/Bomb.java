@@ -1,5 +1,6 @@
 package engine;
 
+import towerDefense.Gameplay;
 import engine.graphics.Sprite;
 
 public class Bomb extends Entity implements Drawable {
@@ -37,19 +38,19 @@ public class Bomb extends Entity implements Drawable {
 		this.y += velocity.getY() * delta;
 
 		if (this.velocity.getX() >= 0 && this.velocity.getY() >= 0) {
-			if (this.x >= targetX && this.y >= targetY) {
+			if (this.x >= targetX || this.y >= targetY) {
 				fire();
 			}
 		} else if (this.velocity.getX() <= 0 && this.velocity.getY() <= 0) {
-			if (this.x <= targetX && this.y <= targetY) {
+			if (this.x <= targetX || this.y <= targetY) {
 				fire();
 			}
 		} else if (this.velocity.getX() >= 0 && this.velocity.getY() <= 0) {
-			if (this.x >= targetX && this.y <= targetY) {
+			if (this.x >= targetX || this.y <= targetY) {
 				fire();
 			}
 		} else if (this.velocity.getX() <= 0 && this.velocity.getY() >= 0) {
-			if (this.x <= targetX && this.y >= targetY) {
+			if (this.x <= targetX || this.y >= targetY) {
 				fire();
 			}
 		}
@@ -66,16 +67,17 @@ public class Bomb extends Entity implements Drawable {
 
 			float bombDistance = (float) Math.sqrt(bombedDeltaX * bombedDeltaX
 					+ bombedDeltaY * bombedDeltaY);
-			System.out.println(bombDistance);
 			if (bombDistance < this.bombRadius + bombedEnemy.getRadius()) {
-				System.out.println("t");
 				bombedEnemy.setHealth(bombedEnemy.getHealth() - this.damage);
 				if (bombedEnemy.getHealth() <= 0) {
 					this.game.getPlayer().addMoney(bombedEnemy.getMoney());
 				}
 			}
 		}
-		this.game.bombs.remove(this);
+		this.game.getSoundHandler().play("explode");
+		this.game.getBombs().remove(this);
+
+		
 	}
 
 }

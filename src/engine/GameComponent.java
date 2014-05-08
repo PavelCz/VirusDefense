@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import towerDefense.TowerDefense;
 import engine.gui.Clickable;
 import engine.gui.GUI;
 
@@ -33,6 +34,7 @@ public abstract class GameComponent {
 		this.guiElements = new ArrayList<GUI>();
 		this.clickables = new ArrayList<Clickable>();
 	}
+	
 
 	public void update(GameContainer container, int delta) throws SlickException {
 		this.updateClickables(container, delta);
@@ -58,6 +60,7 @@ public abstract class GameComponent {
 					buttonWasPressed = true;
 					clickable.onClick();
 					this.wasClicked = clickable;
+					this.game.getSoundHandler().play("press");
 				}
 			}
 
@@ -72,6 +75,12 @@ public abstract class GameComponent {
 
 		}
 	}
+	
+	public SoundHandler getSoundHandler() {
+		return this.game.getSoundHandler();
+	}
+
+	
 
 	private void releaseAllClickables() {
 		for (Clickable clickable : this.clickables) {
