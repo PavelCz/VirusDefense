@@ -37,19 +37,19 @@ public class Bomb extends Entity implements Drawable {
 		this.y += velocity.getY() * delta;
 
 		if (this.velocity.getX() >= 0 && this.velocity.getY() >= 0) {
-			if (this.x >= targetX && this.y >= targetY) {
+			if (this.x >= targetX || this.y >= targetY) {
 				fire();
 			}
 		} else if (this.velocity.getX() <= 0 && this.velocity.getY() <= 0) {
-			if (this.x <= targetX && this.y <= targetY) {
+			if (this.x <= targetX || this.y <= targetY) {
 				fire();
 			}
 		} else if (this.velocity.getX() >= 0 && this.velocity.getY() <= 0) {
-			if (this.x >= targetX && this.y <= targetY) {
+			if (this.x >= targetX || this.y <= targetY) {
 				fire();
 			}
 		} else if (this.velocity.getX() <= 0 && this.velocity.getY() >= 0) {
-			if (this.x <= targetX && this.y >= targetY) {
+			if (this.x <= targetX || this.y >= targetY) {
 				fire();
 			}
 		}
