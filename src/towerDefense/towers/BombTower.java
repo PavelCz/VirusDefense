@@ -1,5 +1,8 @@
-package engine;
+package towerDefense.towers;
 
+import towerDefense.Gameplay;
+import engine.Bomb;
+import engine.Enemy;
 import engine.graphics.Sprite;
 
 public class BombTower extends Tower {
@@ -38,7 +41,7 @@ public class BombTower extends Tower {
 				if (distance < this.radius + enemy.getRadius()) {
 					Bomb b = new Bomb(x * 50 + 25, y * 50 + 25, bombRadius,
 							damage, game, enemyX, enemyY);
-					game.bombs.add(b);
+					game.getBombs().add(b);
 
 					done = true;
 					this.game.getSoundHandler().play("shotT2");

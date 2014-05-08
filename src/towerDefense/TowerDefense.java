@@ -1,10 +1,13 @@
-package engine;
+package towerDefense;
 
 import org.lwjgl.openal.AL;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+
+import engine.GameComponent;
+import engine.SoundHandler;
 
 public class TowerDefense extends BasicGame {
 

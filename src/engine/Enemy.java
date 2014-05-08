@@ -1,5 +1,6 @@
 package engine;
 
+import towerDefense.Gameplay;
 import engine.graphics.Sprite;
 
 public class Enemy extends Entity implements Drawable {

@@ -1,4 +1,4 @@
-package engine;
+package towerDefense;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,21 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
+import towerDefense.towers.BombTower;
+import towerDefense.towers.LongerShootingTower;
+import towerDefense.towers.Tower;
+import engine.Bomb;
+import engine.Enemy;
+import engine.EnemyType;
+import engine.EnemyTypeHandler;
+import engine.GameComponent;
+import engine.MapLayout;
+import engine.MyVector2f;
+import engine.Player;
+import engine.Wave;
+import engine.WaveHandler;
+import engine.Waypoint;
+import engine.graphics.PathTiler;
 import engine.graphics.SlickRectangle;
 import engine.graphics.SlickUnfilledEllipse;
 import engine.graphics.SlickUnfilledRectangle;
@@ -545,5 +560,10 @@ public class Gameplay extends GameComponent {
 	public void setCurrentTower(Tower currentTower) {
 		this.currentTower = currentTower;
 	}
+
+	public ConcurrentLinkedQueue<Bomb> getBombs() {
+		return bombs;
+	}
+	
 
 }

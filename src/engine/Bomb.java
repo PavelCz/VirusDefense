@@ -1,5 +1,6 @@
 package engine;
 
+import towerDefense.Gameplay;
 import engine.graphics.Sprite;
 
 public class Bomb extends Entity implements Drawable {
@@ -74,7 +75,7 @@ public class Bomb extends Entity implements Drawable {
 			}
 		}
 		this.game.getSoundHandler().play("explode");
-		this.game.bombs.remove(this);
+		this.game.getBombs().remove(this);
 
 		
 	}

@@ -2,6 +2,8 @@ package engine;
 
 import java.util.LinkedList;
 
+import towerDefense.Gameplay;
+
 public class WaveHandler {
 	private LinkedList<Wave> waves;
 	private Gameplay game;

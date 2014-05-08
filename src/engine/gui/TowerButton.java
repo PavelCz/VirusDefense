@@ -1,7 +1,7 @@
 package engine.gui;
 
-import engine.Gameplay;
-import engine.Tower;
+import towerDefense.Gameplay;
+import towerDefense.towers.Tower;
 import engine.graphics.Sprite;
 
 public class TowerButton extends Button {

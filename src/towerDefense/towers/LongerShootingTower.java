@@ -1,5 +1,7 @@
-package engine;
+package towerDefense.towers;
 
+import towerDefense.Gameplay;
+import engine.Enemy;
 import engine.graphics.Sprite;
 
 public class LongerShootingTower extends ShootingTower {
