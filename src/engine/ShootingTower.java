@@ -54,6 +54,7 @@ public class ShootingTower extends Tower {
 						this.game.getPlayer().addMoney(enemy.getMoney());
 					}
 					done = true;
+					this.game.getSoundHandler().play("shotT1");
 				}
 			}
 		}

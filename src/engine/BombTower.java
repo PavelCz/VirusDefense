@@ -41,6 +41,7 @@ public class BombTower extends Tower {
 					game.bombs.add(b);
 
 					done = true;
+					this.game.getSoundHandler().play("shotT2");
 
 				}
 			}

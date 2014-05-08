@@ -73,8 +73,10 @@ public class Bomb extends Entity implements Drawable {
 				}
 			}
 		}
-		this.game.bombs.remove(this);
 		this.game.getSoundHandler().play("explode");
+		this.game.bombs.remove(this);
+
+		
 	}
 
 }

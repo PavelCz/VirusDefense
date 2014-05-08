@@ -29,6 +29,7 @@ public class LongerShootingTower extends ShootingTower {
 				if (this.currentlyAttacking == null) {
 					this.currentlyAttacking = enemy;
 					this.delta = this.shootingDuration;
+					this.game.getSoundHandler().play("shotT1");
 				} else {
 					this.currentlyAttacking = null;
 					this.delta = this.shootingInterval;
@@ -53,6 +54,7 @@ public class LongerShootingTower extends ShootingTower {
 					enemy.setDead();
 				}
 			}
+			
 		}
 	}
 
