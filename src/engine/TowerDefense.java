@@ -39,6 +39,7 @@ public class TowerDefense extends BasicGame {
 		this.soundHandler.addWav("bad");
 		this.soundHandler.addWav("death");
 		this.soundHandler.addWav("spawn");
+		this.soundHandler.addWav("explode");
 	}
 
 
