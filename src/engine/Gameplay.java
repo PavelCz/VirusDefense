@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.lwjgl.openal.AL;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -355,6 +356,8 @@ public class Gameplay extends GameComponent {
 		}
 		
 		if (input.isKeyPressed(Input.KEY_R)) {
+
+			AL.destroy();
 			try {
 				container.reinit();
 			} catch (SlickException e) {
