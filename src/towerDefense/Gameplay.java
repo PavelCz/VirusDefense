@@ -577,6 +577,14 @@ public class Gameplay extends GameComponent {
 		return this.currentTower;
 	}
 
+	public int getHorizontalTiles() {
+		return this.currentMapLayout.getNumberTilesWidth();
+	}
+
+	public int getVerticalTiles() {
+		return this.currentMapLayout.getNumberTilesHeight();
+	}
+
 	public void setCurrentTower(Tower currentTower) {
 		this.currentTower = currentTower;
 	}
