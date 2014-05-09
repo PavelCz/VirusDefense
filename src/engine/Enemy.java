@@ -89,7 +89,8 @@ public class Enemy extends Entity implements Drawable {
 	@Override
 	public void draw() {
 		if (this.health > 0) {
-			this.sprite.draw(this.x - this.sprite.getWidth() / 2, this.y - this.sprite.getHeight() / 2);
+			this.sprite.draw((this.x - Gameplay.DEFAULT_SIZE / 2) * Gameplay.GLOBAL_GAME_SCALE, (this.y - Gameplay.DEFAULT_SIZE / 2)
+					* Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
 		}
 	}
 

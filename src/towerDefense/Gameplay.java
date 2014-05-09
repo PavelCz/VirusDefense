@@ -27,6 +27,8 @@ import engine.Projectile;
 import engine.Wave;
 import engine.WaveHandler;
 import engine.Waypoint;
+import engine.graphics.Background;
+import engine.graphics.BackgroundTiles;
 import engine.graphics.PathTiler;
 import engine.graphics.SlickRectangle;
 import engine.graphics.SlickUnfilledEllipse;
@@ -43,6 +45,9 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Gameplay extends GameComponent {
+
+	private Background mapBackground;
+	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private WaveHandler waveHandler;
 	private boolean mouseWasClicked;
@@ -64,12 +69,16 @@ public class Gameplay extends GameComponent {
 	private int towerShadowX, towerShadowY;
 	protected ConcurrentLinkedQueue<Projectile> projectiles;
 
+	public static float GLOBAL_GAME_SCALE;
+	public static float GLOBAL_GUI_SCALE = 1f;
+
 	private StaticText passedTime;
 	private InterfaceBackground interfaceBackground;
 	// Constants:
-	public static int INTERFACE_START_X;
+	public static float INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE;
-	public static int SIZE = 64;
+	public static int SIZE;
+	public static int DEFAULT_SIZE = 64;
 	private float speed;
 	private PathTiler pathTiler;
 
@@ -85,21 +94,29 @@ public class Gameplay extends GameComponent {
 		super.init(container);
 		this.initDefaults();
 
-		this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", SIZE);
+		this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
 		this.pathTiler = new PathTiler(this.currentMapLayout.getPath());
+		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
+		this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
 
 		// Set Constants:
 
-		Gameplay.INTERFACE_START_X = this.currentMapLayout.getNumberTilesWidth() * this.currentTileLength;
+		Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
+		float scale1 = Gameplay.INTERFACE_START_X / this.width;
+		float scale2 = TowerDefense.getHeight() / this.height;
+		Gameplay.GLOBAL_GAME_SCALE = Math.min(scale1, scale2);
+		Gameplay.SIZE = (int) (64 * Gameplay.GLOBAL_GAME_SCALE);
+
+		this.mapBackground = new BackgroundTiles(0.5f, "veins/bg.png", this.getHorizontalTiles(), this.getVerticalTiles());
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 
-		this.towers = new Tower[12][13];
+		this.towers = new Tower[this.getVerticalTiles()][this.getHorizontalTiles()];
 		this.initWaves();
-		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1n.png", this, 25, 20, 0.5f));
-		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2n.png", this, 25, 100, 0.4f));
-		this.enemyTypes.add(new EnemyType(10000, 0.03f, "enemy/v1n.png", this, 25, 1000, 0.7f));
+		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1n.png", this, 32, 20, 0.5f));
+		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2n.png", this, 32, 100, 0.4f));
+		this.enemyTypes.add(new EnemyType(10000, 0.03f, "enemy/v1n.png", this, 32, 1000, 0.7f));
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
@@ -107,12 +124,14 @@ public class Gameplay extends GameComponent {
 		this.projectiles = new ConcurrentLinkedQueue<Projectile>();
 
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
+		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
+				"buttons/PSButton1_click.png",
 				new LongerShootingTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this, 400, 0.08f, 400), this);
-		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 264, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
-				new BombTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50), this);
-		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 328, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
-				new RocketTower(0, 0, new Sprite("tower/t1.png", 1f), this, 1000, 20f, 50), this);
+		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
+				"buttons/PSButton1_click.png", new BombTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50),
+				this);
+		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
+				"buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 1f), this, 1000, 20f, 50), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
@@ -156,12 +175,16 @@ public class Gameplay extends GameComponent {
 	}
 
 	private void initGUI() {
-		int guiX = 3;
-		int livesY = 150;
-		int moneyY = 165;
-		this.numberLives = new StaticText(Gameplay.INTERFACE_START_X + 50, livesY, Color.white, "" + this.player.getLives());
-		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, 580, Color.white, this.passedTimeToString());
-		this.moneyAmount = new StaticText(Gameplay.INTERFACE_START_X + 65, moneyY, Color.white, "" + this.player.getMoney());
+		float guiTileSize = 64 * Gameplay.GLOBAL_GUI_SCALE;
+		float textHeight = 20 * Gameplay.GLOBAL_GUI_SCALE;
+		float guiX = 3 * Gameplay.GLOBAL_GUI_SCALE;
+		float livesY = 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
+		float moneyY = livesY + textHeight;
+		this.numberLives = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, livesY, Color.white, "" + this.player.getLives());
+		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, TowerDefense.getHeight() - textHeight, Color.white,
+				this.passedTimeToString());
+		this.moneyAmount = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize + textHeight, moneyY, Color.white, ""
+				+ this.player.getMoney());
 
 		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(this.numberLives);
@@ -175,7 +198,7 @@ public class Gameplay extends GameComponent {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		this.currentMapLayout.drawBackground();
+		this.drawBackground();
 		this.pathTiler.render();
 		this.renderEnemies();
 		this.renderTowers();
@@ -197,9 +220,9 @@ public class Gameplay extends GameComponent {
 		this.renderDebug(container, graphics);
 
 		if (this.mode == 1) {
-			new Sprite("You Win.png").draw(0, 0);
+			new Sprite("You Win.png").draw(0, 0, Gameplay.GLOBAL_GAME_SCALE);
 		} else if (this.mode == -1) {
-			new Sprite("Game Over.png").draw(0, 0);
+			new Sprite("Game Over.png").draw(0, 0, Gameplay.GLOBAL_GAME_SCALE);
 		}
 	}
 
@@ -207,8 +230,9 @@ public class Gameplay extends GameComponent {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
-			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength / 2, enemy.getY() - Gameplay.SIZE/2 - barHeight,
-					enemy.getMaxHealth(), barLength, barHeight);
+			SlickHealthbar h = new SlickHealthbar(graphics, (enemy.getX() - barLength / 2) * Gameplay.GLOBAL_GAME_SCALE,
+					(enemy.getY() - Gameplay.SIZE / 2) * Gameplay.GLOBAL_GAME_SCALE - barHeight, enemy.getMaxHealth(), barLength,
+					barHeight);
 			h.setHealth(enemy.getHealth());
 			h.setBordered(true);
 			h.draw();
@@ -244,13 +268,15 @@ public class Gameplay extends GameComponent {
 			Sprite sprite = this.currentTower.getSprite().clone();
 
 			if (this.currentTowerPlaceable) {
-				new SlickUnfilledRectangle(graphics, SIZE, SIZE, Color.green).draw(this.towerShadowX, this.towerShadowY);
+				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.GLOBAL_GAME_SCALE, SIZE / Gameplay.GLOBAL_GAME_SCALE, Color.green)
+						.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
 			} else {
-				new SlickUnfilledRectangle(graphics, SIZE, SIZE, Color.red).draw(this.towerShadowX, this.towerShadowY);
+				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.GLOBAL_GAME_SCALE, SIZE / Gameplay.GLOBAL_GAME_SCALE, Color.red)
+						.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
 				sprite.setColor(1f, 0, 0);
 			}
 
-			sprite.draw(this.towerShadowX, this.towerShadowY);
+			sprite.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
 		}
 	}
 
@@ -263,21 +289,23 @@ public class Gameplay extends GameComponent {
 	private void renderDebug(GameContainer container, Graphics graphics) {
 		if (this.debugMode) {
 			for (Enemy enemy : this.enemies) {
-				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX(),
-						enemy.getY());
+				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX()
+						* Gameplay.GLOBAL_GAME_SCALE, enemy.getY() * Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
 			}
 			for (int i = 0; i < this.towers.length; ++i) {
 				for (int j = 0; j < this.towers[0].length; ++j) {
 					if (this.towers[i][j] != null) {
 						Tower currentTower = this.towers[i][j];
 						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red)
-								.draw(currentTower.getX() * this.currentTileLength + Gameplay.SIZE/2, currentTower.getY() * this.currentTileLength
-										+ SIZE/2);
+								.draw((currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2)
+										* Gameplay.GLOBAL_GAME_SCALE,
+										(currentTower.getY() * this.currentTileLength + DEFAULT_SIZE / 2) * Gameplay.GLOBAL_GAME_SCALE,
+										Gameplay.GLOBAL_GAME_SCALE);
 					}
 				}
 			}
 			// create a black box that the FPS are visible
-			new SlickRectangle(graphics, 100, 20, Color.black).draw(5, 10);
+			new SlickRectangle(graphics, 100, 20, Color.black).draw(5, 10, Gameplay.GLOBAL_GAME_SCALE);
 		}
 	}
 
@@ -336,7 +364,8 @@ public class Gameplay extends GameComponent {
 			int[][] path = this.currentMapLayout.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
-			} else if (newY < 12 && x < Gameplay.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
+			} else if (newX >= 0 && newY >= 0 && newY < this.getVerticalTiles() && newX < this.getHorizontalTiles()
+					&& path[newY][newX] == 1 && this.towers[newY][newX] == null) {
 				this.currentTowerPlaceable = true;
 			} else {
 				this.currentTowerPlaceable = false;
@@ -427,7 +456,7 @@ public class Gameplay extends GameComponent {
 
 				boolean buttonWasPressed = false;
 				for (Clickable clickable : this.clickables) {
-					if (clickable.collides((int) x, (int) y)) {
+					if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
 						buttonWasPressed = true;
 						this.releaseAllClickables();
 						clickable.onClick();
@@ -436,13 +465,14 @@ public class Gameplay extends GameComponent {
 					}
 				}
 				if (!buttonWasPressed) {
-					int newX = (int) x / this.currentTileLength;
-					int newY = (int) y / this.currentTileLength;
+					int newX = (int) x / Gameplay.SIZE;
+					int newY = (int) y / Gameplay.SIZE;
+
 					if (this.currentTower != null) {
 						int[][] path = this.currentMapLayout.getPath();
 						int cost = this.currentTower.getCost();
-						if (x < Gameplay.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null
-								&& this.player.getMoney() - cost >= 0) {
+						if (this.currentTowerPlaceable && x < Gameplay.INTERFACE_START_X && y < path.length * this.currentTileLength
+								&& path[newY][newX] == 1 && this.towers[newY][newX] == null && this.player.getMoney() - cost >= 0) {
 							Tower bufferTower = this.currentTower.clone();
 							bufferTower.setX(newX);
 							bufferTower.setY(newY);
@@ -563,12 +593,28 @@ public class Gameplay extends GameComponent {
 		return this.currentTower;
 	}
 
+	public int getHorizontalTiles() {
+		return this.currentMapLayout.getNumberTilesWidth();
+	}
+
+	public void drawBackground() {
+		this.mapBackground.draw();
+	}
+
+	public Background getMapBackground() {
+		return this.mapBackground;
+	}
+
+	public int getVerticalTiles() {
+		return this.currentMapLayout.getNumberTilesHeight();
+	}
+
 	public void setCurrentTower(Tower currentTower) {
 		this.currentTower = currentTower;
 	}
 
 	public ConcurrentLinkedQueue<Projectile> getProjectiles() {
-		return projectiles;
+		return this.projectiles;
 	}
 
 }

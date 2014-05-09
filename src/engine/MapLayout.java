@@ -1,13 +1,9 @@
 package engine;
 
-import engine.graphics.Background;
-import engine.graphics.BackgroundTiles;
-
 public class MapLayout {
 	private int[][] path;
 	private Waypoint waypoints;
 
-	private Background mapBackground;
 	private int tileLength;
 	private int numberTilesWidth, numberTilesHeight;
 
@@ -15,14 +11,9 @@ public class MapLayout {
 		MapLayoutFromImage mapLayout = new MapLayoutFromImage(mapLayoutPath);
 		this.path = mapLayout.getPath();
 		this.waypoints = mapLayout.getStartingPoint();
-		this.mapBackground = new BackgroundTiles(0.5f, backgroundPath);
 		this.numberTilesWidth = this.path[0].length;
 		this.numberTilesHeight = this.path.length;
 		this.tileLength = tileLength;
-	}
-
-	public void drawBackground() {
-		this.mapBackground.draw();
 	}
 
 	public int[][] getPath() {
@@ -31,10 +22,6 @@ public class MapLayout {
 
 	public Waypoint getWaypoints() {
 		return this.waypoints;
-	}
-
-	public Background getMapBackground() {
-		return this.mapBackground;
 	}
 
 	public int getTileLength() {

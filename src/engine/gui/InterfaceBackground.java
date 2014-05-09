@@ -14,7 +14,7 @@ public class InterfaceBackground extends GUI implements Drawable {
 
 	@Override
 	public void draw() {
-		this.picture.draw(this.x, this.y);
+		this.picture.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE);
 
 	}
 

@@ -3,7 +3,7 @@ package engine.graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Sprite extends RotatableRenderObject {
+public class Sprite extends RenderObject {
 	private Image image;
 	private String imagePath;
 	private float defaultScale;
@@ -30,14 +30,8 @@ public class Sprite extends RotatableRenderObject {
 	}
 
 	@Override
-	public void draw(float x, float y) {
-		this.draw(x, y, 0, 1);
-	}
-
-	@Override
-	public void draw(float xCoordinate, float yCoordinate, float rotation, float scale) {
-		this.image.setRotation(rotation);
-		this.image.draw(xCoordinate, yCoordinate, scale * this.defaultScale);
+	public void draw(float xCoordinate, float yCoordinate, float globalScale) {
+		this.image.draw(xCoordinate, yCoordinate, globalScale * this.defaultScale);
 	}
 
 	public float getWidth() {

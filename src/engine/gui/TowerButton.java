@@ -18,8 +18,8 @@ public class TowerButton extends Button {
 		Sprite s = this.tower.getSprite();
 		s.setAlpha(0.8f);
 		float scale = 0.9f;
-		s.draw(this.x + (this.collisionWidth - s.getWidth() * scale) / 2, this.y + (this.collisionHeight - s.getHeight() * scale) / 2,
-				0, scale);
+		s.draw(this.x + (this.collisionWidth - s.getWidth() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, this.y
+				+ (this.collisionHeight - s.getHeight() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, scale * Gameplay.GLOBAL_GUI_SCALE);
 	}
 
 	@Override

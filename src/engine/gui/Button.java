@@ -20,10 +20,10 @@ public class Button extends Clickable {
 	@Override
 	public void draw() {
 		if (!this.clicked) {
-			this.unclickedButton.draw(this.x, this.y);
+			this.unclickedButton.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE);
 
 		} else {
-			this.clickedButton.draw(this.x, this.y);
+			this.clickedButton.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE);
 		}
 
 	}
