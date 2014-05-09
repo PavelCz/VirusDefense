@@ -2,6 +2,7 @@ package engine.gui;
 
 import org.newdawn.slick.Color;
 
+import towerDefense.TowerDefense;
 import engine.graphics.Text;
 
 public class ClickableText extends Clickable {
@@ -30,7 +31,7 @@ public class ClickableText extends Clickable {
 
 	@Override
 	public void draw() {
-		this.text.draw(this.x, this.y);
+		this.text.draw(this.x, this.y, TowerDefense.GLOBAL_GAME_SCALE);
 
 	}
 

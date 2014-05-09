@@ -1,6 +1,7 @@
 package engine.gui;
 
 import towerDefense.Gameplay;
+import towerDefense.TowerDefense;
 import engine.graphics.Sprite;
 
 public class Button extends Clickable {
@@ -20,10 +21,10 @@ public class Button extends Clickable {
 	@Override
 	public void draw() {
 		if (!this.clicked) {
-			this.unclickedButton.draw(this.x, this.y);
+			this.unclickedButton.draw(this.x, this.y, TowerDefense.GLOBAL_GAME_SCALE);
 
 		} else {
-			this.clickedButton.draw(this.x, this.y);
+			this.clickedButton.draw(this.x, this.y, TowerDefense.GLOBAL_GAME_SCALE);
 		}
 
 	}

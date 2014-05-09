@@ -3,6 +3,7 @@ package engine.gui;
 import org.newdawn.slick.Color;
 
 import towerDefense.Gameplay;
+import towerDefense.TowerDefense;
 import engine.graphics.Text;
 
 public class StaticText extends GUI {
@@ -22,7 +23,7 @@ public class StaticText extends GUI {
 
 	@Override
 	public void draw() {
-		this.text.draw(this.x, this.y);
+		this.text.draw(this.x, this.y, TowerDefense.GLOBAL_GAME_SCALE);
 
 	}
 

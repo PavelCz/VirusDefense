@@ -1,6 +1,7 @@
 package towerDefense.towers;
 
 import towerDefense.Gameplay;
+import towerDefense.TowerDefense;
 import engine.Enemy;
 import engine.Rocket;
 import engine.graphics.Sprite;
@@ -10,8 +11,7 @@ public class RocketTower extends Tower {
 	protected final int shootingInterval;
 	protected int bombRadius;
 
-	public RocketTower(float x, float y, Sprite sprite, Gameplay game,
-			int shootingInterval, float damage, int bombRadius) {
+	public RocketTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage, int bombRadius) {
 		super(x * Gameplay.SIZE, y * Gameplay.SIZE, 100, 150, damage, game);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
@@ -21,7 +21,7 @@ public class RocketTower extends Tower {
 
 	@Override
 	public void draw() {
-		this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE);
+		this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, TowerDefense.GLOBAL_GAME_SCALE);
 
 	}
 
@@ -32,16 +32,15 @@ public class RocketTower extends Tower {
 			if (enemy != null && !done) {
 				float enemyX = enemy.getX();
 				float enemyY = enemy.getY();
-				float deltaX = enemyX - (this.getX() * Gameplay.SIZE + Gameplay.SIZE/2);
-				float deltaY = enemyY - (this.getY() * Gameplay.SIZE + Gameplay.SIZE/2);
+				float deltaX = enemyX - (this.getX() * Gameplay.SIZE + Gameplay.SIZE / 2);
+				float deltaY = enemyY - (this.getY() * Gameplay.SIZE + Gameplay.SIZE / 2);
 
-				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY
-						* deltaY);
+				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
 				if (distance < this.radius + enemy.getRadius()) {
-					Rocket r = new Rocket(x * Gameplay.SIZE + Gameplay.SIZE/2, y * Gameplay.SIZE + Gameplay.SIZE/2, bombRadius,
-							damage, game, enemy);
-					game.getProjectiles().add(r);
+					Rocket r = new Rocket(this.x * Gameplay.SIZE + Gameplay.SIZE / 2, this.y * Gameplay.SIZE + Gameplay.SIZE / 2,
+							this.bombRadius, this.damage, this.game, enemy);
+					this.game.getProjectiles().add(r);
 
 					done = true;
 					this.game.getSoundHandler().play("shotT2");
@@ -63,8 +62,7 @@ public class RocketTower extends Tower {
 
 	@Override
 	public Tower clone() {
-		return new BombTower(this.x, this.y, this.sprite.clone(), this.game,
-				this.shootingInterval, this.damage, this.bombRadius);
+		return new BombTower(this.x, this.y, this.sprite.clone(), this.game, this.shootingInterval, this.damage, this.bombRadius);
 	}
 
 }

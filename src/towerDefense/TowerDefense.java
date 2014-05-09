@@ -14,6 +14,7 @@ public class TowerDefense extends BasicGame {
 	protected SoundHandler soundHandler = new SoundHandler();
 	public static final int MODE_MENU = 0;
 	public static final int MODE_GAME = 1;
+	public static float GLOBAL_GAME_SCALE = 0.5f;
 
 	private Gameplay gameplay;
 	private Menu menu;
@@ -50,8 +51,7 @@ public class TowerDefense extends BasicGame {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta)
-			throws SlickException {
+	public void update(GameContainer container, int delta) throws SlickException {
 		if (this.quitGame) {
 			container.exit();
 			AL.destroy();
@@ -66,8 +66,7 @@ public class TowerDefense extends BasicGame {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics)
-			throws SlickException {
+	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		this.currentGameComponent.render(container, graphics);
 
 	}
@@ -81,6 +80,6 @@ public class TowerDefense extends BasicGame {
 	}
 
 	public SoundHandler getSoundHandler() {
-		return soundHandler;
+		return this.soundHandler;
 	}
 }
