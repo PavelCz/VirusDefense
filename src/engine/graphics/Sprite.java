@@ -3,7 +3,7 @@ package engine.graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Sprite {
+public class Sprite extends RenderObject {
 	private Image image;
 	private String imagePath;
 	private float defaultScale;
@@ -29,6 +29,7 @@ public class Sprite {
 
 	}
 
+	@Override
 	public void draw(float xCoordinate, float yCoordinate, float globalScale) {
 		this.image.draw(xCoordinate, yCoordinate, globalScale * this.defaultScale);
 	}
