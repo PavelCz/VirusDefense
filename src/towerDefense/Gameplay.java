@@ -14,8 +14,8 @@ import org.newdawn.slick.Sound;
 
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
+import towerDefense.towers.RocketTower;
 import towerDefense.towers.Tower;
-import engine.Bomb;
 import engine.Enemy;
 import engine.EnemyType;
 import engine.EnemyTypeHandler;
@@ -23,6 +23,7 @@ import engine.GameComponent;
 import engine.MapLayout;
 import engine.MyVector2f;
 import engine.Player;
+import engine.Projectile;
 import engine.Wave;
 import engine.WaveHandler;
 import engine.Waypoint;
@@ -54,13 +55,14 @@ public class Gameplay extends GameComponent {
 	private Tower[][] towers;
 	private TowerButton towerButton1;
 	private TowerButton towerButton2;
+	private TowerButton towerButton3;
 	private Tower currentTower;
 	private Player player;
 	private StaticText numberLives;
 	private StaticText moneyAmount;
 	private boolean currentTowerPlaceable;
 	private int towerShadowX, towerShadowY;
-	protected ConcurrentLinkedQueue<Bomb> bombs;
+	protected ConcurrentLinkedQueue<Projectile> projectiles;
 
 	private StaticText passedTime;
 	private InterfaceBackground interfaceBackground;
@@ -102,15 +104,18 @@ public class Gameplay extends GameComponent {
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
 
-		this.bombs = new ConcurrentLinkedQueue<Bomb>();
+		this.projectiles = new ConcurrentLinkedQueue<Projectile>();
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
 				new LongerShootingTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this, 400, 0.08f, 400), this);
 		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 264, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
 				new BombTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50), this);
+		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 328, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
+				new RocketTower(0, 0, new Sprite("tower/t1.png", 1f), this, 1000, 20f, 50), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
+		this.clickables.add(this.towerButton3);
 
 		//
 		this.initGUI();
@@ -178,8 +183,8 @@ public class Gameplay extends GameComponent {
 		this.renderTowerShadow(container, graphics);
 		this.renderGUI(container, graphics);
 
-		for (Bomb bomb : this.bombs) {
-			bomb.draw();
+		for (Projectile projectiles : this.projectiles) {
+			projectiles.draw();
 		}
 
 	}
@@ -309,8 +314,8 @@ public class Gameplay extends GameComponent {
 			}
 			this.updateTowerShadow(container);
 
-			for (Bomb bomb : this.bombs) {
-				bomb.update(delta);
+			for (Projectile projectiles : this.projectiles) {
+				projectiles.update(delta);
 			}
 
 		}
@@ -562,8 +567,8 @@ public class Gameplay extends GameComponent {
 		this.currentTower = currentTower;
 	}
 
-	public ConcurrentLinkedQueue<Bomb> getBombs() {
-		return bombs;
+	public ConcurrentLinkedQueue<Projectile> getProjectiles() {
+		return projectiles;
 	}
 
 }
