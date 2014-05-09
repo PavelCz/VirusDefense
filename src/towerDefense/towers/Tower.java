@@ -32,8 +32,8 @@ public abstract class Tower extends Entity implements Drawable {
 		if (enemy != null) {
 			float enemyX = enemy.getX();
 			float enemyY = enemy.getY();
-			float deltaX = enemyX - (this.getX() * 50 + 25);
-			float deltaY = enemyY - (this.getY() * 50 + 25);
+			float deltaX = enemyX - (this.getX() * Gameplay.SIZE + Gameplay.SIZE/2);
+			float deltaY = enemyY - (this.getY() * Gameplay.SIZE + Gameplay.SIZE/2);
 
 			float distance = (float) Math.sqrt(deltaX * deltaX + deltaY
 					* deltaY);
@@ -61,8 +61,8 @@ public abstract class Tower extends Entity implements Drawable {
 			if (enemy != null && !done) {
 				float enemyX = enemy.getX();
 				float enemyY = enemy.getY();
-				float deltaX = enemyX - (this.getX() * 50 + 25);
-				float deltaY = enemyY - (this.getY() * 50 + 25);
+				float deltaX = enemyX - (this.getX() * Gameplay.SIZE + Gameplay.SIZE/2);
+				float deltaY = enemyY - (this.getY() * Gameplay.SIZE + Gameplay.SIZE/2);
 
 				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY
 						* deltaY);

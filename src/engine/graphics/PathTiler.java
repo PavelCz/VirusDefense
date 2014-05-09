@@ -1,22 +1,24 @@
 package engine.graphics;
 
+import towerDefense.Gameplay;
+
 
 public class PathTiler {
 	private Sprite corner1, corner2, corner3, corner4, horizontal, vertical, top, bottom, left, right;
 	private Sprite[][] tiles;
 
 	public PathTiler(int[][] path) {
-		float scale = 0.05f;
-		this.corner1 = new Sprite("veins/VeinCorner.png", scale);
-		this.corner2 = new Sprite("veins/VeinCorner2.png", scale);
-		this.corner3 = new Sprite("veins/VeinCorner3.png", scale);
-		this.corner4 = new Sprite("veins/VeinCorner4.png", scale);
-		this.horizontal = new Sprite("veins/VeinHoriz.png", scale);
-		this.vertical = new Sprite("veins/VeinVert.png", scale);
-		this.top = new Sprite("veins/VeinVert.png", scale);
-		this.bottom = new Sprite("veins/VeinVert.png", scale);
-		this.left = new Sprite("veins/VeinHoriz.png", scale);
-		this.right = new Sprite("veins/VeinHoriz.png", scale);
+		float scale = 0.5f;
+		this.corner1 = new Sprite("veins/ur.png", scale);
+		this.corner2 = new Sprite("veins/br.png", scale);
+		this.corner3 = new Sprite("veins/lb.png", scale);
+		this.corner4 = new Sprite("veins/ul.png", scale);
+		this.horizontal = new Sprite("veins/hori.png", scale);
+		this.vertical = new Sprite("veins/verti.png", scale);
+		this.top = new Sprite("veins/verti.png", scale);
+		this.bottom = new Sprite("veins/verti.png", scale);
+		this.left = new Sprite("veins/hori.png", scale);
+		this.right = new Sprite("veins/hori.png", scale);
 		this.tiles = new Sprite[path.length][path[0].length];
 
 		for (int y = 0; y < path.length; ++y) {
@@ -68,7 +70,7 @@ public class PathTiler {
 		for (int y = 0; y < this.tiles.length; ++y) {
 			for (int x = 0; x < this.tiles[0].length; ++x) {
 				if (this.tiles[y][x] != null) {
-					this.tiles[y][x].draw(x * 50, y * 50);
+					this.tiles[y][x].draw(x * Gameplay.SIZE, y * Gameplay.SIZE);
 				}
 			}
 		}
