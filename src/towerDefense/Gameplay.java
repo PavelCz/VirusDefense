@@ -463,8 +463,8 @@ public class Gameplay extends GameComponent {
 					}
 				}
 				if (!buttonWasPressed) {
-					int newX = (int) x / this.currentTileLength;
-					int newY = (int) y / this.currentTileLength;
+					int newX = (int) x / this.SIZE;
+					int newY = (int) y / this.SIZE;
 					if (this.currentTower != null) {
 						int[][] path = this.currentMapLayout.getPath();
 						int cost = this.currentTower.getCost();
