@@ -290,16 +290,18 @@ public class Gameplay extends GameComponent {
 	private void renderDebug(GameContainer container, Graphics graphics) {
 		if (this.debugMode) {
 			for (Enemy enemy : this.enemies) {
-				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX(),
-						enemy.getY(), Gameplay.GLOBAL_GAME_SCALE);
+				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX()
+						* Gameplay.GLOBAL_GAME_SCALE, enemy.getY() * Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
 			}
 			for (int i = 0; i < this.towers.length; ++i) {
 				for (int j = 0; j < this.towers[0].length; ++j) {
 					if (this.towers[i][j] != null) {
 						Tower currentTower = this.towers[i][j];
 						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red)
-								.draw(currentTower.getX() * this.currentTileLength + Gameplay.SIZE / 2, currentTower.getY()
-										* this.currentTileLength + SIZE / 2, Gameplay.GLOBAL_GAME_SCALE);
+								.draw((currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2)
+										* Gameplay.GLOBAL_GAME_SCALE,
+										(currentTower.getY() * this.currentTileLength + DEFAULT_SIZE / 2) * Gameplay.GLOBAL_GAME_SCALE,
+										Gameplay.GLOBAL_GAME_SCALE);
 					}
 				}
 			}
