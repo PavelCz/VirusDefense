@@ -350,7 +350,7 @@ public class Gameplay extends GameComponent {
 			int[][] path = this.currentMapLayout.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
-			} else if (newY < 12 && newX < path.length && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
+			} else if (newY < 12 && newX < path[0].length && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
 				this.currentTowerPlaceable = true;
 			} else {
 				this.currentTowerPlaceable = false;
