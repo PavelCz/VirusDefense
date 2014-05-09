@@ -105,7 +105,8 @@ public class Gameplay extends GameComponent {
 		Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
 		float scale1 = Gameplay.INTERFACE_START_X / this.width;
 		float scale2 = TowerDefense.getHeight() / this.height;
-		Gameplay.SIZE = (int) Math.min(scale1, scale2);
+		Gameplay.GLOBAL_GAME_SCALE = Math.min(scale1, scale2);
+		Gameplay.SIZE = (int) (64 * Gameplay.GLOBAL_GAME_SCALE);
 
 		this.mapBackground = new BackgroundTiles(0.5f, "veins/bg.png", this.getHorizontalTiles(), this.getVerticalTiles());
 		//
