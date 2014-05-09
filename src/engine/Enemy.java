@@ -27,7 +27,6 @@ public class Enemy extends Entity implements Drawable {
 		this.waypoint = startingWaypoint;
 		this.direction = direction;
 		this.radius = radius;
-		System.out.println(radius);
 		this.game = game;
 		this.worth = worth;
 		this.game.getSoundHandler().play("spawn");

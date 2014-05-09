@@ -50,7 +50,6 @@ public class LongerShootingTower extends ShootingTower {
 	protected void shootAt(Enemy enemy) {
 		if (this.inRange(enemy)) {
 			enemy.setHealth(enemy.getHealth() - this.damage);
-			System.out.println("hit");
 			if (enemy.getHealth() <= 0) {
 				if (!enemy.isDead()) {
 					this.game.getPlayer().addMoney(enemy.getMoney());

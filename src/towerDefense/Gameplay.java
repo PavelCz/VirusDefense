@@ -99,16 +99,13 @@ public class Gameplay extends GameComponent {
 		this.pathTiler = new PathTiler(this.currentMapLayout.getPath());
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
 		this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
-		System.out.println(this.width);
 
 		// Set Constants:
 
-		Gameplay.INTERFACE_START_X = this.game.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
-		this.GLOBAL_GAME_SCALE = Gameplay.INTERFACE_START_X / this.width;
-		System.out.println(this.GLOBAL_GAME_SCALE);
+		Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
+		Gameplay.GLOBAL_GAME_SCALE = Gameplay.INTERFACE_START_X / this.width;
 		Gameplay.SIZE = (int) (64 * Gameplay.GLOBAL_GAME_SCALE);
 
-		System.out.println(Gameplay.SIZE);
 		this.mapBackground = new BackgroundTiles(0.5f, "veins/bg.png", this.getHorizontalTiles(), this.getVerticalTiles());
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
@@ -465,10 +462,9 @@ public class Gameplay extends GameComponent {
 					}
 				}
 				if (!buttonWasPressed) {
-					int newX = (int) x / this.SIZE;
-					int newY = (int) y / this.SIZE;
+					int newX = (int) x / Gameplay.SIZE;
+					int newY = (int) y / Gameplay.SIZE;
 
-					System.out.println(x + " " + y);
 					if (this.currentTower != null) {
 						int[][] path = this.currentMapLayout.getPath();
 						int cost = this.currentTower.getCost();
@@ -479,7 +475,6 @@ public class Gameplay extends GameComponent {
 							bufferTower.setY(newY);
 							bufferTower.getSprite().setAlpha(1f);
 							this.towers[newY][newX] = bufferTower;
-							System.out.println(newX + " " + newY);
 							this.player.reduceMoney(cost);
 							this.currentTower = null;
 							this.releaseAllClickables();
