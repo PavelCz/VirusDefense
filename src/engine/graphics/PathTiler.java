@@ -8,7 +8,7 @@ public class PathTiler {
 	private Sprite[][] tiles;
 
 	public PathTiler(int[][] path) {
-		float scale = 0.050f;
+		float scale = 0.5f;
 		this.corner1 = new Sprite("veins/VeinCorner.png", scale);
 		this.corner2 = new Sprite("veins/VeinCorner2.png", scale);
 		this.corner3 = new Sprite("veins/VeinCorner3.png", scale);
