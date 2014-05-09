@@ -244,11 +244,11 @@ public class Gameplay extends GameComponent {
 			Sprite sprite = this.currentTower.getSprite().clone();
 
 			if (this.currentTowerPlaceable) {
-				new SlickUnfilledRectangle(graphics, SIZE, SIZE, Color.green).draw(this.towerShadowX, this.towerShadowY,
-						TowerDefense.GLOBAL_GAME_SCALE);
+				new SlickUnfilledRectangle(graphics, SIZE / TowerDefense.GLOBAL_GAME_SCALE, SIZE / TowerDefense.GLOBAL_GAME_SCALE,
+						Color.green).draw(this.towerShadowX, this.towerShadowY, TowerDefense.GLOBAL_GAME_SCALE);
 			} else {
-				new SlickUnfilledRectangle(graphics, SIZE, SIZE, Color.red).draw(this.towerShadowX, this.towerShadowY,
-						TowerDefense.GLOBAL_GAME_SCALE);
+				new SlickUnfilledRectangle(graphics, SIZE / TowerDefense.GLOBAL_GAME_SCALE, SIZE / TowerDefense.GLOBAL_GAME_SCALE,
+						Color.red).draw(this.towerShadowX, this.towerShadowY, TowerDefense.GLOBAL_GAME_SCALE);
 				sprite.setColor(1f, 0, 0);
 			}
 

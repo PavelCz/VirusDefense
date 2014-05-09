@@ -30,8 +30,7 @@ public class SlickTwoColoredBar extends RenderObject {
 		this.health.setWidth(this.length2);
 		this.health.draw(x, y, globalScale);
 		if (this.bordered) {
-			new SlickUnfilledRectangle(this.graphics, this.length * globalScale, this.height * globalScale, Color.black).draw(x, y,
-					globalScale);
+			new SlickUnfilledRectangle(this.graphics, this.length, this.height, Color.black).draw(x, y, globalScale);
 			;
 		}
 
