@@ -24,7 +24,7 @@ public class Text extends RenderObject {
 	}
 
 	@Override
-	public void draw(float x, float y) {
+	public void draw(float x, float y, float globalScale) {
 		this.font.drawString(x, y, this.text, this.color);
 
 	}

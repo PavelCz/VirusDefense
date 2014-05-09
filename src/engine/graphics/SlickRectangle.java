@@ -32,9 +32,9 @@ public class SlickRectangle extends RenderObject {
 	}
 
 	@Override
-	public void draw(float x, float y) {
-		this.graphics.fill(new Rectangle(x, y, this.width, this.height), new GradientFill(0, 0, this.color, this.width, this.height,
-				this.color));
+	public void draw(float x, float y, float globalScale) {
+		this.graphics.fill(new Rectangle(x, y, this.width * globalScale, this.height * globalScale), new GradientFill(0, 0,
+				this.color, this.width * globalScale, this.height * globalScale, this.color));
 	}
 
 	public void setWidth(float width) {

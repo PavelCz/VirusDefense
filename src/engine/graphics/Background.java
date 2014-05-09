@@ -11,7 +11,7 @@ public class Background implements Drawable {
 
 	@Override
 	public void draw() {
-		this.picture.draw(0, 0);
+		this.picture.draw(0, 0, 1);
 
 	}
 
