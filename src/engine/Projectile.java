@@ -22,7 +22,8 @@ public abstract class Projectile extends Entity {
 	}
 
 	public void draw() {
-		this.sprite.draw(this.x - Gameplay.SIZE / 2, this.y - Gameplay.SIZE / 2, Gameplay.GLOBAL_GAME_SCALE);
+		this.sprite.draw((this.x - Gameplay.DEFAULT_SIZE / 2) * Gameplay.GLOBAL_GAME_SCALE, (this.y - Gameplay.DEFAULT_SIZE / 2)
+				* Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
 	}
 
 }

@@ -11,7 +11,7 @@ public class RocketTower extends Tower {
 	protected int bombRadius;
 
 	public RocketTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage, int bombRadius) {
-		super(x * Gameplay.SIZE, y * Gameplay.SIZE, 100, 150, damage, game);
+		super(x, y, 100, 150, damage, game);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
 		this.delta = this.shootingInterval;
@@ -31,14 +31,14 @@ public class RocketTower extends Tower {
 			if (enemy != null && !done) {
 				float enemyX = enemy.getX();
 				float enemyY = enemy.getY();
-				float deltaX = enemyX - (this.getX() * Gameplay.SIZE + Gameplay.SIZE / 2);
-				float deltaY = enemyY - (this.getY() * Gameplay.SIZE + Gameplay.SIZE / 2);
+				float deltaX = enemyX - (this.getX() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
+				float deltaY = enemyY - (this.getY() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
 
 				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
 				if (distance < this.radius + enemy.getRadius()) {
-					Rocket r = new Rocket(this.x * Gameplay.SIZE + Gameplay.SIZE / 2, this.y * Gameplay.SIZE + Gameplay.SIZE / 2,
-							this.bombRadius, this.damage, this.game, enemy);
+					Rocket r = new Rocket(this.x * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2, this.y * Gameplay.DEFAULT_SIZE
+							+ Gameplay.DEFAULT_SIZE / 2, this.bombRadius, this.damage, this.game, enemy);
 					this.game.getProjectiles().add(r);
 
 					done = true;

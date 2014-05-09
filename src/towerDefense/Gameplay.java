@@ -104,7 +104,7 @@ public class Gameplay extends GameComponent {
 		// Set Constants:
 
 		Gameplay.INTERFACE_START_X = this.game.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
-		this.GLOBAL_GAME_SCALE = 0.5f;// = Gameplay.INTERFACE_START_X / this.width;
+		this.GLOBAL_GAME_SCALE = Gameplay.INTERFACE_START_X / this.width;
 		System.out.println(this.GLOBAL_GAME_SCALE);
 		Gameplay.SIZE = (int) (64 * Gameplay.GLOBAL_GAME_SCALE);
 
@@ -115,9 +115,9 @@ public class Gameplay extends GameComponent {
 
 		this.towers = new Tower[12][13];
 		this.initWaves();
-		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1n.png", this, 25, 20, 0.5f));
-		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2n.png", this, 25, 100, 0.4f));
-		this.enemyTypes.add(new EnemyType(10000, 0.03f, "enemy/v1n.png", this, 25, 1000, 0.7f));
+		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1n.png", this, 32, 20, 0.5f));
+		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2n.png", this, 32, 100, 0.4f));
+		this.enemyTypes.add(new EnemyType(10000, 0.03f, "enemy/v1n.png", this, 32, 1000, 0.7f));
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
@@ -467,6 +467,8 @@ public class Gameplay extends GameComponent {
 				if (!buttonWasPressed) {
 					int newX = (int) x / this.SIZE;
 					int newY = (int) y / this.SIZE;
+
+					System.out.println(x + " " + y);
 					if (this.currentTower != null) {
 						int[][] path = this.currentMapLayout.getPath();
 						int cost = this.currentTower.getCost();
@@ -477,6 +479,7 @@ public class Gameplay extends GameComponent {
 							bufferTower.setY(newY);
 							bufferTower.getSprite().setAlpha(1f);
 							this.towers[newY][newX] = bufferTower;
+							System.out.println(newX + " " + newY);
 							this.player.reduceMoney(cost);
 							this.currentTower = null;
 							this.releaseAllClickables();

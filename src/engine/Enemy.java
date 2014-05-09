@@ -27,6 +27,7 @@ public class Enemy extends Entity implements Drawable {
 		this.waypoint = startingWaypoint;
 		this.direction = direction;
 		this.radius = radius;
+		System.out.println(radius);
 		this.game = game;
 		this.worth = worth;
 		this.game.getSoundHandler().play("spawn");
@@ -89,8 +90,8 @@ public class Enemy extends Entity implements Drawable {
 	@Override
 	public void draw() {
 		if (this.health > 0) {
-			this.sprite.draw((this.x - this.sprite.getWidth() / 2) * Gameplay.GLOBAL_GAME_SCALE,
-					(this.y - this.sprite.getHeight() / 2) * Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
+			this.sprite.draw((this.x - Gameplay.DEFAULT_SIZE / 2) * Gameplay.GLOBAL_GAME_SCALE, (this.y - Gameplay.DEFAULT_SIZE / 2)
+					* Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
 		}
 	}
 
