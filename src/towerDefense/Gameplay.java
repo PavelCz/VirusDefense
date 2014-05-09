@@ -27,6 +27,8 @@ import engine.Projectile;
 import engine.Wave;
 import engine.WaveHandler;
 import engine.Waypoint;
+import engine.graphics.Background;
+import engine.graphics.BackgroundTiles;
 import engine.graphics.PathTiler;
 import engine.graphics.SlickRectangle;
 import engine.graphics.SlickUnfilledEllipse;
@@ -43,6 +45,8 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Gameplay extends GameComponent {
+
+	private Background mapBackground;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private WaveHandler waveHandler;
@@ -65,7 +69,7 @@ public class Gameplay extends GameComponent {
 	private int towerShadowX, towerShadowY;
 	protected ConcurrentLinkedQueue<Projectile> projectiles;
 
-	public static float GLOBAL_GAME_SCALE = 1f;
+	public static float GLOBAL_GAME_SCALE;
 	public static float GLOBAL_GUI_SCALE = 1f;
 
 	private StaticText passedTime;
@@ -73,7 +77,8 @@ public class Gameplay extends GameComponent {
 	// Constants:
 	public static float INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE;
-	public static int SIZE = (int) (64 * Gameplay.GLOBAL_GAME_SCALE);
+	public static int SIZE;
+	public static int DEFAULT_SIZE = 64;
 	private float speed;
 	private PathTiler pathTiler;
 
@@ -89,13 +94,22 @@ public class Gameplay extends GameComponent {
 		super.init(container);
 		this.initDefaults();
 
-		this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", SIZE);
+		this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
 		this.pathTiler = new PathTiler(this.currentMapLayout.getPath());
+		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
+		this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
+		System.out.println(this.width);
 
 		// Set Constants:
 
 		Gameplay.INTERFACE_START_X = this.game.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
+		this.GLOBAL_GAME_SCALE = 0.5f;// = Gameplay.INTERFACE_START_X / this.width;
+		System.out.println(this.GLOBAL_GAME_SCALE);
+		Gameplay.SIZE = (int) (64 * Gameplay.GLOBAL_GAME_SCALE);
+
+		System.out.println(Gameplay.SIZE);
+		this.mapBackground = new BackgroundTiles(0.5f, "veins/bg.png", this.getHorizontalTiles(), this.getVerticalTiles());
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 
@@ -123,8 +137,6 @@ public class Gameplay extends GameComponent {
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
 
-		this.height = Gameplay.SIZE * this.towers.length;
-		this.width = Gameplay.SIZE * this.towers[0].length;
 		//
 		this.initGUI();
 		container.setShowFPS(this.debugMode);
@@ -170,7 +182,7 @@ public class Gameplay extends GameComponent {
 		float livesY = 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
 		float moneyY = livesY + textHeight;
 		this.numberLives = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, livesY, Color.white, "" + this.player.getLives());
-		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, this.game.getHeight() - textHeight, Color.white,
+		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, TowerDefense.getHeight() - textHeight, Color.white,
 				this.passedTimeToString());
 		this.moneyAmount = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize + textHeight, moneyY, Color.white, ""
 				+ this.player.getMoney());
@@ -187,7 +199,7 @@ public class Gameplay extends GameComponent {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		this.currentMapLayout.drawBackground();
+		this.drawBackground();
 		this.pathTiler.render();
 		this.renderEnemies();
 		this.renderTowers();
@@ -219,8 +231,9 @@ public class Gameplay extends GameComponent {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
-			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength * Gameplay.GLOBAL_GAME_SCALE / 2, enemy.getY()
-					- Gameplay.SIZE * Gameplay.GLOBAL_GAME_SCALE / 2 - barHeight, enemy.getMaxHealth(), barLength, barHeight);
+			SlickHealthbar h = new SlickHealthbar(graphics, (enemy.getX() - barLength / 2) * Gameplay.GLOBAL_GAME_SCALE,
+					(enemy.getY() - Gameplay.SIZE / 2) * Gameplay.GLOBAL_GAME_SCALE - barHeight, enemy.getMaxHealth(), barLength,
+					barHeight);
 			h.setHealth(enemy.getHealth());
 			h.setBordered(true);
 			h.draw();
@@ -579,6 +592,14 @@ public class Gameplay extends GameComponent {
 
 	public int getHorizontalTiles() {
 		return this.currentMapLayout.getNumberTilesWidth();
+	}
+
+	public void drawBackground() {
+		this.mapBackground.draw();
+	}
+
+	public Background getMapBackground() {
+		return this.mapBackground;
 	}
 
 	public int getVerticalTiles() {
