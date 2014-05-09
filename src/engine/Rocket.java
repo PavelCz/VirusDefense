@@ -6,16 +6,15 @@ import engine.graphics.Sprite;
 public class Rocket extends Projectile implements Drawable {
 	private Enemy enemy;
 
-	public Rocket(float x, float y, int bombRadius, float damage, Gameplay game,
-			float enemyX, float enemyY, Enemy enemy) {
+	public Rocket(float x, float y, int bombRadius, float damage, Gameplay game, Enemy enemy) {
 		super(x, y);
 		this.Radius = bombRadius;
 		this.damage = damage;
 		this.game = game;
-		this.targetX = enemyX;
-		this.targetY = enemyY;
+		this.targetX = enemy.x;
+		this.targetY = enemy.y;
 		this.speed = 0.1f;
-		this.velocity = new MyVector2f(enemyX - x, enemyY - y);
+		this.velocity = new MyVector2f(enemy.x - x, enemy.y - y);
 		this.velocity.setLength(speed);
 		this.sprite = new Sprite("shoot/Frame0001.png", 0.05f);
 		this.enemy = enemy;
