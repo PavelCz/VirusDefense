@@ -67,6 +67,7 @@ public class Gameplay extends GameComponent {
 	// Constants:
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE;
+	public static int SIZE = 64;
 	private float speed;
 	private PathTiler pathTiler;
 
@@ -82,7 +83,7 @@ public class Gameplay extends GameComponent {
 		super.init(container);
 		this.initDefaults();
 
-		this.currentMapLayout = new MapLayout("maps/map.png", "veins/flat.png", 50);
+		this.currentMapLayout = new MapLayout("maps/map.png", "veins/flat.png", SIZE);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
 		this.pathTiler = new PathTiler(this.currentMapLayout.getPath());
 
@@ -100,7 +101,7 @@ public class Gameplay extends GameComponent {
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
-		
+
 		this.bombs = new ConcurrentLinkedQueue<Bomb>();
 
 		// Buttons; this has nothing to do with the draw sequence
@@ -116,7 +117,7 @@ public class Gameplay extends GameComponent {
 		container.setShowFPS(this.debugMode);
 
 	}
-	
+
 	private void initDefaults() {
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
 		this.waveHandler = new WaveHandler(this, 2000);
@@ -176,7 +177,7 @@ public class Gameplay extends GameComponent {
 
 		this.renderTowerShadow(container, graphics);
 		this.renderGUI(container, graphics);
-		
+
 		for (Bomb bomb : this.bombs) {
 			bomb.draw();
 		}
@@ -201,7 +202,7 @@ public class Gameplay extends GameComponent {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
-			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength / 2, enemy.getY() - 25 - barHeight,
+			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength / 2, enemy.getY() - Gameplay.SIZE/2 - barHeight,
 					enemy.getMaxHealth(), barLength, barHeight);
 			h.setHealth(enemy.getHealth());
 			h.setBordered(true);
@@ -307,7 +308,7 @@ public class Gameplay extends GameComponent {
 
 			}
 			this.updateTowerShadow(container);
-			
+
 			for (Bomb bomb : this.bombs) {
 				bomb.update(delta);
 			}
@@ -369,7 +370,7 @@ public class Gameplay extends GameComponent {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (input.isKeyPressed(Input.KEY_R)) {
 
 			AL.destroy();
@@ -450,7 +451,7 @@ public class Gameplay extends GameComponent {
 						} else {
 							this.game.getSoundHandler().play("bad");
 						}
-						
+
 					}
 				}
 				this.mouseWasClicked = true;
@@ -564,6 +565,5 @@ public class Gameplay extends GameComponent {
 	public ConcurrentLinkedQueue<Bomb> getBombs() {
 		return bombs;
 	}
-	
 
 }

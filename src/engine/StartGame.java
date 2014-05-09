@@ -10,7 +10,7 @@ public class StartGame {
 		TowerDefense game = new TowerDefense();
 		AppGameContainer appGameContainer;
 		try {
-			appGameContainer = new AppGameContainer(game, 800, 600, false);
+			appGameContainer = new AppGameContainer(game, 1024, 768, false);
 			appGameContainer.start();
 
 		} catch (SlickException e) {
