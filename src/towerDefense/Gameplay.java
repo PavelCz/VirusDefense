@@ -112,7 +112,7 @@ public class Gameplay extends GameComponent {
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 
-		this.towers = new Tower[12][13];
+		this.towers = new Tower[this.getVerticalTiles()][this.getHorizontalTiles()];
 		this.initWaves();
 		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1n.png", this, 32, 20, 0.5f));
 		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2n.png", this, 32, 100, 0.4f));
@@ -364,7 +364,8 @@ public class Gameplay extends GameComponent {
 			int[][] path = this.currentMapLayout.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
-			} else if (newY < 12 && newX < path[0].length && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
+			} else if (newX >= 0 && newY >= 0 && newY < this.getVerticalTiles() && newX < this.getHorizontalTiles()
+					&& path[newY][newX] == 1 && this.towers[newY][newX] == null) {
 				this.currentTowerPlaceable = true;
 			} else {
 				this.currentTowerPlaceable = false;

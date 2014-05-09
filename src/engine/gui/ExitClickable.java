@@ -14,6 +14,5 @@ public class ExitClickable extends ClickableText {
 	public void onRelease() {
 		super.onRelease();
 		this.towerDefense.quitGame();
-		System.out.println("act2");
 	}
 }

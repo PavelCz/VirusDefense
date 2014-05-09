@@ -80,8 +80,8 @@ public class MapLayoutFromImage {
 	}
 
 	private void setWaypoints() {
-		int currentX = (int) this.startingPoint.getX() / 64;
-		int currentY = (int) this.startingPoint.getY() / 64;
+		int currentX = (int) this.startingPoint.getX() / Gameplay.DEFAULT_SIZE;
+		int currentY = (int) this.startingPoint.getY() / Gameplay.DEFAULT_SIZE;
 		int[][] path = this.path.clone();
 
 		int relativePositionOfNextPath = this.relativePositionOfNextCoordinate(path, currentX, currentY);
