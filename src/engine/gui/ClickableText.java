@@ -2,15 +2,14 @@ package engine.gui;
 
 import org.newdawn.slick.Color;
 
-import towerDefense.TowerDefense;
 import engine.graphics.Text;
 
 public class ClickableText extends Clickable {
 	private Text text;
 
-	public ClickableText(float x, float y, String text) {
+	public ClickableText(float x, float y, String text, float globalScale) {
 		super(x, y);
-		this.text = new Text(15, text, Color.white);
+		this.text = new Text(15, text, Color.white, globalScale);
 		this.collisionWidth = this.text.getWidth();
 		this.collisionHeight = this.text.getHeight();
 	}
@@ -31,7 +30,7 @@ public class ClickableText extends Clickable {
 
 	@Override
 	public void draw() {
-		this.text.draw(this.x, this.y, TowerDefense.GLOBAL_GAME_SCALE);
+		this.text.draw(this.x, this.y, 1f);
 
 	}
 

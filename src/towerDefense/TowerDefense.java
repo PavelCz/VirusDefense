@@ -15,6 +15,9 @@ public class TowerDefense extends BasicGame {
 	public static final int MODE_MENU = 0;
 	public static final int MODE_GAME = 1;
 	public static float GLOBAL_GAME_SCALE = 0.5f;
+	public static float GLOBAL_GUI_SCALE = 1f;
+	private int height;
+	public int width;
 
 	private Gameplay gameplay;
 	private Menu menu;
@@ -30,6 +33,8 @@ public class TowerDefense extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		this.initSounds();
+		this.height = container.getHeight();
+		this.width = container.getWidth();
 		this.gameplay = new Gameplay(this);
 		this.menu = new Menu(this);
 		this.menu.init(container);
@@ -81,5 +86,13 @@ public class TowerDefense extends BasicGame {
 
 	public SoundHandler getSoundHandler() {
 		return this.soundHandler;
+	}
+
+	public int getHeight() {
+		return this.height;
+	}
+
+	public int getWidth() {
+		return this.width;
 	}
 }

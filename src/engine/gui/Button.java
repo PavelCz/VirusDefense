@@ -21,10 +21,10 @@ public class Button extends Clickable {
 	@Override
 	public void draw() {
 		if (!this.clicked) {
-			this.unclickedButton.draw(this.x, this.y, TowerDefense.GLOBAL_GAME_SCALE);
+			this.unclickedButton.draw(this.x, this.y, TowerDefense.GLOBAL_GUI_SCALE);
 
 		} else {
-			this.clickedButton.draw(this.x, this.y, TowerDefense.GLOBAL_GAME_SCALE);
+			this.clickedButton.draw(this.x, this.y, TowerDefense.GLOBAL_GUI_SCALE);
 		}
 
 	}

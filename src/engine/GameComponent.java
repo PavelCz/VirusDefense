@@ -34,7 +34,6 @@ public abstract class GameComponent {
 		this.guiElements = new ArrayList<GUI>();
 		this.clickables = new ArrayList<Clickable>();
 	}
-	
 
 	public void update(GameContainer container, int delta) throws SlickException {
 		this.updateClickables(container, delta);
@@ -46,7 +45,7 @@ public abstract class GameComponent {
 
 	private void updateClickables(GameContainer container, int delta) {
 		for (Clickable clickable : this.clickables) {
-			clickable.update(container);
+			clickable.update(container, 1f);
 		}
 		Input input = container.getInput();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
@@ -56,15 +55,13 @@ public abstract class GameComponent {
 
 			boolean buttonWasPressed = false;
 			for (Clickable clickable : this.clickables) {
-				if (clickable.collides((int) x, (int) y)) {
+				if (clickable.collides((int) x, (int) y, 1f)) {
 					buttonWasPressed = true;
 					clickable.onClick();
 					this.wasClicked = clickable;
 					this.game.getSoundHandler().play("press");
 				}
 			}
-
-			
 
 		}
 		// checks if mouse button was released again after being pressed
@@ -75,12 +72,10 @@ public abstract class GameComponent {
 
 		}
 	}
-	
+
 	public SoundHandler getSoundHandler() {
 		return this.game.getSoundHandler();
 	}
-
-	
 
 	private void releaseAllClickables() {
 		for (Clickable clickable : this.clickables) {

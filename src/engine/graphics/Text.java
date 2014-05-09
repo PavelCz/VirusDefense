@@ -6,15 +6,16 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
 public class Text extends RenderObject {
+	private Font fontSettings;
 	private TrueTypeFont font;
 	private String text;
 	private Color color;
 	private int height;
 
-	public Text(int height, String text, Color color) {
+	public Text(int height, String text, Color color, float globalScale) {
 		this.height = height;
-		Font fontSettings = new Font("Verdana", Font.PLAIN, this.height);
-		this.font = new TrueTypeFont(fontSettings, true);
+		this.fontSettings = new Font("Verdana", Font.PLAIN, (int) (this.height * globalScale));
+		this.font = new TrueTypeFont(this.fontSettings, true);
 		this.text = text;
 		this.color = color;
 	}

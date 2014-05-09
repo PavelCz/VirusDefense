@@ -12,7 +12,7 @@ public class StaticText extends GUI {
 	public StaticText(float x, float y, int height, Color color, String text) {
 		super(x, y);
 
-		this.text = new Text(height, text, color);
+		this.text = new Text(height, text, color, TowerDefense.GLOBAL_GUI_SCALE);
 
 	}
 
@@ -23,7 +23,7 @@ public class StaticText extends GUI {
 
 	@Override
 	public void draw() {
-		this.text.draw(this.x, this.y, TowerDefense.GLOBAL_GAME_SCALE);
+		this.text.draw(this.x, this.y, TowerDefense.GLOBAL_GUI_SCALE);
 
 	}
 

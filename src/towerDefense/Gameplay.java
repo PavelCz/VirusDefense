@@ -43,6 +43,7 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Gameplay extends GameComponent {
+	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private WaveHandler waveHandler;
 	private boolean mouseWasClicked;
@@ -67,7 +68,7 @@ public class Gameplay extends GameComponent {
 	private StaticText passedTime;
 	private InterfaceBackground interfaceBackground;
 	// Constants:
-	public static int INTERFACE_START_X;
+	public static float INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE;
 	public static int SIZE = (int) (64 * TowerDefense.GLOBAL_GAME_SCALE);
 	private float speed;
@@ -91,7 +92,7 @@ public class Gameplay extends GameComponent {
 
 		// Set Constants:
 
-		Gameplay.INTERFACE_START_X = this.currentMapLayout.getNumberTilesWidth() * this.currentTileLength;
+		Gameplay.INTERFACE_START_X = this.game.getWidth() - 3 * 64 * TowerDefense.GLOBAL_GUI_SCALE;
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 
@@ -107,16 +108,21 @@ public class Gameplay extends GameComponent {
 		this.projectiles = new ConcurrentLinkedQueue<Projectile>();
 
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
-				new LongerShootingTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this, 400, 0.08f, 400), this);
-		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 264, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
-				new BombTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50), this);
-		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 328, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
-				new RocketTower(0, 0, new Sprite("tower/t1.png", 1f), this, 1000, 20f, 50), this);
+		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * TowerDefense.GLOBAL_GUI_SCALE,
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0,
+						new Sprite("tower/t1n.png", 0.5f), this, 400, 0.08f, 400), this);
+		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * TowerDefense.GLOBAL_GUI_SCALE,
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0,
+						new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50), this);
+		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * TowerDefense.GLOBAL_GUI_SCALE,
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 1f), this,
+						1000, 20f, 50), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
 
+		this.height = Gameplay.SIZE * this.towers.length;
+		this.width = Gameplay.SIZE * this.towers[0].length;
 		//
 		this.initGUI();
 		container.setShowFPS(this.debugMode);
@@ -156,12 +162,16 @@ public class Gameplay extends GameComponent {
 	}
 
 	private void initGUI() {
-		int guiX = 3;
-		int livesY = 150;
-		int moneyY = 165;
-		this.numberLives = new StaticText(Gameplay.INTERFACE_START_X + 50, livesY, Color.white, "" + this.player.getLives());
-		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, 580, Color.white, this.passedTimeToString());
-		this.moneyAmount = new StaticText(Gameplay.INTERFACE_START_X + 65, moneyY, Color.white, "" + this.player.getMoney());
+		float guiTileSize = 64 * TowerDefense.GLOBAL_GUI_SCALE;
+		float textHeight = 20 * TowerDefense.GLOBAL_GUI_SCALE;
+		float guiX = 3 * TowerDefense.GLOBAL_GUI_SCALE;
+		float livesY = 3 * 64 * TowerDefense.GLOBAL_GUI_SCALE;
+		float moneyY = livesY + textHeight;
+		this.numberLives = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, livesY, Color.white, "" + this.player.getLives());
+		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, this.game.getHeight() - textHeight, Color.white,
+				this.passedTimeToString());
+		this.moneyAmount = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize + textHeight, moneyY, Color.white, ""
+				+ this.player.getMoney());
 
 		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(this.numberLives);
@@ -207,8 +217,9 @@ public class Gameplay extends GameComponent {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
-			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength / 2,
-					enemy.getY() - Gameplay.SIZE / 2 - barHeight, enemy.getMaxHealth(), barLength, barHeight);
+			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength * TowerDefense.GLOBAL_GAME_SCALE / 2,
+					enemy.getY() - Gameplay.SIZE * TowerDefense.GLOBAL_GAME_SCALE / 2 - barHeight, enemy.getMaxHealth(), barLength,
+					barHeight);
 			h.setHealth(enemy.getHealth());
 			h.setBordered(true);
 			h.draw();
@@ -338,7 +349,7 @@ public class Gameplay extends GameComponent {
 			int[][] path = this.currentMapLayout.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
-			} else if (newY < 12 && x < Gameplay.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
+			} else if (newY < 12 && newX < path.length && path[newY][newX] == 1 && this.towers[newY][newX] == null) {
 				this.currentTowerPlaceable = true;
 			} else {
 				this.currentTowerPlaceable = false;
@@ -429,7 +440,7 @@ public class Gameplay extends GameComponent {
 
 				boolean buttonWasPressed = false;
 				for (Clickable clickable : this.clickables) {
-					if (clickable.collides((int) x, (int) y)) {
+					if (clickable.collides((int) x, (int) y, TowerDefense.GLOBAL_GUI_SCALE)) {
 						buttonWasPressed = true;
 						this.releaseAllClickables();
 						clickable.onClick();
@@ -443,8 +454,8 @@ public class Gameplay extends GameComponent {
 					if (this.currentTower != null) {
 						int[][] path = this.currentMapLayout.getPath();
 						int cost = this.currentTower.getCost();
-						if (x < Gameplay.INTERFACE_START_X && path[newY][newX] == 1 && this.towers[newY][newX] == null
-								&& this.player.getMoney() - cost >= 0) {
+						if (this.currentTowerPlaceable && x < Gameplay.INTERFACE_START_X && y < path.length * this.currentTileLength
+								&& path[newY][newX] == 1 && this.towers[newY][newX] == null && this.player.getMoney() - cost >= 0) {
 							Tower bufferTower = this.currentTower.clone();
 							bufferTower.setX(newX);
 							bufferTower.setY(newY);

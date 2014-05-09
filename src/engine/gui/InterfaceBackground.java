@@ -15,7 +15,7 @@ public class InterfaceBackground extends GUI implements Drawable {
 
 	@Override
 	public void draw() {
-		this.picture.draw(this.x, this.y, TowerDefense.GLOBAL_GAME_SCALE);
+		this.picture.draw(this.x, this.y, TowerDefense.GLOBAL_GUI_SCALE);
 
 	}
 
