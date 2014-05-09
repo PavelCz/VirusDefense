@@ -1,6 +1,7 @@
 package engine;
 
 import towerDefense.Gameplay;
+import towerDefense.TowerDefense;
 import engine.graphics.Sprite;
 
 public class Enemy extends Entity implements Drawable {
@@ -89,7 +90,8 @@ public class Enemy extends Entity implements Drawable {
 	@Override
 	public void draw() {
 		if (this.health > 0) {
-			this.sprite.draw(this.x - this.sprite.getWidth() / 2, this.y - this.sprite.getHeight() / 2, 1);
+			this.sprite
+					.draw(this.x - this.sprite.getWidth() / 2, this.y - this.sprite.getHeight() / 2, TowerDefense.GLOBAL_GAME_SCALE);
 		}
 	}
 

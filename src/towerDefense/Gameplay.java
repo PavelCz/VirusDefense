@@ -69,7 +69,7 @@ public class Gameplay extends GameComponent {
 	// Constants:
 	public static int INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE;
-	public static int SIZE = 64;
+	public static int SIZE = (int) (64 * TowerDefense.GLOBAL_GAME_SCALE);
 	private float speed;
 	private PathTiler pathTiler;
 

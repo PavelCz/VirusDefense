@@ -29,13 +29,8 @@ public class Sprite {
 
 	}
 
-	public void draw(float x, float y, float globalScale) {
-		this.draw(x, y, 0, 1);
-	}
-
-	public void draw(float xCoordinate, float yCoordinate, float rotation, float scale) {
-		this.image.setRotation(rotation);
-		this.image.draw(xCoordinate, yCoordinate, scale * this.defaultScale);
+	public void draw(float xCoordinate, float yCoordinate, float globalScale) {
+		this.image.draw(xCoordinate, yCoordinate, globalScale * this.defaultScale);
 	}
 
 	public float getWidth() {

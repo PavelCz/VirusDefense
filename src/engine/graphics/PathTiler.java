@@ -1,6 +1,7 @@
 package engine.graphics;
 
 import towerDefense.Gameplay;
+import towerDefense.TowerDefense;
 
 public class PathTiler {
 	private Sprite corner1, corner2, corner3, corner4, horizontal, vertical, top, bottom, left, right;
@@ -69,7 +70,7 @@ public class PathTiler {
 		for (int y = 0; y < this.tiles.length; ++y) {
 			for (int x = 0; x < this.tiles[0].length; ++x) {
 				if (this.tiles[y][x] != null) {
-					this.tiles[y][x].draw(x * Gameplay.SIZE, y * Gameplay.SIZE, 1);
+					this.tiles[y][x].draw(x * Gameplay.SIZE, y * Gameplay.SIZE, TowerDefense.GLOBAL_GAME_SCALE);
 				}
 			}
 		}

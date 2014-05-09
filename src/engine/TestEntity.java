@@ -14,7 +14,7 @@ public class TestEntity extends RotatableEntity implements Drawable {
 
 	@Override
 	public void draw() {
-		this.sprite.draw(this.x, this.y, this.rotation, 1);
+		this.sprite.draw(this.x, this.y, 1);
 
 	}
 
