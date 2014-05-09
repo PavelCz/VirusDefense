@@ -1,7 +1,6 @@
 package engine;
 
 import towerDefense.Gameplay;
-import towerDefense.TowerDefense;
 import engine.graphics.Sprite;
 
 public abstract class Projectile extends Entity {
@@ -23,7 +22,7 @@ public abstract class Projectile extends Entity {
 	}
 
 	public void draw() {
-		this.sprite.draw(this.x - Gameplay.SIZE / 2, this.y - Gameplay.SIZE / 2, TowerDefense.GLOBAL_GAME_SCALE);
+		this.sprite.draw(this.x - Gameplay.SIZE / 2, this.y - Gameplay.SIZE / 2, Gameplay.GLOBAL_GAME_SCALE);
 	}
 
 }

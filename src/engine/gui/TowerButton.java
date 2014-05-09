@@ -1,7 +1,6 @@
 package engine.gui;
 
 import towerDefense.Gameplay;
-import towerDefense.TowerDefense;
 import towerDefense.towers.Tower;
 import engine.graphics.Sprite;
 
@@ -19,9 +18,8 @@ public class TowerButton extends Button {
 		Sprite s = this.tower.getSprite();
 		s.setAlpha(0.8f);
 		float scale = 0.9f;
-		s.draw(this.x + (this.collisionWidth - s.getWidth() * scale) / 2 * TowerDefense.GLOBAL_GUI_SCALE, this.y
-				+ (this.collisionHeight - s.getHeight() * scale) / 2 * TowerDefense.GLOBAL_GUI_SCALE, scale
-				* TowerDefense.GLOBAL_GUI_SCALE);
+		s.draw(this.x + (this.collisionWidth - s.getWidth() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, this.y
+				+ (this.collisionHeight - s.getHeight() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, scale * Gameplay.GLOBAL_GUI_SCALE);
 	}
 
 	@Override

@@ -65,12 +65,15 @@ public class Gameplay extends GameComponent {
 	private int towerShadowX, towerShadowY;
 	protected ConcurrentLinkedQueue<Projectile> projectiles;
 
+	public static float GLOBAL_GAME_SCALE = 1f;
+	public static float GLOBAL_GUI_SCALE = 1f;
+
 	private StaticText passedTime;
 	private InterfaceBackground interfaceBackground;
 	// Constants:
 	public static float INTERFACE_START_X;
 	public static int STANDARD_TEXT_SCALE;
-	public static int SIZE = (int) (64 * TowerDefense.GLOBAL_GAME_SCALE);
+	public static int SIZE = (int) (64 * Gameplay.GLOBAL_GAME_SCALE);
 	private float speed;
 	private PathTiler pathTiler;
 
@@ -92,7 +95,7 @@ public class Gameplay extends GameComponent {
 
 		// Set Constants:
 
-		Gameplay.INTERFACE_START_X = this.game.getWidth() - 3 * 64 * TowerDefense.GLOBAL_GUI_SCALE;
+		Gameplay.INTERFACE_START_X = this.game.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 
@@ -108,15 +111,14 @@ public class Gameplay extends GameComponent {
 		this.projectiles = new ConcurrentLinkedQueue<Projectile>();
 
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * TowerDefense.GLOBAL_GUI_SCALE,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0,
-						new Sprite("tower/t1n.png", 0.5f), this, 400, 0.08f, 400), this);
-		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * TowerDefense.GLOBAL_GUI_SCALE,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0,
-						new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50), this);
-		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * TowerDefense.GLOBAL_GUI_SCALE,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 1f), this,
-						1000, 20f, 50), this);
+		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
+				"buttons/PSButton1_click.png",
+				new LongerShootingTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this, 400, 0.08f, 400), this);
+		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
+				"buttons/PSButton1_click.png", new BombTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50),
+				this);
+		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
+				"buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 1f), this, 1000, 20f, 50), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
@@ -162,10 +164,10 @@ public class Gameplay extends GameComponent {
 	}
 
 	private void initGUI() {
-		float guiTileSize = 64 * TowerDefense.GLOBAL_GUI_SCALE;
-		float textHeight = 20 * TowerDefense.GLOBAL_GUI_SCALE;
-		float guiX = 3 * TowerDefense.GLOBAL_GUI_SCALE;
-		float livesY = 3 * 64 * TowerDefense.GLOBAL_GUI_SCALE;
+		float guiTileSize = 64 * Gameplay.GLOBAL_GUI_SCALE;
+		float textHeight = 20 * Gameplay.GLOBAL_GUI_SCALE;
+		float guiX = 3 * Gameplay.GLOBAL_GUI_SCALE;
+		float livesY = 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
 		float moneyY = livesY + textHeight;
 		this.numberLives = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, livesY, Color.white, "" + this.player.getLives());
 		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, this.game.getHeight() - textHeight, Color.white,
@@ -207,9 +209,9 @@ public class Gameplay extends GameComponent {
 		this.renderDebug(container, graphics);
 
 		if (this.mode == 1) {
-			new Sprite("You Win.png").draw(0, 0, TowerDefense.GLOBAL_GAME_SCALE);
+			new Sprite("You Win.png").draw(0, 0, Gameplay.GLOBAL_GAME_SCALE);
 		} else if (this.mode == -1) {
-			new Sprite("Game Over.png").draw(0, 0, TowerDefense.GLOBAL_GAME_SCALE);
+			new Sprite("Game Over.png").draw(0, 0, Gameplay.GLOBAL_GAME_SCALE);
 		}
 	}
 
@@ -217,9 +219,8 @@ public class Gameplay extends GameComponent {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
-			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength * TowerDefense.GLOBAL_GAME_SCALE / 2,
-					enemy.getY() - Gameplay.SIZE * TowerDefense.GLOBAL_GAME_SCALE / 2 - barHeight, enemy.getMaxHealth(), barLength,
-					barHeight);
+			SlickHealthbar h = new SlickHealthbar(graphics, enemy.getX() - barLength * Gameplay.GLOBAL_GAME_SCALE / 2, enemy.getY()
+					- Gameplay.SIZE * Gameplay.GLOBAL_GAME_SCALE / 2 - barHeight, enemy.getMaxHealth(), barLength, barHeight);
 			h.setHealth(enemy.getHealth());
 			h.setBordered(true);
 			h.draw();
@@ -255,15 +256,15 @@ public class Gameplay extends GameComponent {
 			Sprite sprite = this.currentTower.getSprite().clone();
 
 			if (this.currentTowerPlaceable) {
-				new SlickUnfilledRectangle(graphics, SIZE / TowerDefense.GLOBAL_GAME_SCALE, SIZE / TowerDefense.GLOBAL_GAME_SCALE,
-						Color.green).draw(this.towerShadowX, this.towerShadowY, TowerDefense.GLOBAL_GAME_SCALE);
+				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.GLOBAL_GAME_SCALE, SIZE / Gameplay.GLOBAL_GAME_SCALE, Color.green)
+						.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
 			} else {
-				new SlickUnfilledRectangle(graphics, SIZE / TowerDefense.GLOBAL_GAME_SCALE, SIZE / TowerDefense.GLOBAL_GAME_SCALE,
-						Color.red).draw(this.towerShadowX, this.towerShadowY, TowerDefense.GLOBAL_GAME_SCALE);
+				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.GLOBAL_GAME_SCALE, SIZE / Gameplay.GLOBAL_GAME_SCALE, Color.red)
+						.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
 				sprite.setColor(1f, 0, 0);
 			}
 
-			sprite.draw(this.towerShadowX, this.towerShadowY, TowerDefense.GLOBAL_GAME_SCALE);
+			sprite.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
 		}
 	}
 
@@ -277,7 +278,7 @@ public class Gameplay extends GameComponent {
 		if (this.debugMode) {
 			for (Enemy enemy : this.enemies) {
 				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX(),
-						enemy.getY(), TowerDefense.GLOBAL_GAME_SCALE);
+						enemy.getY(), Gameplay.GLOBAL_GAME_SCALE);
 			}
 			for (int i = 0; i < this.towers.length; ++i) {
 				for (int j = 0; j < this.towers[0].length; ++j) {
@@ -285,12 +286,12 @@ public class Gameplay extends GameComponent {
 						Tower currentTower = this.towers[i][j];
 						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red)
 								.draw(currentTower.getX() * this.currentTileLength + Gameplay.SIZE / 2, currentTower.getY()
-										* this.currentTileLength + SIZE / 2, TowerDefense.GLOBAL_GAME_SCALE);
+										* this.currentTileLength + SIZE / 2, Gameplay.GLOBAL_GAME_SCALE);
 					}
 				}
 			}
 			// create a black box that the FPS are visible
-			new SlickRectangle(graphics, 100, 20, Color.black).draw(5, 10, TowerDefense.GLOBAL_GAME_SCALE);
+			new SlickRectangle(graphics, 100, 20, Color.black).draw(5, 10, Gameplay.GLOBAL_GAME_SCALE);
 		}
 	}
 
@@ -440,7 +441,7 @@ public class Gameplay extends GameComponent {
 
 				boolean buttonWasPressed = false;
 				for (Clickable clickable : this.clickables) {
-					if (clickable.collides((int) x, (int) y, TowerDefense.GLOBAL_GUI_SCALE)) {
+					if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
 						buttonWasPressed = true;
 						this.releaseAllClickables();
 						clickable.onClick();

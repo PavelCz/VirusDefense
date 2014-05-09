@@ -1,7 +1,6 @@
 package towerDefense.towers;
 
 import towerDefense.Gameplay;
-import towerDefense.TowerDefense;
 import engine.Enemy;
 import engine.Rocket;
 import engine.graphics.Sprite;
@@ -21,7 +20,7 @@ public class RocketTower extends Tower {
 
 	@Override
 	public void draw() {
-		this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, TowerDefense.GLOBAL_GAME_SCALE);
+		this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
 
 	}
 

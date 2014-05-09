@@ -1,7 +1,6 @@
 package engine.gui;
 
 import towerDefense.Gameplay;
-import towerDefense.TowerDefense;
 import engine.Drawable;
 import engine.graphics.Sprite;
 
@@ -15,7 +14,7 @@ public class InterfaceBackground extends GUI implements Drawable {
 
 	@Override
 	public void draw() {
-		this.picture.draw(this.x, this.y, TowerDefense.GLOBAL_GUI_SCALE);
+		this.picture.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE);
 
 	}
 

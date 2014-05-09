@@ -1,6 +1,6 @@
 package engine.graphics;
 
-import towerDefense.TowerDefense;
+import towerDefense.Gameplay;
 import engine.Drawable;
 
 public class Background implements Drawable {
@@ -12,7 +12,7 @@ public class Background implements Drawable {
 
 	@Override
 	public void draw() {
-		this.picture.draw(0, 0, TowerDefense.GLOBAL_GAME_SCALE);
+		this.picture.draw(0, 0, Gameplay.GLOBAL_GAME_SCALE);
 
 	}
 
