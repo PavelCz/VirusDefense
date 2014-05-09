@@ -9,16 +9,16 @@ public class PathTiler {
 
 	public PathTiler(int[][] path) {
 		float scale = 0.5f;
-		this.corner1 = new Sprite("veins/VeinCorner.png", scale);
-		this.corner2 = new Sprite("veins/VeinCorner2.png", scale);
-		this.corner3 = new Sprite("veins/VeinCorner3.png", scale);
-		this.corner4 = new Sprite("veins/VeinCorner4.png", scale);
-		this.horizontal = new Sprite("veins/VeinHoriz.png", scale);
-		this.vertical = new Sprite("veins/VeinVert.png", scale);
-		this.top = new Sprite("veins/VeinVert.png", scale);
-		this.bottom = new Sprite("veins/VeinVert.png", scale);
-		this.left = new Sprite("veins/VeinHoriz.png", scale);
-		this.right = new Sprite("veins/VeinHoriz.png", scale);
+		this.corner1 = new Sprite("veins/ur.png", scale);
+		this.corner2 = new Sprite("veins/br.png", scale);
+		this.corner3 = new Sprite("veins/lb.png", scale);
+		this.corner4 = new Sprite("veins/ul.png", scale);
+		this.horizontal = new Sprite("veins/hori.png", scale);
+		this.vertical = new Sprite("veins/verti.png", scale);
+		this.top = new Sprite("veins/verti.png", scale);
+		this.bottom = new Sprite("veins/verti.png", scale);
+		this.left = new Sprite("veins/hori.png", scale);
+		this.right = new Sprite("veins/hori.png", scale);
 		this.tiles = new Sprite[path.length][path[0].length];
 
 		for (int y = 0; y < path.length; ++y) {

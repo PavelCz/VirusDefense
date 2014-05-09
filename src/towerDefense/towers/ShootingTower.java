@@ -10,7 +10,7 @@ public class ShootingTower extends Tower {
 
 	public ShootingTower(float x, float y, Sprite sprite, Gameplay game,
 			int shootingInterval, float damage) {
-		super(x * 50, y * 50, 100, 100, damage, game);
+		super(x * Gameplay.SIZE, y * Gameplay.SIZE, 100, 100, damage, game);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
 		this.delta = this.shootingInterval;
@@ -24,7 +24,7 @@ public class ShootingTower extends Tower {
 
 	@Override
 	public void draw() {
-		this.sprite.draw(this.x * 50, this.y * 50);
+		this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE);
 
 	}
 
@@ -44,8 +44,8 @@ public class ShootingTower extends Tower {
 			if (enemy != null && !done) {
 				float enemyX = enemy.getX();
 				float enemyY = enemy.getY();
-				float deltaX = enemyX - (this.getX() * 50 + 25);
-				float deltaY = enemyY - (this.getY() * 50 + 25);
+				float deltaX = enemyX - (this.getX() * Gameplay.SIZE + Gameplay.SIZE/2);
+				float deltaY = enemyY - (this.getY() * Gameplay.SIZE + Gameplay.SIZE/2);
 
 				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY
 						* deltaY);

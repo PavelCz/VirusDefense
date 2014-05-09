@@ -83,7 +83,7 @@ public class Gameplay extends GameComponent {
 		super.init(container);
 		this.initDefaults();
 
-		this.currentMapLayout = new MapLayout("maps/map.png", "veins/flat.png", SIZE);
+		this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", SIZE);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
 		this.pathTiler = new PathTiler(this.currentMapLayout.getPath());
 
@@ -95,9 +95,9 @@ public class Gameplay extends GameComponent {
 
 		this.towers = new Tower[12][13];
 		this.initWaves();
-		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1n.png", this, 25, 20, 0.05f));
-		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2n.png", this, 25, 100, 0.04f));
-		this.enemyTypes.add(new EnemyType(10000, 0.03f, "enemy/v1n.png", this, 25, 1000, 0.07f));
+		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1n.png", this, 25, 20, 0.5f));
+		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2n.png", this, 25, 100, 0.4f));
+		this.enemyTypes.add(new EnemyType(10000, 0.03f, "enemy/v1n.png", this, 25, 1000, 0.7f));
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
@@ -106,8 +106,8 @@ public class Gameplay extends GameComponent {
 
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 200, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
-				new LongerShootingTower(0, 0, new Sprite("tower/t1n.png", 0.1f), this, 400, 0.08f, 400), this);
-		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 250, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
+				new LongerShootingTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this, 400, 0.08f, 400), this);
+		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 264, "buttons/PSButton1.png", "buttons/PSButton1_click.png",
 				new BombTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f, 50), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
@@ -239,9 +239,9 @@ public class Gameplay extends GameComponent {
 			Sprite sprite = this.currentTower.getSprite().clone();
 
 			if (this.currentTowerPlaceable) {
-				new SlickUnfilledRectangle(graphics, 50, 50, Color.green).draw(this.towerShadowX, this.towerShadowY);
+				new SlickUnfilledRectangle(graphics, SIZE, SIZE, Color.green).draw(this.towerShadowX, this.towerShadowY);
 			} else {
-				new SlickUnfilledRectangle(graphics, 50, 50, Color.red).draw(this.towerShadowX, this.towerShadowY);
+				new SlickUnfilledRectangle(graphics, SIZE, SIZE, Color.red).draw(this.towerShadowX, this.towerShadowY);
 				sprite.setColor(1f, 0, 0);
 			}
 
@@ -266,8 +266,8 @@ public class Gameplay extends GameComponent {
 					if (this.towers[i][j] != null) {
 						Tower currentTower = this.towers[i][j];
 						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red)
-								.draw(currentTower.getX() * this.currentTileLength + 25, currentTower.getY() * this.currentTileLength
-										+ 25);
+								.draw(currentTower.getX() * this.currentTileLength + Gameplay.SIZE/2, currentTower.getY() * this.currentTileLength
+										+ SIZE/2);
 					}
 				}
 			}
@@ -324,10 +324,10 @@ public class Gameplay extends GameComponent {
 			// this.towerShadowY = (int) (input.getMouseY() - this.currentTower.getSprite().getHeight() / 2);
 			int x = input.getMouseX();
 			int y = input.getMouseY();
-			int newX = x / 50;
-			int newY = y / 50;
-			this.towerShadowX = newX * 50;
-			this.towerShadowY = newY * 50;
+			int newX = x / Gameplay.SIZE;
+			int newY = y / Gameplay.SIZE;
+			this.towerShadowX = newX * Gameplay.SIZE;
+			this.towerShadowY = newY * Gameplay.SIZE;
 			int[][] path = this.currentMapLayout.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
