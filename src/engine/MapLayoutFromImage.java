@@ -4,8 +4,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import towerDefense.Gameplay;
-
 // @formatter:off
 /**
  * @author Pavel
@@ -45,6 +43,7 @@ public class MapLayoutFromImage {
 
 	private void setColorArray() {
 		this.colors = new Color[this.image.getHeight()][this.image.getWidth()];
+		System.out.println(this.image.getHeight() + " " + this.image.getWidth());
 		for (int y = 0; y < this.colors.length; ++y) {
 			for (int x = 0; x < this.colors[0].length; ++x) {
 				this.colors[y][x] = this.image.getColor(x, y);
@@ -68,8 +67,7 @@ public class MapLayoutFromImage {
 				} else {
 					this.path[y][x] = 0;
 					if (this.isRed(currentColor)) {
-						this.startingPoint = new Waypoint(x * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2, y
-								* Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
+						this.startingPoint = new Waypoint(x, y);
 					} else { // currentColor has no blue, no green, no red value => Path
 						//
 					}
@@ -80,8 +78,8 @@ public class MapLayoutFromImage {
 	}
 
 	private void setWaypoints() {
-		int currentX = (int) this.startingPoint.getX() / Gameplay.DEFAULT_SIZE;
-		int currentY = (int) this.startingPoint.getY() / Gameplay.DEFAULT_SIZE;
+		int currentX = (int) this.startingPoint.getX();
+		int currentY = (int) this.startingPoint.getY();
 		int[][] path = this.path.clone();
 
 		int relativePositionOfNextPath = this.relativePositionOfNextCoordinate(path, currentX, currentY);
@@ -90,13 +88,12 @@ public class MapLayoutFromImage {
 		int relativePositionOfPreviousPath;
 		relativePositionOfPreviousPath = relativePositionOfNextPath;
 
-		while (currentX >= 0 && currentY >= 0 && currentX < this.path.length && currentY < this.path.length
+		while (currentX >= 0 && currentY >= 0 && currentX < this.path[0].length && currentY < this.path.length
 				&& this.path[currentY][currentX] < 1) {
 			path[currentY][currentX] = 5;
 			relativePositionOfNextPath = this.relativePositionOfNextCoordinate(path, currentX, currentY);
 			if (relativePositionOfNextPath != relativePositionOfPreviousPath) {
-				this.startingPoint.add(new Waypoint(currentX * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2, currentY
-						* Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2, relativePositionOfNextPath));
+				this.startingPoint.add(new Waypoint(currentX, currentY, relativePositionOfNextPath));
 			}
 			if (relativePositionOfNextPath == Waypoint.RIGHT) {
 				++currentX;
