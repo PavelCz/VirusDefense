@@ -43,6 +43,7 @@ public class MapLayoutFromImage {
 
 	private void setColorArray() {
 		this.colors = new Color[this.image.getHeight()][this.image.getWidth()];
+		System.out.println(this.image.getHeight() + " " + this.image.getWidth());
 		for (int y = 0; y < this.colors.length; ++y) {
 			for (int x = 0; x < this.colors[0].length; ++x) {
 				this.colors[y][x] = this.image.getColor(x, y);
@@ -87,7 +88,7 @@ public class MapLayoutFromImage {
 		int relativePositionOfPreviousPath;
 		relativePositionOfPreviousPath = relativePositionOfNextPath;
 
-		while (currentX >= 0 && currentY >= 0 && currentX < this.path.length && currentY < this.path.length
+		while (currentX >= 0 && currentY >= 0 && currentX < this.path[0].length && currentY < this.path.length
 				&& this.path[currentY][currentX] < 1) {
 			path[currentY][currentX] = 5;
 			relativePositionOfNextPath = this.relativePositionOfNextCoordinate(path, currentX, currentY);
