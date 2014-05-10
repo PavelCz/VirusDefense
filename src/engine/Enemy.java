@@ -23,9 +23,9 @@ public class Enemy extends Entity implements Drawable {
 		this.maxHealth = maxHealth;
 		this.speed = speed;
 		this.sprite = sprite;
-		this.velocity = new MyVector2f(0, speed);
 		this.waypoint = startingWaypoint;
 		this.direction = this.waypoint.getDirection();
+		this.newDirection();
 		this.radius = radius;
 		this.game = game;
 		this.worth = worth;
