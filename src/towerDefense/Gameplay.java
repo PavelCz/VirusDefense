@@ -87,6 +87,7 @@ public class Gameplay extends GameComponent {
 	//
 	public Gameplay(TowerDefense game) {
 		super(game);
+		
 	}
 
 	@Override
@@ -94,7 +95,7 @@ public class Gameplay extends GameComponent {
 		super.init(container);
 		this.initDefaults();
 
-		this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
+		//this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
 		this.pathTiler = new PathTiler(this.currentMapLayout.getPath());
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
@@ -621,6 +622,10 @@ public class Gameplay extends GameComponent {
 
 	public ConcurrentLinkedQueue<Projectile> getProjectiles() {
 		return this.projectiles;
+	}
+	
+	public void setMapLayout(MapLayout mapLayout) {
+		this.currentMapLayout = mapLayout;
 	}
 
 }
