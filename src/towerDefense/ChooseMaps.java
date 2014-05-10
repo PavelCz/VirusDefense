@@ -74,7 +74,6 @@ public class ChooseMaps extends GameComponent {
 
 						this.game.setMode(TowerDefense.MODE_GAME);
 					}
-					System.out.println(this.page);
 
 				}
 			}

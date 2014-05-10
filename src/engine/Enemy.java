@@ -71,7 +71,6 @@ public class Enemy extends Entity implements Drawable {
 			this.game.getSoundHandler().play("death");
 			this.game.getEnemies().remove(this);
 		}
-		System.out.println(this.x + " " + this.y);
 	}
 
 	private void newDirection() {

@@ -141,11 +141,6 @@ public class Gameplay extends GameComponent {
 		this.initGUI();
 		container.setShowFPS(this.debugMode);
 
-		Waypoint currentWaypoint = this.getWaypoints();
-		while (currentWaypoint != null) {
-			System.out.println(currentWaypoint.getX() + ", " + currentWaypoint.getY() + " " + currentWaypoint.getDirection());
-			currentWaypoint = currentWaypoint.getNextWaypoint();
-		}
 
 	}
 
