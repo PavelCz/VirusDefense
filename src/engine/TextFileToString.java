@@ -22,6 +22,7 @@ public class TextFileToString {
 			while ((line = reader.readLine()) != null) {
 				list.add(line);
 			}
+			reader.close();
 		} catch (IOException x) {
 			System.err.println(x);
 		}
