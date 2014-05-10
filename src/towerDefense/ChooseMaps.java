@@ -25,6 +25,10 @@ public class ChooseMaps extends GameComponent {
 		this.mapHandler.add("map.png", "previews/Blutkreislauf-rachen.png");
 		this.mapHandler.add("testMapHor.png", "previews/Blutkreislauf-Herz.jpg");
 		this.mapHandler.add("testMapVer.png", "previews/Blutkreislauf-Niere.jpg");
+
+		this.mapHandler.add("map-map.png", "maps/map-map.png");
+		this.mapHandler.add("malegenitals.png", "maps/malegenitals.png");
+		
 		this.currentMap = this.mapHandler.get(page);
 		this.button = new Button(100, 150, currentMap.getPicture(),
 				currentMap.getPicture());
