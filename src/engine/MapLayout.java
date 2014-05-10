@@ -1,28 +1,25 @@
 package engine;
 
-import engine.graphics.Background;
-import engine.graphics.BackgroundTiles;
+import engine.graphics.PathTiler;
+import engine.graphics.Sprite;
 
 public class MapLayout {
 	private int[][] path;
+	private PathTiler pathTiler;
 	private Waypoint waypoints;
-
-	private Background mapBackground;
+	private Sprite picture;
 	private int tileLength;
 	private int numberTilesWidth, numberTilesHeight;
 
-	public MapLayout(String mapLayoutPath, String backgroundPath, int tileLength) {
+	public MapLayout(String mapLayoutPath, String backgroundPath, int tileLength, String picture) {
 		MapLayoutFromImage mapLayout = new MapLayoutFromImage(mapLayoutPath);
+		this.picture = new Sprite(picture);
 		this.path = mapLayout.getPath();
 		this.waypoints = mapLayout.getStartingPoint();
-		this.mapBackground = new BackgroundTiles(0.5f, backgroundPath);
 		this.numberTilesWidth = this.path[0].length;
 		this.numberTilesHeight = this.path.length;
 		this.tileLength = tileLength;
-	}
-
-	public void drawBackground() {
-		this.mapBackground.draw();
+		this.pathTiler = new PathTiler(this.path);
 	}
 
 	public int[][] getPath() {
@@ -31,10 +28,6 @@ public class MapLayout {
 
 	public Waypoint getWaypoints() {
 		return this.waypoints;
-	}
-
-	public Background getMapBackground() {
-		return this.mapBackground;
 	}
 
 	public int getTileLength() {
@@ -48,5 +41,15 @@ public class MapLayout {
 	public int getNumberTilesHeight() {
 		return this.numberTilesHeight;
 	}
+
+	public Sprite getPicture() {
+		return picture;
+	}
+	
+	public void renderPath() {
+		this.pathTiler.render();
+	}
+	
+	
 
 }

@@ -37,6 +37,7 @@ public class Menu extends GameComponent {
 		this.t.setBorderColor(Color.gray);
 		this.t.setBackgroundColor(Color.lightGray);
 		this.t.setMaxLength(32);
+		
 	}
 
 	
