@@ -65,8 +65,7 @@ public class TowerDefense extends BasicGame {
 		}
 		if (this.mode == TowerDefense.MODE_GAME) {
 			this.currentGameComponent = this.gameplay;
-		}
-		if (this.mode == TowerDefense.MODE_MAPS) {
+		} else if (this.mode == TowerDefense.MODE_MAPS) {
 			this.currentGameComponent = this.maps;
 		} else {
 			this.currentGameComponent = this.menu;
@@ -105,15 +104,15 @@ public class TowerDefense extends BasicGame {
 	public void setMapLayout(MapLayout mapLayout) {
 		this.gameplay.setMapLayout(mapLayout);
 	}
-	
+
 	public void initGameplay(GameContainer container) {
 
-		this.currentGameComponent = this.gameplay;
 		try {
 			this.gameplay.init(container);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.currentGameComponent = this.gameplay;
 	}
 }
