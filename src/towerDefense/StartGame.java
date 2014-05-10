@@ -5,6 +5,7 @@ import org.newdawn.slick.SlickException;
 
 public class StartGame {
 	public static void main(String[] args) {
+
 		TowerDefense game = new TowerDefense();
 		AppGameContainer appGameContainer;
 		try {
