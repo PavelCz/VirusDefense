@@ -45,7 +45,7 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Gameplay extends GameComponent {
-
+	private static int horizontalTiles, verticalTiles;
 	private Background mapBackground;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
@@ -96,9 +96,13 @@ public class Gameplay extends GameComponent {
 
 		this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
+
+		Gameplay.horizontalTiles = this.currentMapLayout.getNumberTilesWidth();
+
+		Gameplay.verticalTiles = this.currentMapLayout.getNumberTilesHeight();
 		this.pathTiler = new PathTiler(this.currentMapLayout.getPath());
-		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
-		this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
+		this.height = Gameplay.DEFAULT_SIZE * Gameplay.getVerticalTiles();
+		this.width = Gameplay.DEFAULT_SIZE * Gameplay.getHorizontalTiles();
 
 		// Set Constants:
 
@@ -108,11 +112,11 @@ public class Gameplay extends GameComponent {
 		Gameplay.GLOBAL_GAME_SCALE = Math.min(scale1, scale2);
 		Gameplay.SIZE = (int) (64 * Gameplay.GLOBAL_GAME_SCALE);
 
-		this.mapBackground = new BackgroundTiles(0.5f, "veins/bg.png", this.getHorizontalTiles(), this.getVerticalTiles());
+		this.mapBackground = new BackgroundTiles(0.5f, "veins/bg.png", Gameplay.getHorizontalTiles(), Gameplay.getVerticalTiles());
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 
-		this.towers = new Tower[this.getVerticalTiles()][this.getHorizontalTiles()];
+		this.towers = new Tower[Gameplay.getVerticalTiles()][Gameplay.getHorizontalTiles()];
 		this.initWaves();
 		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1n.png", this, 32, 20, 0.5f));
 		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2n.png", this, 32, 100, 0.4f));
@@ -364,7 +368,7 @@ public class Gameplay extends GameComponent {
 			int[][] path = this.currentMapLayout.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
-			} else if (newX >= 0 && newY >= 0 && newY < this.getVerticalTiles() && newX < this.getHorizontalTiles()
+			} else if (newX >= 0 && newY >= 0 && newY < Gameplay.getVerticalTiles() && newX < Gameplay.getHorizontalTiles()
 					&& path[newY][newX] == 1 && this.towers[newY][newX] == null) {
 				this.currentTowerPlaceable = true;
 			} else {
@@ -593,8 +597,8 @@ public class Gameplay extends GameComponent {
 		return this.currentTower;
 	}
 
-	public int getHorizontalTiles() {
-		return this.currentMapLayout.getNumberTilesWidth();
+	public static int getHorizontalTiles() {
+		return Gameplay.horizontalTiles;
 	}
 
 	public void drawBackground() {
@@ -605,8 +609,8 @@ public class Gameplay extends GameComponent {
 		return this.mapBackground;
 	}
 
-	public int getVerticalTiles() {
-		return this.currentMapLayout.getNumberTilesHeight();
+	public static int getVerticalTiles() {
+		return Gameplay.verticalTiles;
 	}
 
 	public void setCurrentTower(Tower currentTower) {
