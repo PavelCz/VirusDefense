@@ -1,6 +1,5 @@
 package engine;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,8 +20,7 @@ public class WaveHandler {
 		this.waves = new LinkedList<Wave>();
 		this.timeBetweenWaves = timeBetweenWaves;
 		this.delta = this.timeBetweenWaves;
-		List<String> lines = TextFileToString
-				.getString("./src/data/files/waves/" + path);
+		List<String> lines = TextFileToString.getLines("./src/data/files/waves/" + path);
 		this.initWaves(lines);
 
 	}
@@ -34,7 +32,7 @@ public class WaveHandler {
 		String s = lines.get(i);
 
 		String[] parts = s.split(", ");
-		numberEnemies = parts.length-1;
+		numberEnemies = parts.length - 1;
 		int[] ints = new int[numberEnemies];
 		for (int j = 0; j < ints.length; ++j) {
 			ints[j] = Integer.parseInt(parts[j + 1]);
@@ -42,7 +40,7 @@ public class WaveHandler {
 		this.addWave(new Wave(Integer.parseInt(parts[0]), ints));
 		++i;
 
-		for ( ; i < lines.size(); ++i) {
+		for (; i < lines.size(); ++i) {
 			s = lines.get(i);
 			parts = s.split(", ");
 			ints = new int[numberEnemies];
@@ -91,9 +89,7 @@ public class WaveHandler {
 			if (this.index > 0) {
 				// calculates the next enemy type, creates a new object with
 				// that type and adds the object to the enemies of the game
-				this.game.getEnemies().add(
-						this.game.getEnemyTypes().createEnemy(
-								this.calculateEnemy(this.currentWave)));
+				this.game.getEnemies().add(this.game.getEnemyTypes().createEnemy(this.calculateEnemy(this.currentWave)));
 				this.index--;
 			}
 		}

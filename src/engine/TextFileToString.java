@@ -11,12 +11,11 @@ public class TextFileToString {
 	private int[] bytes;
 	private char[] chars;
 
-	
-	public static List<String> getString(String path) {
+	public static List<String> getLines(String path) {
 		List<String> list = new ArrayList<String>();
 		try {
 			File f = new File(path);
-			
+
 			BufferedReader reader = new BufferedReader(new FileReader(f));
 
 			String line = null;
@@ -28,21 +27,6 @@ public class TextFileToString {
 		}
 		return list;
 	}
-
-	// FileInputStream file = new FileInputStream(path);
-	// int size = file.available();
-	// bytes = new int[size];
-	// int t;
-	// int i = 0;
-	// while (-1 != (t = file.read())) {
-	// bytes[i] = t;
-	// ++i;
-	// }
-	// this.chars = new char[bytes.length];
-	// for (int j = 0; j < bytes.length; ++j) {
-	// this.chars[j] = (char) bytes[j];
-	//
-	// }
 
 	public String getString() {
 
