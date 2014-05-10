@@ -18,7 +18,8 @@ public class Enemy extends Entity implements Drawable {
 
 	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Gameplay game, float radius,
 			int worth) {
-		super(startingWaypoint.getX(), startingWaypoint.getY());
+		super(startingWaypoint.getX() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2, startingWaypoint.getY()
+				* Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
 		this.health = maxHealth;
 		this.maxHealth = maxHealth;
 		this.speed = speed;
@@ -53,13 +54,17 @@ public class Enemy extends Entity implements Drawable {
 			if (this.waypoint == null) {
 				this.health = 0;
 				this.game.reduceLives();
-			} else if (this.direction == Waypoint.DOWN && this.getY() >= this.waypoint.getY()) {
+			} else if (this.direction == Waypoint.DOWN
+					&& this.getY() >= this.waypoint.getY() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2) {
 				this.newDirection();
-			} else if (this.direction == Waypoint.RIGHT && this.getX() >= this.waypoint.getX()) {
+			} else if (this.direction == Waypoint.RIGHT
+					&& this.getX() >= this.waypoint.getX() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2) {
 				this.newDirection();
-			} else if (this.direction == Waypoint.UP && this.getY() <= this.waypoint.getY()) {
+			} else if (this.direction == Waypoint.UP
+					&& this.getY() <= this.waypoint.getY() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2) {
 				this.newDirection();
-			} else if (this.direction == Waypoint.LEFT && this.getX() <= this.waypoint.getX()) {
+			} else if (this.direction == Waypoint.LEFT
+					&& this.getX() <= this.waypoint.getX() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2) {
 				this.newDirection();
 			}
 		} else {

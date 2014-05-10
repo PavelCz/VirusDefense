@@ -4,8 +4,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import towerDefense.Gameplay;
-
 // @formatter:off
 /**
  * @author Pavel
@@ -68,8 +66,7 @@ public class MapLayoutFromImage {
 				} else {
 					this.path[y][x] = 0;
 					if (this.isRed(currentColor)) {
-						this.startingPoint = new Waypoint(x * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2, y
-								* Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
+						this.startingPoint = new Waypoint(x, y);
 					} else { // currentColor has no blue, no green, no red value => Path
 						//
 					}
@@ -80,8 +77,8 @@ public class MapLayoutFromImage {
 	}
 
 	private void setWaypoints() {
-		int currentX = (int) this.startingPoint.getX() / Gameplay.DEFAULT_SIZE;
-		int currentY = (int) this.startingPoint.getY() / Gameplay.DEFAULT_SIZE;
+		int currentX = (int) this.startingPoint.getX();
+		int currentY = (int) this.startingPoint.getY();
 		int[][] path = this.path.clone();
 
 		int relativePositionOfNextPath = this.relativePositionOfNextCoordinate(path, currentX, currentY);
@@ -95,8 +92,7 @@ public class MapLayoutFromImage {
 			path[currentY][currentX] = 5;
 			relativePositionOfNextPath = this.relativePositionOfNextCoordinate(path, currentX, currentY);
 			if (relativePositionOfNextPath != relativePositionOfPreviousPath) {
-				this.startingPoint.add(new Waypoint(currentX * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2, currentY
-						* Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2, relativePositionOfNextPath));
+				this.startingPoint.add(new Waypoint(currentX, currentY, relativePositionOfNextPath));
 			}
 			if (relativePositionOfNextPath == Waypoint.RIGHT) {
 				++currentX;
