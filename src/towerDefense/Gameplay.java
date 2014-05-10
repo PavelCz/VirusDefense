@@ -144,7 +144,7 @@ public class Gameplay extends GameComponent {
 		this.waveHandler = new WaveHandler(this, 2000, "1.txt");
 		this.mouseWasClicked = false;
 		this.debugMode = false;
-		this.enemyTypes = new EnemyTypeHandler();
+		this.enemyTypes = new EnemyTypeHandler(this);
 		this.passedMilliseconds = 0;
 		this.mode = 0;
 		this.player = new Player(10, 200);

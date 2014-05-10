@@ -3,6 +3,8 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import towerDefense.Gameplay;
+
 /**
  * Handles all enemy types. You can add a new enemy type. This Type will be saved at a specific index and later you can create an
  * Object with that number
@@ -12,7 +14,7 @@ import java.util.List;
 public class EnemyTypeHandler {
 	private List<EnemyType> enemyTypes;
 
-	public EnemyTypeHandler() {
+	public EnemyTypeHandler(Gameplay game) {
 		this.enemyTypes = new ArrayList<EnemyType>();
 	}
 
