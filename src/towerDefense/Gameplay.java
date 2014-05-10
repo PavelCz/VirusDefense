@@ -158,19 +158,6 @@ public class Gameplay extends GameComponent {
 
 	private void initWaves() {
 
-		this.waveHandler.addWave(new Wave(1, new int[] { 100, 0, 0 }));
-		this.waveHandler.addWave(new Wave(2, new int[] { 100, 0, 0 }));
-		this.waveHandler.addWave(new Wave(2, new int[] { 100, 0, 0 }));
-		this.waveHandler.addWave(new Wave(3, new int[] { 95, 5, 0 }));
-		this.waveHandler.addWave(new Wave(6, new int[] { 90, 10, 0 }));
-		this.waveHandler.addWave(new Wave(6, new int[] { 70, 30, 0 }));
-		this.waveHandler.addWave(new Wave(9, new int[] { 80, 20, 0 }));
-		this.waveHandler.addWave(new Wave(15, new int[] { 80, 20, 0 }));
-		this.waveHandler.addWave(new Wave(12, new int[] { 50, 50, 0 }));
-		this.waveHandler.addWave(new Wave(30, new int[] { 70, 30, 0 }));
-		this.waveHandler.addWave(new Wave(50, new int[] { 50, 50, 0 }));
-		this.waveHandler.addWave(new Wave(1, new int[] { 0, 0, 100 }));
-
 	}
 
 	private void initGUI() {

@@ -22,20 +22,30 @@ public class WaveHandler {
 		this.waves = new LinkedList<Wave>();
 		this.timeBetweenWaves = timeBetweenWaves;
 		this.delta = this.timeBetweenWaves;
-		List<String> lines = TextFileToString.getString("./src/data/files/waves/" + path);
+		List<String> lines = TextFileToString
+				.getString("./src/data/files/waves/" + path);
 		this.initWaves(lines);
-		
-		
+
 	}
-	
+
 	private void initWaves(List<String> lines) {
 		int i = 0;
-		
+
 		this.numberEnemies = Integer.parseInt(lines.get(i));
 		++i;
 		System.out.println(this.numberEnemies);
+
+		for (; i < lines.size(); ++i) {
+			String s = lines.get(i);
+			String[] parts = s.split(", ");
+			int[] ints = new int[this.numberEnemies];
+			for (int j = 0; j < ints.length; ++j) {
+				ints[j] = Integer.parseInt(parts[j + 1]);
+			}
+			this.addWave(new Wave(Integer.parseInt(parts[0]), ints));
+
+		}
 	}
-	
 
 	public void addWave(Wave wave) {
 		this.waves.add(wave);
