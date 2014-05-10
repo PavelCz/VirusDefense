@@ -20,7 +20,7 @@ public class WaveHandler {
 		this.waves = new LinkedList<Wave>();
 		this.timeBetweenWaves = timeBetweenWaves;
 		this.delta = this.timeBetweenWaves;
-		List<String> lines = TextFileToString.getLines("./src/data/files/waves/" + path);
+		List<String> lines = TextFileToString.getLines("waves/" + path);
 		this.initWaves(lines);
 
 	}

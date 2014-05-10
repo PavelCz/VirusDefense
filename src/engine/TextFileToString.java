@@ -14,7 +14,7 @@ public class TextFileToString {
 	public static List<String> getLines(String path) {
 		List<String> list = new ArrayList<String>();
 		try {
-			File f = new File(path);
+			File f = new File("./src/data/files/" + path);
 
 			BufferedReader reader = new BufferedReader(new FileReader(f));
 
