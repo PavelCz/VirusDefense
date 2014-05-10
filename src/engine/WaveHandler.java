@@ -9,7 +9,6 @@ import towerDefense.Gameplay;
 public class WaveHandler {
 	private LinkedList<Wave> waves;
 	private Gameplay game;
-	private int numberEnemies;
 	private int index = 0;
 	private Wave currentWave;
 	private int delta;
@@ -30,15 +29,23 @@ public class WaveHandler {
 
 	private void initWaves(List<String> lines) {
 		int i = 0;
+		int numberEnemies;
 
-		this.numberEnemies = Integer.parseInt(lines.get(i));
+		String s = lines.get(i);
+
+		String[] parts = s.split(", ");
+		numberEnemies = parts.length-1;
+		int[] ints = new int[numberEnemies];
+		for (int j = 0; j < ints.length; ++j) {
+			ints[j] = Integer.parseInt(parts[j + 1]);
+		}
+		this.addWave(new Wave(Integer.parseInt(parts[0]), ints));
 		++i;
-		System.out.println(this.numberEnemies);
 
-		for (; i < lines.size(); ++i) {
-			String s = lines.get(i);
-			String[] parts = s.split(", ");
-			int[] ints = new int[this.numberEnemies];
+		for ( ; i < lines.size(); ++i) {
+			s = lines.get(i);
+			parts = s.split(", ");
+			ints = new int[numberEnemies];
 			for (int j = 0; j < ints.length; ++j) {
 				ints[j] = Integer.parseInt(parts[j + 1]);
 			}
