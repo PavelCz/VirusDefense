@@ -11,11 +11,13 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.TextField;
 
 import engine.GameComponent;
+import engine.MapHandler;
 import engine.gui.ExitClickable;
 import engine.gui.StartClickable;
 
 public class Menu extends GameComponent {
 	private TextField t;
+	private MapHandler mapHandler = new MapHandler();
 
 	public Menu(TowerDefense game) {
 		super(game);
@@ -37,6 +39,10 @@ public class Menu extends GameComponent {
 		this.t.setBorderColor(Color.gray);
 		this.t.setBackgroundColor(Color.lightGray);
 		this.t.setMaxLength(32);
+		
+		this.mapHandler.add("map.png");
+		this.mapHandler.add("testMapHor.png");
+		this.mapHandler.add("testMapVer.png");
 	}
 
 	

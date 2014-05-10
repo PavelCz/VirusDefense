@@ -11,6 +11,6 @@ public class MapHandler {
 	}
 	
 	public void add(String path) {
-		this.maps.add(new MapLayout(path, "veins/bg.png", 64));
+		this.maps.add(new MapLayout("maps/" + path, "veins/bg.png", 64));
 	}
 }
