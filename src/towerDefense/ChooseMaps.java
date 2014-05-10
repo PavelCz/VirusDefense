@@ -3,7 +3,6 @@ package towerDefense;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
-import towerDefense.towers.Tower;
 import engine.GameComponent;
 import engine.MapHandler;
 import engine.MapLayout;
@@ -25,10 +24,9 @@ public class ChooseMaps extends GameComponent {
 		this.mapHandler.add("map.png", "maps/map.png");
 		this.mapHandler.add("testMapHor.png", "maps/testMap.png");
 		this.mapHandler.add("testMapVer.png", "maps/testMapHor.png");
-		
-		this.currentMap = this.mapHandler.get(page);
-		this.button = new Button(100, 150, currentMap.getPicture(),
-				currentMap.getPicture());
+
+		this.currentMap = this.mapHandler.get(this.page);
+		this.button = new Button(100, 150, this.currentMap.getPicture(), this.currentMap.getPicture());
 		this.left = new Button(50, 200, "left.png", "left.png");
 
 		this.right = new Button(200, 200, "right.png", "right.png");
@@ -39,9 +37,10 @@ public class ChooseMaps extends GameComponent {
 		this.guiElements.add(this.button);
 		this.guiElements.add(this.left);
 		this.guiElements.add(this.right);
-		this.lastPage = mapHandler.getLength()-1;
+		this.lastPage = this.mapHandler.getLength() - 1;
 	}
 
+	@Override
 	public void update(GameContainer container, int delta) {
 		this.mouseEvents(container, delta);
 		this.button.setUnclickedButton(this.currentMap.getPicture());
@@ -62,15 +61,15 @@ public class ChooseMaps extends GameComponent {
 							this.page = this.lastPage;
 						}
 
-						this.currentMap = mapHandler.get(this.page);
+						this.currentMap = this.mapHandler.get(this.page);
 					} else if (clickable == this.right) {
 						this.page += 1;
 						if (this.page > this.lastPage) {
 							this.page = 0;
 						}
-						this.currentMap = mapHandler.get(this.page);
+						this.currentMap = this.mapHandler.get(this.page);
 					} else if (clickable == this.button) {
-						this.game.setMapLayout(currentMap);
+						this.game.setMapLayout(this.currentMap);
 						this.game.initGameplay(container);
 
 						this.game.setMode(TowerDefense.MODE_GAME);

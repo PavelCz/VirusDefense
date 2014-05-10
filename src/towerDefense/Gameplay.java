@@ -24,7 +24,6 @@ import engine.MapLayout;
 import engine.MyVector2f;
 import engine.Player;
 import engine.Projectile;
-import engine.Wave;
 import engine.WaveHandler;
 import engine.Waypoint;
 import engine.graphics.Background;
@@ -85,7 +84,7 @@ public class Gameplay extends GameComponent {
 	//
 	public Gameplay(TowerDefense game) {
 		super(game);
-		
+
 	}
 
 	@Override
@@ -93,7 +92,7 @@ public class Gameplay extends GameComponent {
 		super.init(container);
 		this.initDefaults();
 
-		//this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
+		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
 		this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
@@ -137,7 +136,6 @@ public class Gameplay extends GameComponent {
 		//
 		this.initGUI();
 		container.setShowFPS(this.debugMode);
-
 
 	}
 
@@ -602,7 +600,7 @@ public class Gameplay extends GameComponent {
 	public ConcurrentLinkedQueue<Projectile> getProjectiles() {
 		return this.projectiles;
 	}
-	
+
 	public void setMapLayout(MapLayout mapLayout) {
 		this.currentMapLayout = mapLayout;
 	}

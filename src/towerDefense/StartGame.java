@@ -1,11 +1,7 @@
 package towerDefense;
 
-import java.io.IOException;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
-
-import engine.TextFileToString;
 
 public class StartGame {
 	public static void main(String[] args) {
