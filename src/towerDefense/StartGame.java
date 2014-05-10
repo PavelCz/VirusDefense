@@ -1,9 +1,7 @@
-package engine;
+package towerDefense;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
-
-import towerDefense.TowerDefense;
 
 public class StartGame {
 	public static void main(String[] args) {
