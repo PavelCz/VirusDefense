@@ -29,7 +29,6 @@ import engine.WaveHandler;
 import engine.Waypoint;
 import engine.graphics.Background;
 import engine.graphics.BackgroundTiles;
-import engine.graphics.PathTiler;
 import engine.graphics.SlickRectangle;
 import engine.graphics.SlickUnfilledEllipse;
 import engine.graphics.SlickUnfilledRectangle;
@@ -80,7 +79,6 @@ public class Gameplay extends GameComponent {
 	public static int SIZE;
 	public static int DEFAULT_SIZE = 64;
 	private float speed;
-	private PathTiler pathTiler;
 
 	// Tests:
 
