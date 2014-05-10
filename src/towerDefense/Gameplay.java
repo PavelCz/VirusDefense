@@ -94,7 +94,7 @@ public class Gameplay extends GameComponent {
 		super.init(container);
 		this.initDefaults();
 
-		this.currentMapLayout = new MapLayout("maps/testMapHor.png", "veins/bg.png", DEFAULT_SIZE);
+		this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
 		this.pathTiler = new PathTiler(this.currentMapLayout.getPath());
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
