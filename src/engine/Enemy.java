@@ -54,16 +54,16 @@ public class Enemy extends Entity implements Drawable {
 			if (this.waypoint == null) {
 				this.health = 0;
 				this.game.reduceLives();
-			} else if (this.direction == Waypoint.DOWN && this.getY() >= this.waypoint.getY() * Gameplay.DEFAULT_SIZE) {
+			} else if (this.direction == Waypoint.DOWN && this.y >= this.waypoint.getY() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
 				this.normalizeCoordinates(previousWaypoint);
-			} else if (this.direction == Waypoint.RIGHT && this.getX() >= this.waypoint.getX() * Gameplay.DEFAULT_SIZE) {
+			} else if (this.direction == Waypoint.RIGHT && this.x >= this.waypoint.getX() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
 				this.normalizeCoordinates(previousWaypoint);
-			} else if (this.direction == Waypoint.UP && this.getY() <= this.waypoint.getY() * Gameplay.DEFAULT_SIZE) {
+			} else if (this.direction == Waypoint.UP && this.y <= this.waypoint.getY() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
 				this.normalizeCoordinates(previousWaypoint);
-			} else if (this.direction == Waypoint.LEFT && this.getX() <= this.waypoint.getX() * Gameplay.DEFAULT_SIZE) {
+			} else if (this.direction == Waypoint.LEFT && this.x <= this.waypoint.getX() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
 				this.normalizeCoordinates(previousWaypoint);
 			}
@@ -107,6 +107,16 @@ public class Enemy extends Entity implements Drawable {
 		// } else {
 		// this.y = (int) (this.y / Gameplay.DEFAULT_SIZE) * Gameplay.DEFAULT_SIZE;
 		// }
+	}
+
+	@Override
+	public float getX() {
+		return (this.x + Gameplay.DEFAULT_SIZE / 2);
+	}
+
+	@Override
+	public float getY() {
+		return (this.y + Gameplay.DEFAULT_SIZE / 2);
 	}
 
 	public float getRadius() {
