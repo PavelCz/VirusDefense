@@ -17,8 +17,7 @@ public class Enemy extends Entity implements Drawable {
 	private boolean dead = false;
 
 	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, Gameplay game, float radius, int worth) {
-		super(startingWaypoint.getX() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2, startingWaypoint.getY()
-				* Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
+		super(startingWaypoint.getX() * Gameplay.DEFAULT_SIZE, startingWaypoint.getY() * Gameplay.DEFAULT_SIZE);
 		this.health = maxHealth;
 		this.maxHealth = maxHealth;
 		this.speed = speed;
@@ -53,23 +52,20 @@ public class Enemy extends Entity implements Drawable {
 			if (this.waypoint == null) {
 				this.health = 0;
 				this.game.reduceLives();
-			} else if (this.direction == Waypoint.DOWN
-					&& this.getY() >= this.waypoint.getY() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2) {
+			} else if (this.direction == Waypoint.DOWN && this.getY() >= this.waypoint.getY() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
-			} else if (this.direction == Waypoint.RIGHT
-					&& this.getX() >= this.waypoint.getX() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2) {
+			} else if (this.direction == Waypoint.RIGHT && this.getX() >= this.waypoint.getX() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
-			} else if (this.direction == Waypoint.UP
-					&& this.getY() <= this.waypoint.getY() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2) {
+			} else if (this.direction == Waypoint.UP && this.getY() <= this.waypoint.getY() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
-			} else if (this.direction == Waypoint.LEFT
-					&& this.getX() <= this.waypoint.getX() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2) {
+			} else if (this.direction == Waypoint.LEFT && this.getX() <= this.waypoint.getX() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
 			}
 		} else {
 			this.game.getSoundHandler().play("death");
 			this.game.getEnemies().remove(this);
 		}
+		System.out.println(this.x + " " + this.y);
 	}
 
 	private void newDirection() {
@@ -93,8 +89,7 @@ public class Enemy extends Entity implements Drawable {
 	@Override
 	public void draw() {
 		if (this.health > 0) {
-			this.sprite.draw((this.x - Gameplay.DEFAULT_SIZE / 2) * Gameplay.GLOBAL_GAME_SCALE, (this.y - Gameplay.DEFAULT_SIZE / 2)
-					* Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
+			this.sprite.draw((this.x) * Gameplay.GLOBAL_GAME_SCALE, (this.y) * Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
 		}
 	}
 
