@@ -6,15 +6,16 @@ import engine.graphics.Sprite;
 public class Button extends Clickable {
 	private Sprite unclickedButton;
 	private Sprite clickedButton;
-	protected Gameplay game;
 
-	public Button(float x, float y, String unclickedButtonPath, String clickedButtonPath, Gameplay game) {
+	public Button(float x, float y, String unclickedButtonPath, String clickedButtonPath) {
+		this(x,y,new Sprite(unclickedButtonPath), new Sprite(clickedButtonPath));
+	}
+	public Button(float x, float y, Sprite unclickedButton, Sprite clickedButton) {
 		super(x, y);
-		this.unclickedButton = new Sprite(unclickedButtonPath);
-		this.clickedButton = new Sprite(clickedButtonPath);
+		this.unclickedButton = unclickedButton;
+		this.clickedButton = clickedButton;
 		this.collisionWidth = this.unclickedButton.getWidth();
 		this.collisionHeight = this.unclickedButton.getHeight();
-		this.game = game;
 	}
 
 	@Override
@@ -38,6 +39,10 @@ public class Button extends Clickable {
 	public void onUnHover() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void setUnclickedButton(Sprite picture) {
+		this.unclickedButton = picture;
 	}
 
 }

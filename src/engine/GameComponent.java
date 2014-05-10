@@ -22,6 +22,9 @@ public abstract class GameComponent {
 
 	public GameComponent(TowerDefense game) {
 		this.game = game;
+
+		this.guiElements = new ArrayList<GUI>();
+		this.clickables = new ArrayList<Clickable>();
 	}
 
 	private void renderGUI() {
@@ -31,8 +34,6 @@ public abstract class GameComponent {
 	}
 
 	public void init(GameContainer container) throws SlickException {
-		this.guiElements = new ArrayList<GUI>();
-		this.clickables = new ArrayList<Clickable>();
 	}
 
 	public void update(GameContainer container, int delta) throws SlickException {
