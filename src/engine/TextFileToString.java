@@ -3,9 +3,11 @@ package engine;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class TextFileToString {
 	private int[] bytes;
+	private char[] chars;
 	public TextFileToString(String path) throws IOException {
 		FileInputStream file = new FileInputStream(path);
 		int size = file.available();
@@ -16,16 +18,22 @@ public class TextFileToString {
 			bytes[i] = t;
 			++i;
 		}
+		char[] chars = new char[bytes.length];
+		for(int j = 0; j< bytes.length; ++j) {
+			chars[j] =(char) bytes[j];
+			
+		}
 
 	}
 	
-	public String toString() {
-		char[] chars = new char[bytes.length];
-		for(int i = 0; i< bytes.length; ++i) {
-			chars[i] =(char) bytes[i];
-			
-		}
+	public String getString() {
+		
+		
 		
 		return new String(chars);
+	}
+	
+	public char[] getChars() {
+		return this.chars;
 	}
 }

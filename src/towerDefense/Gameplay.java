@@ -143,7 +143,7 @@ public class Gameplay extends GameComponent {
 
 	private void initDefaults() {
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
-		this.waveHandler = new WaveHandler(this, 2000);
+		this.waveHandler = new WaveHandler(this, 2000, "1.txt");
 		this.mouseWasClicked = false;
 		this.debugMode = false;
 		this.enemyTypes = new EnemyTypeHandler();

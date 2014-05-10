@@ -1,5 +1,6 @@
 package engine;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 import towerDefense.Gameplay;
@@ -7,6 +8,7 @@ import towerDefense.Gameplay;
 public class WaveHandler {
 	private LinkedList<Wave> waves;
 	private Gameplay game;
+	private int numberEnemies;
 	private int index = 0;
 	private Wave currentWave;
 	private int delta;
@@ -14,12 +16,32 @@ public class WaveHandler {
 	private int timeBetweenEnemies = 500;
 	private boolean done = false;
 
-	public WaveHandler(Gameplay game, int timeBetweenWaves) {
+	public WaveHandler(Gameplay game, int timeBetweenWaves, String path) {
 		this.game = game;
 		this.waves = new LinkedList<Wave>();
 		this.timeBetweenWaves = timeBetweenWaves;
 		this.delta = this.timeBetweenWaves;
+		TextFileToString file;
+		try {
+			file = new TextFileToString(
+					"./src/data/files/waves/" + path);
+			this.initWaves(file.getChars());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
+	
+	private void initWaves(char[] chars) {
+		int i = 0;
+		while(chars[i] != "\n".toCharArray()[0]) {
+			
+		}
+	}
+	
 
 	public void addWave(Wave wave) {
 		this.waves.add(wave);
@@ -56,8 +78,11 @@ public class WaveHandler {
 		if (this.delta <= 0) {
 			this.delta = this.timeBetweenEnemies;
 			if (this.index > 0) {
-				// calculates the next enemy type, creates a new object with that type and adds the object to the enemies of the game
-				this.game.getEnemies().add(this.game.getEnemyTypes().createEnemy(this.calculateEnemy(this.currentWave)));
+				// calculates the next enemy type, creates a new object with
+				// that type and adds the object to the enemies of the game
+				this.game.getEnemies().add(
+						this.game.getEnemyTypes().createEnemy(
+								this.calculateEnemy(this.currentWave)));
 				this.index--;
 			}
 		}

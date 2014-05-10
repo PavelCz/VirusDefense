@@ -10,7 +10,7 @@ import engine.TextFileToString;
 public class StartGame {
 	public static void main(String[] args) {
 		try {
-			TextFileToString tfts = new TextFileToString("D:/Users/Valep/git/TowerDefense/src/data/files/test.txt");
+			TextFileToString tfts = new TextFileToString("./src/data/files/test.txt");
 			System.out.println(tfts.toString());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
