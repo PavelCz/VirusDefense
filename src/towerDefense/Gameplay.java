@@ -17,7 +17,6 @@ import towerDefense.towers.LongerShootingTower;
 import towerDefense.towers.RocketTower;
 import towerDefense.towers.Tower;
 import engine.Enemy;
-import engine.EnemyType;
 import engine.EnemyTypeHandler;
 import engine.GameComponent;
 import engine.MapLayout;
@@ -111,9 +110,6 @@ public class Gameplay extends GameComponent {
 
 		this.towers = new Tower[this.getVerticalTiles()][this.getHorizontalTiles()];
 		this.initWaves();
-		this.enemyTypes.add(new EnemyType(100, 0.1f, "enemy/v1n.png", this, 32, 20, 0.5f));
-		this.enemyTypes.add(new EnemyType(200, 0.25f, "enemy/v2n.png", this, 32, 100, 0.4f));
-		this.enemyTypes.add(new EnemyType(10000, 0.03f, "enemy/v1n.png", this, 32, 1000, 0.7f));
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
@@ -144,7 +140,7 @@ public class Gameplay extends GameComponent {
 		this.waveHandler = new WaveHandler(this, 2000, "1.txt");
 		this.mouseWasClicked = false;
 		this.debugMode = false;
-		this.enemyTypes = new EnemyTypeHandler(this);
+		this.enemyTypes = new EnemyTypeHandler(this, "./src/data/files/enemies.txt");
 		this.passedMilliseconds = 0;
 		this.mode = 0;
 		this.player = new Player(10, 200);

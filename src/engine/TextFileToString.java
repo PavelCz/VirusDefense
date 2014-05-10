@@ -28,7 +28,7 @@ public class TextFileToString {
 		return list;
 	}
 
-	public String getString() {
+	private String getString() {
 
 		return new String(this.chars);
 	}

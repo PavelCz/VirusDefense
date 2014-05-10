@@ -14,8 +14,18 @@ import towerDefense.Gameplay;
 public class EnemyTypeHandler {
 	private List<EnemyType> enemyTypes;
 
-	public EnemyTypeHandler(Gameplay game) {
+	public EnemyTypeHandler(Gameplay game, String enemies) {
 		this.enemyTypes = new ArrayList<EnemyType>();
+		this.initEnemyTypes(game, TextFileToString.getLines(enemies));
+	}
+
+	private void initEnemyTypes(Gameplay game, List<String> lines) {
+		for (String line : lines) {
+			String[] parts = line.split(", ");
+			this.enemyTypes.add(new EnemyType(Integer.parseInt(parts[0]), Float.parseFloat(parts[1]), parts[2], game, Integer
+					.parseInt(parts[3]), Integer.parseInt(parts[4]), Float.parseFloat(parts[5])));
+		}
+
 	}
 
 	/**
