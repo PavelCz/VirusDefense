@@ -2,6 +2,7 @@ package engine;
 
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 
 import towerDefense.Gameplay;
 
@@ -21,25 +22,18 @@ public class WaveHandler {
 		this.waves = new LinkedList<Wave>();
 		this.timeBetweenWaves = timeBetweenWaves;
 		this.delta = this.timeBetweenWaves;
-		TextFileToString file;
-		try {
-			file = new TextFileToString(
-					"./src/data/files/waves/" + path);
-			this.initWaves(file.getChars());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		List<String> lines = TextFileToString.getString("./src/data/files/waves/" + path);
+		this.initWaves(lines);
 		
 		
 	}
 	
-	private void initWaves(char[] chars) {
+	private void initWaves(List<String> lines) {
 		int i = 0;
-		while(chars[i] != "\n".toCharArray()[0]) {
-			
-		}
+		
+		this.numberEnemies = Integer.parseInt(lines.get(i));
+		++i;
+		System.out.println(this.numberEnemies);
 	}
 	
 
