@@ -25,6 +25,7 @@ public class ChooseMaps extends GameComponent {
 		this.mapHandler.add("map.png", "maps/map.png");
 		this.mapHandler.add("testMapHor.png", "maps/testMap.png");
 		this.mapHandler.add("testMapVer.png", "maps/testMapHor.png");
+		
 		this.currentMap = this.mapHandler.get(page);
 		this.button = new Button(100, 150, currentMap.getPicture(),
 				currentMap.getPicture());
