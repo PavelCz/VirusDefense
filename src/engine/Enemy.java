@@ -49,17 +49,23 @@ public class Enemy extends Entity implements Drawable {
 		if (this.health > 0) {
 			this.x += this.velocity.getX() * delta;
 			this.y += this.velocity.getY() * delta;
+
+			Waypoint previousWaypoint = this.waypoint;
 			if (this.waypoint == null) {
 				this.health = 0;
 				this.game.reduceLives();
 			} else if (this.direction == Waypoint.DOWN && this.getY() >= this.waypoint.getY() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
+				this.normalizeCoordinates(previousWaypoint);
 			} else if (this.direction == Waypoint.RIGHT && this.getX() >= this.waypoint.getX() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
+				this.normalizeCoordinates(previousWaypoint);
 			} else if (this.direction == Waypoint.UP && this.getY() <= this.waypoint.getY() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
+				this.normalizeCoordinates(previousWaypoint);
 			} else if (this.direction == Waypoint.LEFT && this.getX() <= this.waypoint.getX() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
+				this.normalizeCoordinates(previousWaypoint);
 			}
 		} else {
 			this.game.getSoundHandler().play("death");
@@ -91,6 +97,16 @@ public class Enemy extends Entity implements Drawable {
 		if (this.health > 0) {
 			this.sprite.draw((this.x) * Gameplay.GLOBAL_GAME_SCALE, (this.y) * Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
 		}
+	}
+
+	private void normalizeCoordinates(Waypoint waypoint) {
+
+		this.x = waypoint.getX() * Gameplay.DEFAULT_SIZE;
+		this.y = waypoint.getY() * Gameplay.DEFAULT_SIZE;
+		// if (this.direction == Waypoint.UP || this.direction == Waypoint.DOWN) {
+		// } else {
+		// this.y = (int) (this.y / Gameplay.DEFAULT_SIZE) * Gameplay.DEFAULT_SIZE;
+		// }
 	}
 
 	public float getRadius() {
