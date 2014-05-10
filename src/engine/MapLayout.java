@@ -1,9 +1,11 @@
 package engine;
 
+import engine.graphics.PathTiler;
 import engine.graphics.Sprite;
 
 public class MapLayout {
 	private int[][] path;
+	private PathTiler pathTiler;
 	private Waypoint waypoints;
 	private Sprite picture;
 	private int tileLength;
@@ -17,6 +19,7 @@ public class MapLayout {
 		this.numberTilesWidth = this.path[0].length;
 		this.numberTilesHeight = this.path.length;
 		this.tileLength = tileLength;
+		this.pathTiler = new PathTiler(this.path);
 	}
 
 	public int[][] getPath() {
@@ -41,6 +44,10 @@ public class MapLayout {
 
 	public Sprite getPicture() {
 		return picture;
+	}
+	
+	public void renderPath() {
+		this.pathTiler.render();
 	}
 	
 	

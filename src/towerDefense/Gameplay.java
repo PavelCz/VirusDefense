@@ -97,7 +97,6 @@ public class Gameplay extends GameComponent {
 
 		//this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = this.currentMapLayout.getTileLength();
-		this.pathTiler = new PathTiler(this.currentMapLayout.getPath());
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
 		this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
 
@@ -201,7 +200,7 @@ public class Gameplay extends GameComponent {
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		this.drawBackground();
-		this.pathTiler.render();
+		this.currentMapLayout.renderPath();
 		this.renderEnemies();
 		this.renderTowers();
 
