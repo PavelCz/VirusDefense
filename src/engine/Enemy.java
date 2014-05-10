@@ -16,8 +16,7 @@ public class Enemy extends Entity implements Drawable {
 	private int worth;
 	private boolean dead = false;
 
-	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Gameplay game, float radius,
-			int worth) {
+	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, Gameplay game, float radius, int worth) {
 		super(startingWaypoint.getX() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2, startingWaypoint.getY()
 				* Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
 		this.health = maxHealth;
@@ -26,7 +25,7 @@ public class Enemy extends Entity implements Drawable {
 		this.sprite = sprite;
 		this.velocity = new MyVector2f(0, speed);
 		this.waypoint = startingWaypoint;
-		this.direction = direction;
+		this.direction = this.waypoint.getDirection();
 		this.radius = radius;
 		this.game = game;
 		this.worth = worth;
@@ -35,7 +34,7 @@ public class Enemy extends Entity implements Drawable {
 
 	public Enemy(EnemyType enemyType) {
 		this(enemyType.getHealth(), enemyType.getSpeed(), enemyType.getSprite(), enemyType.getGame().getWaypoints(), enemyType
-				.getGame().getWaypoints().getDirection(), enemyType.getGame(), enemyType.getRadius(), enemyType.getWorth());
+				.getGame(), enemyType.getRadius(), enemyType.getWorth());
 
 	}
 
