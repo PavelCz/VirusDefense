@@ -23,6 +23,9 @@ public class ChooseLevel extends GameComponent {
 		super(game);
 		this.page = 0;
 		this.levelHandler.add("level1.txt", game.getGameplay());
+		this.levelHandler.add("level4.txt", game.getGameplay());
+		this.levelHandler.add("level2.txt", game.getGameplay());
+		this.levelHandler.add("level3.txt", game.getGameplay());
 
 		this.currentLevel = this.levelHandler.get(this.page);
 		this.button = new Button(100, 150, this.currentLevel.getPreviewPicture(), this.currentLevel.getPreviewPicture());
