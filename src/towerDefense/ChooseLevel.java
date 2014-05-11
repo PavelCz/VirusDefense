@@ -10,7 +10,7 @@ import engine.MapLayout;
 import engine.gui.Button;
 import engine.gui.Clickable;
 
-public class ChooseMaps extends GameComponent {
+public class ChooseLevel extends GameComponent {
 
 	private Button button, left, right;
 	private int page, lastPage;
@@ -19,25 +19,16 @@ public class ChooseMaps extends GameComponent {
 
 	private LevelHandler levelHandler = new LevelHandler();
 
-	public ChooseMaps(TowerDefense game) {
+	public ChooseLevel(TowerDefense game) {
 		super(game);
 		this.page = 0;
-		this.levelHandler.add("map.png", "previews/Blutkreislauf-rachen.png");
-		this.levelHandler.add("testMapHor.png", "previews/Blutkreislauf-Herz.jpg");
-		this.levelHandler.add("testMapVer.png", "previews/Blutkreislauf-Niere.jpg");
+		this.levelHandler.add("level1.png", game.getGameplay());
+		
 
-		this.levelHandler.add("map-map.png", "maps/map-map.png");
-		this.levelHandler.add("malegenitals.png", "maps/malegenitals.png");
+		
 
 		this.currentLevel = this.levelHandler.get(this.page);
-		this.button = new Button(100, 150, this.currentLevel.getPicture(), this.currentLevel.getPicture());
-
-		this.levelHandler.add("map.png", "maps/map.png");
-		this.levelHandler.add("testMapHor.png", "maps/testMap.png");
-		this.levelHandler.add("testMapVer.png", "maps/testMapHor.png");
-
-		this.currentLevel = this.levelHandler.get(this.page);
-		this.button = new Button(100, 150, this.currentLevel.getPicture(), this.currentLevel.getPicture());
+		this.button = new Button(100, 150, this.currentLevel.getPreviewPicture(),  this.currentLevel.getPreviewPicture());
 		this.left = new Button(50, 200, "left.png", "left.png");
 
 		this.right = new Button(200, 200, "right.png", "right.png");
@@ -56,7 +47,7 @@ public class ChooseMaps extends GameComponent {
 	@Override
 	public void update(GameContainer container, int delta) {
 		this.mouseEvents(container, delta);
-		this.button.setUnclickedButton(this.currentLevel.getPicture());
+		this.button.setUnclickedButton(this.currentLevel.getPreviewPicture());
 	}
 
 	private void mouseEvents(GameContainer container, int delta) {

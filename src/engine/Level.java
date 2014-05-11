@@ -3,6 +3,7 @@ package engine;
 import java.util.List;
 
 import engine.graphics.BackgroundTiles;
+import engine.graphics.Sprite;
 
 import towerDefense.Gameplay;
 
@@ -23,5 +24,9 @@ public class Level {
 		this.waves = new WaveHandler(game, 2000, lines.get(3));
 		this.enemies = new EnemyTypeHandler(game, lines.get(4));
 
+	}
+	
+	public Sprite getPreviewPicture() {
+		return this.map.getPicture();
 	}
 }
