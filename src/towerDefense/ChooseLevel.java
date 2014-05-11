@@ -28,10 +28,13 @@ public class ChooseLevel extends GameComponent {
 		this.levelHandler.add("level3.txt", game.getGameplay());
 
 		this.currentLevel = this.levelHandler.get(this.page);
-		this.button = new Button(150, 150, this.currentLevel.getPreviewPicture(), this.currentLevel.getPreviewPicture());
-		this.left = new Button(50, 200, "left.png", "left.png");
+		
+		this.button = new Button(TowerDefense.getWidth() / 2, TowerDefense.getHeight() / 5, this.currentLevel.getPreviewPicture(),
+				this.currentLevel.getPreviewPicture());
+		this.left = new Button(TowerDefense.getWidth() / 4, TowerDefense.getHeight() / 4, "left.png", "left.png");
 
-		this.right = new Button(500, 200, "right.png", "right.png");
+		this.right = new Button(TowerDefense.getWidth() - TowerDefense.getWidth() / 4, TowerDefense.getHeight() / 4, "right.png",
+				"right.png");
 
 		this.clickables.add(this.button);
 		this.clickables.add(this.left);
