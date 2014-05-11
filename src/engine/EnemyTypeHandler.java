@@ -16,7 +16,7 @@ public class EnemyTypeHandler {
 
 	public EnemyTypeHandler(Gameplay game, String enemies) {
 		this.enemyTypes = new ArrayList<EnemyType>();
-		this.initEnemyTypes(game, TextFileToString.getLines(enemies));
+		this.initEnemyTypes(game, TextFileToString.getLines("enemies/" + enemies));
 	}
 
 	private void initEnemyTypes(Gameplay game, List<String> lines) {
