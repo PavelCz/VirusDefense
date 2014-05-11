@@ -24,9 +24,9 @@ public class SlickEllipse extends SlickRectangle {
 	}
 
 	@Override
-	public void draw(float x, float y) {
-		this.graphics.fill(new Ellipse(x, y, this.width / 2, this.height / 2), new GradientFill(0, 0, this.color, this.width / 2,
-				this.height / 2, this.color));
+	public void draw(float x, float y, float globalScale) {
+		this.graphics.fill(new Ellipse(x, y, this.width / 2 * globalScale, this.height / 2 * globalScale), new GradientFill(0, 0,
+				this.color, this.width / 2 * globalScale, this.height / 2 * globalScale, this.color));
 	}
 
 }

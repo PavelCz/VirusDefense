@@ -24,9 +24,9 @@ public class SlickUnfilledRectangle extends SlickRectangle {
 	}
 
 	@Override
-	public void draw(float x, float y) {
-		this.graphics.draw(new Rectangle(x, y, this.width, this.height), new GradientFill(0, 0, this.color, this.width, this.height,
-				this.color));
+	public void draw(float x, float y, float globalScale) {
+		this.graphics.draw(new Rectangle(x, y, this.width * globalScale, this.height * globalScale), new GradientFill(0, 0,
+				this.color, this.width * globalScale, this.height * globalScale, this.color));
 	}
 
 }

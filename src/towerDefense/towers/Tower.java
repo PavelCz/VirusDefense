@@ -13,8 +13,7 @@ public abstract class Tower extends Entity implements Drawable {
 	protected Gameplay game;
 	protected Sprite sprite;
 
-	public Tower(float x, float y, int cost, int radius, float damage,
-			Gameplay game) {
+	public Tower(float x, float y, int cost, int radius, float damage, Gameplay game) {
 		super(x, y);
 
 		this.cost = cost;
@@ -32,11 +31,10 @@ public abstract class Tower extends Entity implements Drawable {
 		if (enemy != null) {
 			float enemyX = enemy.getX();
 			float enemyY = enemy.getY();
-			float deltaX = enemyX - (this.getX() * Gameplay.SIZE + Gameplay.SIZE/2);
-			float deltaY = enemyY - (this.getY() * Gameplay.SIZE + Gameplay.SIZE/2);
+			float deltaX = enemyX - (this.getX() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
+			float deltaY = enemyY - (this.getY() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
 
-			float distance = (float) Math.sqrt(deltaX * deltaX + deltaY
-					* deltaY);
+			float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
 			if (distance < this.radius + enemy.getRadius()) {
 				return true;
@@ -61,11 +59,10 @@ public abstract class Tower extends Entity implements Drawable {
 			if (enemy != null && !done) {
 				float enemyX = enemy.getX();
 				float enemyY = enemy.getY();
-				float deltaX = enemyX - (this.getX() * Gameplay.SIZE + Gameplay.SIZE/2);
-				float deltaY = enemyY - (this.getY() * Gameplay.SIZE + Gameplay.SIZE/2);
+				float deltaX = enemyX - (this.getX() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
+				float deltaY = enemyY - (this.getY() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
 
-				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY
-						* deltaY);
+				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
 				if (distance < this.radius + enemy.getRadius()) {
 					return enemy;

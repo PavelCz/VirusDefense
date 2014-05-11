@@ -6,10 +6,12 @@ import engine.graphics.Sprite;
 
 public class TowerButton extends Button {
 	private Tower tower;
+	private Gameplay game;
 
 	public TowerButton(float x, float y, String unclickedButtonPath, String clickedButtonPath, Tower tower, Gameplay game) {
-		super(x, y, unclickedButtonPath, clickedButtonPath, game);
+		super(x, y, unclickedButtonPath, clickedButtonPath);
 		this.tower = tower;
+		this.game = game;
 	}
 
 	@Override
@@ -18,8 +20,8 @@ public class TowerButton extends Button {
 		Sprite s = this.tower.getSprite();
 		s.setAlpha(0.8f);
 		float scale = 0.9f;
-		s.draw(this.x + (this.collisionWidth - s.getWidth() * scale) / 2, this.y + (this.collisionHeight - s.getHeight() * scale) / 2,
-				0, scale);
+		s.draw(this.x + (this.collisionWidth - s.getWidth() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, this.y
+				+ (this.collisionHeight - s.getHeight() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, scale * Gameplay.GLOBAL_GUI_SCALE);
 	}
 
 	@Override

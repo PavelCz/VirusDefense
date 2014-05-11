@@ -17,7 +17,7 @@ public class SoundHandler {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void addWav(String name) {
 		this.add(name, name + ".wav");
 	}
@@ -25,9 +25,6 @@ public class SoundHandler {
 	public void play(String name) {
 		if (this.sounds.containsKey(name)) {
 			this.sounds.get(name).play();
-
-
-			System.out.print("mo ");
 		}
 	}
 

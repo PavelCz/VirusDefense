@@ -56,7 +56,7 @@ public class LongerShootingTower extends ShootingTower {
 					enemy.setDead();
 				}
 			}
-			
+
 		}
 	}
 
