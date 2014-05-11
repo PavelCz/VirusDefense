@@ -51,8 +51,7 @@ public class Enemy extends Entity implements Drawable {
 	public void update(int delta) {
 		if (this.wobble) {
 			this.wobbleTimer += delta;
-			this.wobbleFactor = Math.sin(this.wobbleTimer /200.0)/10-0.2;
-			System.out.println(wobbleFactor);
+			this.wobbleFactor = (Math.sin(this.wobbleTimer / 200.0)+6) / 8 ;
 		}
 		if (this.health > 0) {
 			this.x += this.velocity.getX() * delta;
@@ -103,8 +102,9 @@ public class Enemy extends Entity implements Drawable {
 	public void draw() {
 		if (this.health > 0) {
 			if (this.wobble) {
-				this.sprite.draw((this.x) * Gameplay.GLOBAL_GAME_SCALE, (this.y) * Gameplay.GLOBAL_GAME_SCALE,
-						Gameplay.GLOBAL_GAME_SCALE + (float) this.wobbleFactor);
+				float scale = (float) this.wobbleFactor;
+				float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
+				this.sprite.draw((this.x + size) * Gameplay.GLOBAL_GAME_SCALE, (this.y + size) * Gameplay.GLOBAL_GAME_SCALE, scale);
 			} else {
 				this.sprite.draw((this.x) * Gameplay.GLOBAL_GAME_SCALE, (this.y) * Gameplay.GLOBAL_GAME_SCALE,
 						Gameplay.GLOBAL_GAME_SCALE);
