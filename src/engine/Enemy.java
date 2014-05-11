@@ -15,6 +15,9 @@ public class Enemy extends Entity implements Drawable {
 	protected int direction;
 	private int worth;
 	private boolean dead = false;
+	private boolean wobble = true;
+	private double wobbleFactor;
+	private int wobbleTimer = 0;
 
 	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, Gameplay game, float radius, int worth) {
 		super(startingWaypoint.getX() * Gameplay.DEFAULT_SIZE, startingWaypoint.getY() * Gameplay.DEFAULT_SIZE);
@@ -46,6 +49,11 @@ public class Enemy extends Entity implements Drawable {
 	}
 
 	public void update(int delta) {
+		if (this.wobble) {
+			this.wobbleTimer += delta;
+			this.wobbleFactor = Math.sin(this.wobbleTimer /200.0)/10;
+			System.out.println(wobbleFactor);
+		}
 		if (this.health > 0) {
 			this.x += this.velocity.getX() * delta;
 			this.y += this.velocity.getY() * delta;
@@ -94,7 +102,13 @@ public class Enemy extends Entity implements Drawable {
 	@Override
 	public void draw() {
 		if (this.health > 0) {
-			this.sprite.draw((this.x) * Gameplay.GLOBAL_GAME_SCALE, (this.y) * Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
+			if (this.wobble) {
+				this.sprite.draw((this.x) * Gameplay.GLOBAL_GAME_SCALE, (this.y) * Gameplay.GLOBAL_GAME_SCALE,
+						Gameplay.GLOBAL_GAME_SCALE + (float) this.wobbleFactor);
+			} else {
+				this.sprite.draw((this.x) * Gameplay.GLOBAL_GAME_SCALE, (this.y) * Gameplay.GLOBAL_GAME_SCALE,
+						Gameplay.GLOBAL_GAME_SCALE);
+			}
 		}
 	}
 
