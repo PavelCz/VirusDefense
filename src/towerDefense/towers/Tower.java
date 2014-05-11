@@ -13,7 +13,7 @@ public abstract class Tower extends Entity implements Drawable {
 	protected Gameplay game;
 	protected Sprite sprite;
 	protected boolean building = true;
-	protected int buildingTimer = 550;
+	protected int buildingTimer = 150;
 	protected final float buildingTime = buildingTimer;
 
 	public Tower(float x, float y, int cost, int radius, float damage, Gameplay game) {

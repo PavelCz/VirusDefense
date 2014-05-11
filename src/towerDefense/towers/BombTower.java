@@ -69,6 +69,7 @@ public class BombTower extends Tower {
 		if (this.building) {
 			this.buildingTimer -= delta;
 			if ((this.buildingTime - this.buildingTimer) / buildingTime >= this.wobbleFactor) {
+				this.delta = this.buildingTimer;
 				this.building = false;
 			}
 		}
