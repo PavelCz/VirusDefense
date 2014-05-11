@@ -9,6 +9,8 @@ public class BombTower extends Tower {
 	protected int delta;
 	protected final int shootingInterval;
 	protected int bombRadius;
+	protected float wobbleFactor;
+	private boolean wobble = true;
 
 	public BombTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage, int bombRadius) {
 		super(x, y, 100, 150, damage, game);
@@ -20,7 +22,14 @@ public class BombTower extends Tower {
 
 	@Override
 	public void draw() {
-		this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
+		if (this.wobble) {
+			float scale = this.wobbleFactor;
+			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
+			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE,
+					(this.y * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE, scale);
+		} else {
+			this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
+		}
 
 	}
 
@@ -52,6 +61,7 @@ public class BombTower extends Tower {
 
 	@Override
 	public void update(int delta) {
+		this.wobbleFactor = (float) ((Math.sin(this.delta / 155.0) + 5.5) / 8);
 		this.delta -= delta;
 		if (this.delta <= 0) {
 			this.delta = this.shootingInterval;
