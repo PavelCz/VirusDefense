@@ -51,7 +51,7 @@ public class Enemy extends Entity implements Drawable {
 	public void update(int delta) {
 		if (this.wobble) {
 			this.wobbleTimer += delta;
-			this.wobbleFactor = Math.sin(this.wobbleTimer /200.0)/10;
+			this.wobbleFactor = Math.sin(this.wobbleTimer /200.0)/10-0.2;
 			System.out.println(wobbleFactor);
 		}
 		if (this.health > 0) {
