@@ -7,6 +7,7 @@ import engine.GameComponent;
 import engine.Level;
 import engine.LevelHandler;
 import engine.MapLayout;
+import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.Clickable;
 
@@ -28,13 +29,20 @@ public class ChooseLevel extends GameComponent {
 		this.levelHandler.add("level3.txt", game.getGameplay());
 
 		this.currentLevel = this.levelHandler.get(this.page);
-		
-		this.button = new Button(TowerDefense.getWidth() / 2, TowerDefense.getHeight() / 5, this.currentLevel.getPreviewPicture(),
-				this.currentLevel.getPreviewPicture());
-		this.left = new Button(TowerDefense.getWidth() / 4, TowerDefense.getHeight() / 4, "left.png", "left.png");
+		Sprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
+		Sprite leftSprite = new Sprite("left.png");
+		Sprite rightSprite = new Sprite("right.png");
 
-		this.right = new Button(TowerDefense.getWidth() - TowerDefense.getWidth() / 4, TowerDefense.getHeight() / 4, "right.png",
-				"right.png");
+		float leftX = TowerDefense.getWidth() / 4 - leftSprite.getWidth() / 2;
+		float leftY = TowerDefense.getHeight() / 2 - leftSprite.getHeight() / 2;
+		float rightX = TowerDefense.getWidth() - leftX;
+		float rightY = leftY;
+		float buttonX = TowerDefense.getWidth() / 2 - currentPreviewPicture.getWidth() / 2;
+		float buttonY = TowerDefense.getHeight() / 2 - currentPreviewPicture.getHeight() / 2;
+
+		this.button = new Button(buttonX, buttonY, currentPreviewPicture, currentPreviewPicture);
+		this.left = new Button(leftX, leftY, leftSprite, leftSprite);
+		this.right = new Button(rightX, rightY, rightSprite, rightSprite);
 
 		this.clickables.add(this.button);
 		this.clickables.add(this.left);
