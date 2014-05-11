@@ -11,8 +11,8 @@ public class MapLayout {
 	private int tileLength;
 	private int numberTilesWidth, numberTilesHeight;
 
-	public MapLayout(String mapLayoutPath, String backgroundPath, int tileLength, String picture) {
-		MapLayoutFromImage mapLayout = new MapLayoutFromImage(mapLayoutPath);
+	public MapLayout(String mapLayoutPath,  int tileLength, String picture) {
+		MapLayoutFromImage mapLayout = new MapLayoutFromImage("data/files/maps/" +mapLayoutPath);
 		this.picture = new Sprite(picture);
 		this.path = mapLayout.getPath();
 		this.waypoints = mapLayout.getStartingPoint();

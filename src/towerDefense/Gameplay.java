@@ -19,14 +19,12 @@ import towerDefense.towers.Tower;
 import engine.Enemy;
 import engine.EnemyTypeHandler;
 import engine.GameComponent;
-import engine.MapLayout;
+import engine.Level;
 import engine.MyVector2f;
 import engine.Player;
 import engine.Projectile;
-import engine.WaveHandler;
 import engine.Waypoint;
 import engine.graphics.Background;
-import engine.graphics.BackgroundTiles;
 import engine.graphics.SlickRectangle;
 import engine.graphics.SlickUnfilledEllipse;
 import engine.graphics.SlickUnfilledRectangle;
@@ -43,16 +41,13 @@ import engine.gui.TowerButton;
  */
 public class Gameplay extends GameComponent {
 
-	private Background mapBackground;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
-	private WaveHandler waveHandler;
 	private boolean mouseWasClicked;
 	private boolean debugMode;
-	private EnemyTypeHandler enemyTypes;
 	private int passedMilliseconds;
 	private int mode;
-	private MapLayout currentMapLayout;
+	private Level currentLevel;
 	private int currentTileLength;
 	private Tower[][] towers;
 	private TowerButton towerButton1;
@@ -92,7 +87,7 @@ public class Gameplay extends GameComponent {
 		this.initDefaults();
 
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
-		this.currentTileLength = this.currentMapLayout.getTileLength();
+		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
 		this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
 
@@ -104,7 +99,6 @@ public class Gameplay extends GameComponent {
 		Gameplay.GLOBAL_GAME_SCALE = Math.min(scale1, scale2);
 		Gameplay.SIZE = (int) (64 * Gameplay.GLOBAL_GAME_SCALE);
 
-		this.mapBackground = new BackgroundTiles(0.5f, "veins/bg.png", this.getHorizontalTiles(), this.getVerticalTiles());
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 
@@ -137,10 +131,8 @@ public class Gameplay extends GameComponent {
 
 	private void initDefaults() {
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
-		this.waveHandler = new WaveHandler(this, 2000, "1.txt");
 		this.mouseWasClicked = false;
 		this.debugMode = false;
-		this.enemyTypes = new EnemyTypeHandler(this, "enemies.txt");
 		this.passedMilliseconds = 0;
 		this.mode = 0;
 		this.player = new Player(10, 200);
@@ -179,7 +171,7 @@ public class Gameplay extends GameComponent {
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		this.drawBackground();
-		this.currentMapLayout.renderPath();
+		this.currentLevel.renderPath();
 		this.renderEnemies();
 		this.renderTowers();
 
@@ -311,7 +303,7 @@ public class Gameplay extends GameComponent {
 					}
 				}
 
-				this.waveHandler.update(delta);
+				this.currentLevel.getWaveHandler().update(delta);
 			}
 			this.mouseEvents(container, delta);
 			this.keyboardEvents(container, delta);
@@ -341,7 +333,7 @@ public class Gameplay extends GameComponent {
 			int newY = y / Gameplay.SIZE;
 			this.towerShadowX = newX * Gameplay.SIZE;
 			this.towerShadowY = newY * Gameplay.SIZE;
-			int[][] path = this.currentMapLayout.getPath();
+			int[][] path = this.currentLevel.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
 			} else if (newX >= 0 && newY >= 0 && newY < this.getVerticalTiles() && newX < this.getHorizontalTiles()
@@ -416,7 +408,7 @@ public class Gameplay extends GameComponent {
 			this.speed /= 2f;
 		}
 		if (input.isKeyPressed(Input.KEY_L)) {
-			this.enemies.add(this.enemyTypes.createEnemy(0));
+			this.enemies.add(this.getEnemyTypes().createEnemy(0));
 		}
 	}
 
@@ -449,7 +441,7 @@ public class Gameplay extends GameComponent {
 					int newY = (int) y / Gameplay.SIZE;
 
 					if (this.currentTower != null) {
-						int[][] path = this.currentMapLayout.getPath();
+						int[][] path = this.currentLevel.getPath();
 						int cost = this.currentTower.getCost();
 						if (this.currentTowerPlaceable && x < Gameplay.INTERFACE_START_X && y < path.length * this.currentTileLength
 								&& path[newY][newX] == 1 && this.towers[newY][newX] == null && this.player.getMoney() - cost >= 0) {
@@ -504,7 +496,7 @@ public class Gameplay extends GameComponent {
 	}
 
 	public Waypoint getWaypoints() {
-		return this.currentMapLayout.getWaypoints();
+		return this.currentLevel.getWaypoints();
 	}
 
 	/**
@@ -525,7 +517,7 @@ public class Gameplay extends GameComponent {
 	}
 
 	public EnemyTypeHandler getEnemyTypes() {
-		return this.enemyTypes;
+		return this.currentLevel.getEnemyTypes();
 	}
 
 	private String millisecondsToTimeString(int milliseconds) {
@@ -574,19 +566,19 @@ public class Gameplay extends GameComponent {
 	}
 
 	public int getHorizontalTiles() {
-		return this.currentMapLayout.getNumberTilesWidth();
+		return this.currentLevel.getNumberTilesWidth();
 	}
 
 	public void drawBackground() {
-		this.mapBackground.draw();
+		this.getMapBackground().draw();
 	}
 
 	public Background getMapBackground() {
-		return this.mapBackground;
+		return this.currentLevel.getMapBackground();
 	}
 
 	public int getVerticalTiles() {
-		return this.currentMapLayout.getNumberTilesHeight();
+		return this.currentLevel.getNumberTilesHeight();
 	}
 
 	public void setCurrentTower(Tower currentTower) {
@@ -597,8 +589,8 @@ public class Gameplay extends GameComponent {
 		return this.projectiles;
 	}
 
-	public void setMapLayout(MapLayout mapLayout) {
-		this.currentMapLayout = mapLayout;
+	public void setLevel(Level level) {
+		this.currentLevel = level;
 	}
 
 }

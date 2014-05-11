@@ -7,7 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import engine.GameComponent;
-import engine.MapLayout;
+import engine.Level;
 import engine.SoundHandler;
 
 public class TowerDefense extends BasicGame {
@@ -21,7 +21,7 @@ public class TowerDefense extends BasicGame {
 
 	private Gameplay gameplay;
 	private Menu menu;
-	private ChooseMaps maps;
+	private ChooseLevel maps;
 	private GameComponent currentGameComponent;
 	private boolean quitGame = false;
 
@@ -39,7 +39,7 @@ public class TowerDefense extends BasicGame {
 		this.gameplay = new Gameplay(this);
 		this.menu = new Menu(this);
 		this.menu.init(container);
-		this.maps = new ChooseMaps(this);
+		this.maps = new ChooseLevel(this);
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
 	}
@@ -101,8 +101,8 @@ public class TowerDefense extends BasicGame {
 		return TowerDefense.WIDTH;
 	}
 
-	public void setMapLayout(MapLayout mapLayout) {
-		this.gameplay.setMapLayout(mapLayout);
+	public void setLevel(Level level) {
+		this.gameplay.setLevel(level);
 	}
 
 	public void initGameplay(GameContainer container) {
@@ -114,5 +114,9 @@ public class TowerDefense extends BasicGame {
 			e.printStackTrace();
 		}
 		this.currentGameComponent = this.gameplay;
+	}
+	
+	public Gameplay getGameplay() {
+		return this.gameplay;
 	}
 }
