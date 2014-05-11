@@ -6,7 +6,6 @@ import org.newdawn.slick.Input;
 import engine.GameComponent;
 import engine.Level;
 import engine.LevelHandler;
-import engine.MapLayout;
 import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.Clickable;

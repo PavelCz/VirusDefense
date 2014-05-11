@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextFileToString {
-	private int[] bytes;
-	private char[] chars;
 
 	public static List<String> getLines(String path) {
 		List<String> list = new ArrayList<String>();
@@ -29,12 +27,4 @@ public class TextFileToString {
 		return list;
 	}
 
-	private String getString() {
-
-		return new String(this.chars);
-	}
-
-	public char[] getChars() {
-		return this.chars;
-	}
 }

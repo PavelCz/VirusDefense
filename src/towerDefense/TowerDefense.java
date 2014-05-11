@@ -8,7 +8,6 @@ import org.newdawn.slick.SlickException;
 
 import engine.GameComponent;
 import engine.Level;
-import engine.MapLayout;
 import engine.SoundHandler;
 
 public class TowerDefense extends BasicGame {
