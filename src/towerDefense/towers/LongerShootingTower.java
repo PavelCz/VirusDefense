@@ -16,6 +16,7 @@ public class LongerShootingTower extends ShootingTower {
 
 	@Override
 	public void update(int delta) {
+		this.buildingTimer -= delta;
 		this.delta -= delta;
 		if (this.currentlyAttacking != null) {
 			this.shootAt(this.currentlyAttacking);

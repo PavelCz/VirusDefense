@@ -61,6 +61,7 @@ public class BombTower extends Tower {
 
 	@Override
 	public void update(int delta) {
+		super.update(delta);
 		this.wobbleFactor = (float) ((Math.sin(this.delta / 155.0) + 5.5) / 8);
 		this.delta -= delta;
 		if (this.delta <= 0) {

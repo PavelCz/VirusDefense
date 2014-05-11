@@ -29,6 +29,7 @@ public class ShootingTower extends Tower {
 
 	@Override
 	public void update(int delta) {
+		super.update(delta);
 		this.delta -= delta;
 		if (this.delta <= 0) {
 			this.delta = this.shootingInterval;

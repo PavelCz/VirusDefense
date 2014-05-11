@@ -12,6 +12,8 @@ public abstract class Tower extends Entity implements Drawable {
 	protected float damage;
 	protected Gameplay game;
 	protected Sprite sprite;
+	protected boolean building = true;
+	protected int buildingTimer = 1000;
 
 	public Tower(float x, float y, int cost, int radius, float damage, Gameplay game) {
 		super(x, y);
@@ -25,7 +27,9 @@ public abstract class Tower extends Entity implements Drawable {
 
 	public abstract void shoot();
 
-	public abstract void update(int delta);
+	public  void update(int delta) {
+		this.buildingTimer -= delta;
+	}
 
 	protected boolean inRange(Enemy enemy) {
 		if (enemy != null) {
