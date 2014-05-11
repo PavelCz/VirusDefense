@@ -4,7 +4,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
 import engine.GameComponent;
-import engine.MapHandler;
+import engine.Level;
+import engine.LevelHandler;
 import engine.MapLayout;
 import engine.gui.Button;
 import engine.gui.Clickable;
@@ -14,29 +15,29 @@ public class ChooseMaps extends GameComponent {
 	private Button button, left, right;
 	private int page, lastPage;
 
-	private MapLayout currentMap;
+	private Level currentLevel;
 
-	private MapHandler mapHandler = new MapHandler();
+	private LevelHandler levelHandler = new LevelHandler();
 
 	public ChooseMaps(TowerDefense game) {
 		super(game);
 		this.page = 0;
-		this.mapHandler.add("map.png", "previews/Blutkreislauf-rachen.png");
-		this.mapHandler.add("testMapHor.png", "previews/Blutkreislauf-Herz.jpg");
-		this.mapHandler.add("testMapVer.png", "previews/Blutkreislauf-Niere.jpg");
+		this.levelHandler.add("map.png", "previews/Blutkreislauf-rachen.png");
+		this.levelHandler.add("testMapHor.png", "previews/Blutkreislauf-Herz.jpg");
+		this.levelHandler.add("testMapVer.png", "previews/Blutkreislauf-Niere.jpg");
 
-		this.mapHandler.add("map-map.png", "maps/map-map.png");
-		this.mapHandler.add("malegenitals.png", "maps/malegenitals.png");
+		this.levelHandler.add("map-map.png", "maps/map-map.png");
+		this.levelHandler.add("malegenitals.png", "maps/malegenitals.png");
 
-		this.currentMap = this.mapHandler.get(this.page);
-		this.button = new Button(100, 150, this.currentMap.getPicture(), this.currentMap.getPicture());
+		this.currentLevel = this.levelHandler.get(this.page);
+		this.button = new Button(100, 150, this.currentLevel.getPicture(), this.currentLevel.getPicture());
 
-		this.mapHandler.add("map.png", "maps/map.png");
-		this.mapHandler.add("testMapHor.png", "maps/testMap.png");
-		this.mapHandler.add("testMapVer.png", "maps/testMapHor.png");
+		this.levelHandler.add("map.png", "maps/map.png");
+		this.levelHandler.add("testMapHor.png", "maps/testMap.png");
+		this.levelHandler.add("testMapVer.png", "maps/testMapHor.png");
 
-		this.currentMap = this.mapHandler.get(this.page);
-		this.button = new Button(100, 150, this.currentMap.getPicture(), this.currentMap.getPicture());
+		this.currentLevel = this.levelHandler.get(this.page);
+		this.button = new Button(100, 150, this.currentLevel.getPicture(), this.currentLevel.getPicture());
 		this.left = new Button(50, 200, "left.png", "left.png");
 
 		this.right = new Button(200, 200, "right.png", "right.png");
@@ -47,15 +48,15 @@ public class ChooseMaps extends GameComponent {
 		this.guiElements.add(this.button);
 		this.guiElements.add(this.left);
 		this.guiElements.add(this.right);
-		this.lastPage = this.mapHandler.getLength() - 1;
+		this.lastPage = this.levelHandler.getLength() - 1;
 
-		this.lastPage = this.mapHandler.getLength() - 1;
+		this.lastPage = this.levelHandler.getLength() - 1;
 	}
 
 	@Override
 	public void update(GameContainer container, int delta) {
 		this.mouseEvents(container, delta);
-		this.button.setUnclickedButton(this.currentMap.getPicture());
+		this.button.setUnclickedButton(this.currentLevel.getPicture());
 	}
 
 	private void mouseEvents(GameContainer container, int delta) {
@@ -72,16 +73,16 @@ public class ChooseMaps extends GameComponent {
 						if (this.page < 0) {
 							this.page = this.lastPage;
 						}
-						this.currentMap = this.mapHandler.get(this.page);
-						this.currentMap = this.mapHandler.get(this.page);
+						this.currentLevel = this.levelHandler.get(this.page);
+						this.currentLevel = this.levelHandler.get(this.page);
 					} else if (clickable == this.right) {
 						this.page += 1;
 						if (this.page > this.lastPage) {
 							this.page = 0;
 						}
-						this.currentMap = this.mapHandler.get(this.page);
+						this.currentLevel = this.levelHandler.get(this.page);
 					} else if (clickable == this.button) {
-						this.game.setMapLayout(this.currentMap);
+						this.game.setMapLayout(this.currentLevel);
 						this.game.initGameplay(container);
 
 						this.game.setMode(TowerDefense.MODE_GAME);
