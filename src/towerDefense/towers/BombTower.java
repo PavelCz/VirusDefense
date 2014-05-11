@@ -22,11 +22,16 @@ public class BombTower extends Tower {
 
 	@Override
 	public void draw() {
-		if (this.wobble) {
+		if (this.building) {
+			float scale = (this.buildingTime - this.buildingTimer) / buildingTime;
+			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
+			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE,
+					(this.y * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE * scale);
+		} else if (this.wobble) {
 			float scale = this.wobbleFactor;
 			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
 			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE,
-					(this.y * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE, scale);
+					(this.y * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE, scale * Gameplay.GLOBAL_GAME_SCALE);
 		} else {
 			this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
 		}
@@ -61,7 +66,12 @@ public class BombTower extends Tower {
 
 	@Override
 	public void update(int delta) {
-		super.update(delta);
+		if (this.building) {
+			this.buildingTimer -= delta;
+			if ((this.buildingTime - this.buildingTimer) / buildingTime >= this.wobbleFactor) {
+				this.building = false;
+			}
+		}
 		this.wobbleFactor = (float) ((Math.sin(this.delta / 155.0) + 5.5) / 8);
 		this.delta -= delta;
 		if (this.delta <= 0) {
