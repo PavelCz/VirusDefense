@@ -23,12 +23,19 @@ public class ShootingTower extends Tower {
 
 	@Override
 	public void draw() {
-		this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
-
+		if (this.building) {
+			float scale = (this.buildingTime - this.buildingTimer) / buildingTime;
+			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
+			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE,
+					(this.y * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE * scale);
+		} else {
+			this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
+		}
 	}
 
 	@Override
 	public void update(int delta) {
+		super.update(delta);
 		this.delta -= delta;
 		if (this.delta <= 0) {
 			this.delta = this.shootingInterval;
