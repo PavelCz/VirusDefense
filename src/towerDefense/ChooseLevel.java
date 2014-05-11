@@ -28,10 +28,10 @@ public class ChooseLevel extends GameComponent {
 		this.levelHandler.add("level3.txt", game.getGameplay());
 
 		this.currentLevel = this.levelHandler.get(this.page);
-		this.button = new Button(100, 150, this.currentLevel.getPreviewPicture(), this.currentLevel.getPreviewPicture());
+		this.button = new Button(150, 150, this.currentLevel.getPreviewPicture(), this.currentLevel.getPreviewPicture());
 		this.left = new Button(50, 200, "left.png", "left.png");
 
-		this.right = new Button(200, 200, "right.png", "right.png");
+		this.right = new Button(500, 200, "right.png", "right.png");
 
 		this.clickables.add(this.button);
 		this.clickables.add(this.left);
