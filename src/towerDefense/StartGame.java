@@ -4,18 +4,12 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
 public class StartGame {
-	public static void main(String[] args) {
+	public static void main(final String[] args) throws SlickException {
 
-		TowerDefense game = new TowerDefense();
+		final TowerDefense game = new TowerDefense();
 		AppGameContainer appGameContainer;
-		try {
-			appGameContainer = new AppGameContainer(game, 1024, 768, false);
-			appGameContainer.start();
-
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		appGameContainer = new AppGameContainer(game, 1024, 768, false);
+		appGameContainer.start();
 
 	}
 }
