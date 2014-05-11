@@ -2,6 +2,7 @@ package engine;
 
 import java.util.List;
 
+import engine.graphics.Background;
 import engine.graphics.BackgroundTiles;
 import engine.graphics.Sprite;
 
@@ -47,4 +48,17 @@ public class Level {
 	public int getNumberTilesHeight() {
 		return this.map.getNumberTilesHeight();
 	}
+
+	public WaveHandler getWaveHandler() {
+		return waves;
+	}
+
+	public Background getMapBackground() {
+		return mapBackgound;
+	}
+
+	public EnemyTypeHandler getEnemyTypes() {
+		return enemies;
+	}
+	
 }

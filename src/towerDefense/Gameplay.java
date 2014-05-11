@@ -44,13 +44,10 @@ import engine.gui.TowerButton;
  */
 public class Gameplay extends GameComponent {
 
-	private Background mapBackground;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
-	private WaveHandler waveHandler;
 	private boolean mouseWasClicked;
 	private boolean debugMode;
-	private EnemyTypeHandler enemyTypes;
 	private int passedMilliseconds;
 	private int mode;
 	private Level currentLevel;
@@ -105,7 +102,6 @@ public class Gameplay extends GameComponent {
 		Gameplay.GLOBAL_GAME_SCALE = Math.min(scale1, scale2);
 		Gameplay.SIZE = (int) (64 * Gameplay.GLOBAL_GAME_SCALE);
 
-		this.mapBackground = new BackgroundTiles(0.5f, "veins/bg.png", this.getHorizontalTiles(), this.getVerticalTiles());
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 
@@ -138,10 +134,8 @@ public class Gameplay extends GameComponent {
 
 	private void initDefaults() {
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
-		this.waveHandler = new WaveHandler(this, 2000, "1.txt");
 		this.mouseWasClicked = false;
 		this.debugMode = false;
-		this.enemyTypes = new EnemyTypeHandler(this, "enemies.txt");
 		this.passedMilliseconds = 0;
 		this.mode = 0;
 		this.player = new Player(10, 200);
@@ -312,7 +306,7 @@ public class Gameplay extends GameComponent {
 					}
 				}
 
-				this.waveHandler.update(delta);
+				this.currentLevel.getWaveHandler().update(delta);
 			}
 			this.mouseEvents(container, delta);
 			this.keyboardEvents(container, delta);
@@ -417,7 +411,7 @@ public class Gameplay extends GameComponent {
 			this.speed /= 2f;
 		}
 		if (input.isKeyPressed(Input.KEY_L)) {
-			this.enemies.add(this.enemyTypes.createEnemy(0));
+			this.enemies.add(this.getEnemyTypes().createEnemy(0));
 		}
 	}
 
@@ -526,7 +520,7 @@ public class Gameplay extends GameComponent {
 	}
 
 	public EnemyTypeHandler getEnemyTypes() {
-		return this.enemyTypes;
+		return this.currentLevel.getEnemyTypes();
 	}
 
 	private String millisecondsToTimeString(int milliseconds) {
@@ -579,11 +573,11 @@ public class Gameplay extends GameComponent {
 	}
 
 	public void drawBackground() {
-		this.mapBackground.draw();
+		this.getMapBackground().draw();
 	}
 
 	public Background getMapBackground() {
-		return this.mapBackground;
+		return this.currentLevel.getMapBackground();
 	}
 
 	public int getVerticalTiles() {
