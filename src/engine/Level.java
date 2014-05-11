@@ -29,4 +29,22 @@ public class Level {
 	public Sprite getPreviewPicture() {
 		return this.map.getPicture();
 	}
+	
+	public void renderPath() {
+		this.map.renderPath();
+	}
+	public int[][] getPath() {
+		return this.map.getPath();
+	}
+	
+	public Waypoint getWaypoints() {
+		return this.map.getWaypoints();
+	}
+	
+	public int getNumberTilesWidth() {
+		return this.map.getNumberTilesWidth();
+	}
+	public int getNumberTilesHeight() {
+		return this.map.getNumberTilesHeight();
+	}
 }

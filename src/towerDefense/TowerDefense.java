@@ -7,6 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import engine.GameComponent;
+import engine.Level;
 import engine.MapLayout;
 import engine.SoundHandler;
 
@@ -101,8 +102,8 @@ public class TowerDefense extends BasicGame {
 		return TowerDefense.WIDTH;
 	}
 
-	public void setMapLayout(MapLayout mapLayout) {
-		this.gameplay.setMapLayout(mapLayout);
+	public void setLevel(Level level) {
+		this.gameplay.setLevel(level);
 	}
 
 	public void initGameplay(GameContainer container) {

@@ -19,6 +19,7 @@ import towerDefense.towers.Tower;
 import engine.Enemy;
 import engine.EnemyTypeHandler;
 import engine.GameComponent;
+import engine.Level;
 import engine.MapLayout;
 import engine.MyVector2f;
 import engine.Player;
@@ -52,7 +53,7 @@ public class Gameplay extends GameComponent {
 	private EnemyTypeHandler enemyTypes;
 	private int passedMilliseconds;
 	private int mode;
-	private MapLayout currentMapLayout;
+	private Level currentLevel;
 	private int currentTileLength;
 	private Tower[][] towers;
 	private TowerButton towerButton1;
@@ -92,7 +93,7 @@ public class Gameplay extends GameComponent {
 		this.initDefaults();
 
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
-		this.currentTileLength = this.currentMapLayout.getTileLength();
+		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
 		this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
 
@@ -179,7 +180,7 @@ public class Gameplay extends GameComponent {
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		this.drawBackground();
-		this.currentMapLayout.renderPath();
+		this.currentLevel.renderPath();
 		this.renderEnemies();
 		this.renderTowers();
 
@@ -341,7 +342,7 @@ public class Gameplay extends GameComponent {
 			int newY = y / Gameplay.SIZE;
 			this.towerShadowX = newX * Gameplay.SIZE;
 			this.towerShadowY = newY * Gameplay.SIZE;
-			int[][] path = this.currentMapLayout.getPath();
+			int[][] path = this.currentLevel.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
 			} else if (newX >= 0 && newY >= 0 && newY < this.getVerticalTiles() && newX < this.getHorizontalTiles()
@@ -449,7 +450,7 @@ public class Gameplay extends GameComponent {
 					int newY = (int) y / Gameplay.SIZE;
 
 					if (this.currentTower != null) {
-						int[][] path = this.currentMapLayout.getPath();
+						int[][] path = this.currentLevel.getPath();
 						int cost = this.currentTower.getCost();
 						if (this.currentTowerPlaceable && x < Gameplay.INTERFACE_START_X && y < path.length * this.currentTileLength
 								&& path[newY][newX] == 1 && this.towers[newY][newX] == null && this.player.getMoney() - cost >= 0) {
@@ -504,7 +505,7 @@ public class Gameplay extends GameComponent {
 	}
 
 	public Waypoint getWaypoints() {
-		return this.currentMapLayout.getWaypoints();
+		return this.currentLevel.getWaypoints();
 	}
 
 	/**
@@ -574,7 +575,7 @@ public class Gameplay extends GameComponent {
 	}
 
 	public int getHorizontalTiles() {
-		return this.currentMapLayout.getNumberTilesWidth();
+		return this.currentLevel.getNumberTilesWidth();
 	}
 
 	public void drawBackground() {
@@ -586,7 +587,7 @@ public class Gameplay extends GameComponent {
 	}
 
 	public int getVerticalTiles() {
-		return this.currentMapLayout.getNumberTilesHeight();
+		return this.currentLevel.getNumberTilesHeight();
 	}
 
 	public void setCurrentTower(Tower currentTower) {
@@ -597,8 +598,8 @@ public class Gameplay extends GameComponent {
 		return this.projectiles;
 	}
 
-	public void setMapLayout(MapLayout mapLayout) {
-		this.currentMapLayout = mapLayout;
+	public void setLevel(Level level) {
+		this.currentLevel = level;
 	}
 
 }

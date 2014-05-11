@@ -22,13 +22,10 @@ public class ChooseLevel extends GameComponent {
 	public ChooseLevel(TowerDefense game) {
 		super(game);
 		this.page = 0;
-		this.levelHandler.add("level1.png", game.getGameplay());
-		
-
-		
+		this.levelHandler.add("level1.txt", game.getGameplay());
 
 		this.currentLevel = this.levelHandler.get(this.page);
-		this.button = new Button(100, 150, this.currentLevel.getPreviewPicture(),  this.currentLevel.getPreviewPicture());
+		this.button = new Button(100, 150, this.currentLevel.getPreviewPicture(), this.currentLevel.getPreviewPicture());
 		this.left = new Button(50, 200, "left.png", "left.png");
 
 		this.right = new Button(200, 200, "right.png", "right.png");
@@ -73,7 +70,7 @@ public class ChooseLevel extends GameComponent {
 						}
 						this.currentLevel = this.levelHandler.get(this.page);
 					} else if (clickable == this.button) {
-						this.game.setMapLayout(this.currentLevel);
+						this.game.setLevel(this.currentLevel);
 						this.game.initGameplay(container);
 
 						this.game.setMode(TowerDefense.MODE_GAME);
