@@ -8,9 +8,9 @@ public class ShootingTower extends Tower {
 	protected int delta;
 	protected final int shootingInterval;
 
-	public ShootingTower(float x, float y, Sprite sprite, Gameplay game,
-			int shootingInterval, float damage) {
-		super(x * Gameplay.SIZE, y * Gameplay.SIZE, 100, 100, damage, game);
+	public ShootingTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage) {
+		super(x, y, 100, 128, damage, game);
+
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
 		this.delta = this.shootingInterval;
@@ -18,13 +18,12 @@ public class ShootingTower extends Tower {
 
 	@Override
 	public Tower clone() {
-		return new ShootingTower(this.x, this.y, this.sprite.clone(),
-				this.game, this.shootingInterval, this.damage);
+		return new ShootingTower(this.x, this.y, this.sprite.clone(), this.game, this.shootingInterval, this.damage);
 	}
 
 	@Override
 	public void draw() {
-		this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE);
+		this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
 
 	}
 
@@ -44,11 +43,10 @@ public class ShootingTower extends Tower {
 			if (enemy != null && !done) {
 				float enemyX = enemy.getX();
 				float enemyY = enemy.getY();
-				float deltaX = enemyX - (this.getX() * Gameplay.SIZE + Gameplay.SIZE/2);
-				float deltaY = enemyY - (this.getY() * Gameplay.SIZE + Gameplay.SIZE/2);
+				float deltaX = enemyX - (this.getX() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
+				float deltaY = enemyY - (this.getY() * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2);
 
-				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY
-						* deltaY);
+				float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
 				if (distance < this.radius + enemy.getRadius()) {
 					enemy.setHealth(enemy.getHealth() - this.damage);

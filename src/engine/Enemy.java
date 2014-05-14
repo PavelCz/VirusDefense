@@ -16,16 +16,15 @@ public class Enemy extends Entity implements Drawable {
 	private int worth;
 	private boolean dead = false;
 
-	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, int direction, Gameplay game, float radius,
-			int worth) {
-		super(startingWaypoint.getX(), startingWaypoint.getY());
+	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, Gameplay game, float radius, int worth) {
+		super(startingWaypoint.getX() * Gameplay.DEFAULT_SIZE, startingWaypoint.getY() * Gameplay.DEFAULT_SIZE);
 		this.health = maxHealth;
 		this.maxHealth = maxHealth;
 		this.speed = speed;
 		this.sprite = sprite;
-		this.velocity = new MyVector2f(0, speed);
 		this.waypoint = startingWaypoint;
-		this.direction = direction;
+		this.direction = this.waypoint.getDirection();
+		this.newDirection();
 		this.radius = radius;
 		this.game = game;
 		this.worth = worth;
@@ -34,7 +33,7 @@ public class Enemy extends Entity implements Drawable {
 
 	public Enemy(EnemyType enemyType) {
 		this(enemyType.getHealth(), enemyType.getSpeed(), enemyType.getSprite(), enemyType.getGame().getWaypoints(), enemyType
-				.getGame().getWaypoints().getDirection(), enemyType.getGame(), enemyType.getRadius(), enemyType.getWorth());
+				.getGame(), enemyType.getRadius(), enemyType.getWorth());
 
 	}
 
@@ -50,17 +49,23 @@ public class Enemy extends Entity implements Drawable {
 		if (this.health > 0) {
 			this.x += this.velocity.getX() * delta;
 			this.y += this.velocity.getY() * delta;
+
+			Waypoint previousWaypoint = this.waypoint;
 			if (this.waypoint == null) {
 				this.health = 0;
 				this.game.reduceLives();
-			} else if (this.direction == Waypoint.DOWN && this.getY() >= this.waypoint.getY()) {
+			} else if (this.direction == Waypoint.DOWN && this.y >= this.waypoint.getY() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
-			} else if (this.direction == Waypoint.RIGHT && this.getX() >= this.waypoint.getX()) {
+				this.normalizeCoordinates(previousWaypoint);
+			} else if (this.direction == Waypoint.RIGHT && this.x >= this.waypoint.getX() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
-			} else if (this.direction == Waypoint.UP && this.getY() <= this.waypoint.getY()) {
+				this.normalizeCoordinates(previousWaypoint);
+			} else if (this.direction == Waypoint.UP && this.y <= this.waypoint.getY() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
-			} else if (this.direction == Waypoint.LEFT && this.getX() <= this.waypoint.getX()) {
+				this.normalizeCoordinates(previousWaypoint);
+			} else if (this.direction == Waypoint.LEFT && this.x <= this.waypoint.getX() * Gameplay.DEFAULT_SIZE) {
 				this.newDirection();
+				this.normalizeCoordinates(previousWaypoint);
 			}
 		} else {
 			this.game.getSoundHandler().play("death");
@@ -89,8 +94,28 @@ public class Enemy extends Entity implements Drawable {
 	@Override
 	public void draw() {
 		if (this.health > 0) {
-			this.sprite.draw(this.x - this.sprite.getWidth() / 2, this.y - this.sprite.getHeight() / 2);
+			this.sprite.draw((this.x) * Gameplay.GLOBAL_GAME_SCALE, (this.y) * Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
 		}
+	}
+
+	private void normalizeCoordinates(Waypoint waypoint) {
+
+		this.x = waypoint.getX() * Gameplay.DEFAULT_SIZE;
+		this.y = waypoint.getY() * Gameplay.DEFAULT_SIZE;
+		// if (this.direction == Waypoint.UP || this.direction == Waypoint.DOWN) {
+		// } else {
+		// this.y = (int) (this.y / Gameplay.DEFAULT_SIZE) * Gameplay.DEFAULT_SIZE;
+		// }
+	}
+
+	@Override
+	public float getX() {
+		return (this.x + Gameplay.DEFAULT_SIZE / 2);
+	}
+
+	@Override
+	public float getY() {
+		return (this.y + Gameplay.DEFAULT_SIZE / 2);
 	}
 
 	public float getRadius() {

@@ -3,6 +3,8 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import towerDefense.Gameplay;
+
 /**
  * Handles all enemy types. You can add a new enemy type. This Type will be saved at a specific index and later you can create an
  * Object with that number
@@ -12,8 +14,18 @@ import java.util.List;
 public class EnemyTypeHandler {
 	private List<EnemyType> enemyTypes;
 
-	public EnemyTypeHandler() {
+	public EnemyTypeHandler(Gameplay game, String enemies) {
 		this.enemyTypes = new ArrayList<EnemyType>();
+		this.initEnemyTypes(game, TextFileToString.getLines("enemies/" + enemies));
+	}
+
+	private void initEnemyTypes(Gameplay game, List<String> lines) {
+		for (String line : lines) {
+			String[] parts = line.split(", ");
+			this.enemyTypes.add(new EnemyType(Integer.parseInt(parts[0]), Float.parseFloat(parts[1]), parts[2], game, Integer
+					.parseInt(parts[3]), Integer.parseInt(parts[4]), Float.parseFloat(parts[5])));
+		}
+
 	}
 
 	/**

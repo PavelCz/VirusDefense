@@ -23,15 +23,16 @@ public abstract class Clickable extends GUI {
 
 	public abstract void onUnHover();
 
-	public boolean collides(int x, int y) {
-		return (x >= this.x && x <= this.x + this.collisionWidth && y >= this.y && y <= this.y + this.collisionHeight);
+	public boolean collides(int x, int y, float globalScale) {
+		return (x >= this.x && x <= this.x + this.collisionWidth * globalScale && y >= this.y && y <= this.y + this.collisionHeight
+				* globalScale);
 	}
 
-	public void update(GameContainer container) {
+	public void update(GameContainer container, float globalScale) {
 		Input input = container.getInput();
 		float x = input.getMouseX();
 		float y = input.getMouseY();
-		if (!this.clicked && this.collides((int) x, (int) y)) {
+		if (!this.clicked && this.collides((int) x, (int) y, globalScale)) {
 			this.onHover();
 		} else if (!this.clicked) {
 			this.onUnHover();

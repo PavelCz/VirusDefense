@@ -2,6 +2,7 @@ package engine.gui;
 
 import org.newdawn.slick.Graphics;
 
+import towerDefense.Gameplay;
 import engine.graphics.SlickTwoColoredBar;
 
 /**
@@ -39,7 +40,7 @@ public class SlickHealthbar extends GUI {
 	@Override
 	public void draw() {
 		this.bar.setFractionLeft(this.healthLeft / this.maxHealth);
-		this.bar.draw(this.x, this.y);
+		this.bar.draw(this.x, this.y, Gameplay.GLOBAL_GAME_SCALE);
 
 	}
 
