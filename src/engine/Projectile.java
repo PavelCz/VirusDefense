@@ -18,8 +18,7 @@ public abstract class Projectile extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void update(int delta) {
-	}
+	public abstract void update(int delta);
 
 	public void draw() {
 		this.sprite.draw((this.x - Gameplay.DEFAULT_SIZE / 2) * Gameplay.GLOBAL_GAME_SCALE, (this.y - Gameplay.DEFAULT_SIZE / 2)
