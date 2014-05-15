@@ -56,4 +56,8 @@ public abstract class Clickable extends GUI {
 		return this.stayClicked;
 	}
 
+	public boolean isClicked() {
+		return this.clicked;
+	}
+
 }

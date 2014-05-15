@@ -58,7 +58,9 @@ public abstract class GameComponent {
 				this.mouseWasClicked = false;
 				for (Clickable clickable : this.clickables) {
 					if (!clickable.isStayClicked()) {
-						clickable.onRelease();
+						if (clickable.isClicked()) {
+							clickable.onRelease();
+						}
 					}
 				}
 			}
