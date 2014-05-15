@@ -3,12 +3,22 @@ package engine.gui;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
+import towerDefense.Gameplay;
+
 public abstract class Clickable extends GUI {
 	protected float collisionWidth, collisionHeight;
 	protected boolean clicked = false;
 
 	public Clickable(float x, float y) {
 		super(x, y);
+	}
+
+	public void update(float mouseX, float mouseY) {
+		if (this.collides((int) this.x, (int) this.y, Gameplay.GLOBAL_GUI_SCALE)) {
+			this.onClick();
+			this.game.getSoundHandler().play("press");
+
+		}
 	}
 
 	public void onClick() {
