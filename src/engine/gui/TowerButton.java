@@ -33,8 +33,7 @@ public class TowerButton extends Button {
 	@Override
 	public void onRelease() {
 		super.onRelease();
-		this.game.setCurrentTower(this.tower);
-		this.game.getCurrentTower().getSprite().setAlpha(0.5f);
+		this.game.setCurrentTower(null);
 
 	}
 

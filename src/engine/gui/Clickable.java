@@ -23,8 +23,9 @@ public abstract class Clickable extends GUI {
 			if (this.clicked) {
 				this.onRelease();
 			} else {
-				this.onClick();
 				this.game.releaseAllClickablesExcept(this);
+				this.onClick();
+
 			}
 			this.game.getSoundHandler().play("press");
 
