@@ -243,7 +243,9 @@ public class Gameplay extends GameComponent {
 			} else {
 				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.GLOBAL_GAME_SCALE, SIZE / Gameplay.GLOBAL_GAME_SCALE, Color.red)
 						.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
+				sprite.setAlpha(0.1f);
 				sprite.setColor(1f, 0, 0);
+
 			}
 
 			sprite.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
