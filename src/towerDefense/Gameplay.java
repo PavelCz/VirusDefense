@@ -421,37 +421,39 @@ public class Gameplay extends GameComponent {
 	private void mouseEvents(GameContainer container, int delta) {
 		if (this.mode == 0) {
 			Input input = container.getInput();
+			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
-			float x = input.getMouseX();
-			float y = input.getMouseY();
+				float x = input.getMouseX();
+				float y = input.getMouseY();
 
-			boolean buttonWasPressed = false;
-			for (Clickable clickable : this.clickables) {
-				clickable.update(container);
-			}
-			if (!buttonWasPressed) {
-				int newX = (int) x / Gameplay.SIZE;
-				int newY = (int) y / Gameplay.SIZE;
+				boolean buttonWasPressed = false;
+				for (Clickable clickable : this.clickables) {
+					clickable.update(container);
+				}
+				if (!buttonWasPressed) {
+					int newX = (int) x / Gameplay.SIZE;
+					int newY = (int) y / Gameplay.SIZE;
 
-				if (this.currentTower != null) {
-					int[][] path = this.currentLevel.getPath();
-					int cost = this.currentTower.getCost();
-					if (this.currentTowerPlaceable && x < Gameplay.INTERFACE_START_X && y < path.length * this.currentTileLength
-							&& path[newY][newX] == 1 && this.towers[newY][newX] == null && this.player.getMoney() - cost >= 0) {
-						Tower bufferTower = this.currentTower.clone();
-						bufferTower.setX(newX);
-						bufferTower.setY(newY);
-						bufferTower.getSprite().setAlpha(1f);
-						this.towers[newY][newX] = bufferTower;
-						this.player.reduceMoney(cost);
-						this.currentTower = null;
-						this.releaseAllClickables();
-						this.game.getSoundHandler().play("place");
+					if (this.currentTower != null) {
+						int[][] path = this.currentLevel.getPath();
+						int cost = this.currentTower.getCost();
+						if (this.currentTowerPlaceable && x < Gameplay.INTERFACE_START_X && y < path.length * this.currentTileLength
+								&& path[newY][newX] == 1 && this.towers[newY][newX] == null && this.player.getMoney() - cost >= 0) {
+							Tower bufferTower = this.currentTower.clone();
+							bufferTower.setX(newX);
+							bufferTower.setY(newY);
+							bufferTower.getSprite().setAlpha(1f);
+							this.towers[newY][newX] = bufferTower;
+							this.player.reduceMoney(cost);
+							this.currentTower = null;
+							this.releaseAllClickables();
+							this.game.getSoundHandler().play("place");
 
-					} else {
-						this.game.getSoundHandler().play("bad");
+						} else {
+							this.game.getSoundHandler().play("bad");
+						}
+
 					}
-
 				}
 				this.mouseWasClicked = true;
 
