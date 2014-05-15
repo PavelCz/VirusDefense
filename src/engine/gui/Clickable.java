@@ -3,12 +3,36 @@ package engine.gui;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
+import towerDefense.Gameplay;
+
 public abstract class Clickable extends GUI {
 	protected float collisionWidth, collisionHeight;
 	protected boolean clicked = false;
+	protected Gameplay game;
+	protected boolean stayClicked;
 
-	public Clickable(float x, float y) {
+	public Clickable(float x, float y, Gameplay game, boolean stayClicked) {
 		super(x, y);
+		this.game = game;
+		this.stayClicked = stayClicked;
+	}
+
+	public void update(GameContainer container) {
+		Input input = container.getInput();
+		float x = input.getMouseX();
+		float y = input.getMouseY();
+		if (this.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+			if (this.clicked) {
+				this.onRelease();
+			} else {
+				this.game.releaseAllClickablesExcept(this);
+				this.onClick();
+
+			}
+			this.game.getSoundHandler().play("press");
+
+		}
+
 	}
 
 	public void onClick() {
@@ -28,14 +52,12 @@ public abstract class Clickable extends GUI {
 				* globalScale);
 	}
 
-	public void update(GameContainer container, float globalScale) {
-		Input input = container.getInput();
-		float x = input.getMouseX();
-		float y = input.getMouseY();
-		if (!this.clicked && this.collides((int) x, (int) y, globalScale)) {
-			this.onHover();
-		} else if (!this.clicked) {
-			this.onUnHover();
-		}
+	public boolean isStayClicked() {
+		return this.stayClicked;
 	}
+
+	public boolean isClicked() {
+		return this.clicked;
+	}
+
 }

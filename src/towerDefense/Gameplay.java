@@ -43,7 +43,6 @@ public class Gameplay extends GameComponent {
 
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
-	private boolean mouseWasClicked;
 	private boolean debugMode;
 	private int passedMilliseconds;
 	private int mode;
@@ -130,7 +129,6 @@ public class Gameplay extends GameComponent {
 
 	private void initDefaults() {
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
-		this.mouseWasClicked = false;
 		this.debugMode = false;
 		this.passedMilliseconds = 0;
 		this.mode = 0;
@@ -245,7 +243,9 @@ public class Gameplay extends GameComponent {
 			} else {
 				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.GLOBAL_GAME_SCALE, SIZE / Gameplay.GLOBAL_GAME_SCALE, Color.red)
 						.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
+				sprite.setAlpha(0.1f);
 				sprite.setColor(1f, 0, 0);
+
 			}
 
 			sprite.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
@@ -421,73 +421,57 @@ public class Gameplay extends GameComponent {
 	private void mouseEvents(GameContainer container, int delta) {
 		if (this.mode == 0) {
 			Input input = container.getInput();
+
 			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
-				float x = input.getMouseX();
-				float y = input.getMouseY();
-
-				boolean buttonWasPressed = false;
+				this.placeTower(input);
 				for (Clickable clickable : this.clickables) {
-					if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-						buttonWasPressed = true;
-						this.releaseAllClickables();
-						clickable.onClick();
-						this.game.getSoundHandler().play("press");
-
-					}
+					clickable.update(container);
 				}
-				if (!buttonWasPressed) {
-					int newX = (int) x / Gameplay.SIZE;
-					int newY = (int) y / Gameplay.SIZE;
-
-					if (this.currentTower != null) {
-						int[][] path = this.currentLevel.getPath();
-						int cost = this.currentTower.getCost();
-						if (this.currentTowerPlaceable && x < Gameplay.INTERFACE_START_X && y < path.length * this.currentTileLength
-								&& path[newY][newX] == 1 && this.towers[newY][newX] == null && this.player.getMoney() - cost >= 0) {
-							Tower bufferTower = this.currentTower.clone();
-							bufferTower.setX(newX);
-							bufferTower.setY(newY);
-							bufferTower.getSprite().setAlpha(1f);
-							this.towers[newY][newX] = bufferTower;
-							this.player.reduceMoney(cost);
-							this.currentTower = null;
-							this.releaseAllClickables();
-							this.game.getSoundHandler().play("place");
-
-						} else {
-							this.game.getSoundHandler().play("bad");
-						}
-
-					}
-				}
-				this.mouseWasClicked = true;
 
 			} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
-				this.currentTower = null;
 				this.releaseAllClickables();
-			}
-			// checks if mouse button was released again after being pressed
-			if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-
-				this.mouseWasClicked = false;
-				this.releaseAllClickablesNotTowerButtons();
 
 			}
+		}
+	}
+
+	private void placeTower(Input input) {
+		float x = input.getMouseX();
+		float y = input.getMouseY();
+		int newX = (int) x / Gameplay.SIZE;
+		int newY = (int) y / Gameplay.SIZE;
+
+		if (this.currentTower != null) {
+			int[][] path = this.currentLevel.getPath();
+			int cost = this.currentTower.getCost();
+			if (this.currentTowerPlaceable && x < Gameplay.INTERFACE_START_X && y < path.length * this.currentTileLength
+					&& path[newY][newX] == 1 && this.towers[newY][newX] == null && this.player.getMoney() - cost >= 0) {
+				Tower bufferTower = this.currentTower.clone();
+				bufferTower.setX(newX);
+				bufferTower.setY(newY);
+				bufferTower.getSprite().setAlpha(1f);
+				this.towers[newY][newX] = bufferTower;
+				this.player.reduceMoney(cost);
+				this.game.getSoundHandler().play("place");
+
+			} else {
+				boolean mouseCollidesButton = false;
+				for (Clickable clickable : this.clickables) {
+					if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+						mouseCollidesButton = true;
+					}
+				}
+				if (!mouseCollidesButton) {
+					this.game.getSoundHandler().play("bad");
+				}
+			}
+
 		}
 	}
 
 	private void releaseAllClickables() {
 		for (Clickable clickable : this.clickables) {
 			clickable.onRelease();
-		}
-	}
-
-	private void releaseAllClickablesNotTowerButtons() {
-		for (Clickable clickable : this.clickables) {
-			if (!(clickable.getClass() == this.towerButton1.getClass())) {
-				clickable.onRelease();
-			}
 		}
 	}
 
@@ -591,6 +575,10 @@ public class Gameplay extends GameComponent {
 
 	public void setLevel(Level level) {
 		this.currentLevel = level;
+	}
+
+	public boolean currentTowerPlaceable() {
+		return this.currentTowerPlaceable;
 	}
 
 }
