@@ -8,9 +8,11 @@ import towerDefense.Gameplay;
 public abstract class Clickable extends GUI {
 	protected float collisionWidth, collisionHeight;
 	protected boolean clicked = false;
+	protected Gameplay game;
 
-	public Clickable(float x, float y) {
+	public Clickable(float x, float y, Gameplay game) {
 		super(x, y);
+		this.game = game;
 	}
 
 	public void update(float mouseX, float mouseY) {

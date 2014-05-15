@@ -7,11 +7,12 @@ public class Button extends Clickable {
 	private Sprite unclickedButton;
 	private Sprite clickedButton;
 
-	public Button(float x, float y, String unclickedButtonPath, String clickedButtonPath) {
-		this(x,y,new Sprite(unclickedButtonPath), new Sprite(clickedButtonPath));
+	public Button(float x, float y, String unclickedButtonPath, String clickedButtonPath, Gameplay game) {
+		this(x, y, new Sprite(unclickedButtonPath), new Sprite(clickedButtonPath), game);
 	}
-	public Button(float x, float y, Sprite unclickedButton, Sprite clickedButton) {
-		super(x, y);
+
+	public Button(float x, float y, Sprite unclickedButton, Sprite clickedButton, Gameplay game) {
+		super(x, y, game);
 		this.unclickedButton = unclickedButton;
 		this.clickedButton = clickedButton;
 		this.collisionWidth = this.unclickedButton.getWidth();
@@ -40,7 +41,7 @@ public class Button extends Clickable {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	public void setUnclickedButton(Sprite picture) {
 		this.unclickedButton = picture;
 	}

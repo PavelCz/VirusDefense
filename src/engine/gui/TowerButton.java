@@ -6,12 +6,10 @@ import engine.graphics.Sprite;
 
 public class TowerButton extends Button {
 	private Tower tower;
-	private Gameplay game;
 
 	public TowerButton(float x, float y, String unclickedButtonPath, String clickedButtonPath, Tower tower, Gameplay game) {
-		super(x, y, unclickedButtonPath, clickedButtonPath);
+		super(x, y, unclickedButtonPath, clickedButtonPath, game);
 		this.tower = tower;
-		this.game = game;
 	}
 
 	@Override

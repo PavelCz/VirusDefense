@@ -39,9 +39,9 @@ public class ChooseLevel extends GameComponent {
 		float buttonX = TowerDefense.getWidth() / 2 - currentPreviewPicture.getWidth() / 2;
 		float buttonY = TowerDefense.getHeight() / 2 - currentPreviewPicture.getHeight() / 2;
 
-		this.button = new Button(buttonX, buttonY, currentPreviewPicture, currentPreviewPicture);
-		this.left = new Button(leftX, leftY, leftSprite, leftSprite);
-		this.right = new Button(rightX, rightY, rightSprite, rightSprite);
+		this.button = new Button(buttonX, buttonY, currentPreviewPicture, currentPreviewPicture, game.getGameplay());
+		this.left = new Button(leftX, leftY, leftSprite, leftSprite, game.getGameplay());
+		this.right = new Button(rightX, rightY, rightSprite, rightSprite, game.getGameplay());
 
 		this.clickables.add(this.button);
 		this.clickables.add(this.left);

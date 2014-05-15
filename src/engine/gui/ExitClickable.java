@@ -6,7 +6,7 @@ public class ExitClickable extends ClickableText {
 	private TowerDefense towerDefense;
 
 	public ExitClickable(float x, float y, TowerDefense towerDefense) {
-		super(x, y, "Exit Game", 1f);
+		super(x, y, "Exit Game", 1f, towerDefense.getGameplay());
 		this.towerDefense = towerDefense;
 	}
 
