@@ -16,6 +16,7 @@ public abstract class GameComponent {
 
 	protected List<GUI> guiElements;
 	protected List<Clickable> clickables;
+	private boolean mouseWasClicked;
 
 	protected TowerDefense game;
 	private Clickable wasClicked;
@@ -47,11 +48,20 @@ public abstract class GameComponent {
 	private void updateClickables(GameContainer container, int delta) {
 		Input input = container.getInput();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
+			this.mouseWasClicked = true;
 			for (Clickable clickable : this.clickables) {
 				clickable.update(container);
 			}
 
+		} else {
+			if (this.mouseWasClicked) {
+				this.mouseWasClicked = false;
+				for (Clickable clickable : this.clickables) {
+					if (!clickable.isStayClicked()) {
+						clickable.onRelease();
+					}
+				}
+			}
 		}
 	}
 

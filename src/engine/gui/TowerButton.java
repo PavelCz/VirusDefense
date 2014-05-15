@@ -8,8 +8,9 @@ public class TowerButton extends Button {
 	private Tower tower;
 
 	public TowerButton(float x, float y, String unclickedButtonPath, String clickedButtonPath, Tower tower, Gameplay game) {
-		super(x, y, unclickedButtonPath, clickedButtonPath, game);
+		super(x, y, unclickedButtonPath, clickedButtonPath, game, true);
 		this.tower = tower;
+		this.stayClicked = false;
 	}
 
 	@Override
