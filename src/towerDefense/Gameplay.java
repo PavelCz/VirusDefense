@@ -129,7 +129,6 @@ public class Gameplay extends GameComponent {
 
 	private void initDefaults() {
 		this.enemies = new ConcurrentLinkedQueue<Enemy>();
-		this.mouseWasClicked = false;
 		this.debugMode = false;
 		this.passedMilliseconds = 0;
 		this.mode = 0;
@@ -441,8 +440,6 @@ public class Gameplay extends GameComponent {
 						bufferTower.getSprite().setAlpha(1f);
 						this.towers[newY][newX] = bufferTower;
 						this.player.reduceMoney(cost);
-						this.currentTower = null;
-						this.releaseAllClickables();
 						this.game.getSoundHandler().play("place");
 
 					} else {
@@ -450,7 +447,6 @@ public class Gameplay extends GameComponent {
 					}
 
 				}
-				this.mouseWasClicked = true;
 
 			} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
 				this.currentTower = null;
@@ -586,4 +582,5 @@ public class Gameplay extends GameComponent {
 	public boolean currentTowerPlaceable() {
 		return this.currentTowerPlaceable;
 	}
+
 }

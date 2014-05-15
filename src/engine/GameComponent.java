@@ -78,9 +78,12 @@ public abstract class GameComponent {
 		return this.game.getSoundHandler();
 	}
 
-	private void releaseAllClickables() {
+	public void releaseAllClickablesExcept(Clickable excluded) {
 		for (Clickable clickable : this.clickables) {
-			clickable.onRelease();
+			if (clickable != excluded) {
+				clickable.onRelease();
+			}
+
 		}
 	}
 
