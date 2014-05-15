@@ -45,31 +45,12 @@ public abstract class GameComponent {
 	}
 
 	private void updateClickables(GameContainer container, int delta) {
-		for (Clickable clickable : this.clickables) {
-			clickable.update(container, 1f);
-		}
 		Input input = container.getInput();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
-			float x = input.getMouseX();
-			float y = input.getMouseY();
-
-			boolean buttonWasPressed = false;
 			for (Clickable clickable : this.clickables) {
-				if (clickable.collides((int) x, (int) y, 1f)) {
-					buttonWasPressed = true;
-					clickable.onClick();
-					this.wasClicked = clickable;
-					this.game.getSoundHandler().play("press");
-				}
+				clickable.update(container);
 			}
-
-		}
-		// checks if mouse button was released again after being pressed
-		if (this.wasClicked != null && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-
-			this.wasClicked.onRelease();
-			this.wasClicked = null;
 
 		}
 	}

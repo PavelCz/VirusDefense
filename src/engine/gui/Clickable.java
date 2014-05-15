@@ -50,14 +50,4 @@ public abstract class Clickable extends GUI {
 				* globalScale);
 	}
 
-	public void update(GameContainer container, float globalScale) {
-		Input input = container.getInput();
-		float x = input.getMouseX();
-		float y = input.getMouseY();
-		if (!this.clicked && this.collides((int) x, (int) y, globalScale)) {
-			this.onHover();
-		} else if (!this.clicked) {
-			this.onUnHover();
-		}
-	}
 }
