@@ -427,17 +427,9 @@ public class Gameplay extends GameComponent {
 				this.placeTower(input);
 
 			} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
-				this.currentTower = null;
 				this.releaseAllClickables();
 
 			}
-			// checks if mouse button was released again after being pressed
-			// if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			//
-			// this.mouseWasClicked = false;
-			// this.releaseAllClickablesNotTowerButtons();
-			//
-			// }
 		}
 	}
 
