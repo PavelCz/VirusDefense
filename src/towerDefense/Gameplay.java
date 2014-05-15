@@ -567,7 +567,7 @@ public class Gameplay extends GameComponent {
 		this.currentLevel = level;
 	}
 
-	public boolean currentTowerPlacable() {
+	public boolean currentTowerPlaceable() {
 		return this.currentTowerPlaceable;
 	}
 }
