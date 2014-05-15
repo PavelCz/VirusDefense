@@ -469,14 +469,6 @@ public class Gameplay extends GameComponent {
 		}
 	}
 
-	private void releaseAllClickablesNotTowerButtons() {
-		for (Clickable clickable : this.clickables) {
-			if (!(clickable.getClass() == this.towerButton1.getClass())) {
-				clickable.onRelease();
-			}
-		}
-	}
-
 	public ConcurrentLinkedQueue<Enemy> getEnemies() {
 		return this.enemies;
 	}
