@@ -421,10 +421,10 @@ public class Gameplay extends GameComponent {
 			Input input = container.getInput();
 
 			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+				this.placeTower(input);
 				for (Clickable clickable : this.clickables) {
 					clickable.update(container);
 				}
-				this.placeTower(input);
 
 			} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
 				this.releaseAllClickables();
@@ -453,7 +453,15 @@ public class Gameplay extends GameComponent {
 				this.game.getSoundHandler().play("place");
 
 			} else {
-				this.game.getSoundHandler().play("bad");
+				boolean mouseCollidesButton = false;
+				for (Clickable clickable : this.clickables) {
+					if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+						mouseCollidesButton = true;
+					}
+				}
+				if (!mouseCollidesButton) {
+					this.game.getSoundHandler().play("bad");
+				}
 			}
 
 		}
