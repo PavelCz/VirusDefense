@@ -14,6 +14,7 @@ import org.newdawn.slick.Sound;
 
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
+import towerDefense.towers.RocketFastTower;
 import towerDefense.towers.RocketTower;
 import towerDefense.towers.Tower;
 import engine.Enemy;
@@ -52,6 +53,7 @@ public class Gameplay extends GameComponent {
 	private TowerButton towerButton1;
 	private TowerButton towerButton2;
 	private TowerButton towerButton3;
+	private TowerButton towerButton4;
 	private Tower currentTower;
 	private Player player;
 	private StaticText numberLives;
@@ -114,12 +116,15 @@ public class Gameplay extends GameComponent {
 				"buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new Sprite("tower/Tower2.png", 0.5f), this, 400, 0.08f,
 						400), this);
 		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
-				"buttons/PSButton1_click.png", new BombTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this, 1000, 20f, 50), this);
+				"buttons/PSButton1_click.png", new BombTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this, 1500, 15f, 50), this);
 		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
-				"buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 0.5f), this, 1000, 20f, 50), this);
+				"buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 0.5f), this, 200, 15f, 50), this);
+		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X+64+32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
+				"buttons/PSButton1_click.png", new RocketFastTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
+		this.clickables.add(this.towerButton4);
 
 		//
 		this.initGUI();
@@ -160,6 +165,7 @@ public class Gameplay extends GameComponent {
 		this.guiElements.add(this.towerButton1);
 		this.guiElements.add(this.towerButton2);
 		this.guiElements.add(this.towerButton3);
+		this.guiElements.add(this.towerButton4);
 		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, livesY, Color.white, "Lives:"));
 		this.guiElements.add(this.passedTime);
 		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, moneyY, Color.white, "Money:"));
