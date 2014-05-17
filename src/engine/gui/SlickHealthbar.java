@@ -40,7 +40,7 @@ public class SlickHealthbar extends GUI {
 	@Override
 	public void draw() {
 		this.bar.setFractionLeft(this.healthLeft / this.maxHealth);
-		this.bar.draw(this.x, this.y, Gameplay.GLOBAL_GAME_SCALE);
+		this.bar.draw(this.x, this.y, Gameplay.CURRENT_GAME_SCALE);
 
 	}
 

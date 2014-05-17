@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -63,7 +64,8 @@ public class Gameplay extends GameComponent {
 	private int towerShadowX, towerShadowY;
 	protected ConcurrentLinkedQueue<Projectile> projectiles;
 
-	public static float GLOBAL_GAME_SCALE;
+	public static float CURRENT_GAME_SCALE;
+	public static float MAX_GAME_SCALE;
 	public static float GLOBAL_GUI_SCALE = 1f;
 
 	private StaticText passedTime;
@@ -87,7 +89,7 @@ public class Gameplay extends GameComponent {
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
 		this.initDefaults();
-		Gameplay.camera = new Camera(0, 0);
+		Gameplay.camera = new Camera(0, 0, this);
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
@@ -98,8 +100,9 @@ public class Gameplay extends GameComponent {
 		Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
 		float scale1 = Gameplay.INTERFACE_START_X / this.width;
 		float scale2 = TowerDefense.getHeight() / this.height;
-		Gameplay.GLOBAL_GAME_SCALE = Math.min(scale1, scale2);
-		Gameplay.SIZE = (int) (64 * Gameplay.GLOBAL_GAME_SCALE);
+		Gameplay.CURRENT_GAME_SCALE = Math.max(scale1, scale2);
+		Gameplay.MAX_GAME_SCALE = Gameplay.CURRENT_GAME_SCALE;
+		Gameplay.SIZE = (int) (64 * Gameplay.CURRENT_GAME_SCALE);
 
 		//
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
@@ -198,9 +201,9 @@ public class Gameplay extends GameComponent {
 		this.renderDebug(container, graphics);
 
 		if (this.mode == 1) {
-			new Sprite("You Win.png").draw(0, 0, Gameplay.GLOBAL_GAME_SCALE);
+			new Sprite("You Win.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE);
 		} else if (this.mode == -1) {
-			new Sprite("Game Over.png").draw(0, 0, Gameplay.GLOBAL_GAME_SCALE);
+			new Sprite("Game Over.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE);
 		}
 	}
 
@@ -208,9 +211,9 @@ public class Gameplay extends GameComponent {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
-			SlickHealthbar h = new SlickHealthbar(graphics, (enemy.getX() - barLength / 2 - Gameplay.getCameraX())
-					* Gameplay.GLOBAL_GAME_SCALE, (enemy.getY() - Gameplay.SIZE / 2 - Gameplay.getCameraY())
-					* Gameplay.GLOBAL_GAME_SCALE - barHeight, enemy.getMaxHealth(), barLength, barHeight);
+			SlickHealthbar h = new SlickHealthbar(graphics, (enemy.getX() - barLength / 2) * Gameplay.CURRENT_GAME_SCALE
+					- Gameplay.getCameraX(), (enemy.getY() - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE
+					- Gameplay.getCameraY(), enemy.getMaxHealth(), barLength, barHeight);
 			h.setHealth(enemy.getHealth());
 			h.setBordered(true);
 			h.draw();
@@ -246,17 +249,17 @@ public class Gameplay extends GameComponent {
 			Sprite sprite = this.currentTower.getSprite().clone();
 
 			if (this.currentTowerPlaceable) {
-				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.GLOBAL_GAME_SCALE, SIZE / Gameplay.GLOBAL_GAME_SCALE, Color.green)
-						.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
+				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
+						Color.green).draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
 			} else {
-				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.GLOBAL_GAME_SCALE, SIZE / Gameplay.GLOBAL_GAME_SCALE, Color.red)
-						.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
+				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE, Color.red)
+						.draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
 				sprite.setAlpha(0.1f);
 				sprite.setColor(1f, 0, 0);
 
 			}
 
-			sprite.draw(this.towerShadowX, this.towerShadowY, Gameplay.GLOBAL_GAME_SCALE);
+			sprite.draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
 		}
 	}
 
@@ -269,19 +272,19 @@ public class Gameplay extends GameComponent {
 	private void renderDebug(GameContainer container, Graphics graphics) {
 		if (this.debugMode) {
 			for (Enemy enemy : this.enemies) {
-				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX()
-						- Gameplay.getCameraX() * Gameplay.GLOBAL_GAME_SCALE, enemy.getY() - Gameplay.getCameraY()
-						* Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
+				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw((enemy.getX())
+						* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(),
+						(enemy.getY()) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
 			}
 			for (int i = 0; i < this.towers.length; ++i) {
 				for (int j = 0; j < this.towers[0].length; ++j) {
 					if (this.towers[i][j] != null) {
 						Tower currentTower = this.towers[i][j];
 						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red)
-								.draw((currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2 - Gameplay
-										.getCameraX()) * Gameplay.GLOBAL_GAME_SCALE, (currentTower.getY() * this.currentTileLength
-										+ DEFAULT_SIZE / 2 - Gameplay.getCameraY())
-										* Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
+								.draw((currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2)
+										* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (currentTower.getY()
+										* this.currentTileLength + DEFAULT_SIZE / 2)
+										* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
 					}
 				}
 			}
@@ -340,8 +343,8 @@ public class Gameplay extends GameComponent {
 			int y = input.getMouseY() + Gameplay.getCameraY();
 			int newX = (x) / Gameplay.SIZE;
 			int newY = (y) / Gameplay.SIZE;
-			this.towerShadowX = (int) (input.getMouseX() / Gameplay.DEFAULT_SIZE) * Gameplay.DEFAULT_SIZE;
-			this.towerShadowY = (int) (input.getMouseY() / Gameplay.DEFAULT_SIZE) * Gameplay.DEFAULT_SIZE;
+			this.towerShadowX = (int) (newX * Gameplay.SIZE - Gameplay.getCameraX());
+			this.towerShadowY = (int) (newY * Gameplay.SIZE - Gameplay.getCameraY());
 			int[][] path = this.currentLevel.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
@@ -396,28 +399,41 @@ public class Gameplay extends GameComponent {
 				e.printStackTrace();
 			}
 		}
-		if (input.isKeyPressed(Input.KEY_LEFT)) {
-			if (Gameplay.getCameraX() - 32 >= 0) {
-				Gameplay.camera.addX(-32);
+		int mouseWheel = Mouse.getDWheel();
+		if (mouseWheel > 0) { // mouse wheel up
+			Gameplay.CURRENT_GAME_SCALE *=  1.1f;
+			if (Gameplay.CURRENT_GAME_SCALE > 6) {
+				Gameplay.CURRENT_GAME_SCALE = 6f;
 			}
-		}
-		if (input.isKeyPressed(Input.KEY_RIGHT)) {
-			if (Gameplay.getCameraX() + this.getHorizontalTiles() * Gameplay.SIZE < this.getHorizontalTiles()
-					* Gameplay.SIZE) {
-				Gameplay.camera.addX(+32);
+			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
+		} else if (mouseWheel < 0) {// mouse wheel down
+			Gameplay.CURRENT_GAME_SCALE *= 0.9f;
+			if (Gameplay.CURRENT_GAME_SCALE < Gameplay.MAX_GAME_SCALE) {
+				Gameplay.CURRENT_GAME_SCALE = Gameplay.MAX_GAME_SCALE;
 			}
+			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		}
-		if (input.isKeyPressed(Input.KEY_UP)) {
-			if (Gameplay.getCameraY() - 32 >= 0) {
-				Gameplay.camera.addY(-32);
-			}
+
+		float scrollSpeed = 0.5f;
+		float scrollDistance = scrollSpeed * delta;
+		if (input.isKeyDown(Input.KEY_LEFT)) {
+			Gameplay.camera.addX(-scrollDistance);
+
 		}
-		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			if (Gameplay.getCameraY() + this.getHorizontalTiles() * Gameplay.SIZE < this.getVerticalTiles()
-					* Gameplay.SIZE) {
-				Gameplay.camera.addY(+32);
-			}
+
+		if (input.isKeyDown(Input.KEY_RIGHT)) {
+			Gameplay.camera.addX(+scrollDistance);
+
 		}
+		if (input.isKeyDown(Input.KEY_UP)) {
+			Gameplay.camera.addY(-scrollDistance);
+
+		}
+		if (input.isKeyDown(Input.KEY_DOWN)) {
+			Gameplay.camera.addY(+scrollDistance);
+
+		}
+
 		if (this.debugMode) {
 			this.debugKeyboardEvents(container, delta);
 		}
@@ -475,10 +491,8 @@ public class Gameplay extends GameComponent {
 		int newY = (int) y / Gameplay.SIZE;
 
 		if (this.currentTower != null) {
-			int[][] path = this.currentLevel.getPath();
 			int cost = this.currentTower.getCost();
-			if (this.currentTowerPlaceable && x < Gameplay.INTERFACE_START_X && y < path.length * this.currentTileLength
-					&& path[newY][newX] == 1 && this.towers[newY][newX] == null && this.player.getMoney() - cost >= 0) {
+			if (this.currentTowerPlaceable) {
 				Tower bufferTower = this.currentTower.clone();
 				bufferTower.setX(newX);
 				bufferTower.setY(newY);
