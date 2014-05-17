@@ -7,4 +7,12 @@ public class Camera extends Entity{
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void addX(int amount) {
+		this.x += amount;
+	}
+	
+	public void addY(int amount) {
+		this.y += amount;
+	}
+	
 }

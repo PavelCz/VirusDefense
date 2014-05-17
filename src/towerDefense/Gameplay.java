@@ -396,6 +396,10 @@ public class Gameplay extends GameComponent {
 				e.printStackTrace();
 			}
 		}
+		if (input.isKeyPressed(Input.KEY_LEFT)) {
+
+			Gameplay.camera.
+		}
 		if (this.debugMode) {
 			this.debugKeyboardEvents(container, delta);
 		}
