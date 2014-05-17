@@ -87,7 +87,7 @@ public class Gameplay extends GameComponent {
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
 		this.initDefaults();
-		this.camera = new Camera(100, 100);
+		Gameplay.camera = new Camera(100, 100);
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
@@ -430,10 +430,12 @@ public class Gameplay extends GameComponent {
 		if (this.mode == 0) {
 			Input input = container.getInput();
 
+			float x = input.getMouseX() - Gameplay.getCameraX();
+			float y = input.getMouseY() - Gameplay.getCameraY();
 			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 				this.placeTower(input);
 				for (Clickable clickable : this.clickables) {
-					clickable.update(container);
+					clickable.update(x, y, container);
 				}
 
 			} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
