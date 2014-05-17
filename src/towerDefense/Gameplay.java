@@ -339,8 +339,8 @@ public class Gameplay extends GameComponent {
 			int y = input.getMouseY() + Gameplay.getCameraY();
 			int newX = (x) / Gameplay.SIZE;
 			int newY = (y) / Gameplay.SIZE;
-			this.towerShadowX = input.getMouseX() - Gameplay.SIZE / 2;
-			this.towerShadowY = input.getMouseY() - Gameplay.SIZE / 2;
+			this.towerShadowX = (int)(input.getMouseX()/Gameplay.DEFAULT_SIZE)*Gameplay.DEFAULT_SIZE;
+			this.towerShadowY = (int)(input.getMouseY()/Gameplay.DEFAULT_SIZE)*Gameplay.DEFAULT_SIZE;
 			int[][] path = this.currentLevel.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
