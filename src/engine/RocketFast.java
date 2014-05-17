@@ -16,7 +16,6 @@ public class RocketFast extends Projectile implements Drawable {
 		this.velocity.setLength(speed);
 		this.sprite = new Sprite("shoot/Frame0010.png", 0.05f);
 		this.enemy = enemy;
-		System.out.println("test");
 	}
 
 	public void update(int delta) {
@@ -24,7 +23,6 @@ public class RocketFast extends Projectile implements Drawable {
 		this.velocity.setLength(speed);
 		this.x += velocity.getX() * delta;
 		this.y += velocity.getY() * delta;
-		System.out.println(enemy.getX());
 
 		if (this.velocity.getX() >= 0 && this.velocity.getY() >= 0) {
 			if (this.x >= enemy.getX() || this.y >= enemy.getY()) {

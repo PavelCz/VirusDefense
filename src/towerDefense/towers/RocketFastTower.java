@@ -25,7 +25,6 @@ public class RocketFastTower extends Tower {
 
 	@Override
 	public void shoot() {
-		System.out.println("t");
 		boolean done = false;
 		for (Enemy enemy : this.game.getEnemies()) {
 			if (enemy != null && !done) {

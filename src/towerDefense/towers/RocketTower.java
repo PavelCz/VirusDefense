@@ -16,7 +16,6 @@ public class RocketTower extends Tower {
 		this.shootingInterval = shootingInterval;
 		this.delta = this.shootingInterval;
 		this.bombRadius = bombRadius;
-		System.out.println("lol");
 	}
 
 	@Override
@@ -27,7 +26,6 @@ public class RocketTower extends Tower {
 
 	@Override
 	public void shoot() {
-		System.out.println("t");
 		boolean done = false;
 		for (Enemy enemy : this.game.getEnemies()) {
 			if (enemy != null && !done) {
