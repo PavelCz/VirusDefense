@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -400,8 +401,11 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		int mouseWheel = Mouse.getDWheel();
-		float previousCameraWidth = Gameplay.INTERFACE_START_X * Gameplay.CURRENT_GAME_SCALE;
-		float previousCameraHeight = TowerDefense.getHeight() * Gameplay.CURRENT_GAME_SCALE;
+		float previousCameraWidth = Gameplay.INTERFACE_START_X / Gameplay.CURRENT_GAME_SCALE;
+		float previousCameraHeight = TowerDefense.getHeight() / Gameplay.CURRENT_GAME_SCALE;
+		float previousScale = Gameplay.CURRENT_GAME_SCALE;
+		float previousMiddleX = camera.getX() / Gameplay.CURRENT_GAME_SCALE + previousCameraWidth / 2;
+		float previousMiddleY = camera.getY() / Gameplay.CURRENT_GAME_SCALE + previousCameraHeight / 2;
 		if (mouseWheel > 0) { // mouse wheel up
 			Gameplay.CURRENT_GAME_SCALE *= 1.1f;
 			if (Gameplay.CURRENT_GAME_SCALE > 6) {
@@ -409,27 +413,28 @@ public class Gameplay extends GameComponent {
 			}
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 
-			float cameraWidth = Gameplay.INTERFACE_START_X * Gameplay.CURRENT_GAME_SCALE;
-			float cameraHeight = TowerDefense.getHeight() * Gameplay.CURRENT_GAME_SCALE;
-			float xDifference = (cameraWidth - previousCameraWidth) / 2;
-			float yDifference = (cameraHeight - previousCameraHeight) / 2;
-			Gameplay.camera.addX(xDifference);
-			Gameplay.camera.addY(yDifference);
+			float cameraWidth = Gameplay.INTERFACE_START_X / Gameplay.CURRENT_GAME_SCALE;
+			float cameraHeight = TowerDefense.getHeight() / Gameplay.CURRENT_GAME_SCALE;
+			float xDifference = (previousCameraWidth - cameraWidth) / 2;
+			float yDifference = (previousCameraHeight - cameraHeight) / 2;
+			Gameplay.camera.setX((previousMiddleX - cameraWidth / 2));
+			Gameplay.camera.setY((previousMiddleY - cameraHeight / 2));
 		} else if (mouseWheel < 0) {// mouse wheel down
 			Gameplay.CURRENT_GAME_SCALE *= 0.9f;
 			if (Gameplay.CURRENT_GAME_SCALE < Gameplay.MAX_GAME_SCALE) {
 				Gameplay.CURRENT_GAME_SCALE = Gameplay.MAX_GAME_SCALE;
 			}
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
-			
-			float cameraWidth = Gameplay.INTERFACE_START_X * Gameplay.CURRENT_GAME_SCALE;
-			float cameraHeight = TowerDefense.getHeight() * Gameplay.CURRENT_GAME_SCALE;
-			float xDifference = (previousCameraWidth - cameraWidth) / 2;
-			float yDifference = (previousCameraHeight - cameraHeight) / 2;
-			Gameplay.camera.addX(xDifference);
-			Gameplay.camera.addY(yDifference);
-		}
 
+			float cameraWidth = Gameplay.INTERFACE_START_X / Gameplay.CURRENT_GAME_SCALE;
+			float cameraHeight = TowerDefense.getHeight() / Gameplay.CURRENT_GAME_SCALE;
+			float xDifference = (cameraWidth - previousCameraWidth) / 2;
+			float yDifference = (cameraHeight - previousCameraHeight) / 2;
+			Gameplay.camera.setX((previousMiddleX - cameraWidth / 2));
+			Gameplay.camera.setY((previousMiddleY - cameraHeight / 2));
+
+		}
+		System.out.println(Gameplay.getCameraX());
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
 		if (input.isKeyDown(Input.KEY_LEFT)) {
