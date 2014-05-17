@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
 import engine.gui.Clickable;
 import engine.gui.GUI;
@@ -47,10 +48,12 @@ public abstract class GameComponent {
 
 	private void updateClickables(GameContainer container, int delta) {
 		Input input = container.getInput();
+		float x = input.getMouseX();
+		float y = input.getMouseY();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			this.mouseWasClicked = true;
 			for (Clickable clickable : this.clickables) {
-				clickable.update(container);
+				clickable.update(x, y, container);
 			}
 
 		} else {

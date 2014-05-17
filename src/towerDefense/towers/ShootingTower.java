@@ -26,10 +26,12 @@ public class ShootingTower extends Tower {
 		if (this.building) {
 			float scale = (this.buildingTime - this.buildingTimer) / buildingTime;
 			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
-			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) * Gameplay.CURRENT_GAME_SCALE,
-					(this.y * Gameplay.DEFAULT_SIZE + size) * Gameplay.CURRENT_GAME_SCALE, Gameplay.CURRENT_GAME_SCALE * scale);
+			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size - Gameplay.getCameraX()) * Gameplay.CURRENT_GAME_SCALE, (this.y
+					* Gameplay.DEFAULT_SIZE + size - Gameplay.getCameraY())
+					* Gameplay.CURRENT_GAME_SCALE, Gameplay.CURRENT_GAME_SCALE * scale);
 		} else {
-			this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE);
+			this.sprite.draw(this.x * Gameplay.SIZE - Gameplay.getCameraX(), this.y * Gameplay.SIZE - Gameplay.getCameraY(),
+					Gameplay.CURRENT_GAME_SCALE);
 		}
 	}
 
