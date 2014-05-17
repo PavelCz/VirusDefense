@@ -87,7 +87,7 @@ public class Gameplay extends GameComponent {
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
 		this.initDefaults();
-		Gameplay.camera = new Camera(100, 100);
+		Gameplay.camera = new Camera(64, 64);
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
@@ -335,12 +335,12 @@ public class Gameplay extends GameComponent {
 			// old version of shadow Coordinates, with pixel accurate coordinates
 			// this.towerShadowX = (int) (input.getMouseX() - this.currentTower.getSprite().getWidth() / 2);
 			// this.towerShadowY = (int) (input.getMouseY() - this.currentTower.getSprite().getHeight() / 2);
-			int x = input.getMouseX();
-			int y = input.getMouseY();
-			int newX = x / Gameplay.SIZE;
-			int newY = y / Gameplay.SIZE;
-			this.towerShadowX = newX * Gameplay.SIZE;
-			this.towerShadowY = newY * Gameplay.SIZE;
+			int x = input.getMouseX() + Gameplay.getCameraX();
+			int y = input.getMouseY() + Gameplay.getCameraY();
+			int newX = (x) / Gameplay.SIZE;
+			int newY = (y) / Gameplay.SIZE;
+			this.towerShadowX = input.getMouseX() - Gameplay.SIZE / 2;
+			this.towerShadowY = input.getMouseY() - Gameplay.SIZE / 2;
 			int[][] path = this.currentLevel.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
@@ -446,8 +446,8 @@ public class Gameplay extends GameComponent {
 	}
 
 	private void placeTower(Input input) {
-		float x = input.getMouseX();
-		float y = input.getMouseY();
+		float x = input.getMouseX() + Gameplay.getCameraX();
+		float y = input.getMouseY() + Gameplay.getCameraY();
 		int newX = (int) x / Gameplay.SIZE;
 		int newY = (int) y / Gameplay.SIZE;
 
