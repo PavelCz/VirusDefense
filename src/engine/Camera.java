@@ -16,11 +16,4 @@ public class Camera extends Entity{
 		this.y += amount;
 	}
 	
-	public float getX() {
-		return this.x;
-	}
-	public float getY() {
-		return this.y;
-	}
-	
 }
