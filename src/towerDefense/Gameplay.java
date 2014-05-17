@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -119,8 +120,9 @@ public class Gameplay extends GameComponent {
 				"buttons/PSButton1_click.png", new BombTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this, 1500, 15f, 50), this);
 		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
 				"buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 0.5f), this, 200, 15f, 50), this);
-		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X+64+32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
-				"buttons/PSButton1_click.png", new RocketFastTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f), this);
+		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE,
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0, 0, new Sprite(
+						"tower/roteBlutk_klein.png", 1f), this, 1000, 20f), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
@@ -244,8 +246,8 @@ public class Gameplay extends GameComponent {
 			Sprite sprite = this.currentTower.getSprite().clone();
 
 			if (this.currentTowerPlaceable) {
-				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE, Color.green)
-						.draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
+				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
+						Color.green).draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
 			} else {
 				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE, Color.red)
 						.draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
@@ -277,8 +279,8 @@ public class Gameplay extends GameComponent {
 						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red)
 								.draw((currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2)
 										* Gameplay.CURRENT_GAME_SCALE,
-										(currentTower.getY() * this.currentTileLength + DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE,
-										Gameplay.CURRENT_GAME_SCALE);
+										(currentTower.getY() * this.currentTileLength + DEFAULT_SIZE / 2)
+												* Gameplay.CURRENT_GAME_SCALE, Gameplay.CURRENT_GAME_SCALE);
 					}
 				}
 			}
@@ -392,6 +394,12 @@ public class Gameplay extends GameComponent {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		int mouseWheel = Mouse.getDWheel();
+		if (mouseWheel > 0) {
+			System.out.println("up");
+		} else if (mouseWheel < 0) {
+			System.out.println("down");
 		}
 		if (this.debugMode) {
 			this.debugKeyboardEvents(container, delta);
