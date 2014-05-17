@@ -286,7 +286,7 @@ public class Gameplay extends GameComponent {
 				}
 			}
 			// create a black box that the FPS are visible
-			new SlickRectangle(graphics, 100, 20, Color.black).draw(5, 10, Gameplay.GLOBAL_GAME_SCALE);
+			new SlickRectangle(graphics, 100, 20, Color.black).draw(5, 10, 1f);
 		}
 	}
 
