@@ -505,8 +505,7 @@ public class Gameplay extends GameComponent {
 		if (this.currentTower != null) {
 			int[][] path = this.currentLevel.getPath();
 			int cost = this.currentTower.getCost();
-			if (this.currentTowerPlaceable && x < Gameplay.INTERFACE_START_X && y < path.length * this.currentTileLength
-					&& path[newY][newX] == 1 && this.towers[newY][newX] == null && this.player.getMoney() - cost >= 0) {
+			if (this.currentTowerPlaceable) {
 				Tower bufferTower = this.currentTower.clone();
 				bufferTower.setX(newX);
 				bufferTower.setY(newY);
