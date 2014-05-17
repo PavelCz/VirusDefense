@@ -1,9 +1,9 @@
 package towerDefense.towers;
 
 import towerDefense.Gameplay;
-import engine.Bomb;
 import engine.Enemy;
 import engine.graphics.Sprite;
+import engine.projectiles.Bomb;
 
 public class BombTower extends Tower {
 	protected int delta;

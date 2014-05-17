@@ -24,7 +24,6 @@ import engine.GameComponent;
 import engine.Level;
 import engine.MyVector2f;
 import engine.Player;
-import engine.Projectile;
 import engine.Waypoint;
 import engine.graphics.Background;
 import engine.graphics.SlickRectangle;
@@ -37,6 +36,7 @@ import engine.gui.InterfaceBackground;
 import engine.gui.SlickHealthbar;
 import engine.gui.StaticText;
 import engine.gui.TowerButton;
+import engine.projectiles.Projectile;
 
 /**
  * @author Pavel

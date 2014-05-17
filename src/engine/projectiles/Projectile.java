@@ -1,6 +1,8 @@
-package engine;
+package engine.projectiles;
 
 import towerDefense.Gameplay;
+import engine.Entity;
+import engine.MyVector2f;
 import engine.graphics.Sprite;
 
 public abstract class Projectile extends Entity {

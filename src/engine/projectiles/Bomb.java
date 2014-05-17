@@ -1,6 +1,9 @@
-package engine;
+package engine.projectiles;
 
 import towerDefense.Gameplay;
+import engine.Drawable;
+import engine.Enemy;
+import engine.MyVector2f;
 import engine.graphics.Sprite;
 
 public class Bomb extends Projectile implements Drawable {
