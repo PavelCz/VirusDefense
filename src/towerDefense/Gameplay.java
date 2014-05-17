@@ -406,8 +406,9 @@ public class Gameplay extends GameComponent {
 			Gameplay.camera.addX(+32);
 		}
 		if (input.isKeyPressed(Input.KEY_UP)) {
-
-			Gameplay.camera.addY(-32);
+			if (Gameplay.getCameraY() - 32 >= 0) {
+				Gameplay.camera.addY(-32);
+			}
 		}
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
 
