@@ -89,7 +89,7 @@ public class Gameplay extends GameComponent {
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
 		this.initDefaults();
-		Gameplay.camera = new Camera(0, 0);
+		Gameplay.camera = new Camera(0, 0, this);
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
@@ -413,38 +413,27 @@ public class Gameplay extends GameComponent {
 			}
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		}
-		float cameraWidth = Gameplay.INTERFACE_START_X;
-		float cameraHeight = TowerDefense.getHeight();
+
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
 		if (input.isKeyDown(Input.KEY_LEFT)) {
 			Gameplay.camera.addX(-scrollDistance);
-			if (Gameplay.getCameraX() < 0) {
-				Gameplay.camera.setX(0);
-			}
+
 		}
 
 		if (input.isKeyDown(Input.KEY_RIGHT)) {
 			Gameplay.camera.addX(+scrollDistance);
-			if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.getHorizontalTiles()
-					* Gameplay.DEFAULT_SIZE) {
-				Gameplay.camera.setX((this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraWidth);
 
-			}
 		}
 		if (input.isKeyDown(Input.KEY_UP)) {
 			Gameplay.camera.addY(-scrollDistance);
-			if (Gameplay.getCameraY() < 0) {
-				Gameplay.camera.setY(0);
-			}
+
 		}
 		if (input.isKeyDown(Input.KEY_DOWN)) {
 			Gameplay.camera.addY(+scrollDistance);
-			if ((Gameplay.getCameraY() + cameraHeight) / Gameplay.CURRENT_GAME_SCALE > this.getVerticalTiles() * Gameplay.DEFAULT_SIZE) {
-				Gameplay.camera.setY((this.getVerticalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraHeight);
 
-			}
 		}
+
 		if (this.debugMode) {
 			this.debugKeyboardEvents(container, delta);
 		}
