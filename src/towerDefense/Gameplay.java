@@ -398,8 +398,10 @@ public class Gameplay extends GameComponent {
 		int mouseWheel = Mouse.getDWheel();
 		if (mouseWheel > 0) {
 			Gameplay.CURRENT_GAME_SCALE -= .1f;
+			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		} else if (mouseWheel < 0) {
 			Gameplay.CURRENT_GAME_SCALE += .1f;
+			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		}
 		if (this.debugMode) {
 			this.debugKeyboardEvents(container, delta);
