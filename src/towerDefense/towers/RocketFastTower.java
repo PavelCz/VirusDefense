@@ -19,7 +19,7 @@ public class RocketFastTower extends Tower {
 
 	@Override
 	public void draw() {
-		this.sprite.draw(this.x - Gameplay.getCameraX()* Gameplay.SIZE, this.y - Gameplay.getCameraY()* Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
+		this.sprite.draw(this.x * Gameplay.SIZE - Gameplay.getCameraX(), this.y * Gameplay.SIZE - Gameplay.getCameraY(), Gameplay.GLOBAL_GAME_SCALE);
 
 	}
 
