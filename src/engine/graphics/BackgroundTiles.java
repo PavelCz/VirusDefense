@@ -20,8 +20,8 @@ public class BackgroundTiles extends Background {
 
 	@Override
 	public void draw() {
-		for (int i = 0; i < this.game.getHorizontalTiles(); ++i) {
-			for (int j = 0; j < this.game.getVerticalTiles(); ++j) {
+		for (int i = 0; i < this.game.getHorizontalTiles() + 1; ++i) {
+			for (int j = 0; j < this.game.getVerticalTiles() + 1; ++j) {
 				if (i < this.horizontalTiles && j < this.verticalTiles) {
 					this.picture.draw(i * Gameplay.SIZE - Gameplay.getCameraX(), j * Gameplay.SIZE - Gameplay.getCameraY(),
 							Gameplay.CURRENT_GAME_SCALE);
