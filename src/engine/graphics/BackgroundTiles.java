@@ -23,9 +23,9 @@ public class BackgroundTiles extends Background {
 		for (int i = 0; i < TowerDefense.getWidth() / Gameplay.SIZE; ++i) {
 			for (int j = 0; j < TowerDefense.getHeight() / Gameplay.SIZE; ++j) {
 				if (i < this.horizontalTiles && j < this.verticalTiles) {
-					this.picture.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
+					this.picture.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE);
 				} else {
-					this.pictureOutOfBounds.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
+					this.pictureOutOfBounds.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE);
 				}
 			}
 		}
