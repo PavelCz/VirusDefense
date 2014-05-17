@@ -413,29 +413,31 @@ public class Gameplay extends GameComponent {
 			}
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		}
-
-		if (input.isKeyPressed(Input.KEY_LEFT)) {
-			if (Gameplay.getCameraX() - 32 >= 0) {
-				Gameplay.camera.addX(-32);
-			}
-		}
 		float cameraWidth = Gameplay.INTERFACE_START_X;
 		float cameraHeight = TowerDefense.getHeight();
-		if (input.isKeyPressed(Input.KEY_RIGHT)) {
-			if ((Gameplay.getCameraX() + cameraWidth + 32) / Gameplay.CURRENT_GAME_SCALE < this.getHorizontalTiles()
-					* Gameplay.DEFAULT_SIZE) {
-				Gameplay.camera.addX(+32);
+		float scrollSpeed = 0.5f;
+		float scrollDistance = scrollSpeed * delta;
+		if (input.isKeyDown(Input.KEY_LEFT)) {
+			if (Gameplay.getCameraX() - scrollDistance >= 0) {
+				Gameplay.camera.addX(-scrollDistance);
 			}
 		}
-		if (input.isKeyPressed(Input.KEY_UP)) {
-			if (Gameplay.getCameraY() - 32 >= 0) {
-				Gameplay.camera.addY(-32);
+		
+		if (input.isKeyDown(Input.KEY_RIGHT)) {
+			if ((Gameplay.getCameraX() + cameraWidth + scrollDistance) / Gameplay.CURRENT_GAME_SCALE < this.getHorizontalTiles()
+					* Gameplay.DEFAULT_SIZE) {
+				Gameplay.camera.addX(+scrollDistance);
 			}
 		}
-		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			if ((Gameplay.getCameraY() + cameraHeight + 32) / Gameplay.CURRENT_GAME_SCALE < this.getVerticalTiles()
+		if (input.isKeyDown(Input.KEY_UP)) {
+			if (Gameplay.getCameraY() - scrollDistance >= 0) {
+				Gameplay.camera.addY(-scrollDistance);
+			}
+		}
+		if (input.isKeyDown(Input.KEY_DOWN)) {
+			if ((Gameplay.getCameraY() + cameraHeight + scrollDistance) / Gameplay.CURRENT_GAME_SCALE < this.getVerticalTiles()
 					* Gameplay.DEFAULT_SIZE) {
-				Gameplay.camera.addY(+32);
+				Gameplay.camera.addY(+scrollDistance);
 			}
 		}
 		if (this.debugMode) {

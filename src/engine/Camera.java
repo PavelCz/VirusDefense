@@ -1,19 +1,20 @@
 package engine;
 
-
-public class Camera extends Entity{
+public class Camera extends Entity {
 
 	public Camera(float x, float y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
-	
-	public void addX(int amount) {
+
+	public void addX(float amount) {
 		this.x += amount;
 	}
-	
-	public void addY(int amount) {
+
+	public void addY(float amount) {
 		this.y += amount;
 	}
 	
+	
+
 }
