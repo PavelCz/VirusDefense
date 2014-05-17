@@ -400,6 +400,9 @@ public class Gameplay extends GameComponent {
 		int mouseWheel = Mouse.getDWheel();
 		if (mouseWheel > 0) { // mouse wheel up
 			Gameplay.CURRENT_GAME_SCALE += .1f;
+			if(Gameplay.CURRENT_GAME_SCALE > 6) {
+				Gameplay.CURRENT_GAME_SCALE  = 6f;
+			}
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		} else if (mouseWheel < 0) {// mouse wheel down
 			Gameplay.CURRENT_GAME_SCALE -= .1f;
