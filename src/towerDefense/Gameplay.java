@@ -64,6 +64,7 @@ public class Gameplay extends GameComponent {
 	protected ConcurrentLinkedQueue<Projectile> projectiles;
 
 	public static float CURRENT_GAME_SCALE;
+	public static float MAX_GAME_SCALE;
 	public static float GLOBAL_GUI_SCALE = 1f;
 
 	private StaticText passedTime;
@@ -99,6 +100,7 @@ public class Gameplay extends GameComponent {
 		float scale1 = Gameplay.INTERFACE_START_X / this.width;
 		float scale2 = TowerDefense.getHeight() / this.height;
 		Gameplay.CURRENT_GAME_SCALE = Math.min(scale1, scale2);
+		Gameplay.MAX_GAME_SCALE = Gameplay.CURRENT_GAME_SCALE;
 		Gameplay.SIZE = (int) (64 * Gameplay.CURRENT_GAME_SCALE);
 
 		//
@@ -401,6 +403,9 @@ public class Gameplay extends GameComponent {
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		} else if (mouseWheel < 0) {// mouse wheel down
 			Gameplay.CURRENT_GAME_SCALE -= .1f;
+			if(Gameplay.CURRENT_GAME_SCALE < Gameplay.MAX_GAME_SCALE) {
+				Gameplay.CURRENT_GAME_SCALE =  Gameplay.MAX_GAME_SCALE;
+			}
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		}
 		if (this.debugMode) {
