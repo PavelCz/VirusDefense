@@ -17,6 +17,7 @@ import towerDefense.towers.LongerShootingTower;
 import towerDefense.towers.RocketFastTower;
 import towerDefense.towers.RocketTower;
 import towerDefense.towers.Tower;
+import engine.Camera;
 import engine.Enemy;
 import engine.EnemyTypeHandler;
 import engine.GameComponent;
@@ -41,7 +42,7 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Gameplay extends GameComponent {
-
+	private Camera camera;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private boolean debugMode;
@@ -86,7 +87,7 @@ public class Gameplay extends GameComponent {
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
 		this.initDefaults();
-
+		this.camera = new Camera(100, 100);
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
@@ -119,8 +120,9 @@ public class Gameplay extends GameComponent {
 				"buttons/PSButton1_click.png", new BombTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this, 1500, 15f, 50), this);
 		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
 				"buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 0.5f), this, 200, 15f, 50), this);
-		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X+64+32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
-				"buttons/PSButton1_click.png", new RocketFastTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f), this);
+		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE,
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0, 0, new Sprite(
+						"tower/roteBlutk_klein.png", 1f), this, 1000, 20f), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
@@ -587,4 +589,11 @@ public class Gameplay extends GameComponent {
 		return this.currentTowerPlaceable;
 	}
 
+	public int getCameraX() {
+		return (int) this.camera.getX();
+	}
+
+	public int getCameraY() {
+		return (int) this.camera.getY();
+	}
 }
