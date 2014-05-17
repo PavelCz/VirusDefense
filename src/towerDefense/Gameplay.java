@@ -282,9 +282,9 @@ public class Gameplay extends GameComponent {
 						Tower currentTower = this.towers[i][j];
 						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red)
 								.draw((currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2)
-										* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (currentTower.getY() * this.currentTileLength
-										+ DEFAULT_SIZE / 2 )
-										* Gameplay.CURRENT_GAME_SCALE- Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
+										* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (currentTower.getY()
+										* this.currentTileLength + DEFAULT_SIZE / 2)
+										* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
 					}
 				}
 			}
@@ -418,11 +418,12 @@ public class Gameplay extends GameComponent {
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
 		if (input.isKeyDown(Input.KEY_LEFT)) {
-			if (Gameplay.getCameraX() - scrollDistance >= 0) {
-				Gameplay.camera.addX(-scrollDistance);
+			Gameplay.camera.addX(-scrollDistance);
+			if (Gameplay.getCameraX() - scrollDistance < 0) {
+				Gameplay.camera.setX(0);
 			}
 		}
-		
+
 		if (input.isKeyDown(Input.KEY_RIGHT)) {
 			if ((Gameplay.getCameraX() + cameraWidth + scrollDistance) / Gameplay.CURRENT_GAME_SCALE < this.getHorizontalTiles()
 					* Gameplay.DEFAULT_SIZE) {
@@ -430,8 +431,9 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyDown(Input.KEY_UP)) {
-			if (Gameplay.getCameraY() - scrollDistance >= 0) {
-				Gameplay.camera.addY(-scrollDistance);
+			Gameplay.camera.addY(-scrollDistance);
+			if (Gameplay.getCameraY() - scrollDistance < 0) {
+				Gameplay.camera.setY(0);
 			}
 		}
 		if (input.isKeyDown(Input.KEY_DOWN)) {
