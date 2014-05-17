@@ -402,7 +402,8 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_RIGHT)) {
-			if (Gameplay.getCameraX() + this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE < this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) {
+			if (Gameplay.getCameraX() + this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE < this.getHorizontalTiles()
+					* Gameplay.DEFAULT_SIZE) {
 				Gameplay.camera.addX(+32);
 			}
 		}
@@ -412,8 +413,10 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
-
-			Gameplay.camera.addY(+32);
+			if (Gameplay.getCameraY() + this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE < this.getVerticalTiles()
+					* Gameplay.DEFAULT_SIZE) {
+				Gameplay.camera.addY(+32);
+			}
 		}
 		if (this.debugMode) {
 			this.debugKeyboardEvents(container, delta);
