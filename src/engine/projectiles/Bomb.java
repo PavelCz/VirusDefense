@@ -1,6 +1,9 @@
-package engine;
+package engine.projectiles;
 
 import towerDefense.Gameplay;
+import engine.Drawable;
+import engine.Enemy;
+import engine.MyVector2f;
 import engine.graphics.Sprite;
 
 public class Bomb extends Projectile implements Drawable {
@@ -12,7 +15,7 @@ public class Bomb extends Projectile implements Drawable {
 		this.game = game;
 		this.targetX = enemyX;
 		this.targetY = enemyY;
-		this.speed = 0.1f;
+		this.speed = 0.2f;
 		this.velocity = new MyVector2f(enemyX - x, enemyY - y);
 		this.velocity.setLength(this.speed);
 		this.sprite = new Sprite("shoot/Frame0001.png", 0.064f);

@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
 import engine.gui.Clickable;
 import engine.gui.GUI;
@@ -16,6 +17,7 @@ public abstract class GameComponent {
 
 	protected List<GUI> guiElements;
 	protected List<Clickable> clickables;
+	private boolean mouseWasClicked;
 
 	protected TowerDefense game;
 	private Clickable wasClicked;
@@ -45,32 +47,26 @@ public abstract class GameComponent {
 	}
 
 	private void updateClickables(GameContainer container, int delta) {
-		for (Clickable clickable : this.clickables) {
-			clickable.update(container, 1f);
-		}
 		Input input = container.getInput();
+		float x = input.getMouseX();
+		float y = input.getMouseY();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
-			float x = input.getMouseX();
-			float y = input.getMouseY();
-
-			boolean buttonWasPressed = false;
+			this.mouseWasClicked = true;
 			for (Clickable clickable : this.clickables) {
-				if (clickable.collides((int) x, (int) y, 1f)) {
-					buttonWasPressed = true;
-					clickable.onClick();
-					this.wasClicked = clickable;
-					this.game.getSoundHandler().play("press");
-				}
+				clickable.update(x, y, container);
 			}
 
-		}
-		// checks if mouse button was released again after being pressed
-		if (this.wasClicked != null && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-
-			this.wasClicked.onRelease();
-			this.wasClicked = null;
-
+		} else {
+			if (this.mouseWasClicked) {
+				this.mouseWasClicked = false;
+				for (Clickable clickable : this.clickables) {
+					if (!clickable.isStayClicked()) {
+						if (clickable.isClicked()) {
+							clickable.onRelease();
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -78,9 +74,12 @@ public abstract class GameComponent {
 		return this.game.getSoundHandler();
 	}
 
-	private void releaseAllClickables() {
+	public void releaseAllClickablesExcept(Clickable excluded) {
 		for (Clickable clickable : this.clickables) {
-			clickable.onRelease();
+			if (clickable != excluded) {
+				clickable.onRelease();
+			}
+
 		}
 	}
 

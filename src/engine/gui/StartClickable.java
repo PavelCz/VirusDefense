@@ -6,7 +6,7 @@ public class StartClickable extends ClickableText {
 	private TowerDefense towerDefense;
 
 	public StartClickable(float x, float y, TowerDefense towerDefense) {
-		super(x, y, "Start new Game", 1f);
+		super(x, y, "Start new Game", 1f, towerDefense.getGameplay(), false);
 		this.towerDefense = towerDefense;
 	}
 

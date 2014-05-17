@@ -1,17 +1,19 @@
 package towerDefense.towers;
 
 import towerDefense.Gameplay;
-import engine.Bomb;
 import engine.Enemy;
 import engine.graphics.Sprite;
+import engine.projectiles.Bomb;
 
 public class BombTower extends Tower {
 	protected int delta;
 	protected final int shootingInterval;
 	protected int bombRadius;
+	protected float wobbleFactor;
+	private boolean wobble = true;
 
 	public BombTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage, int bombRadius) {
-		super(x, y, 100, 150, damage, game);
+		super(x, y, 150, 150, damage, game);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
 		this.delta = this.shootingInterval;
@@ -20,7 +22,21 @@ public class BombTower extends Tower {
 
 	@Override
 	public void draw() {
-		this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
+		if (this.building) {
+			float scale = (this.buildingTime - this.buildingTimer) / buildingTime;
+			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
+			this.sprite.draw((this.x  * Gameplay.DEFAULT_SIZE + size- Gameplay.getCameraX()) * Gameplay.CURRENT_GAME_SCALE, (this.y
+					 * Gameplay.DEFAULT_SIZE + size- Gameplay.getCameraY())
+					* Gameplay.CURRENT_GAME_SCALE, Gameplay.CURRENT_GAME_SCALE * scale);
+		} else if (this.wobble) {
+			float scale = this.wobbleFactor;
+			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
+			this.sprite.draw((this.x  * Gameplay.DEFAULT_SIZE + size) * Gameplay.CURRENT_GAME_SCALE- Gameplay.getCameraX(), (this.y
+					 * Gameplay.DEFAULT_SIZE + size)
+					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), scale * Gameplay.CURRENT_GAME_SCALE);
+		} else {
+			this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE);
+		}
 
 	}
 
@@ -52,6 +68,14 @@ public class BombTower extends Tower {
 
 	@Override
 	public void update(int delta) {
+		if (this.building) {
+			this.buildingTimer -= delta;
+			if ((this.buildingTime - this.buildingTimer) / buildingTime >= this.wobbleFactor) {
+				this.delta = this.buildingTimer;
+				this.building = false;
+			}
+		}
+		this.wobbleFactor = (float) ((Math.sin(this.delta / 155.0) + 5.5) / 8);
 		this.delta -= delta;
 		if (this.delta <= 0) {
 			this.delta = this.shootingInterval;

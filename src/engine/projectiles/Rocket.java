@@ -1,6 +1,9 @@
-package engine;
+package engine.projectiles;
 
 import towerDefense.Gameplay;
+import engine.Drawable;
+import engine.Enemy;
+import engine.MyVector2f;
 import engine.graphics.Sprite;
 
 public class Rocket extends Projectile implements Drawable {
@@ -11,33 +14,33 @@ public class Rocket extends Projectile implements Drawable {
 		this.Radius = bombRadius;
 		this.damage = damage;
 		this.game = game;
-		this.targetX = enemy.x;
-		this.targetY = enemy.y;
-		this.speed = 0.1f;
-		this.velocity = new MyVector2f(enemy.x - x, enemy.y - y);
+		this.speed = 0.15f;
+		this.velocity = new MyVector2f(enemy.getX() - x, enemy.getY() - y);
 		this.velocity.setLength(speed);
-		this.sprite = new Sprite("shoot/Frame0001.png", 0.05f);
+		this.sprite = new Sprite("shoot/Frame0010.png", 0.05f);
 		this.enemy = enemy;
 	}
 
 	public void update(int delta) {
+		this.velocity = new MyVector2f(enemy.getX() - x, enemy.getY() - y);
+		this.velocity.setLength(speed);
 		this.x += velocity.getX() * delta;
 		this.y += velocity.getY() * delta;
 
 		if (this.velocity.getX() >= 0 && this.velocity.getY() >= 0) {
-			if (this.x >= targetX || this.y >= targetY) {
+			if (this.x >= enemy.getX() || this.y >= enemy.getY()) {
 				fire();
 			}
 		} else if (this.velocity.getX() <= 0 && this.velocity.getY() <= 0) {
-			if (this.x <= targetX || this.y <= targetY) {
+			if (this.x <= enemy.getX() || this.y <= enemy.getY()) {
 				fire();
 			}
 		} else if (this.velocity.getX() >= 0 && this.velocity.getY() <= 0) {
-			if (this.x >= targetX || this.y <= targetY) {
+			if (this.x >= enemy.getX() || this.y <= enemy.getY()) {
 				fire();
 			}
 		} else if (this.velocity.getX() <= 0 && this.velocity.getY() >= 0) {
-			if (this.x <= targetX || this.y >= targetY) {
+			if (this.x <= enemy.getX() || this.y >= enemy.getY()) {
 				fire();
 			}
 		}

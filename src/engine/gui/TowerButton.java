@@ -6,12 +6,11 @@ import engine.graphics.Sprite;
 
 public class TowerButton extends Button {
 	private Tower tower;
-	private Gameplay game;
 
 	public TowerButton(float x, float y, String unclickedButtonPath, String clickedButtonPath, Tower tower, Gameplay game) {
-		super(x, y, unclickedButtonPath, clickedButtonPath);
+		super(x, y, unclickedButtonPath, clickedButtonPath, game, true);
 		this.tower = tower;
-		this.game = game;
+		this.stayClicked = false;
 	}
 
 	@Override
@@ -29,6 +28,13 @@ public class TowerButton extends Button {
 		super.onClick();
 		this.game.setCurrentTower(this.tower);
 		this.game.getCurrentTower().getSprite().setAlpha(0.5f);
+
+	}
+
+	@Override
+	public void onRelease() {
+		super.onRelease();
+		this.game.setCurrentTower(null);
 
 	}
 
