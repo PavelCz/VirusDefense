@@ -7,8 +7,8 @@ public class BackgroundTiles extends Background {
 	private int horizontalTiles, verticalTiles;
 	private Sprite pictureOutOfBounds;
 
-	public BackgroundTiles(float scale, String backgroundPath, int horizontalTiles, int verticalTiles) {
-		super(scale, backgroundPath);
+	public BackgroundTiles(float scale, String backgroundPath, int horizontalTiles, int verticalTiles, Gameplay game) {
+		super(scale, backgroundPath, game);
 		this.horizontalTiles = horizontalTiles;
 		this.verticalTiles = verticalTiles;
 		this.pictureOutOfBounds = new Sprite(backgroundPath);
@@ -20,12 +20,14 @@ public class BackgroundTiles extends Background {
 
 	@Override
 	public void draw() {
-		for (int i = 0; i < TowerDefense.getWidth() / Gameplay.SIZE; ++i) {
-			for (int j = 0; j < TowerDefense.getHeight() / Gameplay.SIZE; ++j) {
+		for (int i = 0; i < this.game.getHorizontalTiles(); ++i) {
+			for (int j = 0; j < this.game.getVerticalTiles(); ++j) {
 				if (i < this.horizontalTiles && j < this.verticalTiles) {
-					this.picture.draw(i * Gameplay.SIZE- Gameplay.getCameraX(), j * Gameplay.SIZE- Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
+					this.picture.draw(i * Gameplay.SIZE - Gameplay.getCameraX(), j * Gameplay.SIZE - Gameplay.getCameraY(),
+							Gameplay.CURRENT_GAME_SCALE);
 				} else {
-					this.pictureOutOfBounds.draw(i * Gameplay.SIZE- Gameplay.getCameraX(), j * Gameplay.SIZE- Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
+					this.pictureOutOfBounds.draw(i * Gameplay.SIZE - Gameplay.getCameraX(), j * Gameplay.SIZE - Gameplay.getCameraY(),
+							Gameplay.CURRENT_GAME_SCALE);
 				}
 			}
 		}
