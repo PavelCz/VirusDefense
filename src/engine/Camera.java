@@ -9,6 +9,7 @@ public class Camera extends Entity {
 
 	public void addX(float amount) {
 		this.x += amount;
+		
 	}
 
 	public void addY(float amount) {
