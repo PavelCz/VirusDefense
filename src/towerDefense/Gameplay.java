@@ -402,25 +402,26 @@ public class Gameplay extends GameComponent {
 		int mouseWheel = Mouse.getDWheel();
 		if (mouseWheel > 0) { // mouse wheel up
 			Gameplay.CURRENT_GAME_SCALE += .1f;
-			if(Gameplay.CURRENT_GAME_SCALE > 6) {
-				Gameplay.CURRENT_GAME_SCALE  = 6f;
+			if (Gameplay.CURRENT_GAME_SCALE > 6) {
+				Gameplay.CURRENT_GAME_SCALE = 6f;
 			}
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		} else if (mouseWheel < 0) {// mouse wheel down
 			Gameplay.CURRENT_GAME_SCALE -= .1f;
-			if(Gameplay.CURRENT_GAME_SCALE < Gameplay.MAX_GAME_SCALE) {
-				Gameplay.CURRENT_GAME_SCALE =  Gameplay.MAX_GAME_SCALE;
+			if (Gameplay.CURRENT_GAME_SCALE < Gameplay.MAX_GAME_SCALE) {
+				Gameplay.CURRENT_GAME_SCALE = Gameplay.MAX_GAME_SCALE;
 			}
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		}
+
 		if (input.isKeyPressed(Input.KEY_LEFT)) {
 			if (Gameplay.getCameraX() - 32 >= 0) {
 				Gameplay.camera.addX(-32);
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_RIGHT)) {
-			if (Gameplay.getCameraX() + this.getHorizontalTiles() * Gameplay.SIZE < this.getHorizontalTiles()
-					* Gameplay.SIZE) {
+			if (Gameplay.getCameraX() + this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE / Gameplay.CURRENT_GAME_SCALE < this
+					.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) {
 				Gameplay.camera.addX(+32);
 			}
 		}
@@ -430,8 +431,8 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			if (Gameplay.getCameraY() + this.getHorizontalTiles() * Gameplay.SIZE < this.getVerticalTiles()
-					* Gameplay.SIZE) {
+			if (Gameplay.getCameraY() + this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE / Gameplay.CURRENT_GAME_SCALE < this
+					.getVerticalTiles() * Gameplay.DEFAULT_SIZE) {
 				Gameplay.camera.addY(+32);
 			}
 		}
