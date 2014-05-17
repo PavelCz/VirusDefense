@@ -402,8 +402,9 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_RIGHT)) {
-
-			Gameplay.camera.addX(+32);
+			if (Gameplay.getCameraX() + this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE < this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) {
+				Gameplay.camera.addX(+32);
+			}
 		}
 		if (input.isKeyPressed(Input.KEY_UP)) {
 			if (Gameplay.getCameraY() - 32 >= 0) {
