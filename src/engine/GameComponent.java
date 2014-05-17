@@ -48,8 +48,8 @@ public abstract class GameComponent {
 
 	private void updateClickables(GameContainer container, int delta) {
 		Input input = container.getInput();
-		float x = input.getMouseX() - Gameplay.getCameraX();
-		float y = input.getMouseY() - Gameplay.getCameraY();
+		float x = input.getMouseX();
+		float y = input.getMouseY();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			this.mouseWasClicked = true;
 			for (Clickable clickable : this.clickables) {

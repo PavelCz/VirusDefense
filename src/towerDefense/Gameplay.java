@@ -430,8 +430,8 @@ public class Gameplay extends GameComponent {
 		if (this.mode == 0) {
 			Input input = container.getInput();
 
-			float x = input.getMouseX() - Gameplay.getCameraX();
-			float y = input.getMouseY() - Gameplay.getCameraY();
+			float x = input.getMouseX();
+			float y = input.getMouseY();
 			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 				this.placeTower(input);
 				for (Clickable clickable : this.clickables) {
