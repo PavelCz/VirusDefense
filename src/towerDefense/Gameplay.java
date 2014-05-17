@@ -343,8 +343,8 @@ public class Gameplay extends GameComponent {
 			int y = input.getMouseY() + Gameplay.getCameraY();
 			int newX = (x) / Gameplay.SIZE;
 			int newY = (y) / Gameplay.SIZE;
-			this.towerShadowX = (int) (input.getMouseX() / Gameplay.SIZE) * Gameplay.SIZE;
-			this.towerShadowY = (int) (input.getMouseY() / Gameplay.SIZE) * Gameplay.SIZE;
+			this.towerShadowX = (int) (newX * Gameplay.SIZE - Gameplay.getCameraX());
+			this.towerShadowY = (int) (newY * Gameplay.SIZE - Gameplay.getCameraY());
 			int[][] path = this.currentLevel.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
@@ -422,8 +422,8 @@ public class Gameplay extends GameComponent {
 		float cameraWidth = Gameplay.INTERFACE_START_X;
 		float cameraHeight = TowerDefense.getHeight();
 		if (input.isKeyPressed(Input.KEY_RIGHT)) {
-			if ((Gameplay.getCameraX() + cameraWidth +32)/ Gameplay.CURRENT_GAME_SCALE < this
-					.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) {
+			if ((Gameplay.getCameraX() + cameraWidth + 32) / Gameplay.CURRENT_GAME_SCALE < this.getHorizontalTiles()
+					* Gameplay.DEFAULT_SIZE) {
 				Gameplay.camera.addX(+32);
 			}
 		}
@@ -433,8 +433,8 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			if ((Gameplay.getCameraY() + cameraHeight +32)/ Gameplay.CURRENT_GAME_SCALE < this
-					.getVerticalTiles() * Gameplay.DEFAULT_SIZE) {
+			if ((Gameplay.getCameraY() + cameraHeight + 32) / Gameplay.CURRENT_GAME_SCALE < this.getVerticalTiles()
+					* Gameplay.DEFAULT_SIZE) {
 				Gameplay.camera.addY(+32);
 			}
 		}
