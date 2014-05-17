@@ -419,8 +419,10 @@ public class Gameplay extends GameComponent {
 				Gameplay.camera.addX(-32);
 			}
 		}
+		float cameraWidth = Gameplay.INTERFACE_START_X;
+		float cameraHeight = TowerDefense.getHeight();
 		if (input.isKeyPressed(Input.KEY_RIGHT)) {
-			if (Gameplay.getCameraX() + this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE / Gameplay.CURRENT_GAME_SCALE < this
+			if ((Gameplay.getCameraX() + cameraWidth +32)/ Gameplay.CURRENT_GAME_SCALE < this
 					.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) {
 				Gameplay.camera.addX(+32);
 			}
@@ -431,7 +433,7 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			if (Gameplay.getCameraY() + this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE / Gameplay.CURRENT_GAME_SCALE < this
+			if ((Gameplay.getCameraY() + cameraHeight +32)/ Gameplay.CURRENT_GAME_SCALE < this
 					.getVerticalTiles() * Gameplay.DEFAULT_SIZE) {
 				Gameplay.camera.addY(+32);
 			}

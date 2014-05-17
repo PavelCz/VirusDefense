@@ -1,5 +1,6 @@
 package engine;
 
+
 public class Camera extends Entity{
 
 	public Camera(float x, float y) {
@@ -13,6 +14,13 @@ public class Camera extends Entity{
 	
 	public void addY(int amount) {
 		this.y += amount;
+	}
+	
+	public float getX() {
+		return this.x;
+	}
+	public float getY() {
+		return this.y;
 	}
 	
 }
