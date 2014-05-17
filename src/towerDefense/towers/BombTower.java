@@ -31,9 +31,9 @@ public class BombTower extends Tower {
 		} else if (this.wobble) {
 			float scale = this.wobbleFactor;
 			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
-			this.sprite.draw((this.x  * Gameplay.DEFAULT_SIZE + size- Gameplay.getCameraX()) * Gameplay.CURRENT_GAME_SCALE, (this.y
-					 * Gameplay.DEFAULT_SIZE + size- Gameplay.getCameraY())
-					* Gameplay.CURRENT_GAME_SCALE, scale * Gameplay.CURRENT_GAME_SCALE);
+			this.sprite.draw((this.x  * Gameplay.DEFAULT_SIZE + size) * Gameplay.CURRENT_GAME_SCALE- Gameplay.getCameraX(), (this.y
+					 * Gameplay.DEFAULT_SIZE + size)
+					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), scale * Gameplay.CURRENT_GAME_SCALE);
 		} else {
 			this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE);
 		}
