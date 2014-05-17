@@ -69,7 +69,8 @@ public class PathTiler {
 		for (int y = 0; y < this.tiles.length; ++y) {
 			for (int x = 0; x < this.tiles[0].length; ++x) {
 				if (this.tiles[y][x] != null) {
-					this.tiles[y][x].draw(x * Gameplay.SIZE, y * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
+					this.tiles[y][x].draw(x * Gameplay.SIZE - Gameplay.getCameraX(), y * Gameplay.SIZE - Gameplay.getCameraY(),
+							Gameplay.GLOBAL_GAME_SCALE);
 				}
 			}
 		}
