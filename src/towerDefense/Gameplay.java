@@ -281,10 +281,10 @@ public class Gameplay extends GameComponent {
 					if (this.towers[i][j] != null) {
 						Tower currentTower = this.towers[i][j];
 						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red)
-								.draw((currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2 - Gameplay
-										.getCameraX()) * Gameplay.CURRENT_GAME_SCALE, (currentTower.getY() * this.currentTileLength
-										+ DEFAULT_SIZE / 2 - Gameplay.getCameraY())
-										* Gameplay.CURRENT_GAME_SCALE, Gameplay.CURRENT_GAME_SCALE);
+								.draw((currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2)
+										* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (currentTower.getY() * this.currentTileLength
+										+ DEFAULT_SIZE / 2 )
+										* Gameplay.CURRENT_GAME_SCALE- Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
 					}
 				}
 			}
