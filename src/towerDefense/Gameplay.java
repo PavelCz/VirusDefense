@@ -400,18 +400,34 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		int mouseWheel = Mouse.getDWheel();
+		float previousCameraWidth = Gameplay.INTERFACE_START_X * Gameplay.CURRENT_GAME_SCALE;
+		float previousCameraHeight = TowerDefense.getHeight() * Gameplay.CURRENT_GAME_SCALE;
 		if (mouseWheel > 0) { // mouse wheel up
-			Gameplay.CURRENT_GAME_SCALE *=  1.1f;
+			Gameplay.CURRENT_GAME_SCALE *= 1.1f;
 			if (Gameplay.CURRENT_GAME_SCALE > 6) {
 				Gameplay.CURRENT_GAME_SCALE = 6f;
 			}
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
+
+			float cameraWidth = Gameplay.INTERFACE_START_X * Gameplay.CURRENT_GAME_SCALE;
+			float cameraHeight = TowerDefense.getHeight() * Gameplay.CURRENT_GAME_SCALE;
+			float xDifference = (cameraWidth - previousCameraWidth) / 2;
+			float yDifference = (cameraHeight - previousCameraHeight) / 2;
+			Gameplay.camera.addX(xDifference);
+			Gameplay.camera.addY(yDifference);
 		} else if (mouseWheel < 0) {// mouse wheel down
 			Gameplay.CURRENT_GAME_SCALE *= 0.9f;
 			if (Gameplay.CURRENT_GAME_SCALE < Gameplay.MAX_GAME_SCALE) {
 				Gameplay.CURRENT_GAME_SCALE = Gameplay.MAX_GAME_SCALE;
 			}
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
+			
+			float cameraWidth = Gameplay.INTERFACE_START_X * Gameplay.CURRENT_GAME_SCALE;
+			float cameraHeight = TowerDefense.getHeight() * Gameplay.CURRENT_GAME_SCALE;
+			float xDifference = (previousCameraWidth - cameraWidth) / 2;
+			float yDifference = (previousCameraHeight - cameraHeight) / 2;
+			Gameplay.camera.addX(xDifference);
+			Gameplay.camera.addY(yDifference);
 		}
 
 		float scrollSpeed = 0.5f;
