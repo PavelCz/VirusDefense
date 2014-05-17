@@ -397,9 +397,9 @@ public class Gameplay extends GameComponent {
 		}
 		int mouseWheel = Mouse.getDWheel();
 		if (mouseWheel > 0) {
-			System.out.println("up");
+			Gameplay.CURRENT_GAME_SCALE -= .1f;
 		} else if (mouseWheel < 0) {
-			System.out.println("down");
+			Gameplay.CURRENT_GAME_SCALE += .1f;
 		}
 		if (this.debugMode) {
 			this.debugKeyboardEvents(container, delta);
