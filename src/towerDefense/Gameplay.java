@@ -425,9 +425,11 @@ public class Gameplay extends GameComponent {
 		}
 
 		if (input.isKeyDown(Input.KEY_RIGHT)) {
-			if ((Gameplay.getCameraX() + cameraWidth + scrollDistance) / Gameplay.CURRENT_GAME_SCALE < this.getHorizontalTiles()
+			Gameplay.camera.addX(+scrollDistance);
+			if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.getHorizontalTiles()
 					* Gameplay.DEFAULT_SIZE) {
-				Gameplay.camera.addX(+scrollDistance);
+				Gameplay.camera.setX((this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE)* Gameplay.CURRENT_GAME_SCALE - cameraWidth);
+
 			}
 		}
 		if (input.isKeyDown(Input.KEY_UP)) {
@@ -437,9 +439,11 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyDown(Input.KEY_DOWN)) {
-			if ((Gameplay.getCameraY() + cameraHeight + scrollDistance) / Gameplay.CURRENT_GAME_SCALE < this.getVerticalTiles()
+			Gameplay.camera.addY(+scrollDistance);
+			if ((Gameplay.getCameraY() + cameraHeight) / Gameplay.CURRENT_GAME_SCALE > this.getVerticalTiles()
 					* Gameplay.DEFAULT_SIZE) {
-				Gameplay.camera.addY(+scrollDistance);
+				Gameplay.camera.setY((this.getVerticalTiles() * Gameplay.DEFAULT_SIZE)* Gameplay.CURRENT_GAME_SCALE - cameraHeight);
+
 			}
 		}
 		if (this.debugMode) {
