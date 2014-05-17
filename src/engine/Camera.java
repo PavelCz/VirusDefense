@@ -12,9 +12,18 @@ public class Camera extends Entity {
 	}
 
 	public void addX(float amount) {
-		float cameraWidth = Gameplay.INTERFACE_START_X;
+		this.setX(amount + this.getX());
 
-		this.x += amount;
+	}
+
+	public void addY(float amount) {
+		this.setY(amount + this.getY());
+
+	}
+
+	public void setX(float x) {
+		this.x = x;
+		float cameraWidth = Gameplay.INTERFACE_START_X;
 		if (Gameplay.getCameraX() < 0) {
 			this.setX(0);
 		} else if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.game.getHorizontalTiles()
@@ -24,9 +33,9 @@ public class Camera extends Entity {
 		}
 	}
 
-	public void addY(float amount) {
+	public void setY(float y) {
+		this.y = y;
 		float cameraHeight = TowerDefense.getHeight();
-		this.y += amount;
 		if (Gameplay.getCameraY() < 0) {
 			this.setY(0);
 		} else if ((Gameplay.getCameraY() + cameraHeight) / Gameplay.CURRENT_GAME_SCALE > this.game.getVerticalTiles()
@@ -34,14 +43,6 @@ public class Camera extends Entity {
 			this.setY((this.game.getVerticalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraHeight);
 
 		}
-	}
-
-	public void setX(float x) {
-		this.x = x;
-	}
-
-	public void setY(float y) {
-		this.y = y;
 	}
 
 }
