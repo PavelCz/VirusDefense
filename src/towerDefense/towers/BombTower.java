@@ -1,9 +1,9 @@
 package towerDefense.towers;
 
 import towerDefense.Gameplay;
-import engine.Bomb;
 import engine.Enemy;
 import engine.graphics.Sprite;
+import engine.projectiles.Bomb;
 
 public class BombTower extends Tower {
 	protected int delta;
@@ -25,13 +25,15 @@ public class BombTower extends Tower {
 		if (this.building) {
 			float scale = (this.buildingTime - this.buildingTimer) / buildingTime;
 			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
-			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE,
-					(this.y * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE * scale);
+			this.sprite.draw((this.x  * Gameplay.DEFAULT_SIZE + size- Gameplay.getCameraX()) * Gameplay.GLOBAL_GAME_SCALE, (this.y
+					 * Gameplay.DEFAULT_SIZE + size- Gameplay.getCameraY())
+					* Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE * scale);
 		} else if (this.wobble) {
 			float scale = this.wobbleFactor;
 			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
-			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE,
-					(this.y * Gameplay.DEFAULT_SIZE + size) * Gameplay.GLOBAL_GAME_SCALE, scale * Gameplay.GLOBAL_GAME_SCALE);
+			this.sprite.draw((this.x  * Gameplay.DEFAULT_SIZE + size- Gameplay.getCameraX()) * Gameplay.GLOBAL_GAME_SCALE, (this.y
+					 * Gameplay.DEFAULT_SIZE + size- Gameplay.getCameraY())
+					* Gameplay.GLOBAL_GAME_SCALE, scale * Gameplay.GLOBAL_GAME_SCALE);
 		} else {
 			this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.GLOBAL_GAME_SCALE);
 		}

@@ -17,11 +17,8 @@ public abstract class Clickable extends GUI {
 		this.stayClicked = stayClicked;
 	}
 
-	public void update(GameContainer container) {
-		Input input = container.getInput();
-		float x = input.getMouseX();
-		float y = input.getMouseY();
-		if (this.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+	public void update(float mouseX, float mouseY, GameContainer container) {
+		if (this.collides((int) mouseX, (int) mouseY, Gameplay.GLOBAL_GUI_SCALE)) {
 			if (this.clicked) {
 				this.onRelease();
 			} else {

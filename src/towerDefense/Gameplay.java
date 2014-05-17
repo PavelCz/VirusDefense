@@ -17,13 +17,13 @@ import towerDefense.towers.LongerShootingTower;
 import towerDefense.towers.RocketFastTower;
 import towerDefense.towers.RocketTower;
 import towerDefense.towers.Tower;
+import engine.Camera;
 import engine.Enemy;
 import engine.EnemyTypeHandler;
 import engine.GameComponent;
 import engine.Level;
 import engine.MyVector2f;
 import engine.Player;
-import engine.Projectile;
 import engine.Waypoint;
 import engine.graphics.Background;
 import engine.graphics.SlickRectangle;
@@ -36,12 +36,13 @@ import engine.gui.InterfaceBackground;
 import engine.gui.SlickHealthbar;
 import engine.gui.StaticText;
 import engine.gui.TowerButton;
+import engine.projectiles.Projectile;
 
 /**
  * @author Pavel
  */
 public class Gameplay extends GameComponent {
-
+	private static Camera camera;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private boolean debugMode;
@@ -86,7 +87,7 @@ public class Gameplay extends GameComponent {
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
 		this.initDefaults();
-
+		Gameplay.camera = new Camera(0, 0);
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
@@ -119,8 +120,9 @@ public class Gameplay extends GameComponent {
 				"buttons/PSButton1_click.png", new BombTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this, 1500, 15f, 50), this);
 		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
 				"buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 0.5f), this, 200, 15f, 50), this);
-		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X+64+32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
-				"buttons/PSButton1_click.png", new RocketFastTower(0, 0, new Sprite("tower/roteBlutk_klein.png", 1f), this, 1000, 20f), this);
+		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE,
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0, 0, new Sprite(
+						"tower/roteBlutk_klein.png", 1f), this, 1000, 20f), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
@@ -206,9 +208,9 @@ public class Gameplay extends GameComponent {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
-			SlickHealthbar h = new SlickHealthbar(graphics, (enemy.getX() - barLength / 2) * Gameplay.GLOBAL_GAME_SCALE,
-					(enemy.getY() - Gameplay.SIZE / 2) * Gameplay.GLOBAL_GAME_SCALE - barHeight, enemy.getMaxHealth(), barLength,
-					barHeight);
+			SlickHealthbar h = new SlickHealthbar(graphics, (enemy.getX() - barLength / 2 - Gameplay.getCameraX())
+					* Gameplay.GLOBAL_GAME_SCALE, (enemy.getY() - Gameplay.SIZE / 2 - Gameplay.getCameraY())
+					* Gameplay.GLOBAL_GAME_SCALE - barHeight, enemy.getMaxHealth(), barLength, barHeight);
 			h.setHealth(enemy.getHealth());
 			h.setBordered(true);
 			h.draw();
@@ -268,22 +270,23 @@ public class Gameplay extends GameComponent {
 		if (this.debugMode) {
 			for (Enemy enemy : this.enemies) {
 				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(enemy.getX()
-						* Gameplay.GLOBAL_GAME_SCALE, enemy.getY() * Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
+						- Gameplay.getCameraX() * Gameplay.GLOBAL_GAME_SCALE, enemy.getY() - Gameplay.getCameraY()
+						* Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
 			}
 			for (int i = 0; i < this.towers.length; ++i) {
 				for (int j = 0; j < this.towers[0].length; ++j) {
 					if (this.towers[i][j] != null) {
 						Tower currentTower = this.towers[i][j];
 						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red)
-								.draw((currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2)
-										* Gameplay.GLOBAL_GAME_SCALE,
-										(currentTower.getY() * this.currentTileLength + DEFAULT_SIZE / 2) * Gameplay.GLOBAL_GAME_SCALE,
-										Gameplay.GLOBAL_GAME_SCALE);
+								.draw((currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2 - Gameplay
+										.getCameraX()) * Gameplay.GLOBAL_GAME_SCALE, (currentTower.getY() * this.currentTileLength
+										+ DEFAULT_SIZE / 2 - Gameplay.getCameraY())
+										* Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
 					}
 				}
 			}
 			// create a black box that the FPS are visible
-			new SlickRectangle(graphics, 100, 20, Color.black).draw(5, 10, Gameplay.GLOBAL_GAME_SCALE);
+			new SlickRectangle(graphics, 100, 20, Color.black).draw(5, 10, 1f);
 		}
 	}
 
@@ -333,12 +336,12 @@ public class Gameplay extends GameComponent {
 			// old version of shadow Coordinates, with pixel accurate coordinates
 			// this.towerShadowX = (int) (input.getMouseX() - this.currentTower.getSprite().getWidth() / 2);
 			// this.towerShadowY = (int) (input.getMouseY() - this.currentTower.getSprite().getHeight() / 2);
-			int x = input.getMouseX();
-			int y = input.getMouseY();
-			int newX = x / Gameplay.SIZE;
-			int newY = y / Gameplay.SIZE;
-			this.towerShadowX = newX * Gameplay.SIZE;
-			this.towerShadowY = newY * Gameplay.SIZE;
+			int x = input.getMouseX() + Gameplay.getCameraX();
+			int y = input.getMouseY() + Gameplay.getCameraY();
+			int newX = (x) / Gameplay.SIZE;
+			int newY = (y) / Gameplay.SIZE;
+			this.towerShadowX = (int) (input.getMouseX() / Gameplay.DEFAULT_SIZE) * Gameplay.DEFAULT_SIZE;
+			this.towerShadowY = (int) (input.getMouseY() / Gameplay.DEFAULT_SIZE) * Gameplay.DEFAULT_SIZE;
 			int[][] path = this.currentLevel.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
@@ -393,6 +396,28 @@ public class Gameplay extends GameComponent {
 				e.printStackTrace();
 			}
 		}
+		if (input.isKeyPressed(Input.KEY_LEFT)) {
+			if (Gameplay.getCameraX() - 32 >= 0) {
+				Gameplay.camera.addX(-32);
+			}
+		}
+		if (input.isKeyPressed(Input.KEY_RIGHT)) {
+			if (Gameplay.getCameraX() + this.getHorizontalTiles() * Gameplay.SIZE < this.getHorizontalTiles()
+					* Gameplay.SIZE) {
+				Gameplay.camera.addX(+32);
+			}
+		}
+		if (input.isKeyPressed(Input.KEY_UP)) {
+			if (Gameplay.getCameraY() - 32 >= 0) {
+				Gameplay.camera.addY(-32);
+			}
+		}
+		if (input.isKeyPressed(Input.KEY_DOWN)) {
+			if (Gameplay.getCameraY() + this.getHorizontalTiles() * Gameplay.SIZE < this.getVerticalTiles()
+					* Gameplay.SIZE) {
+				Gameplay.camera.addY(+32);
+			}
+		}
 		if (this.debugMode) {
 			this.debugKeyboardEvents(container, delta);
 		}
@@ -428,10 +453,12 @@ public class Gameplay extends GameComponent {
 		if (this.mode == 0) {
 			Input input = container.getInput();
 
+			float x = input.getMouseX();
+			float y = input.getMouseY();
 			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 				this.placeTower(input);
 				for (Clickable clickable : this.clickables) {
-					clickable.update(container);
+					clickable.update(x, y, container);
 				}
 
 			} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
@@ -442,8 +469,8 @@ public class Gameplay extends GameComponent {
 	}
 
 	private void placeTower(Input input) {
-		float x = input.getMouseX();
-		float y = input.getMouseY();
+		float x = input.getMouseX() + Gameplay.getCameraX();
+		float y = input.getMouseY() + Gameplay.getCameraY();
 		int newX = (int) x / Gameplay.SIZE;
 		int newY = (int) y / Gameplay.SIZE;
 
@@ -587,4 +614,11 @@ public class Gameplay extends GameComponent {
 		return this.currentTowerPlaceable;
 	}
 
+	public static int getCameraX() {
+		return (int) Gameplay.camera.getX();
+	}
+
+	public static int getCameraY() {
+		return (int) Gameplay.camera.getY();
+	}
 }
