@@ -42,7 +42,7 @@ import engine.gui.TowerButton;
  * @author Pavel
  */
 public class Gameplay extends GameComponent {
-	private Camera camera;
+	private static Camera camera;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private boolean debugMode;
@@ -589,11 +589,11 @@ public class Gameplay extends GameComponent {
 		return this.currentTowerPlaceable;
 	}
 
-	public int getCameraX() {
-		return (int) this.camera.getX();
+	public static int getCameraX() {
+		return (int) Gameplay.camera.getX();
 	}
 
-	public int getCameraY() {
-		return (int) this.camera.getY();
+	public static int getCameraY() {
+		return (int) Gameplay.camera.getY();
 	}
 }
