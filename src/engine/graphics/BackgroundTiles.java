@@ -20,9 +20,9 @@ public class BackgroundTiles extends Background {
 
 	@Override
 	public void draw() {
-		for (int i = 0; i < TowerDefense.getWidth() / Gameplay.SIZE; ++i) {
-			for (int j = 0; j < TowerDefense.getHeight() / Gameplay.SIZE; ++j) {
-				if (i < this.horizontalTiles && j < this.verticalTiles) {
+		for (int i = 0; i <= TowerDefense.getWidth() / Gameplay.SIZE; ++i) {
+			for (int j = 0; j <= TowerDefense.getHeight() / Gameplay.SIZE; ++j) {
+				if (i < this.horizontalTiles && j < this.verticalTiles-1) {
 					this.picture.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE);
 				} else {
 					this.pictureOutOfBounds.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE);
