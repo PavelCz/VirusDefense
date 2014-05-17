@@ -398,7 +398,19 @@ public class Gameplay extends GameComponent {
 		}
 		if (input.isKeyPressed(Input.KEY_LEFT)) {
 
-			Gameplay.camera.
+			Gameplay.camera.addX(-32);
+		}
+		if (input.isKeyPressed(Input.KEY_RIGHT)) {
+
+			Gameplay.camera.addX(+32);
+		}
+		if (input.isKeyPressed(Input.KEY_UP)) {
+
+			Gameplay.camera.addY(-32);
+		}
+		if (input.isKeyPressed(Input.KEY_DOWN)) {
+
+			Gameplay.camera.addY(+32);
 		}
 		if (this.debugMode) {
 			this.debugKeyboardEvents(container, delta);
