@@ -87,7 +87,7 @@ public class Gameplay extends GameComponent {
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
 		this.initDefaults();
-		Gameplay.camera = new Camera(64, 64);
+		Gameplay.camera = new Camera(0, 0);
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
 		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
@@ -279,9 +279,9 @@ public class Gameplay extends GameComponent {
 						Tower currentTower = this.towers[i][j];
 						new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.red)
 								.draw((currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2 - Gameplay
-										.getCameraX()) * Gameplay.GLOBAL_GAME_SCALE,
-										(currentTower.getY() * this.currentTileLength + DEFAULT_SIZE / 2- Gameplay.getCameraY()) * Gameplay.GLOBAL_GAME_SCALE,
-										Gameplay.GLOBAL_GAME_SCALE);
+										.getCameraX()) * Gameplay.GLOBAL_GAME_SCALE, (currentTower.getY() * this.currentTileLength
+										+ DEFAULT_SIZE / 2 - Gameplay.getCameraY())
+										* Gameplay.GLOBAL_GAME_SCALE, Gameplay.GLOBAL_GAME_SCALE);
 					}
 				}
 			}
@@ -397,8 +397,9 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_LEFT)) {
-
-			Gameplay.camera.addX(-32);
+			if (Gameplay.getCameraX() - 32 >= 0) {
+				Gameplay.camera.addX(-32);
+			}
 		}
 		if (input.isKeyPressed(Input.KEY_RIGHT)) {
 
