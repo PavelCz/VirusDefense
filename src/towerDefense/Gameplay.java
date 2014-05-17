@@ -211,9 +211,9 @@ public class Gameplay extends GameComponent {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
-			SlickHealthbar h = new SlickHealthbar(graphics, (enemy.getX() - barLength / 2 - Gameplay.getCameraX())
-					* Gameplay.CURRENT_GAME_SCALE, (enemy.getY() - Gameplay.SIZE / 2 - Gameplay.getCameraY())
-					* Gameplay.CURRENT_GAME_SCALE - barHeight, enemy.getMaxHealth(), barLength, barHeight);
+			SlickHealthbar h = new SlickHealthbar(graphics, (enemy.getX() - barLength / 2) * Gameplay.CURRENT_GAME_SCALE
+					- Gameplay.getCameraX(), (enemy.getY() - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE
+					- Gameplay.getCameraY(), enemy.getMaxHealth(), barLength, barHeight);
 			h.setHealth(enemy.getHealth());
 			h.setBordered(true);
 			h.draw();
@@ -272,9 +272,9 @@ public class Gameplay extends GameComponent {
 	private void renderDebug(GameContainer container, Graphics graphics) {
 		if (this.debugMode) {
 			for (Enemy enemy : this.enemies) {
-				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw(
-						(enemy.getX() ) * Gameplay.CURRENT_GAME_SCALE- Gameplay.getCameraX(), (enemy.getY() )
-								* Gameplay.CURRENT_GAME_SCALE- Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
+				new SlickUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw((enemy.getX())
+						* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(),
+						(enemy.getY()) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
 			}
 			for (int i = 0; i < this.towers.length; ++i) {
 				for (int j = 0; j < this.towers[0].length; ++j) {
