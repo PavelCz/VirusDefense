@@ -60,6 +60,7 @@ public class Gameplay extends GameComponent {
 	private Player player;
 	private StaticText numberLives;
 	private StaticText moneyAmount;
+	private StaticText score;
 	private boolean currentTowerPlaceable;
 	private int towerShadowX, towerShadowY;
 	protected ConcurrentLinkedQueue<Projectile> projectiles;
@@ -108,7 +109,6 @@ public class Gameplay extends GameComponent {
 		this.interfaceBackground = new InterfaceBackground("Interface1.png");
 
 		this.towers = new Tower[this.getVerticalTiles()][this.getHorizontalTiles()];
-		this.initWaves();
 
 		// add all objects that need to be drawn to the respectable arrays
 		// entities
@@ -142,16 +142,13 @@ public class Gameplay extends GameComponent {
 		this.debugMode = false;
 		this.passedMilliseconds = 0;
 		this.mode = 0;
-		this.player = new Player(10, 200);
+		this.player = new Player(10, 200, 0);
 		STANDARD_TEXT_SCALE = 15;
 		this.speed = 1f;
 		this.currentTowerPlaceable = true;
 
 	}
 
-	private void initWaves() {
-
-	}
 
 	private void initGUI() {
 		float guiTileSize = 64 * Gameplay.GLOBAL_GUI_SCALE;
@@ -159,11 +156,14 @@ public class Gameplay extends GameComponent {
 		float guiX = 3 * Gameplay.GLOBAL_GUI_SCALE;
 		float livesY = 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
 		float moneyY = livesY + textHeight;
+		float scoreY = moneyY + textHeight;
 		this.numberLives = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, livesY, Color.white, "" + this.player.getLives());
 		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, TowerDefense.getHeight() - textHeight, Color.white,
 				this.passedTimeToString());
 		this.moneyAmount = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize + textHeight, moneyY, Color.white, ""
 				+ this.player.getMoney());
+		this.score = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize + textHeight, scoreY, Color.white, ""
+				+ this.player.getScore());
 
 		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(this.numberLives);
@@ -175,6 +175,8 @@ public class Gameplay extends GameComponent {
 		this.guiElements.add(this.passedTime);
 		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, moneyY, Color.white, "Money:"));
 		this.guiElements.add(this.moneyAmount);
+		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, scoreY, Color.white, "Score:"));
+		this.guiElements.add(this.score);
 	}
 
 	@Override
@@ -300,6 +302,7 @@ public class Gameplay extends GameComponent {
 			this.passedMilliseconds += originalDelta;
 			this.passedTime.setText(this.passedTimeToString());
 			this.moneyAmount.setText("" + this.player.getMoney());
+			this.score.setText("" + this.player.getScore());
 			int delta = (int) (originalDelta * this.speed);
 			if (this.mode == 0) {
 				for (Enemy enemy : this.enemies) {
@@ -401,7 +404,7 @@ public class Gameplay extends GameComponent {
 		}
 		int mouseWheel = Mouse.getDWheel();
 		if (mouseWheel > 0) { // mouse wheel up
-			Gameplay.CURRENT_GAME_SCALE *=  1.1f;
+			Gameplay.CURRENT_GAME_SCALE *= 1.1f;
 			if (Gameplay.CURRENT_GAME_SCALE > 6) {
 				Gameplay.CURRENT_GAME_SCALE = 6f;
 			}
@@ -634,5 +637,13 @@ public class Gameplay extends GameComponent {
 
 	public static int getCameraY() {
 		return (int) Gameplay.camera.getY();
+	}
+
+	public StaticText getScore() {
+		return score;
+	}
+
+	public void setScore(StaticText score) {
+		this.score = score;
 	}
 }

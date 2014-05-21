@@ -3,10 +3,12 @@ package engine;
 public class Player {
 	private int lives;
 	private int money;
+	private int score;
 
-	public Player(int lives, int money) {
+	public Player(int lives, int money, int score) {
 		this.lives = lives;
 		this.money = money;
+		this.score = score;
 	}
 
 	public int getMoney() {
@@ -31,6 +33,18 @@ public class Player {
 
 	public void reduceLives() {
 		this.lives--;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public void addScore(int score) {
+		this.score += score;
 	}
 
 }
