@@ -11,7 +11,7 @@ public class RocketFastTower extends Tower {
 	protected int bombRadius;
 
 	public RocketFastTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage) {
-		super(x, y, 100, 150, damage, game);
+		super(x, y, 100, 200, damage, game);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
 		this.delta = this.shootingInterval;
