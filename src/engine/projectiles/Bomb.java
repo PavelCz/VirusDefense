@@ -59,6 +59,7 @@ public class Bomb extends Projectile implements Drawable {
 				bombedEnemy.setHealth(bombedEnemy.getHealth() - this.damage);
 				if (bombedEnemy.getHealth() <= 0) {
 					this.game.getPlayer().addMoney(bombedEnemy.getMoney());
+					this.game.getPlayer().addScore(bombedEnemy.getMoney()*5);
 				}
 			}
 		}

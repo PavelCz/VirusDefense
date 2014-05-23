@@ -52,6 +52,7 @@ public class RocketFast extends Projectile implements Drawable {
 		enemy.setHealth(enemy.getHealth() - this.damage);
 		if (enemy.getHealth() <= 0) {
 			this.game.getPlayer().addMoney(enemy.getMoney());
+			this.game.getPlayer().addScore(enemy.getMoney()*5);
 		}
 
 		this.game.getSoundHandler().play("explode");
