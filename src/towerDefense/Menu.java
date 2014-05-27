@@ -17,7 +17,7 @@ import engine.gui.StaticText;
 
 public class Menu extends GameComponent {
 	private TextField t;
-	private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.3");
+	private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.4");
 
 	public Menu(TowerDefense game) {
 		super(game);
@@ -39,10 +39,9 @@ public class Menu extends GameComponent {
 		this.t.setBorderColor(Color.gray);
 		this.t.setBackgroundColor(Color.lightGray);
 		this.t.setMaxLength(32);
-		
+
 	}
 
-	
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		super.update(container, delta);
@@ -57,7 +56,7 @@ public class Menu extends GameComponent {
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		super.render(container, graphics);
 		this.t.render(container, graphics);
-		version.draw();
+		this.version.draw();
 	}
 
 }
