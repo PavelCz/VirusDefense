@@ -46,4 +46,8 @@ public class ClickableText extends Clickable {
 		this.text.setColor(Color.white);
 
 	}
+
+	public int getWidth() {
+		return this.text.getWidth();
+	}
 }
