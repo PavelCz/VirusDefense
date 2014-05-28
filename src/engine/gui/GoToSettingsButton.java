@@ -15,6 +15,7 @@ public class GoToSettingsButton extends ClickableText {
 	@Override
 	public void onRelease() {
 		super.onRelease();
+		this.towerDefense.setMode(TowerDefense.MODE_SETTINGS);
 	}
 
 }

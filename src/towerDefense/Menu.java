@@ -12,6 +12,7 @@ import org.newdawn.slick.gui.TextField;
 
 import engine.GameComponent;
 import engine.gui.ExitClickable;
+import engine.gui.GoToSettingsButton;
 import engine.gui.StartClickable;
 import engine.gui.StaticText;
 
@@ -33,6 +34,13 @@ public class Menu extends GameComponent {
 		int y = TowerDefense.getHeight() / 2 - c.getHeight();
 		c.setX(TowerDefense.getWidth() / 2 - c.getWidth() / 2);
 		c.setY(y);
+		y += c.getHeight() + 1;
+
+		GoToSettingsButton settings = new GoToSettingsButton(0, 0, "Settings", this.game);
+		this.clickables.add(settings);
+		this.guiElements.add(settings);
+		settings.setX(TowerDefense.getWidth() / 2 - settings.getWidth() / 2);
+		settings.setY(y);
 		y += c.getHeight() + 1;
 
 		ExitClickable e = new ExitClickable(100, 121, this.game);

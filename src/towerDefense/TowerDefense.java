@@ -23,6 +23,7 @@ public class TowerDefense extends BasicGame {
 	private Gameplay gameplay;
 	private Menu menu;
 	private ChooseLevel maps;
+	private Settings settings;
 	private GameComponent currentGameComponent;
 	private boolean quitGame = false;
 
@@ -41,6 +42,7 @@ public class TowerDefense extends BasicGame {
 		this.menu = new Menu(this);
 		this.menu.init(container);
 		this.maps = new ChooseLevel(this);
+		this.settings = new Settings(this);
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
 	}
@@ -67,7 +69,10 @@ public class TowerDefense extends BasicGame {
 			this.currentGameComponent = this.gameplay;
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
 			this.currentGameComponent = this.maps;
+		} else if (this.mode == TowerDefense.MODE_SETTINGS) {
+			this.currentGameComponent = this.settings;
 		} else {
+
 			this.currentGameComponent = this.menu;
 		}
 		this.currentGameComponent.update(container, delta);
