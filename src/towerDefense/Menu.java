@@ -29,6 +29,7 @@ public class Menu extends GameComponent {
 		StartClickable c = new StartClickable(100, 100, this.game);
 		this.clickables.add(c);
 		this.guiElements.add(c);
+		c.setX(TowerDefense.getWidth() / 2 - c.getWidth() / 2);
 
 		ExitClickable e = new ExitClickable(100, 121, this.game);
 		this.clickables.add(e);
