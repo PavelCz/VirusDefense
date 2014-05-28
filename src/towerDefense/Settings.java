@@ -31,11 +31,19 @@ public class Settings extends GameComponent {
 		this.widthField.setBorderColor(Color.gray);
 		this.widthField.setBackgroundColor(Color.lightGray);
 		this.widthField.setMaxLength(5);
+
+		this.heightField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 50, 100, 50, 25);
+		this.heightField.setText(TowerDefense.getHeight() + "");
+		this.heightField.setBorderColor(Color.gray);
+		this.heightField.setBackgroundColor(Color.lightGray);
+		this.heightField.setMaxLength(5);
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		super.render(container, graphics);
 		this.widthField.render(container, graphics);
+		this.heightField.render(container, graphics);
 	}
 
 }
