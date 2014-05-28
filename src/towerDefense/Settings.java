@@ -46,4 +46,9 @@ public class Settings extends GameComponent {
 		this.heightField.render(container, graphics);
 	}
 
+	public void deactivate() {
+		this.widthField.deactivate();
+		this.heightField.deactivate();
+	}
+
 }
