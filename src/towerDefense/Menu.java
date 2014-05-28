@@ -26,14 +26,20 @@ public class Menu extends GameComponent {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
-		StartClickable c = new StartClickable(100, 100, this.game);
+
+		StartClickable c = new StartClickable(0, 0, this.game);
 		this.clickables.add(c);
 		this.guiElements.add(c);
+		int y = TowerDefense.getHeight() / 2 - c.getHeight();
 		c.setX(TowerDefense.getWidth() / 2 - c.getWidth() / 2);
+		c.setY(y);
+		y += c.getHeight() + 1;
 
 		ExitClickable e = new ExitClickable(100, 121, this.game);
 		this.clickables.add(e);
 		this.guiElements.add(e);
+		e.setX(TowerDefense.getWidth() / 2 - e.getWidth() / 2);
+		e.setY(y);
 
 		this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 100, 75, 25);
 		this.t.setText("Player 1");
