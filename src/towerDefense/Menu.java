@@ -74,4 +74,16 @@ public class Menu extends GameComponent {
 		this.version.draw();
 	}
 
+	public void deactivate() {
+		this.t.deactivate();
+	}
+
+	public void activate(GameContainer container) {
+		this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 100, 75, 25);
+		this.t.setText("Player 1");
+		this.t.setBorderColor(Color.gray);
+		this.t.setBackgroundColor(Color.lightGray);
+		this.t.setMaxLength(32);
+	}
+
 }
