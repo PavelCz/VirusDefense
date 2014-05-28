@@ -14,5 +14,6 @@ public class StartClickable extends ClickableText {
 	public void onRelease() {
 		super.onRelease();
 		this.towerDefense.setMode(TowerDefense.MODE_MAPS);
+		this.towerDefense.deactivateMenu();
 	}
 }

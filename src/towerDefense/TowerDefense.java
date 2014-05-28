@@ -74,8 +74,10 @@ public class TowerDefense extends BasicGame {
 				this.settings.activate(container);
 			}
 			this.currentGameComponent = this.settings;
-		} else {
-
+		} else if (this.mode == TowerDefense.MODE_MENU) {
+			if (this.currentGameComponent != this.menu) {
+				// this.menu.activate(container);
+			}
 			this.currentGameComponent = this.menu;
 		}
 		this.currentGameComponent.update(container, delta);
@@ -127,12 +129,12 @@ public class TowerDefense extends BasicGame {
 		return this.gameplay;
 	}
 
-	public void activateSettings(GameContainer container) {
-		this.settings.activate(container);
-	}
-
 	public void deactivateSettings() {
 		this.settings.deactivate();
+	}
+
+	public void deactivateMenu() {
+		// this.menu.deactivate();
 	}
 
 }

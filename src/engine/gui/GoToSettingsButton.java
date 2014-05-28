@@ -16,6 +16,7 @@ public class GoToSettingsButton extends ClickableText {
 	public void onRelease() {
 		super.onRelease();
 		this.towerDefense.setMode(TowerDefense.MODE_SETTINGS);
+		this.towerDefense.deactivateMenu();
 	}
 
 }
