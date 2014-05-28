@@ -70,6 +70,9 @@ public class TowerDefense extends BasicGame {
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
 			this.currentGameComponent = this.maps;
 		} else if (this.mode == TowerDefense.MODE_SETTINGS) {
+			if (this.currentGameComponent != this.settings) {
+				this.settings.activate(container);
+			}
 			this.currentGameComponent = this.settings;
 		} else {
 
@@ -123,4 +126,13 @@ public class TowerDefense extends BasicGame {
 	public Gameplay getGameplay() {
 		return this.gameplay;
 	}
+
+	public void activateSettings(GameContainer container) {
+		this.settings.activate(container);
+	}
+
+	public void deactivateSettings() {
+		this.settings.deactivate();
+	}
+
 }
