@@ -42,7 +42,7 @@ public class TowerDefense extends BasicGame {
 		this.menu = new Menu(this);
 		this.menu.init(container);
 		this.maps = new ChooseLevel(this);
-		this.settings = new Settings(this);
+		this.settings = new Settings(this, container);
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
 	}
