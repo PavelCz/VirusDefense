@@ -51,4 +51,18 @@ public class Settings extends GameComponent {
 		this.heightField.deactivate();
 	}
 
+	public void activate(GameContainer container) {
+		this.widthField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 100, 50, 25);
+		this.widthField.setText(TowerDefense.getWidth() + "");
+		this.widthField.setBorderColor(Color.gray);
+		this.widthField.setBackgroundColor(Color.lightGray);
+		this.widthField.setMaxLength(5);
+
+		this.heightField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 50, 100, 50, 25);
+		this.heightField.setText(TowerDefense.getHeight() + "");
+		this.heightField.setBorderColor(Color.gray);
+		this.heightField.setBackgroundColor(Color.lightGray);
+		this.heightField.setMaxLength(5);
+	}
+
 }
