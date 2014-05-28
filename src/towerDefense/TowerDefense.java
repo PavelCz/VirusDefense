@@ -16,6 +16,7 @@ public class TowerDefense extends BasicGame {
 	public static final int MODE_MENU = 0;
 	public static final int MODE_GAME = 1;
 	public static final int MODE_MAPS = 2;
+	public static final int MODE_SETTINGS = 3;
 	private static int HEIGHT;
 	private static int WIDTH;
 
@@ -57,8 +58,7 @@ public class TowerDefense extends BasicGame {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta)
-			throws SlickException {
+	public void update(GameContainer container, int delta) throws SlickException {
 		if (this.quitGame) {
 			container.exit();
 			AL.destroy();
@@ -75,8 +75,7 @@ public class TowerDefense extends BasicGame {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics)
-			throws SlickException {
+	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		this.currentGameComponent.render(container, graphics);
 
 	}
@@ -115,7 +114,7 @@ public class TowerDefense extends BasicGame {
 		}
 		this.currentGameComponent = this.gameplay;
 	}
-	
+
 	public Gameplay getGameplay() {
 		return this.gameplay;
 	}
