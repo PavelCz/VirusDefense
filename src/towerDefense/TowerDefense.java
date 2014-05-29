@@ -171,7 +171,7 @@ public class TowerDefense extends BasicGame {
 		// this.menu.deactivate();
 	}
 
-	private static void writeSettingsToFile() {
+	public static void writeSettingsToFile() {
 		PrintWriter writer;
 		try {
 			writer = new PrintWriter("./src/data/files/settings.txt", "UTF-8");

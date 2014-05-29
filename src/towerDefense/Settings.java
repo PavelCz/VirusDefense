@@ -192,6 +192,7 @@ public class Settings extends GameComponent {
 			try {
 				container.setFullscreen(false);
 				TowerDefense.setFULLSCREEN(false);
+
 			} catch (SlickException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -207,6 +208,8 @@ public class Settings extends GameComponent {
 				this.warning.setVisible(true);
 			}
 		}
+
+		TowerDefense.writeSettingsToFile();
 	}
 
 	public void updateApplyButton(GameContainer container, int delta) {
@@ -224,6 +227,7 @@ public class Settings extends GameComponent {
 					AppGameContainer gameContainer = (AppGameContainer) container;
 					gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
 					TowerDefense.updateDimensions(container);
+					TowerDefense.writeSettingsToFile();
 					this.back.setX(0);
 					this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
 					this.game.reinitMenu(container);
