@@ -50,6 +50,13 @@ public abstract class GameComponent {
 		Input input = container.getInput();
 		float x = input.getMouseX();
 		float y = input.getMouseY();
+		for (Clickable clickable : this.clickables) {
+			if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+				clickable.onHover();
+			} else {
+				clickable.onUnHover();
+			}
+		}
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			this.mouseWasClicked = true;
 			for (Clickable clickable : this.clickables) {
