@@ -95,6 +95,7 @@ public class Settings extends GameComponent {
 							this.back.setX(0);
 							this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
 							this.game.reinitMenu(container);
+							this.game.reinitChooseLevel(container);
 						} catch (SlickException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

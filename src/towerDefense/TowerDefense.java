@@ -34,13 +34,12 @@ public class TowerDefense extends BasicGame {
 	}
 
 	@Override
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container) {
 		this.initSounds();
 		TowerDefense.updateDimensions(container);
 		this.gameplay = new Gameplay(this);
-		this.menu = new Menu(this);
-		this.menu.init(container);
-		this.maps = new ChooseLevel(this);
+		this.reinitMenu(container);
+		this.reinitChooseLevel(container);
 		this.settings = new Settings(this, container);
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
@@ -147,6 +146,12 @@ public class TowerDefense extends BasicGame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void reinitChooseLevel(GameContainer container) {
+
+		this.maps = new ChooseLevel(this);
+
 	}
 
 	public void deactivateMenu() {
