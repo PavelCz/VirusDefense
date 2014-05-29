@@ -24,6 +24,7 @@ public class Settings extends GameComponent {
 	private ClickableText apply;
 	private StaticText warning;
 	private GoToMenuButton back;
+	private ClickableText fullscreen;
 
 	public Settings(TowerDefense game, GameContainer container) {
 		super(game);
@@ -62,7 +63,12 @@ public class Settings extends GameComponent {
 
 		this.warning = new StaticText(fieldsX, fieldsY, Color.red, "Please enter a number.");
 		this.warning.setVisible(false);
-
+		fieldsX = 0;
+		fieldsY += this.widthField.getHeight();
+		this.fullscreen = new ClickableText(fieldsX, fieldsY, "Toggle fullscreen", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(),
+				false);
+		this.clickables.add(this.apply);
+		this.guiElements.add(this.apply);
 	}
 
 	@Override
@@ -71,6 +77,7 @@ public class Settings extends GameComponent {
 		this.widthField.render(container, graphics);
 		this.heightField.render(container, graphics);
 		this.warning.draw();
+		this.fullscreen.draw();
 	}
 
 	@Override
@@ -80,6 +87,7 @@ public class Settings extends GameComponent {
 		float y = input.getMouseY();
 		super.updateHovering(x, y);
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+
 			if (this.apply.collides((int) x, (int) y, 1f)) {
 				String newWidthString = this.widthField.getText();
 				String newHeightString = this.heightField.getText();
@@ -88,8 +96,9 @@ public class Settings extends GameComponent {
 					int newHeight = Integer.parseInt(newHeightString);
 					this.warning.setVisible(false);
 					if (newWidth >= 800 && newHeight >= 600) {
-						AppGameContainer gameContainer = (AppGameContainer) container;
+
 						try {
+							AppGameContainer gameContainer = (AppGameContainer) container;
 							gameContainer.setDisplayMode(newWidth, newHeight, false);
 							TowerDefense.updateDimensions(container);
 							this.back.setX(0);
@@ -111,6 +120,24 @@ public class Settings extends GameComponent {
 
 				}
 
+			} else if (this.fullscreen.collides((int) x, (int) y, 1f)) {
+				if (TowerDefense.isFULLSCREEN()) {
+					try {
+						container.setFullscreen(false);
+						TowerDefense.setFULLSCREEN(false);
+					} catch (SlickException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				} else {
+					try {
+						container.setFullscreen(true);
+						TowerDefense.setFULLSCREEN(true);
+					} catch (SlickException e) {
+						System.out.println("not a supported fullscreen resolution");
+					}
+				}
 			}
 			this.mouseWasClicked = true;
 			for (Clickable clickable : this.clickables) {

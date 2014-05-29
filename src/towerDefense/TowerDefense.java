@@ -17,6 +17,7 @@ public class TowerDefense extends BasicGame {
 	public static final int MODE_GAME = 1;
 	public static final int MODE_MAPS = 2;
 	public static final int MODE_SETTINGS = 3;
+	public static boolean FULLSCREEN = false;
 	private static int HEIGHT;
 	private static int WIDTH;
 
@@ -135,6 +136,14 @@ public class TowerDefense extends BasicGame {
 
 	public void deactivateSettings() {
 		this.settings.deactivate();
+	}
+
+	public static boolean isFULLSCREEN() {
+		return FULLSCREEN;
+	}
+
+	public static void setFULLSCREEN(boolean fULLSCREEN) {
+		FULLSCREEN = fULLSCREEN;
 	}
 
 	public void reinitMenu(GameContainer container) {
