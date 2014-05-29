@@ -5,6 +5,8 @@ import java.awt.Font;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
+import towerDefense.Gameplay;
+
 public class Text extends RenderObject {
 	private Font fontSettings;
 	private TrueTypeFont font;
@@ -14,9 +16,7 @@ public class Text extends RenderObject {
 	private boolean visible = true;
 
 	public Text(int height, String text, Color color, float globalScale) {
-		this.height = height;
-		this.fontSettings = new Font("Verdana", Font.PLAIN, (int) (this.height * globalScale));
-		this.font = new TrueTypeFont(this.fontSettings, true);
+		this.setHeight(height);
 		this.text = text;
 		this.color = color;
 	}
@@ -47,6 +47,12 @@ public class Text extends RenderObject {
 
 	public int getHeight() {
 		return this.font.getHeight();
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+		this.fontSettings = new Font("Verdana", Font.PLAIN, (int) (this.height * Gameplay.GLOBAL_GUI_SCALE));
+		this.font = new TrueTypeFont(this.fontSettings, true);
 	}
 
 	public void setVisible(boolean visible) {
