@@ -59,6 +59,7 @@ public class Settings extends GameComponent {
 		fieldsX += this.apply.getWidth() + 10;
 
 		this.warning = new StaticText(fieldsX, fieldsY, Color.red, "Please enter a number.");
+		this.warning.setVisible(false);
 
 	}
 
@@ -86,7 +87,7 @@ public class Settings extends GameComponent {
 					int newHeight = Integer.parseInt(newHeightString);
 					System.out.println(newWidth + " " + newHeight);
 				} catch (NumberFormatException nfe) {
-					System.out.println("not a number");
+					this.warning.setVisible(true);
 				}
 
 			}
