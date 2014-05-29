@@ -93,21 +93,38 @@ public class Settings extends GameComponent {
 		}
 		float lines = supportedResolutions.length + 1;
 
-		float textHeight = Gameplay.GLOBAL_GUI_SCALE;
-		textHeight = Math.min(textHeight, TowerDefense.getHeight() / lines);
-
-		this.supportedResolutionsText = new StaticText(0, 0, (int) textHeight, Color.white, "Supported Resolutions:");
+		this.supportedResolutionsText = new StaticText(0, 0, (int) 15, Color.white, "Supported Resolutions:");
 
 		this.guiElements.add(this.supportedResolutionsText);
+
+		this.resolutions = new ClickableText[supportedResolutions.length];
+		for (int i = 0; i < this.resolutions.length; ++i) {
+			this.resolutions[i] = new ClickableText(0, 0, supportedResolutions[i][0] + " x " + supportedResolutions[i][1],
+					Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
+			this.clickables.add(this.resolutions[i]);
+			this.guiElements.add(this.resolutions[i]);
+		}
+
 		this.updateResolutionsPosition();
 
 	}
 
 	private void updateResolutionsPosition() {
+		float lines = this.resolutions.length + 1;
+		float textHeight = Gameplay.STANDARD_TEXT_SCALE;
+		textHeight = Math.min(textHeight, TowerDefense.getHeight() / lines);
 		float textWidth = this.supportedResolutionsText.getWidth();
 		float x = TowerDefense.getWidth() - textWidth;
 		float y = 0;
 		this.supportedResolutionsText.setPosition(x, y);
+		this.supportedResolutionsText.setHeight((int) textHeight);
+		for (ClickableText clickable : this.resolutions) {
+			y += textHeight;
+			clickable.setX((int) x);
+			clickable.setY((int) y);
+			clickable.setHeight((int) textHeight);
+
+		}
 	}
 
 	@Override
