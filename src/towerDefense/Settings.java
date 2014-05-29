@@ -73,17 +73,18 @@ public class Settings extends GameComponent {
 
 		this.warning = new StaticText(fieldsX, fieldsY, Color.red, "Please enter a number.");
 		this.warning.setVisible(false);
+		this.guiElements.add(this.warning);
 		fieldsX = 0;
 		fieldsY += this.widthField.getHeight();
 		this.fullscreen = new ClickableText(fieldsX, fieldsY, "Toggle fullscreen", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(),
 				false);
-		this.clickables.add(this.apply);
-		this.guiElements.add(this.apply);
+		this.clickables.add(this.fullscreen);
+		this.guiElements.add(this.fullscreen);
 
 		String resolutionText = new String();
 		Integer[][] supportedResolutions = new Integer[0][0];
 		try {
-			resolutionText = this.getSupportedDisplayModesString();
+			resolutionText = "Supported Resolutions:\n" + this.getSupportedDisplayModesString();
 			supportedResolutions = this.getSupportedDisplayModes();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
@@ -95,6 +96,7 @@ public class Settings extends GameComponent {
 		i = Math.min(i, TowerDefense.getHeight() / textHeight);
 
 		this.supportedResolutions = new StaticText(0, 0, Color.white, resolutionText);
+		this.guiElements.add(this.supportedResolutions);
 		float textWidth = this.supportedResolutions.getWidth();
 		float x = TowerDefense.getWidth() - textWidth;
 		float y = 0;
@@ -111,9 +113,9 @@ public class Settings extends GameComponent {
 		super.render(container, graphics);
 		this.widthField.render(container, graphics);
 		this.heightField.render(container, graphics);
-		this.warning.draw();
-		this.fullscreen.draw();
-		this.supportedResolutions.draw();
+		// this.warning.draw();
+		// this.fullscreen.draw();
+		// this.supportedResolutions.draw();
 	}
 
 	@Override
