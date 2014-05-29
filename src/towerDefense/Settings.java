@@ -114,7 +114,7 @@ public class Settings extends GameComponent {
 		float lines = this.resolutionClickables.length + 2;
 		int inbetween = 6;
 		float textHeight = Gameplay.STANDARD_TEXT_SCALE;
-		textHeight = Math.min(textHeight, (TowerDefense.getHeight() - lines - 1 * inbetween) / lines);
+		textHeight = Math.min(textHeight, (TowerDefense.getHeight() - ((lines - 1) * inbetween)) / lines);
 		float textWidth = this.supportedResolutionsText.getWidth();
 		float x = TowerDefense.getWidth() - textWidth;
 		float y = 0;
