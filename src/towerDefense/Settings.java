@@ -5,11 +5,13 @@ import java.awt.Font;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.TextField;
 
 import engine.GameComponent;
+import engine.gui.Clickable;
 import engine.gui.ClickableText;
 import engine.gui.GoToMenuButton;
 
@@ -50,6 +52,46 @@ public class Settings extends GameComponent {
 		super.render(container, graphics);
 		this.widthField.render(container, graphics);
 		this.heightField.render(container, graphics);
+	}
+
+	@Override
+	public void update(GameContainer container, int delta) {
+
+		Input input = container.getInput();
+		float x = input.getMouseX();
+		float y = input.getMouseY();
+		super.updateHovering(x, y);
+		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+			if (this.apply.collides((int) x, (int) y, 1f)) {
+				String newWidthString = this.widthField.getText();
+				String newHeightString = this.heightField.getText();
+				try {
+					int newWidth = Integer.parseInt(newWidthString);
+					int newHeight = Integer.parseInt(newHeightString);
+					System.out.println(newWidth + " " + newHeight);
+				} catch (NumberFormatException nfe) {
+					System.out.println("not a number");
+				}
+
+			}
+			this.mouseWasClicked = true;
+			for (Clickable clickable : this.clickables) {
+				clickable.update(x, y, container);
+			}
+
+		} else {
+			if (this.mouseWasClicked) {
+				this.mouseWasClicked = false;
+				for (Clickable clickable : this.clickables) {
+					if (!clickable.isStayClicked()) {
+						if (clickable.isClicked()) {
+							clickable.onRelease();
+						}
+					}
+				}
+			}
+		}
+
 	}
 
 	public void deactivate() {

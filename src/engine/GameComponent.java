@@ -17,7 +17,7 @@ public abstract class GameComponent {
 
 	protected List<GUI> guiElements;
 	protected List<Clickable> clickables;
-	private boolean mouseWasClicked;
+	protected boolean mouseWasClicked;
 
 	protected TowerDefense game;
 	private Clickable wasClicked;
@@ -50,13 +50,7 @@ public abstract class GameComponent {
 		Input input = container.getInput();
 		float x = input.getMouseX();
 		float y = input.getMouseY();
-		for (Clickable clickable : this.clickables) {
-			if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-				clickable.onHover();
-			} else {
-				clickable.onUnHover();
-			}
-		}
+		this.updateHovering(x, y);
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			this.mouseWasClicked = true;
 			for (Clickable clickable : this.clickables) {
@@ -73,6 +67,16 @@ public abstract class GameComponent {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	public void updateHovering(float x, float y) {
+		for (Clickable clickable : this.clickables) {
+			if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+				clickable.onHover();
+			} else {
+				clickable.onUnHover();
 			}
 		}
 	}
