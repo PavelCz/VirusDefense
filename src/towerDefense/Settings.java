@@ -2,7 +2,8 @@ package towerDefense;
 
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import org.lwjgl.LWJGLException;
@@ -79,22 +80,8 @@ public class Settings extends GameComponent {
 		this.clickables.add(this.apply);
 		this.guiElements.add(this.apply);
 
-		String supportedDisplayModes = new String();
 		try {
-			DisplayMode[] modes = Display.getAvailableDisplayModes();
-			List<String> modesList = new ArrayList<String>();
-			String currentMode = new String();
-			for (DisplayMode displayMode : modes) {
-				currentMode = displayMode.getWidth() + " x " + displayMode.getHeight();
-				if (!modesList.contains(currentMode)) {
-					modesList.add(currentMode);
-				}
-			}
-			Collections.sort(modesList);
-			for (String string : modesList) {
-				supportedDisplayModes += string + "\n";
-			}
-			System.out.println(supportedDisplayModes);
+			this.getSupportedDisplayModes();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -212,6 +199,61 @@ public class Settings extends GameComponent {
 		// this.heightField.setBorderColor(Color.gray);
 		// this.heightField.setBackgroundColor(Color.lightGray);
 		// this.heightField.setMaxLength(5);
+	}
+
+	private String getSupportedDisplayModes() throws LWJGLException {
+		String supportedDisplayModes = new String();
+
+		DisplayMode[] modes = Display.getAvailableDisplayModes();
+
+		List<int[]> resolutionsList = new ArrayList<int[]>();
+		// copies the resolutions int a List of arrays
+		for (DisplayMode displayMode : modes) {
+			int[] resolution = new int[2];
+			resolution[0] = displayMode.getWidth();
+			resolution[1] = displayMode.getHeight();
+			boolean contained = false;
+			for (int[] addedResolution : resolutionsList) {
+
+				if (resolution[0] == addedResolution[0] && resolution[1] == addedResolution[1]) {
+					contained = true;
+
+				}
+			}
+			if (!contained) {
+				resolutionsList.add(resolution);
+			}
+		}
+		// creates an Array from the List
+		Integer[][] resolutionsArray = new Integer[resolutionsList.size()][2];
+		for (int i = 0; i < resolutionsArray.length; ++i) {
+			resolutionsArray[i][0] = resolutionsList.get(i)[0];
+			resolutionsArray[i][1] = resolutionsList.get(i)[1];
+		}
+		// compares the first columns, if they are the same the second column
+		Arrays.sort(resolutionsArray, new Comparator<Integer[]>() {
+			@Override
+			public int compare(final Integer[] entry1, final Integer[] entry2) {
+				final Integer time1 = entry1[0];
+				final Integer time2 = entry2[0];
+				int comparison = time1.compareTo(time2);
+				if (comparison != 0) {
+					return time1.compareTo(time2) * -1;
+				} else {
+					return entry1[1].compareTo(entry2[1]) * -1;
+				}
+			}
+		});
+
+		// Collections.sort(modesList);
+		for (Integer[] resolution1 : resolutionsArray) {
+			supportedDisplayModes += resolution1[0] + " x " + resolution1[1] + "\n";
+		}
+
+		System.out.println(supportedDisplayModes);
+		return supportedDisplayModes;
+		// System.out.println(supportedDisplayModes);
+
 	}
 
 }
