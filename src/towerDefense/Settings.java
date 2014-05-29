@@ -50,13 +50,13 @@ public class Settings extends GameComponent {
 		this.heightField.setBorderColor(Color.gray);
 		this.heightField.setBackgroundColor(Color.lightGray);
 		this.heightField.setMaxLength(5);
-		fieldsX += fieldWidth;
+		fieldsX += fieldWidth + 5;
 
 		this.apply = new ClickableText(fieldsX, fieldsY, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
 		this.clickables.add(this.apply);
 		this.guiElements.add(this.apply);
 
-		fieldsX += this.apply.getWidth();
+		fieldsX += this.apply.getWidth() + 10;
 
 		this.warning = new StaticText(fieldsX, fieldsY, Color.red, "Please enter a number.");
 
