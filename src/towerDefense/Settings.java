@@ -2,6 +2,8 @@ package towerDefense;
 
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
@@ -80,7 +82,7 @@ public class Settings extends GameComponent {
 		String supportedDisplayModes = new String();
 		try {
 			DisplayMode[] modes = Display.getAvailableDisplayModes();
-			ArrayList<String> modesList = new ArrayList<String>();
+			List<String> modesList = new ArrayList<String>();
 			String currentMode = new String();
 			for (DisplayMode displayMode : modes) {
 				currentMode = displayMode.getWidth() + " x " + displayMode.getHeight();
@@ -88,7 +90,11 @@ public class Settings extends GameComponent {
 					modesList.add(currentMode);
 				}
 			}
-			System.out.println(modesList);
+			Collections.sort(modesList);
+			for (String string : modesList) {
+				supportedDisplayModes += string + "\n";
+			}
+			System.out.println(supportedDisplayModes);
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
