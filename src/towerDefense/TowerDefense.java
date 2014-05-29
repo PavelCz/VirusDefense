@@ -36,8 +36,7 @@ public class TowerDefense extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		this.initSounds();
-		TowerDefense.HEIGHT = container.getHeight();
-		TowerDefense.WIDTH = container.getWidth();
+		TowerDefense.updateDimensions(container);
 		this.gameplay = new Gameplay(this);
 		this.menu = new Menu(this);
 		this.menu.init(container);
@@ -108,6 +107,12 @@ public class TowerDefense extends BasicGame {
 
 	public static int getWidth() {
 		return TowerDefense.WIDTH;
+	}
+
+	public static void updateDimensions(GameContainer container) {
+
+		TowerDefense.HEIGHT = container.getHeight();
+		TowerDefense.WIDTH = container.getWidth();
 	}
 
 	public void setLevel(Level level) {

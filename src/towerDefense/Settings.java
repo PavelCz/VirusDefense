@@ -92,6 +92,7 @@ public class Settings extends GameComponent {
 						AppGameContainer gameContainer = (AppGameContainer) container;
 						try {
 							gameContainer.setDisplayMode(newWidth, newHeight, false);
+							TowerDefense.updateDimensions(container);
 							this.back.setX(0);
 							this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
 						} catch (SlickException e) {
