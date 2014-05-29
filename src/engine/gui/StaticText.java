@@ -30,9 +30,18 @@ public class StaticText extends GUI {
 
 	}
 
+	public float getWidth() {
+		return this.text.getWidth();
+	}
+
 	public void setText(String text) {
 		this.text.setText(text);
 		;
+	}
+
+	public void setPosition(float x, float y) {
+		this.x = x;
+		this.y = y;
 	}
 
 }

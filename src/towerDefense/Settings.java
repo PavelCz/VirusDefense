@@ -93,8 +93,15 @@ public class Settings extends GameComponent {
 
 		float i = Gameplay.GLOBAL_GUI_SCALE;
 		i = Math.min(i, TowerDefense.getHeight() / textHeight);
-		float textWidth = (supportedResolutions[0] + " x " + supportedResolutions[1]).length() * i;
-		this.supportedResolutions = new StaticText(TowerDefense.getWidth() - textWidth, 0, Color.white, resolutionText);
+
+		this.supportedResolutions = new StaticText(0, 0, Color.white, resolutionText);
+		float textWidth = this.supportedResolutions.getWidth();
+		float x = TowerDefense.getWidth() - textWidth;
+		float y = 0;
+		System.out.println(TowerDefense.getWidth());
+		System.out.println(x);
+		this.supportedResolutions.setPosition(x, y);
+
 		System.out.println(resolutionText);
 
 	}

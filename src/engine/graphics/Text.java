@@ -30,7 +30,8 @@ public class Text extends RenderObject {
 		if (this.visible) {
 			// this.font.drawString(x, y, this.text, this.color);
 			for (String line : this.text.split("\n")) {
-				this.font.drawString(x, y += this.font.getHeight(), line, this.color);
+				this.font.drawString(x, y, line, this.color);
+				y += this.font.getHeight();
 			}
 		}
 	}
@@ -40,7 +41,8 @@ public class Text extends RenderObject {
 	}
 
 	public int getWidth() {
-		return this.font.getWidth(this.text);
+
+		return this.font.getWidth(this.text.split("\n")[0]);
 	}
 
 	public int getHeight() {
