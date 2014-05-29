@@ -23,16 +23,17 @@ public class Settings extends GameComponent {
 	private TextField heightField;
 	private ClickableText apply;
 	private StaticText warning;
+	private GoToMenuButton back;
 
 	public Settings(TowerDefense game, GameContainer container) {
 		super(game);
 
-		GoToMenuButton settings = new GoToMenuButton(0, 0, "Back", this.game);
-		this.clickables.add(settings);
-		this.guiElements.add(settings);
+		this.back = new GoToMenuButton(0, 0, "Back", this.game);
+		this.clickables.add(this.back);
+		this.guiElements.add(this.back);
 
-		settings.setX(0);
-		settings.setY(TowerDefense.getHeight() - settings.getHeight() * 2);
+		this.back.setX(0);
+		this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
 
 		int fieldsX = 0;
 		int fieldsY = 100;
@@ -95,6 +96,8 @@ public class Settings extends GameComponent {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					this.back.setX(0);
+					this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
 
 				} catch (NumberFormatException nfe) {
 					this.warning.setVisible(true);
