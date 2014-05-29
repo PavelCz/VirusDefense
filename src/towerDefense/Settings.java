@@ -35,6 +35,7 @@ public class Settings extends GameComponent {
 	private StaticText supportedResolutionsText;
 	private ClickableText[] resolutionClickables;
 	private Integer[][] resolutions;
+	private final int minWidth = 600, minHeight = 480;
 
 	public Settings(TowerDefense game, GameContainer container) {
 		super(game);
@@ -217,7 +218,7 @@ public class Settings extends GameComponent {
 			int newWidth = Integer.parseInt(newWidthString);
 			int newHeight = Integer.parseInt(newHeightString);
 			this.warning.setVisible(false);
-			if (newWidth >= 640 && newHeight >= 480) {
+			if (newWidth >= this.minWidth && newHeight >= this.minHeight) {
 
 				try {
 					AppGameContainer gameContainer = (AppGameContainer) container;
@@ -234,7 +235,7 @@ public class Settings extends GameComponent {
 				}
 
 			} else {
-				this.warning.setText("Minimum is 640 x 480");
+				this.warning.setText("Minimum is " + this.minWidth + " x " + this.minHeight);
 				this.warning.setVisible(true);
 			}
 
