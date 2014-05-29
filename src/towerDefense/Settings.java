@@ -148,6 +148,12 @@ public class Settings extends GameComponent {
 				}
 			}
 		}
+		if (input.isKeyPressed(Input.KEY_TAB)) {
+			if (this.widthField.hasFocus()) {
+				this.widthField.setFocus(false);
+				this.heightField.setFocus(true);
+			}
+		}
 
 	}
 
