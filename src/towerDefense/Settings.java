@@ -88,19 +88,25 @@ public class Settings extends GameComponent {
 					int newWidth = Integer.parseInt(newWidthString);
 					int newHeight = Integer.parseInt(newHeightString);
 					this.warning.setVisible(false);
+					if (newWidth >= 800 && newHeight >= 600) {
+						AppGameContainer gameContainer = (AppGameContainer) container;
+						try {
+							gameContainer.setDisplayMode(newWidth, newHeight, false);
+							this.back.setX(0);
+							this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
+						} catch (SlickException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 
-					AppGameContainer gameContainer = (AppGameContainer) container;
-					try {
-						gameContainer.setDisplayMode(newWidth, newHeight, false);
-					} catch (SlickException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					} else {
+						this.warning.setText("Minimum is 800 x 600");
+						this.warning.setVisible(true);
 					}
-					this.back.setX(0);
-					this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
 
 				} catch (NumberFormatException nfe) {
-					this.warning.setVisible(true);
+					this.warning.setText("Please enter a number.");
+
 				}
 
 			}
