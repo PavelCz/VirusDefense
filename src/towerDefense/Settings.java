@@ -1,7 +1,11 @@
 package towerDefense;
 
 import java.awt.Font;
+import java.util.ArrayList;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -25,6 +29,7 @@ public class Settings extends GameComponent {
 	private StaticText warning;
 	private GoToMenuButton back;
 	private ClickableText fullscreen;
+	private StaticText supportedResolutions;
 
 	public Settings(TowerDefense game, GameContainer container) {
 		super(game);
@@ -45,6 +50,7 @@ public class Settings extends GameComponent {
 		this.widthField.setBorderColor(Color.gray);
 		this.widthField.setBackgroundColor(Color.lightGray);
 		this.widthField.setMaxLength(4);
+		this.widthField.setCursorPos(this.widthField.getWidth());
 		fieldsX += fieldWidth;
 
 		this.heightField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), fieldsX, fieldsY,
@@ -53,6 +59,7 @@ public class Settings extends GameComponent {
 		this.heightField.setBorderColor(Color.gray);
 		this.heightField.setBackgroundColor(Color.lightGray);
 		this.heightField.setMaxLength(4);
+		this.heightField.setCursorPos(this.heightField.getWidth());
 		fieldsX += fieldWidth + 5;
 
 		this.apply = new ClickableText(fieldsX, fieldsY, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
@@ -69,6 +76,23 @@ public class Settings extends GameComponent {
 				false);
 		this.clickables.add(this.apply);
 		this.guiElements.add(this.apply);
+
+		String supportedDisplayModes = new String();
+		try {
+			DisplayMode[] modes = Display.getAvailableDisplayModes();
+			ArrayList<String> modesList = new ArrayList<String>();
+			String currentMode = new String();
+			for (DisplayMode displayMode : modes) {
+				currentMode = displayMode.getWidth() + " x " + displayMode.getHeight();
+				if (!modesList.contains(currentMode)) {
+					modesList.add(currentMode);
+				}
+			}
+			System.out.println(modesList);
+		} catch (LWJGLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
