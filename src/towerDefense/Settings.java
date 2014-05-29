@@ -33,7 +33,8 @@ public class Settings extends GameComponent {
 	private GoToMenuButton back;
 	private ClickableText fullscreen;
 	private StaticText supportedResolutionsText;
-	private ClickableText[] resolutions;
+	private ClickableText[] resolutionClickables;
+	private Integer[][] resolutions;
 
 	public Settings(TowerDefense game, GameContainer container) {
 		super(game);
@@ -82,7 +83,6 @@ public class Settings extends GameComponent {
 		this.clickables.add(this.fullscreen);
 		this.guiElements.add(this.fullscreen);
 
-		String resolutionText = new String();
 		Integer[][] supportedResolutions = new Integer[0][0];
 		try {
 
@@ -91,18 +91,18 @@ public class Settings extends GameComponent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		float lines = supportedResolutions.length + 1;
-
-		this.supportedResolutionsText = new StaticText(0, 0, (int) 15, Color.white, "Supported Resolutions:");
+		this.supportedResolutionsText = new StaticText(0, 0, (int) 15, Color.white, "Supported Fullscreen\nResolutions:");
 
 		this.guiElements.add(this.supportedResolutionsText);
 
-		this.resolutions = new ClickableText[supportedResolutions.length];
-		for (int i = 0; i < this.resolutions.length; ++i) {
-			this.resolutions[i] = new ClickableText(0, 0, supportedResolutions[i][0] + " x " + supportedResolutions[i][1],
+		this.resolutionClickables = new ClickableText[supportedResolutions.length];
+		this.resolutions = supportedResolutions;
+		for (int i = 0; i < this.resolutionClickables.length; ++i) {
+			this.resolutionClickables[i] = new ClickableText(0, 0, supportedResolutions[i][0] + " x " + supportedResolutions[i][1],
 					Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
-			this.clickables.add(this.resolutions[i]);
-			this.guiElements.add(this.resolutions[i]);
+			this.clickables.add(this.resolutionClickables[i]);
+			this.guiElements.add(this.resolutionClickables[i]);
+
 		}
 
 		this.updateResolutionsPosition();
@@ -110,16 +110,18 @@ public class Settings extends GameComponent {
 	}
 
 	private void updateResolutionsPosition() {
-		float lines = this.resolutions.length + 1;
+		float lines = this.resolutionClickables.length + 2;
+		int inbetween = 6;
 		float textHeight = Gameplay.STANDARD_TEXT_SCALE;
-		textHeight = Math.min(textHeight, TowerDefense.getHeight() / lines);
+		textHeight = Math.min(textHeight, (TowerDefense.getHeight() - lines - 1 * inbetween) / lines);
 		float textWidth = this.supportedResolutionsText.getWidth();
 		float x = TowerDefense.getWidth() - textWidth;
 		float y = 0;
 		this.supportedResolutionsText.setPosition(x, y);
 		this.supportedResolutionsText.setHeight((int) textHeight);
-		for (ClickableText clickable : this.resolutions) {
-			y += textHeight;
+		y += textHeight + inbetween;
+		for (ClickableText clickable : this.resolutionClickables) {
+			y += textHeight + inbetween;
 			clickable.setX((int) x);
 			clickable.setY((int) y);
 			clickable.setHeight((int) textHeight);
@@ -151,6 +153,12 @@ public class Settings extends GameComponent {
 				this.updateFullscreenButton(container, delta);
 			}
 			this.mouseWasClicked = true;
+			for (int i = 0; i < this.resolutions.length; ++i) {
+				if (this.resolutionClickables[i].collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+					this.widthField.setText(this.resolutions[i][0].toString());
+					this.heightField.setText(this.resolutions[i][1].toString());
+				}
+			}
 			for (Clickable clickable : this.clickables) {
 				clickable.update(x, y, container);
 			}
