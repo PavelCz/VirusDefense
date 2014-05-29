@@ -80,12 +80,23 @@ public class Settings extends GameComponent {
 		this.clickables.add(this.apply);
 		this.guiElements.add(this.apply);
 
+		String resolutionText = new String();
+		Integer[][] supportedResolutions = new Integer[0][0];
 		try {
-			this.getSupportedDisplayModes();
+			resolutionText = this.getSupportedDisplayModesString();
+			supportedResolutions = this.getSupportedDisplayModes();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		float textHeight = supportedResolutions.length;
+
+		float i = Gameplay.GLOBAL_GUI_SCALE;
+		i = Math.min(i, TowerDefense.getHeight() / textHeight);
+		float textWidth = (supportedResolutions[0] + " x " + supportedResolutions[1]).length() * i;
+		this.supportedResolutions = new StaticText(TowerDefense.getWidth() - textWidth, 0, Color.white, resolutionText);
+		System.out.println(resolutionText);
+
 	}
 
 	@Override
@@ -95,6 +106,7 @@ public class Settings extends GameComponent {
 		this.heightField.render(container, graphics);
 		this.warning.draw();
 		this.fullscreen.draw();
+		this.supportedResolutions.draw();
 	}
 
 	@Override
@@ -201,9 +213,7 @@ public class Settings extends GameComponent {
 		// this.heightField.setMaxLength(5);
 	}
 
-	private String getSupportedDisplayModes() throws LWJGLException {
-		String supportedDisplayModes = new String();
-
+	private Integer[][] getSupportedDisplayModes() throws LWJGLException {
 		DisplayMode[] modes = Display.getAvailableDisplayModes();
 
 		List<int[]> resolutionsList = new ArrayList<int[]>();
@@ -244,14 +254,20 @@ public class Settings extends GameComponent {
 				}
 			}
 		});
+		return resolutionsArray;
 
-		// Collections.sort(modesList);
+	}
+
+	private String getSupportedDisplayModesString() throws LWJGLException {
+
+		String supportedDisplayModes = new String();
+
+		Integer[][] resolutionsArray = this.getSupportedDisplayModes();
 		for (Integer[] resolution1 : resolutionsArray) {
+
 			supportedDisplayModes += resolution1[0] + " x " + resolution1[1] + "\n";
 		}
 		return supportedDisplayModes;
 		// System.out.println(supportedDisplayModes);
-
 	}
-
 }

@@ -28,7 +28,10 @@ public class Text extends RenderObject {
 	@Override
 	public void draw(float x, float y, float globalScale) {
 		if (this.visible) {
-			this.font.drawString(x, y, this.text, this.color);
+			// this.font.drawString(x, y, this.text, this.color);
+			for (String line : this.text.split("\n")) {
+				this.font.drawString(x, y += this.font.getHeight(), line, this.color);
+			}
 		}
 	}
 
