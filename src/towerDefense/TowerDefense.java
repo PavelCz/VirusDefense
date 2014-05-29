@@ -1,5 +1,9 @@
 package towerDefense;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
 import org.lwjgl.openal.AL;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -167,4 +171,25 @@ public class TowerDefense extends BasicGame {
 		// this.menu.deactivate();
 	}
 
+	private static void writeSettingsToFile() {
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter("./src/data/files/settings.txt", "UTF-8");
+			writer.println(TowerDefense.getWidth());
+			writer.println(TowerDefense.getHeight());
+			if (TowerDefense.isFULLSCREEN()) {
+				writer.println(1);
+			} else {
+				writer.println(0);
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 }
