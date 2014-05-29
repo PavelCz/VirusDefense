@@ -253,14 +253,9 @@ public class Settings extends GameComponent {
 		Arrays.sort(resolutionsArray, new Comparator<Integer[]>() {
 			@Override
 			public int compare(final Integer[] entry1, final Integer[] entry2) {
-				final Integer time1 = entry1[0];
-				final Integer time2 = entry2[0];
-				int comparison = time1.compareTo(time2);
-				if (comparison != 0) {
-					return time1.compareTo(time2) * -1;
-				} else {
-					return entry1[1].compareTo(entry2[1]) * -1;
-				}
+				final Integer compare1 = entry1[1] * entry1[0];
+				final Integer compare2 = entry2[1] * entry2[0];
+				return compare1.compareTo(compare2) * -1;
 			}
 		});
 		return resolutionsArray;
