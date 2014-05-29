@@ -86,6 +86,7 @@ public class Settings extends GameComponent {
 					int newWidth = Integer.parseInt(newWidthString);
 					int newHeight = Integer.parseInt(newHeightString);
 					this.warning.setVisible(false);
+
 				} catch (NumberFormatException nfe) {
 					this.warning.setVisible(true);
 				}
