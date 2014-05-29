@@ -73,7 +73,7 @@ public class Gameplay extends GameComponent {
 	private InterfaceBackground interfaceBackground;
 	// Constants:
 	public static float INTERFACE_START_X;
-	public static int STANDARD_TEXT_SCALE;
+	public static int STANDARD_TEXT_SCALE = 15;
 	public static int SIZE;
 	public static int DEFAULT_SIZE = 64;
 	private float speed;
@@ -143,12 +143,10 @@ public class Gameplay extends GameComponent {
 		this.passedMilliseconds = 0;
 		this.mode = 0;
 		this.player = new Player(10, 200, 0);
-		STANDARD_TEXT_SCALE = 15;
 		this.speed = 1f;
 		this.currentTowerPlaceable = true;
 
 	}
-
 
 	private void initGUI() {
 		float guiTileSize = 64 * Gameplay.GLOBAL_GUI_SCALE;
@@ -640,7 +638,7 @@ public class Gameplay extends GameComponent {
 	}
 
 	public StaticText getScore() {
-		return score;
+		return this.score;
 	}
 
 	public void setScore(StaticText score) {

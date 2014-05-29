@@ -14,12 +14,14 @@ import engine.GameComponent;
 import engine.gui.Clickable;
 import engine.gui.ClickableText;
 import engine.gui.GoToMenuButton;
+import engine.gui.StaticText;
 
 public class Settings extends GameComponent {
 
 	private TextField widthField;
 	private TextField heightField;
 	private ClickableText apply;
+	private StaticText warning;
 
 	public Settings(TowerDefense game, GameContainer container) {
 		super(game);
@@ -31,20 +33,33 @@ public class Settings extends GameComponent {
 		settings.setX(0);
 		settings.setY(TowerDefense.getHeight() - settings.getHeight() * 2);
 
-		this.widthField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 100, 50, 25);
+		int fieldsX = 0;
+		int fieldsY = 100;
+		int fieldWidth = 50;
+		this.widthField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), fieldsX, fieldsY,
+				fieldWidth, 25);
 		this.widthField.setText(TowerDefense.getWidth() + "");
 		this.widthField.setBorderColor(Color.gray);
 		this.widthField.setBackgroundColor(Color.lightGray);
 		this.widthField.setMaxLength(5);
+		fieldsX += fieldWidth;
 
-		this.heightField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 50, 100, 50, 25);
+		this.heightField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), fieldsX, fieldsY,
+				fieldWidth, 25);
 		this.heightField.setText(TowerDefense.getHeight() + "");
 		this.heightField.setBorderColor(Color.gray);
 		this.heightField.setBackgroundColor(Color.lightGray);
 		this.heightField.setMaxLength(5);
-		this.apply = new ClickableText(100, 101, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
+		fieldsX += fieldWidth;
+
+		this.apply = new ClickableText(fieldsX, fieldsY, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
 		this.clickables.add(this.apply);
 		this.guiElements.add(this.apply);
+
+		fieldsX += this.apply.getWidth();
+
+		this.warning = new StaticText(fieldsX, fieldsY, Color.red, "Please enter a number.");
+
 	}
 
 	@Override
@@ -52,6 +67,7 @@ public class Settings extends GameComponent {
 		super.render(container, graphics);
 		this.widthField.render(container, graphics);
 		this.heightField.render(container, graphics);
+		this.warning.draw();
 	}
 
 	@Override

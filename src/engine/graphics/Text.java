@@ -11,6 +11,7 @@ public class Text extends RenderObject {
 	private String text;
 	private Color color;
 	private int height;
+	private boolean visible = true;
 
 	public Text(int height, String text, Color color, float globalScale) {
 		this.height = height;
@@ -26,8 +27,9 @@ public class Text extends RenderObject {
 
 	@Override
 	public void draw(float x, float y, float globalScale) {
-		this.font.drawString(x, y, this.text, this.color);
-
+		if (this.visible) {
+			this.font.drawString(x, y, this.text, this.color);
+		}
 	}
 
 	public void setColor(Color color) {
@@ -40,5 +42,10 @@ public class Text extends RenderObject {
 
 	public int getHeight() {
 		return this.font.getHeight();
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+
 	}
 }
