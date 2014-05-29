@@ -10,12 +10,14 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.TextField;
 
 import engine.GameComponent;
+import engine.gui.ClickableText;
 import engine.gui.GoToMenuButton;
 
 public class Settings extends GameComponent {
 
 	private TextField widthField;
 	private TextField heightField;
+	private ClickableText apply;
 
 	public Settings(TowerDefense game, GameContainer container) {
 		super(game);
@@ -23,6 +25,7 @@ public class Settings extends GameComponent {
 		GoToMenuButton settings = new GoToMenuButton(0, 0, "Back", this.game);
 		this.clickables.add(settings);
 		this.guiElements.add(settings);
+
 		settings.setX(0);
 		settings.setY(TowerDefense.getHeight() - settings.getHeight() * 2);
 
@@ -37,6 +40,9 @@ public class Settings extends GameComponent {
 		this.heightField.setBorderColor(Color.gray);
 		this.heightField.setBackgroundColor(Color.lightGray);
 		this.heightField.setMaxLength(5);
+		this.apply = new ClickableText(100, 101, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
+		this.clickables.add(this.apply);
+		this.guiElements.add(this.apply);
 	}
 
 	@Override
