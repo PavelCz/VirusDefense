@@ -127,62 +127,9 @@ public class Settings extends GameComponent {
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
 			if (this.apply.collides((int) x, (int) y, 1f)) {
-				this.widthField.setFocus(false);
-				this.heightField.setFocus(false);
-				String newWidthString = this.widthField.getText();
-				String newHeightString = this.heightField.getText();
-				try {
-					int newWidth = Integer.parseInt(newWidthString);
-					int newHeight = Integer.parseInt(newHeightString);
-					this.warning.setVisible(false);
-					if (newWidth >= 640 && newHeight >= 480) {
-
-						try {
-							AppGameContainer gameContainer = (AppGameContainer) container;
-							gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
-							TowerDefense.updateDimensions(container);
-							this.back.setX(0);
-							this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
-							this.game.reinitMenu(container);
-							this.game.reinitChooseLevel(container);
-							this.updateResolutionsPosition();
-						} catch (SlickException e) {
-							this.warning.setText("Not a supported fullscreen resolution.");
-							this.warning.setVisible(true);
-						}
-
-					} else {
-						this.warning.setText("Minimum is 640 x 480");
-						this.warning.setVisible(true);
-					}
-
-				} catch (NumberFormatException nfe) {
-					this.warning.setText("Please enter a number.");
-					this.warning.setVisible(true);
-				}
-
+				this.updateApplyButton(container, delta);
 			} else if (this.fullscreen.collides((int) x, (int) y, 1f)) {
-				this.widthField.setFocus(false);
-				this.heightField.setFocus(false);
-				if (TowerDefense.isFULLSCREEN()) {
-					try {
-						container.setFullscreen(false);
-						TowerDefense.setFULLSCREEN(false);
-					} catch (SlickException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-				} else {
-					try {
-						container.setFullscreen(true);
-						TowerDefense.setFULLSCREEN(true);
-						this.warning.setVisible(false);
-					} catch (SlickException e) {
-						this.warning.setText("Not a supported fullscreen resolution.");
-						this.warning.setVisible(true);
-					}
-				}
+				this.updateFullscreenButton(container, delta);
 			}
 			this.mouseWasClicked = true;
 			for (Clickable clickable : this.clickables) {
@@ -202,6 +149,66 @@ public class Settings extends GameComponent {
 			}
 		}
 
+	}
+
+	public void updateFullscreenButton(GameContainer container, int delta) {
+		this.widthField.setFocus(false);
+		this.heightField.setFocus(false);
+		if (TowerDefense.isFULLSCREEN()) {
+			try {
+				container.setFullscreen(false);
+				TowerDefense.setFULLSCREEN(false);
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			try {
+				container.setFullscreen(true);
+				TowerDefense.setFULLSCREEN(true);
+				this.warning.setVisible(false);
+			} catch (SlickException e) {
+				this.warning.setText("Not a supported fullscreen resolution.");
+				this.warning.setVisible(true);
+			}
+		}
+	}
+
+	public void updateApplyButton(GameContainer container, int delta) {
+		this.widthField.setFocus(false);
+		this.heightField.setFocus(false);
+		String newWidthString = this.widthField.getText();
+		String newHeightString = this.heightField.getText();
+		try {
+			int newWidth = Integer.parseInt(newWidthString);
+			int newHeight = Integer.parseInt(newHeightString);
+			this.warning.setVisible(false);
+			if (newWidth >= 640 && newHeight >= 480) {
+
+				try {
+					AppGameContainer gameContainer = (AppGameContainer) container;
+					gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
+					TowerDefense.updateDimensions(container);
+					this.back.setX(0);
+					this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
+					this.game.reinitMenu(container);
+					this.game.reinitChooseLevel(container);
+					this.updateResolutionsPosition();
+				} catch (SlickException e) {
+					this.warning.setText("Not a supported fullscreen resolution.");
+					this.warning.setVisible(true);
+				}
+
+			} else {
+				this.warning.setText("Minimum is 640 x 480");
+				this.warning.setVisible(true);
+			}
+
+		} catch (NumberFormatException nfe) {
+			this.warning.setText("Please enter a number.");
+			this.warning.setVisible(true);
+		}
 	}
 
 	public void deactivate() {
