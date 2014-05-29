@@ -99,15 +99,15 @@ public class Settings extends GameComponent {
 
 						try {
 							AppGameContainer gameContainer = (AppGameContainer) container;
-							gameContainer.setDisplayMode(newWidth, newHeight, false);
+							gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
 							TowerDefense.updateDimensions(container);
 							this.back.setX(0);
 							this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
 							this.game.reinitMenu(container);
 							this.game.reinitChooseLevel(container);
 						} catch (SlickException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							this.warning.setText("Not a supported fullscreen resolution.");
+							this.warning.setVisible(true);
 						}
 
 					} else {
@@ -117,7 +117,7 @@ public class Settings extends GameComponent {
 
 				} catch (NumberFormatException nfe) {
 					this.warning.setText("Please enter a number.");
-
+					this.warning.setVisible(true);
 				}
 
 			} else if (this.fullscreen.collides((int) x, (int) y, 1f)) {
@@ -134,8 +134,10 @@ public class Settings extends GameComponent {
 					try {
 						container.setFullscreen(true);
 						TowerDefense.setFULLSCREEN(true);
+						this.warning.setVisible(false);
 					} catch (SlickException e) {
-						System.out.println("not a supported fullscreen resolution");
+						this.warning.setText("Not a supported fullscreen resolution.");
+						this.warning.setVisible(true);
 					}
 				}
 			}
