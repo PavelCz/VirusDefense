@@ -138,6 +138,17 @@ public class TowerDefense extends BasicGame {
 		this.settings.deactivate();
 	}
 
+	public void reinitMenu(GameContainer container) {
+
+		this.menu = new Menu(this);
+		try {
+			this.menu.init(container);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public void deactivateMenu() {
 		// this.menu.deactivate();
 	}
