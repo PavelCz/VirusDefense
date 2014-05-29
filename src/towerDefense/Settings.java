@@ -113,6 +113,8 @@ public class Settings extends GameComponent {
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
 			if (this.apply.collides((int) x, (int) y, 1f)) {
+				this.widthField.setFocus(false);
+				this.heightField.setFocus(false);
 				String newWidthString = this.widthField.getText();
 				String newHeightString = this.heightField.getText();
 				try {
@@ -145,6 +147,8 @@ public class Settings extends GameComponent {
 				}
 
 			} else if (this.fullscreen.collides((int) x, (int) y, 1f)) {
+				this.widthField.setFocus(false);
+				this.heightField.setFocus(false);
 				if (TowerDefense.isFULLSCREEN()) {
 					try {
 						container.setFullscreen(false);
