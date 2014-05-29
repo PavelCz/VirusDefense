@@ -249,8 +249,6 @@ public class Settings extends GameComponent {
 		for (Integer[] resolution1 : resolutionsArray) {
 			supportedDisplayModes += resolution1[0] + " x " + resolution1[1] + "\n";
 		}
-
-		System.out.println(supportedDisplayModes);
 		return supportedDisplayModes;
 		// System.out.println(supportedDisplayModes);
 
