@@ -127,7 +127,7 @@ public class Settings extends GameComponent {
 					int newWidth = Integer.parseInt(newWidthString);
 					int newHeight = Integer.parseInt(newHeightString);
 					this.warning.setVisible(false);
-					if (newWidth >= 800 && newHeight >= 600) {
+					if (newWidth >= 640 && newHeight >= 480) {
 
 						try {
 							AppGameContainer gameContainer = (AppGameContainer) container;
@@ -143,7 +143,7 @@ public class Settings extends GameComponent {
 						}
 
 					} else {
-						this.warning.setText("Minimum is 800 x 600");
+						this.warning.setText("Minimum is 640 x 480");
 						this.warning.setVisible(true);
 					}
 
