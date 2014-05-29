@@ -32,7 +32,8 @@ public class Settings extends GameComponent {
 	private StaticText warning;
 	private GoToMenuButton back;
 	private ClickableText fullscreen;
-	private StaticText supportedResolutions;
+	private StaticText supportedResolutionsText;
+	private ClickableText[] resolutions;
 
 	public Settings(TowerDefense game, GameContainer container) {
 		super(game);
@@ -84,28 +85,29 @@ public class Settings extends GameComponent {
 		String resolutionText = new String();
 		Integer[][] supportedResolutions = new Integer[0][0];
 		try {
-			resolutionText = "Supported Resolutions:\n" + this.getSupportedDisplayModesString();
+
 			supportedResolutions = this.getSupportedDisplayModes();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		float textHeight = supportedResolutions.length;
+		float lines = supportedResolutions.length + 1;
 
-		float i = Gameplay.GLOBAL_GUI_SCALE;
-		i = Math.min(i, TowerDefense.getHeight() / textHeight);
+		float textHeight = Gameplay.GLOBAL_GUI_SCALE;
+		textHeight = Math.min(textHeight, TowerDefense.getHeight() / lines);
 
-		this.supportedResolutions = new StaticText(0, 0, Color.white, resolutionText);
-		this.guiElements.add(this.supportedResolutions);
+		this.supportedResolutionsText = new StaticText(0, 0, (int) textHeight, Color.white, "Supported Resolutions:");
+
+		this.guiElements.add(this.supportedResolutionsText);
 		this.updateResolutionsPosition();
 
 	}
 
 	private void updateResolutionsPosition() {
-		float textWidth = this.supportedResolutions.getWidth();
+		float textWidth = this.supportedResolutionsText.getWidth();
 		float x = TowerDefense.getWidth() - textWidth;
 		float y = 0;
-		this.supportedResolutions.setPosition(x, y);
+		this.supportedResolutionsText.setPosition(x, y);
 	}
 
 	@Override
