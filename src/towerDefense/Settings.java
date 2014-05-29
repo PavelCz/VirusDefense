@@ -97,15 +97,15 @@ public class Settings extends GameComponent {
 
 		this.supportedResolutions = new StaticText(0, 0, Color.white, resolutionText);
 		this.guiElements.add(this.supportedResolutions);
+		this.updateResolutionsPosition();
+
+	}
+
+	private void updateResolutionsPosition() {
 		float textWidth = this.supportedResolutions.getWidth();
 		float x = TowerDefense.getWidth() - textWidth;
 		float y = 0;
-		System.out.println(TowerDefense.getWidth());
-		System.out.println(x);
 		this.supportedResolutions.setPosition(x, y);
-
-		System.out.println(resolutionText);
-
 	}
 
 	@Override
@@ -145,6 +145,7 @@ public class Settings extends GameComponent {
 							this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
 							this.game.reinitMenu(container);
 							this.game.reinitChooseLevel(container);
+							this.updateResolutionsPosition();
 						} catch (SlickException e) {
 							this.warning.setText("Not a supported fullscreen resolution.");
 							this.warning.setVisible(true);
@@ -272,6 +273,5 @@ public class Settings extends GameComponent {
 			supportedDisplayModes += resolution1[0] + " x " + resolution1[1] + "\n";
 		}
 		return supportedDisplayModes;
-		// System.out.println(supportedDisplayModes);
 	}
 }
