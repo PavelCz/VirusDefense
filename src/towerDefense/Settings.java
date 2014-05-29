@@ -43,7 +43,7 @@ public class Settings extends GameComponent {
 		this.widthField.setText(TowerDefense.getWidth() + "");
 		this.widthField.setBorderColor(Color.gray);
 		this.widthField.setBackgroundColor(Color.lightGray);
-		this.widthField.setMaxLength(5);
+		this.widthField.setMaxLength(4);
 		fieldsX += fieldWidth;
 
 		this.heightField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), fieldsX, fieldsY,
@@ -51,7 +51,7 @@ public class Settings extends GameComponent {
 		this.heightField.setText(TowerDefense.getHeight() + "");
 		this.heightField.setBorderColor(Color.gray);
 		this.heightField.setBackgroundColor(Color.lightGray);
-		this.heightField.setMaxLength(5);
+		this.heightField.setMaxLength(4);
 		fieldsX += fieldWidth + 5;
 
 		this.apply = new ClickableText(fieldsX, fieldsY, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
@@ -75,7 +75,6 @@ public class Settings extends GameComponent {
 
 	@Override
 	public void update(GameContainer container, int delta) {
-
 		Input input = container.getInput();
 		float x = input.getMouseX();
 		float y = input.getMouseY();
