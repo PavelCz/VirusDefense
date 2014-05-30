@@ -198,10 +198,10 @@ public class Gameplay extends GameComponent {
 			projectiles.draw();
 		}
 		if (this.currentTower != null) {
-			this.currentTower.getSprite().draw(INTERFACE_START_X, 10, GLOBAL_GUI_SCALE);
+			this.currentTower.getSprite().draw(INTERFACE_START_X, 0, GLOBAL_GUI_SCALE);
 			this.towerName.setText(this.currentTower.getName());
-			this.towerInfo.setText("Radius: " + this.currentTower.getRadius() + "\nKosten: " + this.currentTower.getCost() + "\nSchaden: "
-					+ this.currentTower.getDamage());
+			this.towerInfo.setText("Radius: " + this.currentTower.getRadius() + "\nKosten: " + this.currentTower.getCost()
+					+ "\nSchaden: " + this.currentTower.getDamage());
 		} else {
 			this.towerInfo.setText("");
 			this.towerName.setText("");
