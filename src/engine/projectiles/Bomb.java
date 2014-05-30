@@ -32,7 +32,7 @@ public class Bomb extends Projectile implements Drawable {
 
 		float durationToTarget = distance / this.speed;
 		float frames = durationToTarget / 20; // the number of milliseconds before the next frame of the animation is used
-		this.animatedSprite = new AnimatedSprite(animation, 0.064f, (int) frames);
+		this.animatedSprite = new AnimatedSprite(animation, 0.25f, (int) frames);
 	}
 
 	@Override

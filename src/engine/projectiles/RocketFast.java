@@ -16,32 +16,33 @@ public class RocketFast extends Projectile implements Drawable {
 		this.game = game;
 		this.speed = 0.15f;
 		this.velocity = new MyVector2f(enemy.getX() - x, enemy.getY() - y);
-		this.velocity.setLength(speed);
-		this.renderObject = new Sprite("shoot/Frame0010.png", 0.05f);
+		this.velocity.setLength(this.speed);
+		this.renderObject = new Sprite("shoot/Frame0010.png", 0.25f);
 		this.enemy = enemy;
 	}
 
+	@Override
 	public void update(int delta) {
-		this.velocity = new MyVector2f(enemy.getX() - x, enemy.getY() - y);
-		this.velocity.setLength(speed);
-		this.x += velocity.getX() * delta;
-		this.y += velocity.getY() * delta;
+		this.velocity = new MyVector2f(this.enemy.getX() - this.x, this.enemy.getY() - this.y);
+		this.velocity.setLength(this.speed);
+		this.x += this.velocity.getX() * delta;
+		this.y += this.velocity.getY() * delta;
 
 		if (this.velocity.getX() >= 0 && this.velocity.getY() >= 0) {
-			if (this.x >= enemy.getX() || this.y >= enemy.getY()) {
-				fire();
+			if (this.x >= this.enemy.getX() || this.y >= this.enemy.getY()) {
+				this.fire();
 			}
 		} else if (this.velocity.getX() <= 0 && this.velocity.getY() <= 0) {
-			if (this.x <= enemy.getX() || this.y <= enemy.getY()) {
-				fire();
+			if (this.x <= this.enemy.getX() || this.y <= this.enemy.getY()) {
+				this.fire();
 			}
 		} else if (this.velocity.getX() >= 0 && this.velocity.getY() <= 0) {
-			if (this.x >= enemy.getX() || this.y <= enemy.getY()) {
-				fire();
+			if (this.x >= this.enemy.getX() || this.y <= this.enemy.getY()) {
+				this.fire();
 			}
 		} else if (this.velocity.getX() <= 0 && this.velocity.getY() >= 0) {
-			if (this.x <= enemy.getX() || this.y >= enemy.getY()) {
-				fire();
+			if (this.x <= this.enemy.getX() || this.y >= this.enemy.getY()) {
+				this.fire();
 			}
 		}
 
@@ -49,10 +50,10 @@ public class RocketFast extends Projectile implements Drawable {
 
 	public void fire() {
 
-		enemy.setHealth(enemy.getHealth() - this.damage);
-		if (enemy.getHealth() <= 0) {
-			this.game.getPlayer().addMoney(enemy.getMoney());
-			this.game.getPlayer().addScore(enemy.getMoney()*5);
+		this.enemy.setHealth(this.enemy.getHealth() - this.damage);
+		if (this.enemy.getHealth() <= 0) {
+			this.game.getPlayer().addMoney(this.enemy.getMoney());
+			this.game.getPlayer().addScore(this.enemy.getMoney() * 5);
 		}
 
 		this.game.getSoundHandler().play("explode");
