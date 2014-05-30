@@ -1,5 +1,6 @@
 package engine.graphics;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnimatedSprite extends RenderObject {
@@ -9,7 +10,7 @@ public class AnimatedSprite extends RenderObject {
 	private Sprite currentSprite;
 
 	public AnimatedSprite(String[] images, float scale, int speed) {
-
+		this.sprites = new ArrayList<Sprite>();
 		for (String string : images) {
 			this.sprites.add(new Sprite(string, scale));
 

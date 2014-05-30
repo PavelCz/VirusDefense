@@ -17,7 +17,7 @@ public class Rocket extends Projectile implements Drawable {
 		this.speed = 0.15f;
 		this.velocity = new MyVector2f(enemy.getX() - x, enemy.getY() - y);
 		this.velocity.setLength(speed);
-		this.sprite = new Sprite("shoot/Frame0010.png", 0.05f);
+		this.renderObject = new Sprite("shoot/Frame0010.png", 0.05f);
 		this.enemy = enemy;
 	}
 
