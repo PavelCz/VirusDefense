@@ -18,6 +18,7 @@ public class Bomb extends Projectile implements Drawable {
 		this.targetY = enemyY;
 		this.speed = 0.2f;
 		this.velocity = new MyVector2f(enemyX - x, enemyY - y);
+		float distance = this.velocity.getLength();
 		this.velocity.setLength(this.speed);
 		String[] animation = new String[20];
 		for (int i = 0; i <= 8;) {
@@ -28,7 +29,10 @@ public class Bomb extends Projectile implements Drawable {
 			animation[i] = "shoot/Frame00" + ++i + ".png";
 			System.out.println(animation[i - 1]);
 		}
-		this.animatedSprite = new AnimatedSprite(animation, 0.064f, 100);
+
+		float durationToTarget = distance / this.speed;
+		float frames = durationToTarget / 20; // the number of milliseconds before the next frame of the animation is used
+		this.animatedSprite = new AnimatedSprite(animation, 0.064f, (int) frames);
 	}
 
 	@Override
