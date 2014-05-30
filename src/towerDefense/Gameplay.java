@@ -128,7 +128,7 @@ public class Gameplay extends GameComponent {
 				"buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 0.5f), this, 200, 15f, 50), this);
 		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE,
 				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0, 0, new Sprite(
-						"tower/roteBlutk_klein.png", 1f), this, 1000, 20f), this);
+						"tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
@@ -199,10 +199,10 @@ public class Gameplay extends GameComponent {
 		}
 		if (this.currentTower != null) {
 			this.currentTower.getSprite().draw(INTERFACE_START_X, 10, GLOBAL_GUI_SCALE);
-			this.towerName.setText(currentTower.getName());
-			this.towerInfo.setText("Radius: " + currentTower.getRadius() + "\nKosten: " + currentTower.getCost() + "\nSchaden: "
-					+ currentTower.getDamage());
-		}else{
+			this.towerName.setText(this.currentTower.getName());
+			this.towerInfo.setText("Radius: " + this.currentTower.getRadius() + "\nKosten: " + this.currentTower.getCost() + "\nSchaden: "
+					+ this.currentTower.getDamage());
+		} else {
 			this.towerInfo.setText("");
 			this.towerName.setText("");
 		}
