@@ -9,20 +9,23 @@ import engine.graphics.Sprite;
 public abstract class Tower extends Entity implements Drawable {
 	private int cost;
 	protected int radius;
+	protected String name;
 	protected float damage;
 	protected Gameplay game;
 	protected Sprite sprite;
 	protected boolean building = true;
 	protected int buildingTimer = 150;
 	protected final float buildingTime = buildingTimer;
+	protected float shootingInterval;
 
-	public Tower(float x, float y, int cost, int radius, float damage, Gameplay game) {
+	public Tower(float x, float y, int cost, int radius, float damage, Gameplay game, float shootingInterval) {
 		super(x, y);
 
 		this.cost = cost;
 		this.radius = radius;
 		this.damage = damage;
 		this.game = game;
+		this.shootingInterval=shootingInterval;
 
 	}
 
@@ -35,7 +38,7 @@ public abstract class Tower extends Entity implements Drawable {
 				this.building = false;
 			}
 		}
-		
+
 	}
 
 	protected boolean inRange(Enemy enemy) {
@@ -99,6 +102,13 @@ public abstract class Tower extends Entity implements Drawable {
 
 	public void setY(float y) {
 		this.y = y;
+	}
+
+	public String getName() {
+		return name;
+	}
+	public float getDamage() {
+		return damage;
 	}
 
 	@Override

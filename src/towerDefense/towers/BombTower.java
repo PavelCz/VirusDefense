@@ -13,11 +13,12 @@ public class BombTower extends Tower {
 	private boolean wobble = true;
 
 	public BombTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage, int bombRadius) {
-		super(x, y, 100, 150, damage, game);
+		super(x, y, 100, 150, damage, game, shootingInterval);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
 		this.delta = this.shootingInterval;
 		this.bombRadius = bombRadius;
+		this.name = "Bomb Tower";
 	}
 
 	@Override

@@ -6,14 +6,14 @@ import engine.graphics.Sprite;
 
 public class ShootingTower extends Tower {
 	protected int delta;
-	protected final int shootingInterval;
+	
 
-	public ShootingTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage) {
-		super(x, y, 100, 128, damage, game);
+	public ShootingTower(float x, float y, Sprite sprite, Gameplay game, float shootingInterval, float damage) {
+		super(x, y, 100, 128, damage, game,shootingInterval);
 
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
-		this.delta = this.shootingInterval;
+		this.delta = (int) this.shootingInterval;
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class ShootingTower extends Tower {
 		super.update(delta);
 		this.delta -= delta;
 		if (this.delta <= 0) {
-			this.delta = this.shootingInterval;
+			this.delta = (int)this.shootingInterval;
 			this.shoot();
 		}
 	}
