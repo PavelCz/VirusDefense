@@ -37,4 +37,9 @@ public class AnimatedSprite extends RenderObject {
 		this.currentSprite.draw(x, y, globalScale);
 
 	}
+
+	public Sprite getCurrentSprite() {
+		return this.currentSprite;
+	}
+
 }
