@@ -318,6 +318,7 @@ public class Gameplay extends GameComponent {
 
 				this.currentLevel.getWaveHandler().update(delta);
 			}
+			this.updateTowerShadow(container);
 			this.mouseEvents(container, delta);
 			this.keyboardEvents(container, delta);
 
@@ -325,7 +326,7 @@ public class Gameplay extends GameComponent {
 				this.mode = -1;
 
 			}
-			this.updateTowerShadow(container);
+			
 
 			for (Projectile projectiles : this.projectiles) {
 				projectiles.update(delta);
