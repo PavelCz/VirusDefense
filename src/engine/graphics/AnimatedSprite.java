@@ -5,6 +5,7 @@ import java.util.List;
 
 public class AnimatedSprite extends RenderObject {
 	private List<Sprite> sprites;
+	private int startSpeed;
 	private int speed;
 	private int index;
 	private Sprite currentSprite;
@@ -15,6 +16,7 @@ public class AnimatedSprite extends RenderObject {
 			this.sprites.add(new Sprite(string, scale));
 
 		}
+		this.startSpeed = speed;
 		this.speed = speed;
 		this.index = 0;
 		this.currentSprite = this.sprites.get(0);
@@ -26,6 +28,7 @@ public class AnimatedSprite extends RenderObject {
 			this.index += 1;
 			this.index %= this.sprites.size();
 			this.currentSprite = this.sprites.get(this.index);
+			this.speed = this.startSpeed;
 		}
 	}
 
