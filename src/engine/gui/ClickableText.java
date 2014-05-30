@@ -46,4 +46,24 @@ public class ClickableText extends Clickable {
 		this.text.setColor(Color.white);
 
 	}
+
+	public int getWidth() {
+		return this.text.getWidth();
+	}
+
+	public int getHeight() {
+		return this.text.getHeight();
+	}
+
+	public void setHeight(int height) {
+		this.text.setHeight(height);
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
 }

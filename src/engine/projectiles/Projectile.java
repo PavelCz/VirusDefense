@@ -23,9 +23,9 @@ public abstract class Projectile extends Entity {
 	public abstract void update(int delta);
 
 	public void draw() {
-		this.sprite.draw((this.x - Gameplay.DEFAULT_SIZE / 2 - Gameplay.getCameraX()) * Gameplay.CURRENT_GAME_SCALE, (this.y
-				- Gameplay.DEFAULT_SIZE / 2 - Gameplay.getCameraY())
-				* Gameplay.CURRENT_GAME_SCALE, Gameplay.CURRENT_GAME_SCALE);
+		this.sprite.draw((this.x - Gameplay.DEFAULT_SIZE / 2 ) * Gameplay.CURRENT_GAME_SCALE- Gameplay.getCameraX(), (this.y
+				- Gameplay.DEFAULT_SIZE / 2 )
+				* Gameplay.CURRENT_GAME_SCALE- Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
 	}
 
 }

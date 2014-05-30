@@ -20,15 +20,32 @@ public class StaticText extends GUI {
 
 	}
 
+	public void setVisible(boolean visible) {
+		this.text.setVisible(visible);
+	}
+
 	@Override
 	public void draw() {
 		this.text.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE);
 
 	}
 
+	public float getWidth() {
+		return this.text.getWidth();
+	}
+
+	public void setHeight(int height) {
+		this.text.setHeight(height);
+	}
+
 	public void setText(String text) {
 		this.text.setText(text);
 		;
+	}
+
+	public void setPosition(float x, float y) {
+		this.x = x;
+		this.y = y;
 	}
 
 }
