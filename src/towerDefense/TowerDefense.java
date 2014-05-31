@@ -25,6 +25,7 @@ public class TowerDefense extends BasicGame {
 	public static final int MODE_GAME = 1;
 	public static final int MODE_MAPS = 2;
 	public static final int MODE_SETTINGS = 3;
+	public static final int MODE_SCORES = 4;
 	public static boolean FULLSCREEN = false;
 	private static int HEIGHT;
 	private static int WIDTH;
@@ -34,6 +35,8 @@ public class TowerDefense extends BasicGame {
 	private ChooseLevel maps;
 	private Settings settings;
 	private GameComponent currentGameComponent;
+	private Scores scores;
+
 	private boolean quitGame = false;
 
 	private int mode;
@@ -52,6 +55,7 @@ public class TowerDefense extends BasicGame {
 		this.settings = new Settings(this, container);
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
+		this.scores = new Scores(this);
 	}
 
 	private void initSounds() {
@@ -86,6 +90,8 @@ public class TowerDefense extends BasicGame {
 				// this.menu.activate(container);
 			}
 			this.currentGameComponent = this.menu;
+		} else if (this.mode == TowerDefense.MODE_SCORES) {
+			this.currentGameComponent = this.scores;
 		}
 		this.currentGameComponent.update(container, delta);
 
