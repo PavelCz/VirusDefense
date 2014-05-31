@@ -145,7 +145,7 @@ public class Gameplay extends GameComponent {
 		this.debugMode = false;
 		this.passedMilliseconds = 0;
 		this.mode = 0;
-		this.player = new Player(10, 200, 0);
+		this.player = new Player("Dummy", 10, 200, 0);
 		this.speed = 1f;
 		this.currentTowerPlaceable = true;
 
@@ -339,7 +339,9 @@ public class Gameplay extends GameComponent {
 			this.keyboardEvents(container, delta);
 
 			if (this.player.getLives() <= 0) {
-				this.mode = -1;
+				this.game.setMode(TowerDefense.MODE_MENU);
+				TowerDefense.writeScoreToFile(this.game.getGameplay().getPlayer().getName(), this.game.getGameplay().getPlayer()
+						.getScore());
 
 			}
 
