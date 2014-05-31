@@ -61,8 +61,10 @@ public abstract class GameComponent {
 			this.mouseWasClicked = false;
 			for (Clickable clickable : this.clickables) {
 				if (!clickable.isStayClicked()) {
-					if (clickable.isClicked()) {
+					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
 						clickable.onRelease();
+					} else if (clickable.isClicked()) {
+						clickable.setClicked(false);
 					}
 				}
 			}

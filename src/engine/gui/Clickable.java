@@ -30,6 +30,10 @@ public abstract class Clickable extends GUI {
 
 	}
 
+	public void setClicked(boolean clicked) {
+		this.clicked = clicked;
+	}
+
 	public void onClick() {
 		this.clicked = true;
 	}

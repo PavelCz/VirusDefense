@@ -72,10 +72,11 @@ public class ChooseLevel extends GameComponent {
 
 	private void mouseEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
+		float x = input.getMouseX();
+		float y = input.getMouseY();
+		super.updateHovering(x, y);
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			this.mouseWasClicked = true;
-			float x = input.getMouseX();
-			float y = input.getMouseY();
 
 			for (Clickable clickable : this.clickables) {
 				clickable.update(x, y, container);
@@ -107,11 +108,12 @@ public class ChooseLevel extends GameComponent {
 			this.mouseWasClicked = false;
 			for (Clickable clickable : this.clickables) {
 				if (!clickable.isStayClicked()) {
-					if (clickable.isClicked()) {
+					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
 						clickable.onRelease();
+					} else if (clickable.isClicked()) {
+						clickable.setClicked(false);
 					}
 				}
-
 			}
 		}
 	}
