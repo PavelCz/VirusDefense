@@ -222,8 +222,8 @@ public class TowerDefense extends BasicGame {
 		PrintWriter writer;
 		try {
 			writer = new PrintWriter("./src/data/files/score.txt", "UTF-8");
-			for (String[] strings : scores) {
-				writer.println(strings[0] + ", " + strings[1]);
+			for (int i = 0; i < 10; ++i) {
+				writer.println(scores[i][0] + ", " + scores[i][1]);
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {

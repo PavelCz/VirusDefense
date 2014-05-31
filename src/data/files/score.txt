@@ -6,4 +6,5 @@ Pavrzel, 800
 pav, 700
 pav, 700
 pav, 700
-Dummy, 0
+Dummy, 100
+yolobert, 0
