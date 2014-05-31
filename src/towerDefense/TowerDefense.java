@@ -3,6 +3,8 @@ package towerDefense;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import org.lwjgl.openal.AL;
@@ -199,7 +201,7 @@ public class TowerDefense extends BasicGame {
 		List<String> savedScores = TextFileToString.getLines("score.txt");
 		String[][] scores = new String[savedScores.size() + 1][2];
 		for (int i = 0; i < savedScores.size(); ++i) {
-			String[] separateStrings = savedScores.get(0).split(", ");
+			String[] separateStrings = savedScores.get(i).split(", ");
 			scores[i][0] = separateStrings[0];
 			scores[i][1] = separateStrings[1];
 		}
@@ -207,15 +209,21 @@ public class TowerDefense extends BasicGame {
 		scores[savedScores.size()][0] = name;
 		scores[savedScores.size()][1] = new Integer(score).toString();
 
+		// converts the String in the second column to ints and then sorts them by that int value
+		Arrays.sort(scores, new Comparator<String[]>() {
+			@Override
+			public int compare(final String[] entry1, final String[] entry2) {
+				final Integer compare1 = Integer.parseInt(entry1[1]);
+				final Integer compare2 = Integer.parseInt(entry2[1]);
+				return compare1.compareTo(compare2) * -1;
+			}
+		});
+
 		PrintWriter writer;
 		try {
 			writer = new PrintWriter("./src/data/files/score.txt", "UTF-8");
-			writer.println(TowerDefense.getWidth());
-			writer.println(TowerDefense.getHeight());
-			if (TowerDefense.isFULLSCREEN()) {
-				writer.println(1);
-			} else {
-				writer.println(0);
+			for (String[] strings : scores) {
+				writer.println(strings[0] + ", " + strings[1]);
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {
