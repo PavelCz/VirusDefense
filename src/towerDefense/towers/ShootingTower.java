@@ -6,14 +6,14 @@ import engine.graphics.Sprite;
 
 public class ShootingTower extends Tower {
 	protected int delta;
-	protected final int shootingInterval;
+	
 
-	public ShootingTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage) {
-		super(x, y, 100, 128, damage, game);
+	public ShootingTower(float x, float y, Sprite sprite, Gameplay game, float shootingInterval, float damage) {
+		super(x, y, 100, 128, damage, game,shootingInterval);
 
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
-		this.delta = this.shootingInterval;
+		this.delta = (int) this.shootingInterval;
 	}
 
 	@Override
@@ -26,9 +26,9 @@ public class ShootingTower extends Tower {
 		if (this.building) {
 			float scale = (this.buildingTime - this.buildingTimer) / buildingTime;
 			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
-			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size - Gameplay.getCameraX()) * Gameplay.CURRENT_GAME_SCALE, (this.y
-					* Gameplay.DEFAULT_SIZE + size - Gameplay.getCameraY())
-					* Gameplay.CURRENT_GAME_SCALE, Gameplay.CURRENT_GAME_SCALE * scale);
+			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (this.y
+					* Gameplay.DEFAULT_SIZE + size)
+					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE * scale);
 		} else {
 			this.sprite.draw(this.x * Gameplay.SIZE - Gameplay.getCameraX(), this.y * Gameplay.SIZE - Gameplay.getCameraY(),
 					Gameplay.CURRENT_GAME_SCALE);
@@ -40,7 +40,7 @@ public class ShootingTower extends Tower {
 		super.update(delta);
 		this.delta -= delta;
 		if (this.delta <= 0) {
-			this.delta = this.shootingInterval;
+			this.delta = (int)this.shootingInterval;
 			this.shoot();
 		}
 	}
@@ -61,7 +61,7 @@ public class ShootingTower extends Tower {
 					enemy.setHealth(enemy.getHealth() - this.damage);
 					if (enemy.getHealth() <= 0) {
 						this.game.getPlayer().addMoney(enemy.getMoney());
-						this.game.getPlayer().addScore(enemy.getMoney()*5);
+						this.game.getPlayer().addScore(enemy.getMoney() * 5);
 					}
 					done = true;
 					this.game.getSoundHandler().play("shotT1");

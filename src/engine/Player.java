@@ -4,8 +4,10 @@ public class Player {
 	private int lives;
 	private int money;
 	private int score;
+	private String name;
 
-	public Player(int lives, int money, int score) {
+	public Player(String name, int lives, int money, int score) {
+		this.name = name;
 		this.lives = lives;
 		this.money = money;
 		this.score = score;
@@ -36,7 +38,7 @@ public class Player {
 	}
 
 	public int getScore() {
-		return score;
+		return this.score;
 	}
 
 	public void setScore(int score) {
@@ -45,6 +47,15 @@ public class Player {
 
 	public void addScore(int score) {
 		this.score += score;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String playerName) {
+		this.name = playerName;
+
 	}
 
 }

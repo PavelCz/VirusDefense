@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import towerDefense.Gameplay;
+import towerDefense.TowerDefense;
 
 public class WaveHandler {
 	private LinkedList<Wave> waves;
@@ -34,11 +35,11 @@ public class WaveHandler {
 		String[] parts = s.split(", ");
 		numberEnemies = parts.length - 1;
 		int[] ints = new int[numberEnemies];
-		for (int j = 0; j < ints.length; ++j) {
-			ints[j] = Integer.parseInt(parts[j + 1]);
-		}
-		this.addWave(new Wave(Integer.parseInt(parts[0]), ints));
-		++i;
+		// for (int j = 0; j < ints.length; ++j) {
+		// ints[j] = Integer.parseInt(parts[j + 1]);
+		// }
+		// this.addWave(new Wave(Integer.parseInt(parts[0]), ints));
+		// ++i;
 
 		for (; i < lines.size(); ++i) {
 			s = lines.get(i);
@@ -46,6 +47,7 @@ public class WaveHandler {
 			ints = new int[numberEnemies];
 			for (int j = 0; j < ints.length; ++j) {
 				ints[j] = Integer.parseInt(parts[j + 1]);
+
 			}
 			this.addWave(new Wave(Integer.parseInt(parts[0]), ints));
 
@@ -71,8 +73,12 @@ public class WaveHandler {
 
 	public void update(int delta) {
 		this.delta -= delta;
+		// the player defeated all the waves
 		if (this.waves.isEmpty() && this.done) {
-			this.game.setMode(1);
+			TowerDefense.writeScoreToFile(this.game.game.getGameplay().getPlayer().getName(), this.game.game.getGameplay().getPlayer()
+					.getScore());
+			this.game.game.resetScores();
+			this.game.game.setMode(TowerDefense.MODE_MENU);
 		}
 		if (this.game.getEnemies().isEmpty() && this.index <= 0) {
 

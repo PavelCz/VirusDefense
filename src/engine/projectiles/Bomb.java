@@ -4,9 +4,10 @@ import towerDefense.Gameplay;
 import engine.Drawable;
 import engine.Enemy;
 import engine.MyVector2f;
-import engine.graphics.Sprite;
+import engine.graphics.AnimatedSprite;
 
 public class Bomb extends Projectile implements Drawable {
+	private AnimatedSprite animatedSprite;
 
 	public Bomb(float x, float y, int bombRadius, float damage, Gameplay game, float enemyX, float enemyY) {
 		super(x, y);
@@ -17,8 +18,21 @@ public class Bomb extends Projectile implements Drawable {
 		this.targetY = enemyY;
 		this.speed = 0.2f;
 		this.velocity = new MyVector2f(enemyX - x, enemyY - y);
+		float distance = this.velocity.getLength();
 		this.velocity.setLength(this.speed);
-		this.sprite = new Sprite("shoot/Frame0001.png", 0.064f);
+		String[] animation = new String[20];
+		for (int i = 0; i <= 8;) {
+			animation[i] = "shoot/Frame000" + ++i + ".png";
+			System.out.println(animation[i - 1]);
+		}
+		for (int i = 9; i <= 19;) {
+			animation[i] = "shoot/Frame00" + ++i + ".png";
+			System.out.println(animation[i - 1]);
+		}
+
+		float durationToTarget = distance / this.speed;
+		float frames = durationToTarget / 20; // the number of milliseconds before the next frame of the animation is used
+		this.animatedSprite = new AnimatedSprite(animation, 0.25f, (int) frames);
 	}
 
 	@Override
@@ -43,7 +57,15 @@ public class Bomb extends Projectile implements Drawable {
 				this.fire();
 			}
 		}
+		this.animatedSprite.updateAnimation(delta);
 
+	}
+
+	@Override
+	public void draw() {
+		this.animatedSprite.draw((this.x - this.animatedSprite.getCurrentSprite().getWidth() / 2) * Gameplay.CURRENT_GAME_SCALE
+				- Gameplay.getCameraX(), (this.y - this.animatedSprite.getCurrentSprite().getWidth() / 2)
+				* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
 	}
 
 	public void fire() {
@@ -59,7 +81,7 @@ public class Bomb extends Projectile implements Drawable {
 				bombedEnemy.setHealth(bombedEnemy.getHealth() - this.damage);
 				if (bombedEnemy.getHealth() <= 0) {
 					this.game.getPlayer().addMoney(bombedEnemy.getMoney());
-					this.game.getPlayer().addScore(bombedEnemy.getMoney()*5);
+					this.game.getPlayer().addScore(bombedEnemy.getMoney() * 5);
 				}
 			}
 		}

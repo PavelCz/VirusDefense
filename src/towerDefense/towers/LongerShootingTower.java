@@ -8,10 +8,11 @@ public class LongerShootingTower extends ShootingTower {
 	private final int shootingDuration;
 	private Enemy currentlyAttacking = null;
 
-	public LongerShootingTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage, int shootingDuration) {
+	public LongerShootingTower(float x, float y, Sprite sprite, Gameplay game, float shootingInterval, float damage, int shootingDuration) {
 		super(x, y, sprite, game, shootingInterval, damage);
 		this.shootingDuration = shootingDuration;
 		this.delta = 0;
+		this.name = "Shooting Tower";
 	}
 
 	@Override
@@ -28,7 +29,7 @@ public class LongerShootingTower extends ShootingTower {
 			this.shootAt(this.currentlyAttacking);
 			if (this.currentlyAttacking.getHealth() <= 0) {
 				this.currentlyAttacking = null;
-				this.delta = this.shootingInterval;
+				this.delta = (int)this.shootingInterval;
 			}
 		}
 
@@ -41,7 +42,7 @@ public class LongerShootingTower extends ShootingTower {
 					this.game.getSoundHandler().play("shotT1");
 				} else {
 					this.currentlyAttacking = null;
-					this.delta = this.shootingInterval;
+					this.delta = (int)this.shootingInterval;
 				}
 			}
 		}

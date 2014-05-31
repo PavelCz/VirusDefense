@@ -58,9 +58,12 @@ public class Gameplay extends GameComponent {
 	private TowerButton towerButton4;
 	private Tower currentTower;
 	private Player player;
+	private StaticText playerName;
 	private StaticText numberLives;
 	private StaticText moneyAmount;
 	private StaticText score;
+	private StaticText towerInfo;
+	private StaticText towerName;
 	private boolean currentTowerPlaceable;
 	private int towerShadowX, towerShadowY;
 	protected ConcurrentLinkedQueue<Projectile> projectiles;
@@ -73,7 +76,7 @@ public class Gameplay extends GameComponent {
 	private InterfaceBackground interfaceBackground;
 	// Constants:
 	public static float INTERFACE_START_X;
-	public static int STANDARD_TEXT_SCALE;
+	public static int STANDARD_TEXT_SCALE = 15;
 	public static int SIZE;
 	public static int DEFAULT_SIZE = 64;
 	private float speed;
@@ -83,6 +86,7 @@ public class Gameplay extends GameComponent {
 	//
 	public Gameplay(TowerDefense game) {
 		super(game);
+		;
 
 	}
 
@@ -91,7 +95,8 @@ public class Gameplay extends GameComponent {
 		super.init(container);
 		this.initDefaults();
 		Gameplay.camera = new Camera(0, 0, this);
-		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png", DEFAULT_SIZE);
+		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png",
+		// DEFAULT_SIZE);
 		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
 		this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
@@ -114,18 +119,20 @@ public class Gameplay extends GameComponent {
 		// entities
 
 		this.projectiles = new ConcurrentLinkedQueue<Projectile>();
-
+		int offset = 20;
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
-				"buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new Sprite("tower/Tower2.png", 0.5f), this, 400, 0.16f,
-						400), this);
-		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
-				"buttons/PSButton1_click.png", new BombTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this, 1500, 15f, 50), this);
-		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE, "buttons/PSButton1.png",
-				"buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 0.5f), this, 200, 15f, 50), this);
-		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE,
+		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new Sprite("tower/Tower2.png",
+						0.5f), this, 400, 0.16f, 400), this);
+		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this,
+						1500, 15f, 50), this);
+		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 0.5f), this,
+						200, 15f, 50), this);
+		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
 				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0, 0, new Sprite(
-						"tower/roteBlutk_klein.png", 1f), this, 1000, 20f), this);
+						"tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
@@ -142,45 +149,69 @@ public class Gameplay extends GameComponent {
 		this.debugMode = false;
 		this.passedMilliseconds = 0;
 		this.mode = 0;
-		this.player = new Player(10, 200, 0);
-		STANDARD_TEXT_SCALE = 15;
+		this.player = new Player("Player1", 10, 200, 0);
 		this.speed = 1f;
 		this.currentTowerPlaceable = true;
 
 	}
 
-
 	private void initGUI() {
+		this.guiElements.add(this.interfaceBackground);
 		float guiTileSize = 64 * Gameplay.GLOBAL_GUI_SCALE;
 		float textHeight = 20 * Gameplay.GLOBAL_GUI_SCALE;
 		float guiX = 3 * Gameplay.GLOBAL_GUI_SCALE;
-		float livesY = 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
-		float moneyY = livesY + textHeight;
-		float scoreY = moneyY + textHeight;
-		this.numberLives = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, livesY, Color.white, "" + this.player.getLives());
+
+		float cursorXStart = Gameplay.INTERFACE_START_X + guiX;
+		float cursorYStart = 3 * guiTileSize;
+		float cursorX = cursorXStart;
+		float cursorY = cursorYStart;
+
+		this.playerName = new StaticText(cursorX, cursorY, Color.white, "Player: " + this.player.getName());
+		this.guiElements.add(this.playerName);
+		cursorY += textHeight;
+
+		StaticText livesText = new StaticText(cursorX, cursorY, Color.white, "Lives: ");
+		this.guiElements.add(livesText);
+		cursorX += livesText.getWidth();
+		this.numberLives = new StaticText(cursorX, cursorY, Color.white, "" + this.player.getLives());
+		this.guiElements.add(this.numberLives);
+		cursorX = cursorXStart;
+		cursorY += textHeight;
+
+		StaticText moneyText = new StaticText(cursorX, cursorY, Color.white, "Money: ");
+		this.guiElements.add(moneyText);
+		cursorX += moneyText.getWidth();
+		this.moneyAmount = new StaticText(cursorX, cursorY, Color.white, "" + this.player.getMoney());
+		this.guiElements.add(this.moneyAmount);
+		cursorX = cursorXStart;
+		cursorY += textHeight;
+
+		StaticText scoreText = new StaticText(cursorX, cursorY, Color.white, "Score: ");
+		this.guiElements.add(scoreText);
+		cursorX += scoreText.getWidth();
+		this.score = new StaticText(cursorX, cursorY, Color.white, "" + this.player.getScore());
+		this.guiElements.add(this.score);
+
+		this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, 10, Color.white, "");
+		this.towerInfo = new StaticText(Gameplay.INTERFACE_START_X, guiTileSize, Color.white, "");
+
 		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, TowerDefense.getHeight() - textHeight, Color.white,
 				this.passedTimeToString());
-		this.moneyAmount = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize + textHeight, moneyY, Color.white, ""
-				+ this.player.getMoney());
-		this.score = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize + textHeight, scoreY, Color.white, ""
-				+ this.player.getScore());
 
-		this.guiElements.add(this.interfaceBackground);
-		this.guiElements.add(this.numberLives);
 		this.guiElements.add(this.towerButton1);
 		this.guiElements.add(this.towerButton2);
 		this.guiElements.add(this.towerButton3);
 		this.guiElements.add(this.towerButton4);
-		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, livesY, Color.white, "Lives:"));
+
 		this.guiElements.add(this.passedTime);
-		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, moneyY, Color.white, "Money:"));
-		this.guiElements.add(this.moneyAmount);
-		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, scoreY, Color.white, "Score:"));
-		this.guiElements.add(this.score);
+
+		this.guiElements.add(this.towerName);
+		this.guiElements.add(this.towerInfo);
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		super.render(container, graphics);
 		this.drawBackground();
 		this.currentLevel.renderPath();
 		this.renderEnemies();
@@ -191,6 +222,15 @@ public class Gameplay extends GameComponent {
 
 		for (Projectile projectiles : this.projectiles) {
 			projectiles.draw();
+		}
+		if (this.currentTower != null) {
+			this.currentTower.getSprite().draw(INTERFACE_START_X, 0, GLOBAL_GUI_SCALE);
+			this.towerName.setText(this.currentTower.getName());
+			this.towerInfo.setText("Radius: " + this.currentTower.getRadius() + "\nKosten: " + this.currentTower.getCost()
+					+ "\nSchaden: " + this.currentTower.getDamage());
+		} else {
+			this.towerInfo.setText("");
+			this.towerName.setText("");
 		}
 
 	}
@@ -320,14 +360,16 @@ public class Gameplay extends GameComponent {
 
 				this.currentLevel.getWaveHandler().update(delta);
 			}
+			this.updateTowerShadow(container);
 			this.mouseEvents(container, delta);
 			this.keyboardEvents(container, delta);
 
 			if (this.player.getLives() <= 0) {
-				this.mode = -1;
-
+				TowerDefense.writeScoreToFile(this.game.getGameplay().getPlayer().getName(), this.game.getGameplay().getPlayer()
+						.getScore());
+				this.game.resetScores();
+				this.game.setMode(TowerDefense.MODE_MENU);
 			}
-			this.updateTowerShadow(container);
 
 			for (Projectile projectiles : this.projectiles) {
 				projectiles.update(delta);
@@ -339,9 +381,12 @@ public class Gameplay extends GameComponent {
 	private void updateTowerShadow(GameContainer container) {
 		if (this.currentTower != null && this.getMode() == 0) {
 			Input input = container.getInput();
-			// old version of shadow Coordinates, with pixel accurate coordinates
-			// this.towerShadowX = (int) (input.getMouseX() - this.currentTower.getSprite().getWidth() / 2);
-			// this.towerShadowY = (int) (input.getMouseY() - this.currentTower.getSprite().getHeight() / 2);
+			// old version of shadow Coordinates, with pixel accurate
+			// coordinates
+			// this.towerShadowX = (int) (input.getMouseX() -
+			// this.currentTower.getSprite().getWidth() / 2);
+			// this.towerShadowY = (int) (input.getMouseY() -
+			// this.currentTower.getSprite().getHeight() / 2);
 			int x = input.getMouseX() + Gameplay.getCameraX();
 			int y = input.getMouseY() + Gameplay.getCameraY();
 			int newX = (x) / Gameplay.SIZE;
@@ -415,6 +460,14 @@ public class Gameplay extends GameComponent {
 				Gameplay.CURRENT_GAME_SCALE = Gameplay.MAX_GAME_SCALE;
 			}
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
+		}
+		float cameraWidth = Gameplay.INTERFACE_START_X;
+		if (Gameplay.getCameraX() < 0) {
+			Gameplay.camera.setX(0);
+		} else if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.getHorizontalTiles()
+				* Gameplay.DEFAULT_SIZE) {
+			Gameplay.camera.setX((this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraWidth);
+
 		}
 
 		float scrollSpeed = 0.5f;
@@ -640,10 +693,15 @@ public class Gameplay extends GameComponent {
 	}
 
 	public StaticText getScore() {
-		return score;
+		return this.score;
 	}
 
 	public void setScore(StaticText score) {
 		this.score = score;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.player.setName(playerName);
+		this.playerName.setText("Player: " + this.player.getName());
 	}
 }
