@@ -58,6 +58,7 @@ public class Gameplay extends GameComponent {
 	private TowerButton towerButton4;
 	private Tower currentTower;
 	private Player player;
+	private StaticText playerName;
 	private StaticText numberLives;
 	private StaticText moneyAmount;
 	private StaticText score;
@@ -79,7 +80,6 @@ public class Gameplay extends GameComponent {
 	public static int SIZE;
 	public static int DEFAULT_SIZE = 64;
 	private float speed;
-	private String playerName;
 
 	// Tests:
 
@@ -147,7 +147,7 @@ public class Gameplay extends GameComponent {
 		this.debugMode = false;
 		this.passedMilliseconds = 0;
 		this.mode = 0;
-		this.player = new Player(this.playerName, 10, 200, 0);
+		this.player = new Player("Player1", 10, 200, 0);
 		this.speed = 1f;
 		this.currentTowerPlaceable = true;
 
@@ -163,6 +163,10 @@ public class Gameplay extends GameComponent {
 		float cursorYStart = 3 * guiTileSize;
 		float cursorX = cursorXStart;
 		float cursorY = cursorYStart;
+
+		this.playerName = new StaticText(cursorX, cursorY, Color.white, "Player: " + this.player.getName());
+		this.guiElements.add(this.playerName);
+		cursorY += textHeight;
 
 		StaticText livesText = new StaticText(cursorX, cursorY, Color.white, "Lives: ");
 		this.guiElements.add(livesText);
@@ -695,6 +699,7 @@ public class Gameplay extends GameComponent {
 	}
 
 	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
+		this.player.setName(playerName);
+		this.playerName.setText("Player: " + this.player.getName());
 	}
 }
