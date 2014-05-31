@@ -148,18 +148,8 @@ public class Settings extends GameComponent {
 		super.updateHovering(x, y);
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
-			if (this.apply.collides((int) x, (int) y, 1f)) {
-				this.updateApplyButton(container, delta);
-			} else if (this.fullscreen.collides((int) x, (int) y, 1f)) {
-				this.updateFullscreenButton(container, delta);
-			}
 			this.mouseWasClicked = true;
-			for (int i = 0; i < this.resolutions.length; ++i) {
-				if (this.resolutionClickables[i].collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-					this.widthField.setText(this.resolutions[i][0].toString());
-					this.heightField.setText(this.resolutions[i][1].toString());
-				}
-			}
+
 			for (Clickable clickable : this.clickables) {
 				clickable.update(x, y, container);
 			}
@@ -168,8 +158,22 @@ public class Settings extends GameComponent {
 			this.mouseWasClicked = false;
 			for (Clickable clickable : this.clickables) {
 				if (!clickable.isStayClicked()) {
-					if (clickable.isClicked()) {
+					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
 						clickable.onRelease();
+						if (clickable == this.apply) {
+							this.updateApplyButton(container, delta);
+						} else if (clickable == this.fullscreen) {
+							this.updateFullscreenButton(container, delta);
+						}
+						for (int i = 0; i < this.resolutions.length; ++i) {
+							if (this.resolutionClickables[i] == clickable) {
+								this.widthField.setText(this.resolutions[i][0].toString());
+								this.heightField.setText(this.resolutions[i][1].toString());
+							}
+						}
+
+					} else if (clickable.isClicked()) {
+						clickable.setClicked(false);
 					}
 				}
 

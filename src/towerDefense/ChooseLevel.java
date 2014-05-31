@@ -68,6 +68,7 @@ public class ChooseLevel extends GameComponent {
 
 		this.mouseEvents(container, delta);
 		this.button.setUnclickedButton(this.currentLevel.getPreviewPicture());
+		this.button.setClickedButton(this.currentLevel.getPreviewPicture());
 	}
 
 	private void mouseEvents(GameContainer container, int delta) {
@@ -80,28 +81,6 @@ public class ChooseLevel extends GameComponent {
 
 			for (Clickable clickable : this.clickables) {
 				clickable.update(x, y, container);
-				if (clickable.collides((int) x, (int) y, 1f)) {
-					if (clickable == this.left) {
-						--this.page;
-						if (this.page < 0) {
-							this.page = this.lastPage;
-						}
-						this.currentLevel = this.levelHandler.get(this.page);
-						this.currentLevel = this.levelHandler.get(this.page);
-					} else if (clickable == this.right) {
-						this.page += 1;
-						if (this.page > this.lastPage) {
-							this.page = 0;
-						}
-						this.currentLevel = this.levelHandler.get(this.page);
-					} else if (clickable == this.button) {
-						this.game.setLevel(this.currentLevel);
-						this.game.initGameplay(container);
-						this.game.getGameplay().setPlayerName(this.game.getPlayerName());
-						this.game.setMode(TowerDefense.MODE_GAME);
-					}
-
-				}
 			}
 
 		} else if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
@@ -110,6 +89,25 @@ public class ChooseLevel extends GameComponent {
 				if (!clickable.isStayClicked()) {
 					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
 						clickable.onRelease();
+						if (clickable == this.left) {
+							--this.page;
+							if (this.page < 0) {
+								this.page = this.lastPage;
+							}
+							this.currentLevel = this.levelHandler.get(this.page);
+							this.currentLevel = this.levelHandler.get(this.page);
+						} else if (clickable == this.right) {
+							this.page += 1;
+							if (this.page > this.lastPage) {
+								this.page = 0;
+							}
+							this.currentLevel = this.levelHandler.get(this.page);
+						} else if (clickable == this.button) {
+							this.game.setLevel(this.currentLevel);
+							this.game.initGameplay(container);
+							this.game.getGameplay().setPlayerName(this.game.getPlayerName());
+							this.game.setMode(TowerDefense.MODE_GAME);
+						}
 					} else if (clickable.isClicked()) {
 						clickable.setClicked(false);
 					}
