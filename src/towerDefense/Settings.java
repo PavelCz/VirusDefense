@@ -232,6 +232,7 @@ public class Settings extends GameComponent {
 					this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
 					this.game.reinitMenu(container);
 					this.game.reinitChooseLevel(container);
+					this.game.reinitComponents(gameContainer);
 					this.updateResolutionsPosition();
 				} catch (SlickException e) {
 					this.warning.setText("Not a supported fullscreen resolution.");
