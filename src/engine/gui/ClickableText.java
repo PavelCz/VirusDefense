@@ -51,6 +51,10 @@ public class ClickableText extends Clickable {
 		return this.text.getWidth(line);
 	}
 
+	public int getWidth() {
+		return this.text.getWidth();
+	}
+
 	public int getTextHeight() {
 		return this.text.getTextHeight();
 	}

@@ -40,6 +40,19 @@ public class Text extends RenderObject {
 		this.color = color;
 	}
 
+	public int getWidth() {
+		String[] lines = this.text.split("\n");
+		int maxWidth = 0;
+		for (int i = 0; i < lines.length; ++i) {
+			int currentWidth = this.getWidth(i);
+			if (maxWidth < currentWidth) {
+				maxWidth = currentWidth;
+			}
+		}
+		return maxWidth;
+
+	}
+
 	public int getWidth(int line) {
 		String[] lines = this.text.split("\n");
 		return this.font.getWidth(lines[line]);
