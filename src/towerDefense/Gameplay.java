@@ -154,40 +154,58 @@ public class Gameplay extends GameComponent {
 	}
 
 	private void initGUI() {
+		this.guiElements.add(this.interfaceBackground);
 		float guiTileSize = 64 * Gameplay.GLOBAL_GUI_SCALE;
 		float textHeight = 20 * Gameplay.GLOBAL_GUI_SCALE;
 		float guiX = 3 * Gameplay.GLOBAL_GUI_SCALE;
-		float livesY = 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
-		float moneyY = livesY + textHeight;
-		float scoreY = moneyY + textHeight;
-		this.numberLives = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, livesY, Color.white, "" + this.player.getLives());
-		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, TowerDefense.getHeight() - textHeight, Color.white,
-				this.passedTimeToString());
-		this.moneyAmount = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize + textHeight, moneyY, Color.white, ""
-				+ this.player.getMoney());
-		this.score = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize + textHeight, scoreY, Color.white, ""
-				+ this.player.getScore());
+
+		float cursorXStart = Gameplay.INTERFACE_START_X + guiX;
+		float cursorYStart = 3 * guiTileSize;
+		float cursorX = cursorXStart;
+		float cursorY = cursorYStart;
+
+		StaticText livesText = new StaticText(cursorX, cursorY, Color.white, "Lives: ");
+		this.guiElements.add(livesText);
+		cursorX += livesText.getWidth();
+		this.numberLives = new StaticText(cursorX, cursorY, Color.white, "" + this.player.getLives());
+		this.guiElements.add(this.numberLives);
+		cursorX = cursorXStart;
+		cursorY += textHeight;
+
+		StaticText moneyText = new StaticText(cursorX, cursorY, Color.white, "Money: ");
+		this.guiElements.add(moneyText);
+		cursorX += moneyText.getWidth();
+		this.moneyAmount = new StaticText(cursorX, cursorY, Color.white, "" + this.player.getMoney());
+		this.guiElements.add(this.moneyAmount);
+		cursorX = cursorXStart;
+		cursorY += textHeight;
+
+		StaticText scoreText = new StaticText(cursorX, cursorY, Color.white, "Score: ");
+		this.guiElements.add(scoreText);
+		cursorX += scoreText.getWidth();
+		this.score = new StaticText(cursorX, cursorY, Color.white, "" + this.player.getScore());
+		this.guiElements.add(this.score);
+
 		this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, 10, Color.white, "");
 		this.towerInfo = new StaticText(Gameplay.INTERFACE_START_X, guiTileSize, Color.white, "");
 
-		this.guiElements.add(this.interfaceBackground);
-		this.guiElements.add(this.numberLives);
+		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, TowerDefense.getHeight() - textHeight, Color.white,
+				this.passedTimeToString());
+
 		this.guiElements.add(this.towerButton1);
 		this.guiElements.add(this.towerButton2);
 		this.guiElements.add(this.towerButton3);
 		this.guiElements.add(this.towerButton4);
-		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, livesY, Color.white, "Lives:"));
+
 		this.guiElements.add(this.passedTime);
-		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, moneyY, Color.white, "Money:"));
-		this.guiElements.add(this.moneyAmount);
-		this.guiElements.add(new StaticText(Gameplay.INTERFACE_START_X + guiX, scoreY, Color.white, "Score:"));
-		this.guiElements.add(this.score);
+
 		this.guiElements.add(this.towerName);
 		this.guiElements.add(this.towerInfo);
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		super.render(container, graphics);
 		this.drawBackground();
 		this.currentLevel.renderPath();
 		this.renderEnemies();
