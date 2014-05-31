@@ -19,7 +19,7 @@ import engine.gui.StaticText;
 
 public class Menu extends GameComponent {
 	private TextField t;
-	private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.4");
+	private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.5");
 
 	public Menu(TowerDefense game) {
 		super(game);
