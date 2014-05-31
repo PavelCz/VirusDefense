@@ -240,4 +240,15 @@ public class TowerDefense extends BasicGame {
 			e.printStackTrace();
 		}
 	}
+
+	public void reinitComponents(GameContainer container) {
+		TowerDefense.updateDimensions(container);
+		this.gameplay = new Gameplay(this);
+		this.reinitMenu(container);
+		this.reinitChooseLevel(container);
+		this.settings = new Settings(this, container);
+		this.mode = TowerDefense.MODE_MENU;
+		this.currentGameComponent = this.menu;
+		this.scores = new Scores(this);
+	}
 }
