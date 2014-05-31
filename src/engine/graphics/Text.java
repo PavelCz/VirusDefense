@@ -45,7 +45,7 @@ public class Text extends RenderObject {
 		return this.font.getWidth(this.text.split("\n")[0]);
 	}
 
-	public int getHeight() {
+	public int getTextHeight() {
 		return this.font.getHeight();
 	}
 

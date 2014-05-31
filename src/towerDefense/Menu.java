@@ -28,24 +28,24 @@ public class Menu extends GameComponent {
 		StartClickable c = new StartClickable(0, 0, this.game);
 		this.clickables.add(c);
 		this.guiElements.add(c);
-		int y = TowerDefense.getHeight() / 2 - c.getHeight();
+		int y = TowerDefense.getHeight() / 2 - c.getTextHeight();
 		c.setX(TowerDefense.getWidth() / 2 - c.getWidth() / 2);
 		c.setY(y);
-		y += c.getHeight() + 1;
+		y += c.getTextHeight() + 1;
 
 		GoToSettingsButton settings = new GoToSettingsButton(0, 0, "Settings", this.game);
 		this.clickables.add(settings);
 		this.guiElements.add(settings);
 		settings.setX(TowerDefense.getWidth() / 2 - settings.getWidth() / 2);
 		settings.setY(y);
-		y += c.getHeight() + 1;
+		y += c.getTextHeight() + 1;
 
 		GoToScoreButton scores = new GoToScoreButton(0, 0, "Highscores", this.game);
 		this.clickables.add(scores);
 		this.guiElements.add(scores);
 		scores.setX(TowerDefense.getWidth() / 2 - scores.getWidth() / 2);
 		scores.setY(y);
-		y += c.getHeight() + 1;
+		y += c.getTextHeight() + 1;
 
 		ExitClickable e = new ExitClickable(100, 121, this.game);
 		this.clickables.add(e);

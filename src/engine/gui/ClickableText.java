@@ -12,7 +12,7 @@ public class ClickableText extends Clickable {
 		super(x, y, game, stayClicked);
 		this.text = new Text(15, text, Color.white, globalScale);
 		this.collisionWidth = this.text.getWidth();
-		this.collisionHeight = this.text.getHeight();
+		this.collisionHeight = this.text.getTextHeight();
 	}
 
 	@Override
@@ -51,8 +51,8 @@ public class ClickableText extends Clickable {
 		return this.text.getWidth();
 	}
 
-	public int getHeight() {
-		return this.text.getHeight();
+	public int getTextHeight() {
+		return this.text.getTextHeight();
 	}
 
 	public void setHeight(int height) {
