@@ -79,12 +79,14 @@ public class Gameplay extends GameComponent {
 	public static int SIZE;
 	public static int DEFAULT_SIZE = 64;
 	private float speed;
+	private String playerName;
 
 	// Tests:
 
 	//
 	public Gameplay(TowerDefense game) {
 		super(game);
+		;
 
 	}
 
@@ -145,7 +147,7 @@ public class Gameplay extends GameComponent {
 		this.debugMode = false;
 		this.passedMilliseconds = 0;
 		this.mode = 0;
-		this.player = new Player("Dummy", 10, 200, 0);
+		this.player = new Player(this.playerName, 10, 200, 0);
 		this.speed = 1f;
 		this.currentTowerPlaceable = true;
 
@@ -672,5 +674,9 @@ public class Gameplay extends GameComponent {
 
 	public void setScore(StaticText score) {
 		this.score = score;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
 	}
 }
