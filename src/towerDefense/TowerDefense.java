@@ -3,6 +3,7 @@ package towerDefense;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import org.lwjgl.openal.AL;
 import org.newdawn.slick.BasicGame;
@@ -13,6 +14,7 @@ import org.newdawn.slick.SlickException;
 import engine.GameComponent;
 import engine.Level;
 import engine.SoundHandler;
+import engine.TextFileToString;
 
 public class TowerDefense extends BasicGame {
 
@@ -191,5 +193,37 @@ public class TowerDefense extends BasicGame {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static void writeScoreToFile(String name, int score) {
+		List<String> savedScores = TextFileToString.getLines("score.txt");
+		String[][] scores = new String[savedScores.size() + 1][2];
+		for (int i = 0; i < savedScores.size(); ++i) {
+			String[] separateStrings = savedScores.get(0).split(", ");
+			scores[i][0] = separateStrings[0];
+			scores[i][1] = separateStrings[1];
+		}
+
+		scores[savedScores.size()][0] = name;
+		scores[savedScores.size()][1] = new Integer(score).toString();
+
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter("./src/data/files/score.txt", "UTF-8");
+			writer.println(TowerDefense.getWidth());
+			writer.println(TowerDefense.getHeight());
+			if (TowerDefense.isFULLSCREEN()) {
+				writer.println(1);
+			} else {
+				writer.println(0);
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
