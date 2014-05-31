@@ -42,7 +42,7 @@ public class TowerDefense extends BasicGame {
 	private int mode;
 
 	public TowerDefense() {
-		super("Tower Defense");
+		super("Virus Defense");
 	}
 
 	@Override
