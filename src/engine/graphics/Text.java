@@ -49,6 +49,10 @@ public class Text extends RenderObject {
 		return this.font.getHeight();
 	}
 
+	public int getActualHeight() {
+		return this.font.getHeight() * this.text.split("\n").length;
+	}
+
 	public void setHeight(int height) {
 		this.height = height;
 		this.fontSettings = new Font("Verdana", Font.PLAIN, (int) (this.height * Gameplay.GLOBAL_GUI_SCALE));

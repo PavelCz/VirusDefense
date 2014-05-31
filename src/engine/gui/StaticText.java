@@ -38,6 +38,10 @@ public class StaticText extends GUI {
 		return this.text.getTextHeight();
 	}
 
+	public int getActualHeight() {
+		return this.text.getActualHeight();
+	}
+
 	public void setHeight(int height) {
 		this.text.setHeight(height);
 	}
