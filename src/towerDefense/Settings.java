@@ -164,16 +164,15 @@ public class Settings extends GameComponent {
 				clickable.update(x, y, container);
 			}
 
-		} else {
-			if (this.mouseWasClicked) {
-				this.mouseWasClicked = false;
-				for (Clickable clickable : this.clickables) {
-					if (!clickable.isStayClicked()) {
-						if (clickable.isClicked()) {
-							clickable.onRelease();
-						}
+		} else if (this.mouseWasClicked) {
+			this.mouseWasClicked = false;
+			for (Clickable clickable : this.clickables) {
+				if (!clickable.isStayClicked()) {
+					if (clickable.isClicked()) {
+						clickable.onRelease();
 					}
 				}
+
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_TAB)) {

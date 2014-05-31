@@ -2,6 +2,7 @@ package towerDefense;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 
 import engine.GameComponent;
 import engine.Level;
@@ -9,6 +10,7 @@ import engine.LevelHandler;
 import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.Clickable;
+import engine.gui.GoToMenuButton;
 
 public class ChooseLevel extends GameComponent {
 
@@ -44,6 +46,12 @@ public class ChooseLevel extends GameComponent {
 		this.left = new Button(leftX, leftY, leftSprite, leftSprite, game.getGameplay(), false);
 		this.right = new Button(rightX, rightY, rightSprite, rightSprite, game.getGameplay(), false);
 
+		GoToMenuButton back = new GoToMenuButton(0, 0, "Back", this.game);
+		back.setX(0);
+		back.setY(TowerDefense.getHeight() - back.getTextHeight() * 2);
+		this.clickables.add(back);
+		this.guiElements.add(back);
+
 		this.clickables.add(this.button);
 		this.clickables.add(this.left);
 		this.clickables.add(this.right);
@@ -56,7 +64,8 @@ public class ChooseLevel extends GameComponent {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta) {
+	public void update(GameContainer container, int delta) throws SlickException {
+
 		this.mouseEvents(container, delta);
 		this.button.setUnclickedButton(this.currentLevel.getPreviewPicture());
 	}
@@ -64,11 +73,12 @@ public class ChooseLevel extends GameComponent {
 	private void mouseEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
+			this.mouseWasClicked = true;
 			float x = input.getMouseX();
 			float y = input.getMouseY();
 
 			for (Clickable clickable : this.clickables) {
+				clickable.update(x, y, container);
 				if (clickable.collides((int) x, (int) y, 1f)) {
 					if (clickable == this.left) {
 						--this.page;
@@ -93,6 +103,16 @@ public class ChooseLevel extends GameComponent {
 				}
 			}
 
+		} else if (this.mouseWasClicked) {
+			this.mouseWasClicked = false;
+			for (Clickable clickable : this.clickables) {
+				if (!clickable.isStayClicked()) {
+					if (clickable.isClicked()) {
+						clickable.onRelease();
+					}
+				}
+
+			}
 		}
 	}
 
