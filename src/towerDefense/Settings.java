@@ -295,7 +295,7 @@ public class Settings extends GameComponent {
 			resolutionsArray[i][0] = resolutionsList.get(i)[0];
 			resolutionsArray[i][1] = resolutionsList.get(i)[1];
 		}
-		// compares the first columns, if they are the same the second column
+		// sorts by the screen area
 		Arrays.sort(resolutionsArray, new Comparator<Integer[]>() {
 			@Override
 			public int compare(final Integer[] entry1, final Integer[] entry2) {
