@@ -3,6 +3,9 @@ package towerDefense;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 import org.lwjgl.openal.AL;
 import org.newdawn.slick.BasicGame;
@@ -13,6 +16,7 @@ import org.newdawn.slick.SlickException;
 import engine.GameComponent;
 import engine.Level;
 import engine.SoundHandler;
+import engine.TextFileToString;
 
 public class TowerDefense extends BasicGame {
 
@@ -191,5 +195,43 @@ public class TowerDefense extends BasicGame {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static void writeScoreToFile(String name, int score) {
+		List<String> savedScores = TextFileToString.getLines("score.txt");
+		String[][] scores = new String[savedScores.size() + 1][2];
+		for (int i = 0; i < savedScores.size(); ++i) {
+			String[] separateStrings = savedScores.get(i).split(", ");
+			scores[i][0] = separateStrings[0];
+			scores[i][1] = separateStrings[1];
+		}
+
+		scores[savedScores.size()][0] = name;
+		scores[savedScores.size()][1] = new Integer(score).toString();
+
+		// converts the String in the second column to ints and then sorts them by that int value
+		Arrays.sort(scores, new Comparator<String[]>() {
+			@Override
+			public int compare(final String[] entry1, final String[] entry2) {
+				final Integer compare1 = Integer.parseInt(entry1[1]);
+				final Integer compare2 = Integer.parseInt(entry2[1]);
+				return compare1.compareTo(compare2) * -1;
+			}
+		});
+
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter("./src/data/files/score.txt", "UTF-8");
+			for (String[] strings : scores) {
+				writer.println(strings[0] + ", " + strings[1]);
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

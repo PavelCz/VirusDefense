@@ -295,7 +295,7 @@ public class Settings extends GameComponent {
 			resolutionsArray[i][0] = resolutionsList.get(i)[0];
 			resolutionsArray[i][1] = resolutionsList.get(i)[1];
 		}
-		// compares the first columns, if they are the same the second column
+		// sorts by the screen area
 		Arrays.sort(resolutionsArray, new Comparator<Integer[]>() {
 			@Override
 			public int compare(final Integer[] entry1, final Integer[] entry2) {
@@ -308,15 +308,4 @@ public class Settings extends GameComponent {
 
 	}
 
-	private String getSupportedDisplayModesString() throws LWJGLException {
-
-		String supportedDisplayModes = new String();
-
-		Integer[][] resolutionsArray = this.getSupportedDisplayModes();
-		for (Integer[] resolution1 : resolutionsArray) {
-
-			supportedDisplayModes += resolution1[0] + " x " + resolution1[1] + "\n";
-		}
-		return supportedDisplayModes;
-	}
 }

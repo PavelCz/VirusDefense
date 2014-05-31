@@ -1,0 +1,9 @@
+Pavdgel, 10000999
+Pavdsel, 1077000
+Dummy, 65150
+Dummy, 4600
+Pavrzel, 800
+pav, 700
+pav, 700
+pav, 700
+Dummy, 0
