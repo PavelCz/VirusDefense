@@ -84,6 +84,10 @@ public class Menu extends GameComponent {
 		this.version.draw();
 	}
 
+	public String getPlayerName() {
+		return this.t.getText();
+	}
+
 	// public void deactivate() {
 	// this.t.deactivate();
 	// }
