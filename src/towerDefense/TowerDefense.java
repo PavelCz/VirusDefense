@@ -254,4 +254,8 @@ public class TowerDefense extends BasicGame {
 		this.currentGameComponent = this.menu;
 		this.scores = new Scores(this);
 	}
+
+	public String getPlayerName() {
+		return this.menu.getPlayerName();
+	}
 }
