@@ -79,7 +79,10 @@ public class TowerDefense extends BasicGame {
 		if (this.mode == TowerDefense.MODE_GAME) {
 			this.currentGameComponent = this.gameplay;
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
-			this.currentGameComponent = this.maps;
+			if (this.currentGameComponent != this.settings) {
+				this.currentGameComponent = this.maps;
+			}
+
 		} else if (this.mode == TowerDefense.MODE_SETTINGS) {
 			if (this.currentGameComponent != this.settings) {
 				this.settings.activate(container);
