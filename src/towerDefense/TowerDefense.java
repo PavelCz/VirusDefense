@@ -246,7 +246,7 @@ public class TowerDefense extends BasicGame {
 		this.gameplay = new Gameplay(this);
 		this.reinitMenu(container);
 		this.reinitChooseLevel(container);
-		this.settings = new Settings(this, container);
+		// this.settings = new Settings(this, container);
 		this.currentGameComponent = this.menu;
 		this.scores = new Scores(this);
 	}
