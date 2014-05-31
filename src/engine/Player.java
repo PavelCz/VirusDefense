@@ -53,4 +53,9 @@ public class Player {
 		return this.name;
 	}
 
+	public void setName(String playerName) {
+		this.name = playerName;
+
+	}
+
 }

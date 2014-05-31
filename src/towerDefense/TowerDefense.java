@@ -79,7 +79,10 @@ public class TowerDefense extends BasicGame {
 		if (this.mode == TowerDefense.MODE_GAME) {
 			this.currentGameComponent = this.gameplay;
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
-			this.currentGameComponent = this.maps;
+			if (this.currentGameComponent != this.settings) {
+				this.currentGameComponent = this.maps;
+			}
+
 		} else if (this.mode == TowerDefense.MODE_SETTINGS) {
 			if (this.currentGameComponent != this.settings) {
 				this.settings.activate(container);
@@ -253,5 +256,9 @@ public class TowerDefense extends BasicGame {
 		// this.settings = new Settings(this, container);
 		this.currentGameComponent = this.menu;
 		this.scores = new Scores(this);
+	}
+
+	public String getPlayerName() {
+		return this.menu.getPlayerName();
 	}
 }

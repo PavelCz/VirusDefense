@@ -46,7 +46,6 @@ public class WaveHandler {
 			parts = s.split(", ");
 			ints = new int[numberEnemies];
 			for (int j = 0; j < ints.length; ++j) {
-				System.out.println(j + " " + i);
 				ints[j] = Integer.parseInt(parts[j + 1]);
 
 			}
