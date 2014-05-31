@@ -241,6 +241,10 @@ public class TowerDefense extends BasicGame {
 		}
 	}
 
+	public void resetScores() {
+		this.scores = new Scores(this);
+	}
+
 	public void reinitComponents(GameContainer container) {
 		TowerDefense.updateDimensions(container);
 		this.gameplay = new Gameplay(this);
