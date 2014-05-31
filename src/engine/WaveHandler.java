@@ -78,6 +78,7 @@ public class WaveHandler {
 		if (this.waves.isEmpty() && this.done) {
 			TowerDefense.writeScoreToFile(this.game.game.getGameplay().getPlayer().getName(), this.game.game.getGameplay().getPlayer()
 					.getScore());
+			this.game.game.resetScores();
 			this.game.game.setMode(TowerDefense.MODE_MENU);
 		}
 		if (this.game.getEnemies().isEmpty() && this.index <= 0) {

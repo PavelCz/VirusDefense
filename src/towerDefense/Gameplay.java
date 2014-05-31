@@ -339,10 +339,10 @@ public class Gameplay extends GameComponent {
 			this.keyboardEvents(container, delta);
 
 			if (this.player.getLives() <= 0) {
-				this.game.setMode(TowerDefense.MODE_MENU);
 				TowerDefense.writeScoreToFile(this.game.getGameplay().getPlayer().getName(), this.game.getGameplay().getPlayer()
 						.getScore());
-
+				this.game.resetScores();
+				this.game.setMode(TowerDefense.MODE_MENU);
 			}
 
 			for (Projectile projectiles : this.projectiles) {

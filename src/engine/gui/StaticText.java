@@ -30,8 +30,20 @@ public class StaticText extends GUI {
 
 	}
 
-	public float getWidth() {
+	public float getWidth(int line) {
+		return this.text.getWidth(line);
+	}
+
+	public int getWidth() {
 		return this.text.getWidth();
+	}
+
+	public int getTextHeight() {
+		return this.text.getTextHeight();
+	}
+
+	public int getActualHeight() {
+		return this.text.getActualHeight();
 	}
 
 	public void setHeight(int height) {

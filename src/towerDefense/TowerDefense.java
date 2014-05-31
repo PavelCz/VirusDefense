@@ -25,6 +25,7 @@ public class TowerDefense extends BasicGame {
 	public static final int MODE_GAME = 1;
 	public static final int MODE_MAPS = 2;
 	public static final int MODE_SETTINGS = 3;
+	public static final int MODE_SCORES = 4;
 	public static boolean FULLSCREEN = false;
 	private static int HEIGHT;
 	private static int WIDTH;
@@ -34,6 +35,8 @@ public class TowerDefense extends BasicGame {
 	private ChooseLevel maps;
 	private Settings settings;
 	private GameComponent currentGameComponent;
+	private Scores scores;
+
 	private boolean quitGame = false;
 
 	private int mode;
@@ -52,6 +55,7 @@ public class TowerDefense extends BasicGame {
 		this.settings = new Settings(this, container);
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
+		this.scores = new Scores(this);
 	}
 
 	private void initSounds() {
@@ -86,6 +90,8 @@ public class TowerDefense extends BasicGame {
 				// this.menu.activate(container);
 			}
 			this.currentGameComponent = this.menu;
+		} else if (this.mode == TowerDefense.MODE_SCORES) {
+			this.currentGameComponent = this.scores;
 		}
 		this.currentGameComponent.update(container, delta);
 
@@ -222,8 +228,8 @@ public class TowerDefense extends BasicGame {
 		PrintWriter writer;
 		try {
 			writer = new PrintWriter("./src/data/files/score.txt", "UTF-8");
-			for (String[] strings : scores) {
-				writer.println(strings[0] + ", " + strings[1]);
+			for (int i = 0; i < 10; ++i) {
+				writer.println(scores[i][0] + ", " + scores[i][1]);
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {
@@ -233,5 +239,19 @@ public class TowerDefense extends BasicGame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void resetScores() {
+		this.scores = new Scores(this);
+	}
+
+	public void reinitComponents(GameContainer container) {
+		TowerDefense.updateDimensions(container);
+		this.gameplay = new Gameplay(this);
+		this.reinitMenu(container);
+		this.reinitChooseLevel(container);
+		// this.settings = new Settings(this, container);
+		this.currentGameComponent = this.menu;
+		this.scores = new Scores(this);
 	}
 }

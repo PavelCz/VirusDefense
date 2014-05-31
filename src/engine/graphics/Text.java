@@ -41,12 +41,29 @@ public class Text extends RenderObject {
 	}
 
 	public int getWidth() {
+		String[] lines = this.text.split("\n");
+		int maxWidth = 0;
+		for (int i = 0; i < lines.length; ++i) {
+			int currentWidth = this.getWidth(i);
+			if (maxWidth < currentWidth) {
+				maxWidth = currentWidth;
+			}
+		}
+		return maxWidth;
 
-		return this.font.getWidth(this.text.split("\n")[0]);
 	}
 
-	public int getHeight() {
+	public int getWidth(int line) {
+		String[] lines = this.text.split("\n");
+		return this.font.getWidth(lines[line]);
+	}
+
+	public int getTextHeight() {
 		return this.font.getHeight();
+	}
+
+	public int getActualHeight() {
+		return this.font.getHeight() * this.text.split("\n").length;
 	}
 
 	public void setHeight(int height) {

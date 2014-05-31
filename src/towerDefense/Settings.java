@@ -45,7 +45,7 @@ public class Settings extends GameComponent {
 		this.guiElements.add(this.back);
 
 		this.back.setX(0);
-		this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
+		this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
 
 		int fieldsX = 0;
 		int fieldsY = 100;
@@ -229,9 +229,10 @@ public class Settings extends GameComponent {
 					TowerDefense.updateDimensions(container);
 					TowerDefense.writeSettingsToFile();
 					this.back.setX(0);
-					this.back.setY(TowerDefense.getHeight() - this.back.getHeight() * 2);
+					this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
 					this.game.reinitMenu(container);
 					this.game.reinitChooseLevel(container);
+					this.game.reinitComponents(gameContainer);
 					this.updateResolutionsPosition();
 				} catch (SlickException e) {
 					this.warning.setText("Not a supported fullscreen resolution.");
