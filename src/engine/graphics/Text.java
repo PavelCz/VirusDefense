@@ -40,9 +40,9 @@ public class Text extends RenderObject {
 		this.color = color;
 	}
 
-	public int getWidth() {
-
-		return this.font.getWidth(this.text.split("\n")[0]);
+	public int getWidth(int line) {
+		String[] lines = this.text.split("\n");
+		return this.font.getWidth(lines[line]);
 	}
 
 	public int getTextHeight() {
