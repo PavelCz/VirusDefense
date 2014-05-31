@@ -47,9 +47,8 @@ public class TowerDefense extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) {
-		if (!container.isFullscreen()) {
-			String[] icons = { "./data/graphics/icons/icon16.png", "./data/graphics/icons/icon24.png",
-					"./data/graphics/icons/icon32.png" };
+		if (!container.isFullscreen()) {/* "./data/graphics/icons/icon24.png", (this may be necessary for other platforms(mac)) */
+			String[] icons = { "./data/graphics/icons/icon16.png", "./data/graphics/icons/icon32.png" };
 			try {
 				container.setIcons(icons);
 			} catch (SlickException e) {
