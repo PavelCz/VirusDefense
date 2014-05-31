@@ -64,6 +64,7 @@ public class Menu extends GameComponent {
 		this.t.setBackgroundColor(Color.lightGray);
 		this.t.setMaxLength(32);
 		this.t.setLocation(TowerDefense.getWidth() / 2 - this.t.getWidth() / 2, y);
+		this.t.setCursorPos(6);
 
 	}
 
