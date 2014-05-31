@@ -308,15 +308,4 @@ public class Settings extends GameComponent {
 
 	}
 
-	private String getSupportedDisplayModesString() throws LWJGLException {
-
-		String supportedDisplayModes = new String();
-
-		Integer[][] resolutionsArray = this.getSupportedDisplayModes();
-		for (Integer[] resolution1 : resolutionsArray) {
-
-			supportedDisplayModes += resolution1[0] + " x " + resolution1[1] + "\n";
-		}
-		return supportedDisplayModes;
-	}
 }
