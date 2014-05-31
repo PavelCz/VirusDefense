@@ -1,8 +1,6 @@
 package engine.gui;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
-
 import towerDefense.Gameplay;
 
 public abstract class Clickable extends GUI {

@@ -58,7 +58,7 @@ public abstract class GameComponent {
 			}
 
 		} else {
-			if (this.mouseWasClicked) {
+			if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 				this.mouseWasClicked = false;
 				for (Clickable clickable : this.clickables) {
 					if (!clickable.isStayClicked()) {

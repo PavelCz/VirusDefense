@@ -164,7 +164,7 @@ public class Settings extends GameComponent {
 				clickable.update(x, y, container);
 			}
 
-		} else if (this.mouseWasClicked) {
+		} else if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 			this.mouseWasClicked = false;
 			for (Clickable clickable : this.clickables) {
 				if (!clickable.isStayClicked()) {
