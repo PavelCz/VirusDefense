@@ -1,10 +1,14 @@
 package towerDefense;
 
+import java.awt.Font;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.gui.TextField;
 
 import engine.GameComponent;
 import engine.gui.ExitClickable;
@@ -14,7 +18,7 @@ import engine.gui.StartClickable;
 import engine.gui.StaticText;
 
 public class Menu extends GameComponent {
-	// private TextField t;
+	private TextField t;
 	private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.4");
 
 	public Menu(TowerDefense game) {
@@ -52,12 +56,14 @@ public class Menu extends GameComponent {
 		this.guiElements.add(e);
 		e.setX(TowerDefense.getWidth() / 2 - e.getWidth() / 2);
 		e.setY(y);
+		y += c.getTextHeight() + 1;
 
-		// this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 100, 75, 25);
-		// this.t.setText("Player 1");
-		// this.t.setBorderColor(Color.gray);
-		// this.t.setBackgroundColor(Color.lightGray);
-		// this.t.setMaxLength(32);
+		this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 0, 75, 25);
+		this.t.setText("Player");
+		this.t.setBorderColor(Color.gray);
+		this.t.setBackgroundColor(Color.lightGray);
+		this.t.setMaxLength(32);
+		this.t.setLocation(TowerDefense.getWidth() / 2 - this.t.getWidth() / 2, y);
 
 	}
 
@@ -74,7 +80,7 @@ public class Menu extends GameComponent {
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		super.render(container, graphics);
-		// this.t.render(container, graphics);
+		this.t.render(container, graphics);
 		this.version.draw();
 	}
 
