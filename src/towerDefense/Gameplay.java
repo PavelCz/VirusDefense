@@ -93,6 +93,7 @@ public class Gameplay extends GameComponent {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
+		container.getGraphics().setColor(Color.green);
 		this.initDefaults();
 		Gameplay.camera = new Camera(0, 0, this);
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png",
@@ -123,7 +124,7 @@ public class Gameplay extends GameComponent {
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
 				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new Sprite("tower/Tower2.png",
-						0.5f), this, 400, 0.16f, 400), this);
+						0.5f), this, 400, 0.16f, 400, container.getGraphics()), this);
 		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
 				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this,
 						1500, 15f, 50), this);

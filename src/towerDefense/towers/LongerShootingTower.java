@@ -1,5 +1,7 @@
 package towerDefense.towers;
 
+import org.newdawn.slick.Graphics;
+
 import towerDefense.Gameplay;
 import engine.Enemy;
 import engine.graphics.Sprite;
@@ -7,12 +9,15 @@ import engine.graphics.Sprite;
 public class LongerShootingTower extends ShootingTower {
 	private final int shootingDuration;
 	private Enemy currentlyAttacking = null;
+	private Graphics graphics;
 
-	public LongerShootingTower(float x, float y, Sprite sprite, Gameplay game, float shootingInterval, float damage, int shootingDuration) {
+	public LongerShootingTower(float x, float y, Sprite sprite, Gameplay game, float shootingInterval, float damage,
+			int shootingDuration, Graphics graphics) {
 		super(x, y, sprite, game, shootingInterval, damage);
 		this.shootingDuration = shootingDuration;
 		this.delta = 0;
 		this.name = "Shooting Tower";
+		this.graphics = graphics;
 	}
 
 	@Override
@@ -23,13 +28,13 @@ public class LongerShootingTower extends ShootingTower {
 				this.building = false;
 			}
 		}
-		
+
 		this.delta -= delta;
 		if (this.currentlyAttacking != null) {
 			this.shootAt(this.currentlyAttacking);
 			if (this.currentlyAttacking.getHealth() <= 0) {
 				this.currentlyAttacking = null;
-				this.delta = (int)this.shootingInterval;
+				this.delta = (int) this.shootingInterval;
 			}
 		}
 
@@ -42,7 +47,7 @@ public class LongerShootingTower extends ShootingTower {
 					this.game.getSoundHandler().play("shotT1");
 				} else {
 					this.currentlyAttacking = null;
-					this.delta = (int)this.shootingInterval;
+					this.delta = (int) this.shootingInterval;
 				}
 			}
 		}
@@ -52,7 +57,7 @@ public class LongerShootingTower extends ShootingTower {
 	@Override
 	public Tower clone() {
 		return new LongerShootingTower(this.x, this.y, this.sprite.clone(), this.game, this.shootingInterval, this.damage,
-				this.shootingDuration);
+				this.shootingDuration, this.graphics);
 	}
 
 	protected void shootAt(Enemy enemy) {
@@ -61,7 +66,7 @@ public class LongerShootingTower extends ShootingTower {
 			if (enemy.getHealth() <= 0) {
 				if (!enemy.isDead()) {
 					this.game.getPlayer().addMoney(enemy.getMoney());
-					this.game.getPlayer().addScore(enemy.getMoney()*5);
+					this.game.getPlayer().addScore(enemy.getMoney() * 5);
 					enemy.setDead();
 				}
 			}
@@ -69,4 +74,13 @@ public class LongerShootingTower extends ShootingTower {
 		}
 	}
 
+	@Override
+	public void draw() {
+		super.draw();
+		if (this.currentlyAttacking != null) {
+			this.graphics.drawLine(this.x * Gameplay.SIZE + Gameplay.SIZE / 2, this.y * Gameplay.SIZE + Gameplay.SIZE / 2,
+					this.currentlyAttacking.getX(), this.currentlyAttacking.getY());
+		}
+
+	}
 }
