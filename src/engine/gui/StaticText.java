@@ -60,4 +60,9 @@ public class StaticText extends GUI {
 		this.y = y;
 	}
 
+	public void setColor(Color color) {
+		this.text.setColor(color);
+
+	}
+
 }

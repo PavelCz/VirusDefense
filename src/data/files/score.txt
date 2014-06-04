@@ -3,8 +3,8 @@ Pavdsel, 1077000
 Dummy, 65150
 jjjjjjjjjj, 29350
 Dummy, 4600
+Player, 850
 Pavrzel, 800
+Player, 800
 pav, 700
 pav, 700
-pav, 700
-Dummy, 100
