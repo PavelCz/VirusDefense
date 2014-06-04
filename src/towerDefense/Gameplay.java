@@ -358,7 +358,7 @@ public class Gameplay extends GameComponent {
 					}
 				}
 
-				this.currentLevel.getWaveHandler().update(delta);
+				this.currentLevel.getWaveHandler().update(delta, container);
 			}
 			this.updateTowerShadow(container);
 			this.mouseEvents(container, delta);

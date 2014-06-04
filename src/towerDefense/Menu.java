@@ -93,9 +93,11 @@ public class Menu extends GameComponent {
 	}
 
 	public void setLost(int score, String name) {
-		this.lostWonMessage.setText("You Lost, " + name + "!\nYour Score was: " + score + " Points.");
+		this.lostWonMessage.setText("You lost, " + name + "!\nYour Score was: " + score + " Points.");
 		this.lostWonMessage.setPosition((TowerDefense.getWidth() - this.lostWonMessage.getWidth()) / 2, 0);
+		this.lostWonMessage.setColor(Color.red);
 	}
+
 	// public void deactivate() {
 	// this.t.deactivate();
 	// }
@@ -107,5 +109,12 @@ public class Menu extends GameComponent {
 	// this.t.setBackgroundColor(Color.lightGray);
 	// this.t.setMaxLength(32);
 	// }
+
+	public void setWon(int score, String name) {
+		this.lostWonMessage.setText("You beat the level, " + name + "!\nYour Score was: " + score + " Points.");
+		this.lostWonMessage.setPosition((TowerDefense.getWidth() - this.lostWonMessage.getWidth()) / 2, 0);
+		this.lostWonMessage.setColor(Color.green);
+
+	}
 
 }
