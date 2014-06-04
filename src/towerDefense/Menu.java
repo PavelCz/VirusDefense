@@ -32,7 +32,7 @@ public class Menu extends GameComponent {
 		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.red, "");
 		this.guiElements.add(this.lostWonMessage);
 
-		StartClickable c = new StartClickable(0, 0, this.game);
+		StartClickable c = new StartClickable(0, 0, this.game, container);
 		this.clickables.add(c);
 		this.guiElements.add(c);
 		int y = TowerDefense.getHeight() / 2 - c.getTextHeight();
@@ -94,6 +94,7 @@ public class Menu extends GameComponent {
 
 	public void setLost(int score, String name) {
 		this.lostWonMessage.setText("You Lost, " + name + "!\nYour Score was: " + score + " Points.");
+		this.lostWonMessage.setPosition((TowerDefense.getWidth() - this.lostWonMessage.getWidth()) / 2, 0);
 	}
 	// public void deactivate() {
 	// this.t.deactivate();
