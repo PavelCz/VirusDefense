@@ -74,4 +74,13 @@ public class LongerShootingTower extends ShootingTower {
 		}
 	}
 
+	@Override
+	public void draw() {
+		super.draw();
+		if (this.currentlyAttacking != null) {
+			this.graphics.drawLine(this.x * Gameplay.SIZE + Gameplay.SIZE / 2, this.y * Gameplay.SIZE + Gameplay.SIZE / 2,
+					this.currentlyAttacking.getX(), this.currentlyAttacking.getY());
+		}
+
+	}
 }
