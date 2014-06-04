@@ -369,6 +369,8 @@ public class Gameplay extends GameComponent {
 				TowerDefense.writeScoreToFile(this.game.getGameplay().getPlayer().getName(), this.game.getGameplay().getPlayer()
 						.getScore());
 				this.game.resetScores();
+				this.game.setLost(this.player.getScore(), this.player.getName());
+				container.getGraphics().setColor(Color.white);
 				this.game.setMode(TowerDefense.MODE_MENU);
 			}
 

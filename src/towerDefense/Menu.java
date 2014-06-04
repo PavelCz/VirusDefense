@@ -20,6 +20,7 @@ import engine.gui.StaticText;
 public class Menu extends GameComponent {
 	private TextField t;
 	private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.5");
+	private StaticText lostWonMessage;
 
 	public Menu(TowerDefense game) {
 		super(game);
@@ -28,6 +29,8 @@ public class Menu extends GameComponent {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
+		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.red, "");
+		this.guiElements.add(this.lostWonMessage);
 
 		StartClickable c = new StartClickable(0, 0, this.game);
 		this.clickables.add(c);
@@ -89,6 +92,9 @@ public class Menu extends GameComponent {
 		return this.t.getText();
 	}
 
+	public void setLost(int score, String name) {
+		this.lostWonMessage.setText("You Lost, " + name + "!\nYour Score was: " + score + " Points.");
+	}
 	// public void deactivate() {
 	// this.t.deactivate();
 	// }

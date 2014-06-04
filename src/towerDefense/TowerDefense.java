@@ -270,4 +270,8 @@ public class TowerDefense extends BasicGame {
 	public String getPlayerName() {
 		return this.menu.getPlayerName();
 	}
+
+	public void setLost(int score, String name) {
+		this.menu.setLost(score, name);
+	}
 }
