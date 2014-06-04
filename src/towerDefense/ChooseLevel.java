@@ -21,9 +21,8 @@ public class ChooseLevel extends GameComponent {
 
 	private LevelHandler levelHandler = new LevelHandler();
 
-	public ChooseLevel(TowerDefense game) {
+	public ChooseLevel(TowerDefense game, GameContainer container) {
 		super(game);
-
 		this.page = 0;
 		this.levelHandler.add("level1.txt", game.getGameplay());
 		this.levelHandler.add("level4.txt", game.getGameplay());

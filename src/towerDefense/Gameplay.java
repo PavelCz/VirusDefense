@@ -86,7 +86,6 @@ public class Gameplay extends GameComponent {
 	//
 	public Gameplay(TowerDefense game) {
 		super(game);
-		;
 
 	}
 

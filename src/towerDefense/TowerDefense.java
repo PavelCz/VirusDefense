@@ -185,7 +185,7 @@ public class TowerDefense extends BasicGame {
 
 	public void reinitChooseLevel(GameContainer container) {
 
-		this.maps = new ChooseLevel(this);
+		this.maps = new ChooseLevel(this, container);
 
 	}
 
