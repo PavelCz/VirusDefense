@@ -10,10 +10,12 @@ public class LongerShootingTower extends ShootingTower {
 	private final int shootingDuration;
 	private Enemy currentlyAttacking = null;
 	private Graphics graphics;
+	private boolean attacking;
 
 	public LongerShootingTower(float x, float y, Sprite sprite, Gameplay game, float shootingInterval, float damage,
 			int shootingDuration, Graphics graphics) {
 		super(x, y, sprite, game, shootingInterval, damage);
+		this.attacking = false;
 		this.shootingDuration = shootingDuration;
 		this.delta = 0;
 		this.name = "Shooting Tower";
@@ -62,6 +64,7 @@ public class LongerShootingTower extends ShootingTower {
 
 	protected void shootAt(Enemy enemy) {
 		if (this.inRange(enemy)) {
+			this.attacking = true;
 			enemy.setHealth(enemy.getHealth() - this.damage);
 			if (enemy.getHealth() <= 0) {
 				if (!enemy.isDead()) {
@@ -71,13 +74,15 @@ public class LongerShootingTower extends ShootingTower {
 				}
 			}
 
+		} else {
+			this.attacking = false;
 		}
 	}
 
 	@Override
 	public void draw() {
 		super.draw();
-		if (this.currentlyAttacking != null) {
+		if (this.attacking && this.currentlyAttacking != null) {
 			this.graphics.drawLine(this.x * Gameplay.SIZE + Gameplay.SIZE / 2, this.y * Gameplay.SIZE + Gameplay.SIZE / 2,
 					this.currentlyAttacking.getX(), this.currentlyAttacking.getY());
 		}
