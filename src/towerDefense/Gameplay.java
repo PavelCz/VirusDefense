@@ -428,7 +428,7 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			container.exit();
+			this.game.get
 		}
 		if (input.isKeyPressed(Input.KEY_S)) {
 			try {

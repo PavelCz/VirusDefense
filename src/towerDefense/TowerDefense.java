@@ -278,4 +278,9 @@ public class TowerDefense extends BasicGame {
 	public void setWon(int score, String name) {
 		this.menu.setWon(score, name);
 	}
+
+	public Menu getMenu() {
+		return this.menu;
+	}
+
 }
