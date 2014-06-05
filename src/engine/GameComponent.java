@@ -57,14 +57,14 @@ public abstract class GameComponent {
 				clickable.update(x, y, container);
 			}
 
-		} else {
-			if (this.mouseWasClicked) {
-				this.mouseWasClicked = false;
-				for (Clickable clickable : this.clickables) {
-					if (!clickable.isStayClicked()) {
-						if (clickable.isClicked()) {
-							clickable.onRelease();
-						}
+		} else if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			this.mouseWasClicked = false;
+			for (Clickable clickable : this.clickables) {
+				if (!clickable.isStayClicked() && clickable.isActive()) {
+					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+						clickable.onRelease();
+					} else if (clickable.isClicked()) {
+						clickable.setClicked(false);
 					}
 				}
 			}
@@ -73,9 +73,9 @@ public abstract class GameComponent {
 
 	public void updateHovering(float x, float y) {
 		for (Clickable clickable : this.clickables) {
-			if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+			if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE) && !clickable.isClicked() && clickable.isActive()) {
 				clickable.onHover();
-			} else {
+			} else if (!clickable.isClicked() && clickable.isActive()) {
 				clickable.onUnHover();
 			}
 		}

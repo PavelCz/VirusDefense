@@ -11,6 +11,8 @@ import org.lwjgl.openal.AL;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Music;
+import org.newdawn.slick.MusicListener;
 import org.newdawn.slick.SlickException;
 
 import engine.GameComponent;
@@ -18,7 +20,7 @@ import engine.Level;
 import engine.SoundHandler;
 import engine.TextFileToString;
 
-public class TowerDefense extends BasicGame {
+public class TowerDefense extends BasicGame implements MusicListener {
 
 	protected SoundHandler soundHandler = new SoundHandler();
 	public static final int MODE_MENU = 0;
@@ -42,11 +44,20 @@ public class TowerDefense extends BasicGame {
 	private int mode;
 
 	public TowerDefense() {
-		super("Tower Defense");
+		super("Virus Defense");
 	}
 
 	@Override
 	public void init(GameContainer container) {
+		if (!container.isFullscreen()) {/* "./data/graphics/icons/icon24.png", (this may be necessary for other platforms(mac)) */
+			String[] icons = { "./data/graphics/icons/icon16.png", "./data/graphics/icons/icon32.png" };
+			try {
+				container.setIcons(icons);
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		this.initSounds();
 		TowerDefense.updateDimensions(container);
 		this.gameplay = new Gameplay(this);
@@ -176,7 +187,7 @@ public class TowerDefense extends BasicGame {
 
 	public void reinitChooseLevel(GameContainer container) {
 
-		this.maps = new ChooseLevel(this);
+		this.maps = new ChooseLevel(this, container);
 
 	}
 
@@ -231,7 +242,7 @@ public class TowerDefense extends BasicGame {
 		PrintWriter writer;
 		try {
 			writer = new PrintWriter("./src/data/files/score.txt", "UTF-8");
-			for (int i = 0; i < 10; ++i) {
+			for (int i = 0; i < scores.length; ++i) {
 				writer.println(scores[i][0] + ", " + scores[i][1]);
 			}
 			writer.close();
@@ -261,4 +272,29 @@ public class TowerDefense extends BasicGame {
 	public String getPlayerName() {
 		return this.menu.getPlayerName();
 	}
+
+	public void setLost(int score, String name) {
+		this.menu.setLost(score, name);
+	}
+
+	public void setWon(int score, String name) {
+		this.menu.setWon(score, name);
+	}
+
+	public Menu getMenu() {
+		return this.menu;
+	}
+
+	@Override
+	public void musicEnded(Music arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void musicSwapped(Music arg0, Music arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

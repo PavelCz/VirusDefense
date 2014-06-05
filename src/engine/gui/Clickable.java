@@ -1,8 +1,6 @@
 package engine.gui;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
-
 import towerDefense.Gameplay;
 
 public abstract class Clickable extends GUI {
@@ -10,6 +8,7 @@ public abstract class Clickable extends GUI {
 	protected boolean clicked = false;
 	protected Gameplay game;
 	protected boolean stayClicked;
+	protected boolean active = true;
 
 	public Clickable(float x, float y, Gameplay game, boolean stayClicked) {
 		super(x, y);
@@ -18,18 +17,28 @@ public abstract class Clickable extends GUI {
 	}
 
 	public void update(float mouseX, float mouseY, GameContainer container) {
-		if (this.collides((int) mouseX, (int) mouseY, Gameplay.GLOBAL_GUI_SCALE)) {
-			if (this.clicked) {
-				this.onRelease();
-			} else {
-				this.game.releaseAllClickablesExcept(this);
-				this.onClick();
+		if (this.active) {
+			if (this.collides((int) mouseX, (int) mouseY, Gameplay.GLOBAL_GUI_SCALE)) {
+				if (this.clicked) {
+					this.onRelease();
+				} else {
+					this.game.releaseAllClickablesExcept(this);
+					this.onClick();
 
+				}
+
+				this.game.getSoundHandler().play("press");
 			}
-			this.game.getSoundHandler().play("press");
-
 		}
 
+	}
+
+	public boolean isActive() {
+		return this.active;
+	}
+
+	public void setClicked(boolean clicked) {
+		this.clicked = clicked;
 	}
 
 	public void onClick() {

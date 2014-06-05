@@ -46,4 +46,8 @@ public class Button extends Clickable {
 		this.unclickedButton = picture;
 	}
 
+	public void setClickedButton(Sprite picture) {
+		this.clickedButton = picture;
+	}
+
 }

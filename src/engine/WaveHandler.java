@@ -3,6 +3,8 @@ package engine;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.newdawn.slick.GameContainer;
+
 import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
 
@@ -71,7 +73,7 @@ public class WaveHandler {
 		return -1;
 	}
 
-	public void update(int delta) {
+	public void update(int delta, GameContainer container) {
 		this.delta -= delta;
 		// the player defeated all the waves
 		if (this.waves.isEmpty() && this.done) {
@@ -79,6 +81,7 @@ public class WaveHandler {
 					.getScore());
 			this.game.game.resetScores();
 			this.game.game.setMode(TowerDefense.MODE_MENU);
+			this.game.game.setWon(this.game.getPlayer().getScore(), this.game.getPlayer().getName());
 		}
 		if (this.game.getEnemies().isEmpty() && this.index <= 0) {
 
