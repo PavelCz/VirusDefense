@@ -35,10 +35,19 @@ public class Menu extends GameComponent {
 		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.red, "");
 		this.guiElements.add(this.lostWonMessage);
 
+		this.resumeButton = new GoToGameButton(0, 0, "Resume game", this.game);
+		this.clickables.add(this.resumeButton);
+		this.guiElements.add(this.resumeButton);
+		int y = TowerDefense.getHeight() / 2 - this.resumeButton.getTextHeight();
+		this.resumeButton.setX(TowerDefense.getWidth() / 2 - this.resumeButton.getWidth() / 2);
+		this.resumeButton.setY(y);
+		this.resumeButton.setVisible(false);
+		this.resumeButton.deactivate();
+
 		this.startButton = new StartClickable(0, 0, this.game, container);
 		this.clickables.add(this.startButton);
 		this.guiElements.add(this.startButton);
-		int y = TowerDefense.getHeight() / 2 - this.startButton.getTextHeight();
+		y = TowerDefense.getHeight() / 2 - this.startButton.getTextHeight();
 		this.startButton.setX(TowerDefense.getWidth() / 2 - this.startButton.getWidth() / 2);
 		this.startButton.setY(y);
 		y += this.startButton.getTextHeight() + 1;
