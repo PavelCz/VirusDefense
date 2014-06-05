@@ -368,7 +368,6 @@ public class Gameplay extends GameComponent {
 						.getScore());
 				this.game.resetScores();
 				this.game.setLost(this.player.getScore(), this.player.getName());
-				container.getGraphics().setColor(Color.white);
 				this.game.setMode(TowerDefense.MODE_MENU);
 			}
 
