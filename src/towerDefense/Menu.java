@@ -123,7 +123,7 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setHeight(30);
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.settings.deactivate();
-		this.settings.setColor(Color.gray);
+		this.settings.setColor(Color.lightGray);
 	}
 
 	public void setStartMenu() {
