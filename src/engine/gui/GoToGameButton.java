@@ -14,7 +14,9 @@ public class GoToGameButton extends ClickableText {
 
 	@Override
 	public void onRelease() {
-		super.onRelease();
-		this.towerDefense.setMode(TowerDefense.MODE_GAME);
+		if (this.active) {
+			super.onRelease();
+			this.towerDefense.setMode(TowerDefense.MODE_GAME);
+		}
 	}
 }
