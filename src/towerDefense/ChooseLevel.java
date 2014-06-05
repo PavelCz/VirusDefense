@@ -27,7 +27,7 @@ public class ChooseLevel extends GameComponent {
 		this.levelHandler.add("level1.txt", game.getGameplay());
 		this.levelHandler.add("level4.txt", game.getGameplay());
 		this.levelHandler.add("level2.txt", game.getGameplay());
-		this.levelHandler.add("level3.txt", game.getGameplay());
+		// this.levelHandler.add("level3.txt", game.getGameplay());
 
 		this.currentLevel = this.levelHandler.get(this.page);
 		Sprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
