@@ -24,6 +24,7 @@ public class Menu extends GameComponent {
 	private StaticText lostWonMessage;
 	private StartClickable startButton;
 	private GoToGameButton resumeButton;
+	GoToSettingsButton settings;
 	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.white, "VIRUS DEFENSE");
 
 	public Menu(TowerDefense game) {
@@ -57,11 +58,11 @@ public class Menu extends GameComponent {
 		this.startButton.setY(y);
 		y += this.startButton.getTextHeight() + 1;
 
-		GoToSettingsButton settings = new GoToSettingsButton(0, 0, "Settings", this.game);
-		this.clickables.add(settings);
-		this.guiElements.add(settings);
-		settings.setX(TowerDefense.getWidth() / 2 - settings.getWidth() / 2);
-		settings.setY(y);
+		this.settings = new GoToSettingsButton(0, 0, "Settings", this.game);
+		this.clickables.add(this.settings);
+		this.guiElements.add(this.settings);
+		this.settings.setX(TowerDefense.getWidth() / 2 - this.settings.getWidth() / 2);
+		this.settings.setY(y);
 		y += this.startButton.getTextHeight() + 1;
 
 		GoToScoreButton scores = new GoToScoreButton(0, 0, "Highscores", this.game);
@@ -121,6 +122,8 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setText("GAME PAUSED");
 		this.pausedMessage.setHeight(30);
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
+		this.settings.deactivate();
+		this.settings.setColor(Color.gray);
 	}
 
 	public void setStartMenu() {
@@ -129,6 +132,8 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setText("VIRUS DEFENSE");
 		this.pausedMessage.setHeight(50);
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
+		this.settings.activate();
+		this.settings.setColor(Color.white);
 	}
 
 	// public void deactivate() {
