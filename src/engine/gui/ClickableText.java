@@ -27,8 +27,10 @@ public class ClickableText extends Clickable {
 
 	@Override
 	public void onClick() {
-		super.onClick();
-		this.text.setColor(Color.blue);
+		if (this.active) {
+			super.onClick();
+			this.text.setColor(Color.blue);
+		}
 
 	}
 
