@@ -1,5 +1,5 @@
 map-map.png
-previews/Blutkreislauf-Herz.jpg
+previews/Blutkreislauf-Lunge.jpg
 veins/bg.png
 1.txt
 enemies.txt
