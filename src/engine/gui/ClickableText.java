@@ -74,4 +74,9 @@ public class ClickableText extends Clickable {
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	public void setVisible(boolean visible) {
+		this.text.setVisible(visible);
+	}
+
 }
