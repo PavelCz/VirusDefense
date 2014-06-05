@@ -45,7 +45,7 @@ public class Menu extends GameComponent {
 		this.guiElements.add(this.resumeButton);
 		int y = TowerDefense.getHeight() / 2 - this.resumeButton.getTextHeight();
 		this.resumeButton.setX(TowerDefense.getWidth() / 2 - this.resumeButton.getWidth() / 2);
-		this.resumeButton.setY(y);
+		this.resumeButton.setY(y - this.resumeButton.getTextHeight() + 1);
 		this.resumeButton.setVisible(false);
 		this.resumeButton.deactivate();
 
@@ -116,8 +116,6 @@ public class Menu extends GameComponent {
 	}
 
 	public void setPauseMenu() {
-		this.startButton.deactivate();
-		this.startButton.setVisible(false);
 		this.resumeButton.activate();
 		this.resumeButton.setVisible(true);
 		this.pausedMessage.setText("GAME PAUSED");
@@ -128,8 +126,6 @@ public class Menu extends GameComponent {
 	public void setStartMenu() {
 		this.resumeButton.deactivate();
 		this.resumeButton.setVisible(false);
-		this.startButton.activate();
-		this.startButton.setVisible(true);
 		this.pausedMessage.setText("VIRUS DEFENSE");
 		this.pausedMessage.setHeight(50);
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
