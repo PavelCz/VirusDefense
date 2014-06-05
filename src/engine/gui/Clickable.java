@@ -17,19 +17,24 @@ public abstract class Clickable extends GUI {
 	}
 
 	public void update(float mouseX, float mouseY, GameContainer container) {
-		if (this.collides((int) mouseX, (int) mouseY, Gameplay.GLOBAL_GUI_SCALE)) {
-			if (this.clicked) {
-				this.onRelease();
-			} else {
-				this.game.releaseAllClickablesExcept(this);
-				this.onClick();
+		if (this.active) {
+			if (this.collides((int) mouseX, (int) mouseY, Gameplay.GLOBAL_GUI_SCALE)) {
+				if (this.clicked) {
+					this.onRelease();
+				} else {
+					this.game.releaseAllClickablesExcept(this);
+					this.onClick();
 
-			}
-			if (this.active) {
+				}
+
 				this.game.getSoundHandler().play("press");
 			}
 		}
 
+	}
+
+	public boolean isActive() {
+		return this.active;
 	}
 
 	public void setClicked(boolean clicked) {
