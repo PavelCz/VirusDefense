@@ -1,5 +1,6 @@
 package towerDefense;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -11,11 +12,13 @@ import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.Clickable;
 import engine.gui.GoToMenuButton;
+import engine.gui.StaticText;
 
 public class ChooseLevel extends GameComponent {
 
 	private Button button, left, right;
 	private int page, lastPage;
+	private StaticText title = new StaticText(0, 0, 20, Color.white, "Choose a level");
 
 	private Level currentLevel;
 
@@ -23,6 +26,8 @@ public class ChooseLevel extends GameComponent {
 
 	public ChooseLevel(TowerDefense game, GameContainer container) {
 		super(game);
+		this.title.setPosition((TowerDefense.getWidth() - this.title.getWidth()) / 2, TowerDefense.getHeight() / 4);
+		this.guiElements.add(this.title);
 		this.page = 0;
 		this.levelHandler.add("level1.txt", game.getGameplay());
 		this.levelHandler.add("level4.txt", game.getGameplay());
