@@ -465,11 +465,16 @@ public class Gameplay extends GameComponent {
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		}
 		float cameraWidth = Gameplay.INTERFACE_START_X;
+		float cameraHeight = TowerDefense.getHeight();
 		if (Gameplay.getCameraX() < 0) {
 			Gameplay.camera.setX(0);
 		} else if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.getHorizontalTiles()
 				* Gameplay.DEFAULT_SIZE) {
 			Gameplay.camera.setX((this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraWidth);
+
+		} else if ((Gameplay.getCameraY() + cameraHeight) / Gameplay.CURRENT_GAME_SCALE > this.getVerticalTiles()
+				* Gameplay.DEFAULT_SIZE) {
+			Gameplay.camera.setY((this.getVerticalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraHeight);
 
 		}
 
