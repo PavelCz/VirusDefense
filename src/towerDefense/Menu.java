@@ -12,6 +12,7 @@ import org.newdawn.slick.gui.TextField;
 
 import engine.GameComponent;
 import engine.gui.ExitClickable;
+import engine.gui.GoToGameButton;
 import engine.gui.GoToScoreButton;
 import engine.gui.GoToSettingsButton;
 import engine.gui.StartClickable;
@@ -22,6 +23,7 @@ public class Menu extends GameComponent {
 	private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.5");
 	private StaticText lostWonMessage;
 	private StartClickable startButton;
+	private GoToGameButton resumeButton;
 
 	public Menu(TowerDefense game) {
 		super(game);
