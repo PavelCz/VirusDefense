@@ -110,6 +110,20 @@ public class Menu extends GameComponent {
 		this.lostWonMessage.setColor(Color.red);
 	}
 
+	public void setPauseMenu() {
+		this.startButton.deactivate();
+		this.startButton.setVisible(false);
+		this.resumeButton.activate();
+		this.resumeButton.setVisible(true);
+	}
+
+	public void setStartMenu() {
+		this.resumeButton.deactivate();
+		this.resumeButton.setVisible(false);
+		this.startButton.activate();
+		this.startButton.setVisible(true);
+	}
+
 	// public void deactivate() {
 	// this.t.deactivate();
 	// }
