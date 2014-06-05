@@ -7,18 +7,30 @@ import engine.graphics.Text;
 
 public class ClickableText extends Clickable {
 	private Text text;
+	protected boolean active;
 
 	public ClickableText(float x, float y, String text, float globalScale, Gameplay game, boolean stayClicked) {
 		super(x, y, game, stayClicked);
 		this.text = new Text(15, text, Color.white, globalScale);
 		this.collisionWidth = this.text.getWidth();
 		this.collisionHeight = this.text.getTextHeight();
+		this.active = true;
+	}
+
+	public void activate() {
+		this.active = true;
+	}
+
+	public void deactivate() {
+		this.active = false;
 	}
 
 	@Override
 	public void onClick() {
-		super.onClick();
-		this.text.setColor(Color.blue);
+		if (this.active) {
+			super.onClick();
+			this.text.setColor(Color.blue);
+		}
 
 	}
 
@@ -74,4 +86,9 @@ public class ClickableText extends Clickable {
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	public void setVisible(boolean visible) {
+		this.text.setVisible(visible);
+	}
+
 }

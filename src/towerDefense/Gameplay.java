@@ -92,7 +92,7 @@ public class Gameplay extends GameComponent {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
-		container.getGraphics().setColor(Color.green);
+		container.getInput().clearKeyPressedRecord();
 		this.initDefaults();
 		Gameplay.camera = new Camera(0, 0, this);
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png",
@@ -369,8 +369,8 @@ public class Gameplay extends GameComponent {
 						.getScore());
 				this.game.resetScores();
 				this.game.setLost(this.player.getScore(), this.player.getName());
-				container.getGraphics().setColor(Color.white);
 				this.game.setMode(TowerDefense.MODE_MENU);
+				this.game.getMenu().setStartMenu();
 			}
 
 			for (Projectile projectiles : this.projectiles) {
@@ -428,7 +428,8 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			container.exit();
+			this.game.getMenu().setPauseMenu();
+			this.game.setMode(TowerDefense.MODE_MENU);
 		}
 		if (input.isKeyPressed(Input.KEY_S)) {
 			try {
