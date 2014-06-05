@@ -18,22 +18,22 @@ public class BombTower extends Tower {
 		this.shootingInterval = shootingInterval;
 		this.delta = this.shootingInterval;
 		this.bombRadius = bombRadius;
-		this.name = "Bomb Tower";
+		this.name = "B-Lymphozyt";
 	}
 
 	@Override
 	public void draw() {
 		if (this.building) {
-			float scale = (this.buildingTime - this.buildingTimer) / buildingTime;
+			float scale = (this.buildingTime - this.buildingTimer) / this.buildingTime;
 			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
-			this.sprite.draw((this.x  * Gameplay.DEFAULT_SIZE + size- Gameplay.getCameraX()) * Gameplay.CURRENT_GAME_SCALE, (this.y
-					 * Gameplay.DEFAULT_SIZE + size- Gameplay.getCameraY())
+			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size - Gameplay.getCameraX()) * Gameplay.CURRENT_GAME_SCALE, (this.y
+					* Gameplay.DEFAULT_SIZE + size - Gameplay.getCameraY())
 					* Gameplay.CURRENT_GAME_SCALE, Gameplay.CURRENT_GAME_SCALE * scale);
 		} else if (this.wobble) {
 			float scale = this.wobbleFactor;
 			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
-			this.sprite.draw((this.x  * Gameplay.DEFAULT_SIZE + size) * Gameplay.CURRENT_GAME_SCALE- Gameplay.getCameraX(), (this.y
-					 * Gameplay.DEFAULT_SIZE + size)
+			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (this.y
+					* Gameplay.DEFAULT_SIZE + size)
 					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), scale * Gameplay.CURRENT_GAME_SCALE);
 		} else {
 			this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE);
@@ -71,7 +71,7 @@ public class BombTower extends Tower {
 	public void update(int delta) {
 		if (this.building) {
 			this.buildingTimer -= delta;
-			if ((this.buildingTime - this.buildingTimer) / buildingTime >= this.wobbleFactor) {
+			if ((this.buildingTime - this.buildingTimer) / this.buildingTime >= this.wobbleFactor) {
 				this.delta = this.buildingTimer;
 				this.building = false;
 			}

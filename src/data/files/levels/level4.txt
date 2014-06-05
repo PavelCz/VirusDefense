@@ -1,5 +1,5 @@
 testMap.png
-previews/Blutkreislauf-rachen.png
+previews/Blutkreislauf-Rachen.jpg
 veins/bg.png
 1.txt
 enemies.txt

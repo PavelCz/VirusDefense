@@ -1,5 +1,6 @@
 package towerDefense;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -11,11 +12,13 @@ import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.Clickable;
 import engine.gui.GoToMenuButton;
+import engine.gui.StaticText;
 
 public class ChooseLevel extends GameComponent {
 
 	private Button button, left, right;
 	private int page, lastPage;
+	private StaticText title = new StaticText(0, 0, 20, Color.white, "Choose a level");
 
 	private Level currentLevel;
 
@@ -23,16 +26,18 @@ public class ChooseLevel extends GameComponent {
 
 	public ChooseLevel(TowerDefense game, GameContainer container) {
 		super(game);
+		this.title.setPosition((TowerDefense.getWidth() - this.title.getWidth()) / 2, TowerDefense.getHeight() / 4);
+		this.guiElements.add(this.title);
 		this.page = 0;
 		this.levelHandler.add("level1.txt", game.getGameplay());
 		this.levelHandler.add("level4.txt", game.getGameplay());
 		this.levelHandler.add("level2.txt", game.getGameplay());
-		this.levelHandler.add("level3.txt", game.getGameplay());
+		// this.levelHandler.add("level3.txt", game.getGameplay());
 
 		this.currentLevel = this.levelHandler.get(this.page);
 		Sprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
-		Sprite leftSprite = new Sprite("left.png");
-		Sprite rightSprite = new Sprite("right.png");
+		Sprite leftSprite = new Sprite("left.png", 2.5f);
+		Sprite rightSprite = new Sprite("right.png", 2.5f);
 
 		float leftX = TowerDefense.getWidth() / 4 - leftSprite.getWidth() / 2;
 		float leftY = TowerDefense.getHeight() / 2 - leftSprite.getHeight() / 2;
@@ -42,8 +47,8 @@ public class ChooseLevel extends GameComponent {
 		float buttonY = TowerDefense.getHeight() / 2 - currentPreviewPicture.getHeight() / 2;
 
 		this.button = new Button(buttonX, buttonY, currentPreviewPicture, currentPreviewPicture, game.getGameplay(), false);
-		this.left = new Button(leftX, leftY, leftSprite, leftSprite, game.getGameplay(), false);
-		this.right = new Button(rightX, rightY, rightSprite, rightSprite, game.getGameplay(), false);
+		this.left = new Button(leftX, leftY, leftSprite, new Sprite("leftClicked.png", 2.5f), game.getGameplay(), false);
+		this.right = new Button(rightX, rightY, rightSprite, new Sprite("rightClicked.png", 2.5f), game.getGameplay(), false);
 
 		GoToMenuButton back = new GoToMenuButton(0, 0, "Back", this.game);
 		back.setX(0);

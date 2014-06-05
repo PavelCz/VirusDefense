@@ -20,7 +20,7 @@ import engine.gui.StaticText;
 
 public class Menu extends GameComponent {
 	private TextField t;
-	private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.5");
+	// private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.6");
 	private StaticText lostWonMessage;
 	private StartClickable startButton;
 	private GoToGameButton resumeButton;
@@ -103,7 +103,7 @@ public class Menu extends GameComponent {
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		super.render(container, graphics);
 		this.t.render(container, graphics);
-		this.version.draw();
+		// this.version.draw();
 	}
 
 	public String getPlayerName() {

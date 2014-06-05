@@ -5,14 +5,11 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.lwjgl.input.Mouse;
-import org.lwjgl.openal.AL;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
-
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
 import towerDefense.towers.RocketFastTower;
@@ -416,40 +413,22 @@ public class Gameplay extends GameComponent {
 	private void keyboardEvents(GameContainer container, int delta) {
 		Input input = container.getInput();
 
-		if (input.isKeyPressed(Input.KEY_I)) {
-			this.debugMode = !this.debugMode;
-			container.setShowFPS(this.debugMode);
-			if (this.debugMode) {
-				System.out.println("debug");
-				this.player.setMoney(100000);
-			} else {
-				System.out.println("not debug");
-				this.speed = 1f;
-			}
-		}
+		// if (input.isKeyPressed(Input.KEY_I)) {
+		// this.debugMode = !this.debugMode;
+		// container.setShowFPS(this.debugMode);
+		// if (this.debugMode) {
+		// System.out.println("debug");
+		// this.player.setMoney(100000);
+		// } else {
+		// System.out.println("not debug");
+		// this.speed = 1f;
+		// }
+		// }
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			this.game.getMenu().setPauseMenu();
 			this.game.setMode(TowerDefense.MODE_MENU);
 		}
-		if (input.isKeyPressed(Input.KEY_S)) {
-			try {
-				new Sound("data/sound/Blip_Select.wav").play();
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 
-		if (input.isKeyPressed(Input.KEY_R)) {
-
-			AL.destroy();
-			try {
-				container.reinit();
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		int mouseWheel = Mouse.getDWheel();
 		if (mouseWheel > 0) { // mouse wheel up
 			Gameplay.CURRENT_GAME_SCALE *= 1.1f;
@@ -498,9 +477,9 @@ public class Gameplay extends GameComponent {
 
 		}
 
-		if (this.debugMode) {
-			this.debugKeyboardEvents(container, delta);
-		}
+		// if (this.debugMode) {
+		// this.debugKeyboardEvents(container, delta);
+		// }
 
 	}
 

@@ -19,7 +19,7 @@ public class LongerShootingTower extends ShootingTower {
 		this.attacking = false;
 		this.shootingDuration = shootingDuration;
 		this.delta = 0;
-		this.name = "Shooting Tower";
+		this.name = "Erythrozyt";
 		this.graphics = graphics;
 	}
 
