@@ -130,6 +130,9 @@ public class Menu extends GameComponent {
 		this.resumeButton.setVisible(false);
 		this.startButton.activate();
 		this.startButton.setVisible(true);
+		this.pausedMessage.setText("VIRUS DEFENSE");
+		this.pausedMessage.setHeight(50);
+		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 	}
 
 	// public void deactivate() {

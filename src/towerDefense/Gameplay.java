@@ -370,6 +370,7 @@ public class Gameplay extends GameComponent {
 				this.game.resetScores();
 				this.game.setLost(this.player.getScore(), this.player.getName());
 				this.game.setMode(TowerDefense.MODE_MENU);
+				this.game.getMenu().setStartMenu();
 			}
 
 			for (Projectile projectiles : this.projectiles) {
