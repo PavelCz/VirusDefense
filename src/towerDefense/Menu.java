@@ -21,6 +21,7 @@ public class Menu extends GameComponent {
 	private TextField t;
 	private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.5");
 	private StaticText lostWonMessage;
+	private StartClickable startButton;
 
 	public Menu(TowerDefense game) {
 		super(game);
@@ -32,34 +33,34 @@ public class Menu extends GameComponent {
 		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.red, "");
 		this.guiElements.add(this.lostWonMessage);
 
-		StartClickable c = new StartClickable(0, 0, this.game, container);
-		this.clickables.add(c);
-		this.guiElements.add(c);
-		int y = TowerDefense.getHeight() / 2 - c.getTextHeight();
-		c.setX(TowerDefense.getWidth() / 2 - c.getWidth() / 2);
-		c.setY(y);
-		y += c.getTextHeight() + 1;
+		this.startButton = new StartClickable(0, 0, this.game, container);
+		this.clickables.add(this.startButton);
+		this.guiElements.add(this.startButton);
+		int y = TowerDefense.getHeight() / 2 - this.startButton.getTextHeight();
+		this.startButton.setX(TowerDefense.getWidth() / 2 - this.startButton.getWidth() / 2);
+		this.startButton.setY(y);
+		y += this.startButton.getTextHeight() + 1;
 
 		GoToSettingsButton settings = new GoToSettingsButton(0, 0, "Settings", this.game);
 		this.clickables.add(settings);
 		this.guiElements.add(settings);
 		settings.setX(TowerDefense.getWidth() / 2 - settings.getWidth() / 2);
 		settings.setY(y);
-		y += c.getTextHeight() + 1;
+		y += this.startButton.getTextHeight() + 1;
 
 		GoToScoreButton scores = new GoToScoreButton(0, 0, "Highscores", this.game);
 		this.clickables.add(scores);
 		this.guiElements.add(scores);
 		scores.setX(TowerDefense.getWidth() / 2 - scores.getWidth() / 2);
 		scores.setY(y);
-		y += c.getTextHeight() + 1;
+		y += this.startButton.getTextHeight() + 1;
 
 		ExitClickable e = new ExitClickable(100, 121, this.game);
 		this.clickables.add(e);
 		this.guiElements.add(e);
 		e.setX(TowerDefense.getWidth() / 2 - e.getWidth() / 2);
 		e.setY(y);
-		y += c.getTextHeight() + 1;
+		y += this.startButton.getTextHeight() + 1;
 
 		this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 0, 75, 25);
 		this.t.setText("Player");
