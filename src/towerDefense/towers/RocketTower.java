@@ -7,16 +7,16 @@ import engine.projectiles.Rocket;
 
 public class RocketTower extends Tower {
 	protected int delta;
-	protected  float shootingInterval;
+	protected float shootingInterval;
 	protected int bombRadius;
 
 	public RocketTower(float x, float y, Sprite sprite, Gameplay game, float shootingInterval, float damage, int bombRadius) {
 		super(x, y, 100, 50, damage, game, shootingInterval);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
-		this.delta = (int)this.shootingInterval;
+		this.delta = (int) this.shootingInterval;
 		this.bombRadius = bombRadius;
-		this.name = "Rocket Tower";
+		this.name = "T-Lymphozyt";
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class RocketTower extends Tower {
 	public void update(int delta) {
 		this.delta -= delta;
 		if (this.delta <= 0) {
-			this.delta = (int)this.shootingInterval;
+			this.delta = (int) this.shootingInterval;
 			this.shoot();
 		}
 	}
