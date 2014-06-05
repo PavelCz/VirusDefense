@@ -1,5 +1,6 @@
 package towerDefense.towers;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 import towerDefense.Gameplay;
@@ -83,8 +84,10 @@ public class LongerShootingTower extends ShootingTower {
 	public void draw() {
 		super.draw();
 		if (this.attacking && this.currentlyAttacking != null) {
+			this.graphics.setColor(Color.green);
 			this.graphics.drawLine(this.x * Gameplay.SIZE + Gameplay.SIZE / 2, this.y * Gameplay.SIZE + Gameplay.SIZE / 2,
 					this.currentlyAttacking.getX(), this.currentlyAttacking.getY());
+			this.graphics.setColor(Color.white);
 		}
 
 	}
