@@ -11,6 +11,8 @@ import org.lwjgl.openal.AL;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Music;
+import org.newdawn.slick.MusicListener;
 import org.newdawn.slick.SlickException;
 
 import engine.GameComponent;
@@ -18,7 +20,7 @@ import engine.Level;
 import engine.SoundHandler;
 import engine.TextFileToString;
 
-public class TowerDefense extends BasicGame {
+public class TowerDefense extends BasicGame implements MusicListener {
 
 	protected SoundHandler soundHandler = new SoundHandler();
 	public static final int MODE_MENU = 0;
@@ -281,6 +283,18 @@ public class TowerDefense extends BasicGame {
 
 	public Menu getMenu() {
 		return this.menu;
+	}
+
+	@Override
+	public void musicEnded(Music arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void musicSwapped(Music arg0, Music arg1) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
