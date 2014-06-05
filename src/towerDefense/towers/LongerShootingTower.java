@@ -85,8 +85,11 @@ public class LongerShootingTower extends ShootingTower {
 		super.draw();
 		if (this.attacking && this.currentlyAttacking != null) {
 			this.graphics.setColor(Color.green);
-			this.graphics.drawLine(this.x * Gameplay.SIZE + Gameplay.SIZE / 2, this.y * Gameplay.SIZE + Gameplay.SIZE / 2,
-					this.currentlyAttacking.getX(), this.currentlyAttacking.getY());
+			this.graphics.drawLine((this.x * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE
+					- Gameplay.getCameraX(), (this.y * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2)
+					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), (this.currentlyAttacking.getX())
+					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (this.currentlyAttacking.getY())
+					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY());
 			this.graphics.setColor(Color.white);
 		}
 
