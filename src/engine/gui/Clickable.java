@@ -8,6 +8,7 @@ public abstract class Clickable extends GUI {
 	protected boolean clicked = false;
 	protected Gameplay game;
 	protected boolean stayClicked;
+	protected boolean active = true;
 
 	public Clickable(float x, float y, Gameplay game, boolean stayClicked) {
 		super(x, y);
@@ -24,8 +25,9 @@ public abstract class Clickable extends GUI {
 				this.onClick();
 
 			}
-			this.game.getSoundHandler().play("press");
-
+			if (this.active) {
+				this.game.getSoundHandler().play("press");
+			}
 		}
 
 	}
