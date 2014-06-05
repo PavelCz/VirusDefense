@@ -1,5 +1,3 @@
-Player, 850
-Pavrzel, 800
-Player, 800
-pav, 700
-pav, 700
+Player, 0
+Player, 0
+Player, 0

@@ -24,6 +24,7 @@ public class Menu extends GameComponent {
 	private StaticText lostWonMessage;
 	private StartClickable startButton;
 	private GoToGameButton resumeButton;
+	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.white, "VIRUS DEFENSE");
 
 	public Menu(TowerDefense game) {
 		super(game);
@@ -32,6 +33,10 @@ public class Menu extends GameComponent {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
+
+		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
+		this.guiElements.add(this.pausedMessage);
+
 		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.red, "");
 		this.guiElements.add(this.lostWonMessage);
 
@@ -115,6 +120,9 @@ public class Menu extends GameComponent {
 		this.startButton.setVisible(false);
 		this.resumeButton.activate();
 		this.resumeButton.setVisible(true);
+		this.pausedMessage.setText("GAME PAUSED");
+		this.pausedMessage.setHeight(30);
+		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 	}
 
 	public void setStartMenu() {
