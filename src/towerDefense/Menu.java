@@ -124,6 +124,7 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.settings.deactivate();
 		this.settings.setColor(Color.lightGray);
+		this.lostWonMessage.setVisible(false);
 	}
 
 	public void setStartMenu() {
@@ -134,6 +135,7 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.settings.activate();
 		this.settings.setColor(Color.white);
+		this.lostWonMessage.setVisible(true);
 	}
 
 	// public void deactivate() {
