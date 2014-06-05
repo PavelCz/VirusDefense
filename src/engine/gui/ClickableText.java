@@ -89,4 +89,9 @@ public class ClickableText extends Clickable {
 		this.text.setVisible(visible);
 	}
 
+	public void setColor(Color color) {
+		this.text.setColor(color);
+
+	}
+
 }
