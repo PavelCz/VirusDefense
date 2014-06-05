@@ -92,6 +92,7 @@ public class Gameplay extends GameComponent {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
+		container.getInput().clearKeyPressedRecord();
 		this.initDefaults();
 		Gameplay.camera = new Camera(0, 0, this);
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png",
