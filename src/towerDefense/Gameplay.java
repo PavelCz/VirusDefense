@@ -428,7 +428,8 @@ public class Gameplay extends GameComponent {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			this.game.get
+			this.game.getMenu().setPauseMenu();
+			this.game.setMode(TowerDefense.MODE_MENU);
 		}
 		if (input.isKeyPressed(Input.KEY_S)) {
 			try {
