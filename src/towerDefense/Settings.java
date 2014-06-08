@@ -277,8 +277,10 @@ public class Settings extends GameComponent {
 
 		List<int[]> resolutionsList = new ArrayList<int[]>();
 		// copies the resolutions int a List of arrays
+		// TODO: this is the reason the game takes so long to start up
+		int[] resolution = new int[2];
 		for (DisplayMode displayMode : modes) {
-			int[] resolution = new int[2];
+
 			resolution[0] = displayMode.getWidth();
 			resolution[1] = displayMode.getHeight();
 			boolean contained = false;
