@@ -46,12 +46,11 @@ public class Settings extends GameComponent {
 
 		this.back.setX(0);
 		this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
-
+		TrueTypeFont ttt = new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true);
 		int fieldsX = 0;
 		int fieldsY = 100;
 		int fieldWidth = 50;
-		this.widthField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), fieldsX, fieldsY,
-				fieldWidth, 25);
+		this.widthField = new TextField(container, ttt, fieldsX, fieldsY, fieldWidth, 25);
 		this.widthField.setText(TowerDefense.getWidth() + "");
 		this.widthField.setBorderColor(Color.gray);
 		this.widthField.setBackgroundColor(Color.lightGray);
@@ -59,8 +58,7 @@ public class Settings extends GameComponent {
 		this.widthField.setCursorPos(this.widthField.getWidth());
 		fieldsX += fieldWidth;
 
-		this.heightField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), fieldsX, fieldsY,
-				fieldWidth, 25);
+		this.heightField = new TextField(container, ttt, fieldsX, fieldsY, fieldWidth, 25);
 		this.heightField.setText(TowerDefense.getHeight() + "");
 		this.heightField.setBorderColor(Color.gray);
 		this.heightField.setBackgroundColor(Color.lightGray);
