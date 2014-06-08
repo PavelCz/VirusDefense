@@ -1,7 +1,6 @@
 package engine.graphics;
 
 import towerDefense.Gameplay;
-import towerDefense.TowerDefense;
 
 public class BackgroundTiles extends Background {
 	private int horizontalTiles, verticalTiles;
@@ -20,8 +19,9 @@ public class BackgroundTiles extends Background {
 
 	@Override
 	public void draw() {
-		for (int i = 0; i < this.game.getHorizontalTiles() + 1; ++i) {
-			for (int j = 0; j < this.game.getVerticalTiles() + 1; ++j) {
+		// if (this.game != null) {
+		for (int i = 0; i < this.horizontalTiles + 1; ++i) {
+			for (int j = 0; j < this.verticalTiles + 1; ++j) {
 				if (i < this.horizontalTiles && j < this.verticalTiles) {
 					this.picture.draw(i * Gameplay.SIZE - Gameplay.getCameraX(), j * Gameplay.SIZE - Gameplay.getCameraY(),
 							Gameplay.CURRENT_GAME_SCALE);
@@ -30,7 +30,7 @@ public class BackgroundTiles extends Background {
 							Gameplay.CURRENT_GAME_SCALE);
 				}
 			}
+			// }
 		}
-
 	}
 }

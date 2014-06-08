@@ -81,14 +81,21 @@ public class Gameplay extends GameComponent {
 	// Tests:
 
 	//
-	public Gameplay(TowerDefense game) {
+	public Gameplay(TowerDefense game, Level level, GameContainer container) {
 		super(game);
-
+		this.currentLevel = level;
+		try {
+			this.init(container);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
+		this.currentLevel.setGame(this);
 		container.getInput().clearKeyPressedRecord();
 		this.initDefaults();
 		Gameplay.camera = new Camera(0, 0, this);

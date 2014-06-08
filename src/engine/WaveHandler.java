@@ -83,8 +83,7 @@ public class WaveHandler {
 			this.game.game.setMode(TowerDefense.MODE_MENU);
 			this.game.game.setWon(this.game.getPlayer().getScore(), this.game.getPlayer().getName());
 		}
-		if (this.game.getEnemies().isEmpty() && this.index <= 0) {
-
+		if (this.game != null && this.game.getEnemies().isEmpty() && this.index <= 0) {
 			if (!this.waves.isEmpty()) {
 				this.index = this.waves.peek().getNumber();
 				this.currentWave = this.waves.poll();
@@ -102,5 +101,10 @@ public class WaveHandler {
 				this.index--;
 			}
 		}
+	}
+
+	public void setGame(Gameplay game) {
+		this.game = game;
+
 	}
 }

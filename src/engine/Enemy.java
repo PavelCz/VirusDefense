@@ -34,9 +34,9 @@ public class Enemy extends Entity implements Drawable {
 		this.game.getSoundHandler().play("spawn");
 	}
 
-	public Enemy(EnemyType enemyType) {
-		this(enemyType.getHealth(), enemyType.getSpeed(), enemyType.getSprite(), enemyType.getGame().getWaypoints(), enemyType
-				.getGame(), enemyType.getRadius(), enemyType.getWorth());
+	public Enemy(EnemyType enemyType, Gameplay game) {
+		this(enemyType.getHealth(), enemyType.getSpeed(), enemyType.getSprite(), game.getWaypoints(), game, enemyType.getRadius(),
+				enemyType.getWorth());
 
 	}
 
@@ -104,8 +104,8 @@ public class Enemy extends Entity implements Drawable {
 			if (this.wobble) {
 				float scale = (float) this.wobbleFactor;
 				float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
-				this.sprite.draw((this.x  + size) * Gameplay.CURRENT_GAME_SCALE- Gameplay.getCameraX(),
-						(this.y  + size) * Gameplay.CURRENT_GAME_SCALE- Gameplay.getCameraY(), scale * Gameplay.CURRENT_GAME_SCALE);
+				this.sprite.draw((this.x + size) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (this.y + size)
+						* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), scale * Gameplay.CURRENT_GAME_SCALE);
 			} else {
 				this.sprite.draw((this.x) * Gameplay.CURRENT_GAME_SCALE, (this.y) * Gameplay.CURRENT_GAME_SCALE,
 						Gameplay.CURRENT_GAME_SCALE);

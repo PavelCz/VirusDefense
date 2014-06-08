@@ -60,7 +60,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		}
 		this.initSounds();
 		TowerDefense.updateDimensions(container);
-		this.gameplay = new Gameplay(this);
+		// this.gameplay = new Gameplay(this);
 		this.reinitMenu(container);
 		this.reinitChooseLevel(container);
 		this.settings = new Settings(this, container);
@@ -147,14 +147,14 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		this.gameplay.setLevel(level);
 	}
 
-	public void initGameplay(GameContainer container) {
-
-		try {
-			this.gameplay.init(container);
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void initGameplay(GameContainer container, Level level) {
+		this.gameplay = new Gameplay(this, level, container);
+		// try {
+		// this.gameplay.init(container);
+		// } catch (SlickException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		this.currentGameComponent = this.gameplay;
 	}
 
@@ -261,7 +261,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 
 	public void reinitComponents(GameContainer container) {
 		TowerDefense.updateDimensions(container);
-		this.gameplay = new Gameplay(this);
+		// this.gameplay = new Gameplay(this);
 		this.reinitMenu(container);
 		this.reinitChooseLevel(container);
 		// this.settings = new Settings(this, container);
