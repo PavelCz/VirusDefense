@@ -64,7 +64,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		// this.gameplay = new Gameplay(this);
 		this.reinitMenu(container);
 		this.reinitChooseLevel(container);
-		this.settings = new Settings(this, container);
+		// this.settings = new Settings(this, container);
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
 		this.scores = new Scores(this);
@@ -99,7 +99,8 @@ public class TowerDefense extends BasicGame implements MusicListener {
 
 		} else if (this.mode == TowerDefense.MODE_SETTINGS) {
 			if (this.currentGameComponent != this.settings) {
-				this.settings.activate(container);
+				// this.settings.activate(container);
+				this.settings = new Settings(this, container);
 			}
 			this.currentGameComponent = this.settings;
 		} else if (this.mode == TowerDefense.MODE_MENU) {
