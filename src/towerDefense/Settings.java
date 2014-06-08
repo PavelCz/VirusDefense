@@ -46,6 +46,7 @@ public class Settings extends GameComponent {
 
 		this.back.setX(0);
 		this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
+
 		TrueTypeFont ttt = new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true);
 		int fieldsX = 0;
 		int fieldsY = 100;
