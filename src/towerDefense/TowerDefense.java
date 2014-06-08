@@ -49,6 +49,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 
 	@Override
 	public void init(GameContainer container) {
+		long time = System.nanoTime();
 		if (!container.isFullscreen()) {/* "./data/graphics/icons/icon24.png", (this may be necessary for other platforms(mac)) */
 			String[] icons = { "data/graphics/icons/icon16.png", "data/graphics/icons/icon32.png" };
 			try {
@@ -67,6 +68,8 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
 		this.scores = new Scores(this);
+		long passedTime = System.nanoTime() - time;
+		System.out.println(passedTime / 1000000000.0);
 	}
 
 	private void initSounds() {
