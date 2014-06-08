@@ -21,7 +21,7 @@ import org.newdawn.slick.gui.TextField;
 import engine.GameComponent;
 import engine.gui.Clickable;
 import engine.gui.ClickableText;
-import engine.gui.GoToMenuButton;
+import engine.gui.SetGameModeButton;
 import engine.gui.StaticText;
 
 public class Settings extends GameComponent {
@@ -30,7 +30,7 @@ public class Settings extends GameComponent {
 	private TextField heightField;
 	private ClickableText apply;
 	private StaticText warning;
-	private GoToMenuButton back;
+	private SetGameModeButton back;
 	private ClickableText fullscreen;
 	private StaticText supportedResolutionsText;
 	private ClickableText[] resolutionClickables;
@@ -40,7 +40,7 @@ public class Settings extends GameComponent {
 	public Settings(TowerDefense game, GameContainer container) {
 		super(game);
 
-		this.back = new GoToMenuButton(0, 0, "Back", this.game);
+		this.back = new SetGameModeButton(0, 0, "Back", this.game, TowerDefense.MODE_MENU);
 		this.clickables.add(this.back);
 		this.guiElements.add(this.back);
 

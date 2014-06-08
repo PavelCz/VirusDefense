@@ -11,7 +11,7 @@ import engine.LevelHandler;
 import engine.graphics.Sprite;
 import engine.gui.Button;
 import engine.gui.Clickable;
-import engine.gui.GoToMenuButton;
+import engine.gui.SetGameModeButton;
 import engine.gui.StaticText;
 
 public class ChooseLevel extends GameComponent {
@@ -50,7 +50,7 @@ public class ChooseLevel extends GameComponent {
 		this.left = new Button(leftX, leftY, leftSprite, new Sprite("leftClicked.png", 2.5f), game.getGameplay(), false);
 		this.right = new Button(rightX, rightY, rightSprite, new Sprite("rightClicked.png", 2.5f), game.getGameplay(), false);
 
-		GoToMenuButton back = new GoToMenuButton(0, 0, "Back", this.game);
+		SetGameModeButton back = new SetGameModeButton(0, 0, "Back", this.game, TowerDefense.MODE_MENU);
 		back.setX(0);
 		back.setY(TowerDefense.getHeight() - back.getTextHeight() * 2);
 		this.clickables.add(back);

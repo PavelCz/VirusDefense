@@ -12,9 +12,8 @@ import org.newdawn.slick.gui.TextField;
 
 import engine.GameComponent;
 import engine.gui.ExitClickable;
-import engine.gui.GoToGameButton;
-import engine.gui.GoToScoreButton;
 import engine.gui.GoToSettingsButton;
+import engine.gui.SetGameModeButton;
 import engine.gui.StartClickable;
 import engine.gui.StaticText;
 
@@ -23,7 +22,7 @@ public class Menu extends GameComponent {
 	// private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.6");
 	private StaticText lostWonMessage;
 	private StartClickable startButton;
-	private GoToGameButton resumeButton;
+	private SetGameModeButton resumeButton;
 	GoToSettingsButton settings;
 	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.white, "VIRUS DEFENSE");
 
@@ -41,7 +40,7 @@ public class Menu extends GameComponent {
 		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.red, "");
 		this.guiElements.add(this.lostWonMessage);
 
-		this.resumeButton = new GoToGameButton(0, 0, "Resume game", this.game);
+		this.resumeButton = new SetGameModeButton(0, 0, "Resume game", this.game, TowerDefense.MODE_GAME);
 		this.clickables.add(this.resumeButton);
 		this.guiElements.add(this.resumeButton);
 		int y = TowerDefense.getHeight() / 2 - this.resumeButton.getTextHeight();
@@ -65,7 +64,7 @@ public class Menu extends GameComponent {
 		this.settings.setY(y);
 		y += this.startButton.getTextHeight() + 1;
 
-		GoToScoreButton scores = new GoToScoreButton(0, 0, "Highscores", this.game);
+		SetGameModeButton scores = new SetGameModeButton(0, 0, "Highscores", this.game, TowerDefense.MODE_SCORES);
 		this.clickables.add(scores);
 		this.guiElements.add(scores);
 		scores.setX(TowerDefense.getWidth() / 2 - scores.getWidth() / 2);
