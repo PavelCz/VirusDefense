@@ -22,7 +22,7 @@ import engine.TextFileToString;
 
 public class TowerDefense extends BasicGame implements MusicListener {
 
-	protected SoundHandler soundHandler = new SoundHandler();
+	protected static SoundHandler soundHandler = new SoundHandler();
 	public static final int MODE_MENU = 0;
 	public static final int MODE_GAME = 1;
 	public static final int MODE_MAPS = 2;
@@ -70,15 +70,15 @@ public class TowerDefense extends BasicGame implements MusicListener {
 	}
 
 	private void initSounds() {
-		this.soundHandler.addWav("press");
-		this.soundHandler.add("place", "place.wav");
-		this.soundHandler.addWav("bad");
-		this.soundHandler.addWav("death");
-		this.soundHandler.addWav("spawn");
+		TowerDefense.soundHandler.addWav("press");
+		TowerDefense.soundHandler.add("place", "place.wav");
+		TowerDefense.soundHandler.addWav("bad");
+		TowerDefense.soundHandler.addWav("death");
+		TowerDefense.soundHandler.addWav("spawn");
 
-		this.soundHandler.addWav("explode");
-		this.soundHandler.addWav("shotT1");
-		this.soundHandler.addWav("shotT2");
+		TowerDefense.soundHandler.addWav("explode");
+		TowerDefense.soundHandler.addWav("shotT1");
+		TowerDefense.soundHandler.addWav("shotT2");
 	}
 
 	@Override
@@ -127,8 +127,8 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		this.quitGame = true;
 	}
 
-	public SoundHandler getSoundHandler() {
-		return this.soundHandler;
+	public static SoundHandler getSoundHandler() {
+		return TowerDefense.soundHandler;
 	}
 
 	public static int getHeight() {

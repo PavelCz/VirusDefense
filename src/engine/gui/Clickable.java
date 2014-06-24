@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 
 import engine.GameComponent;
 import towerDefense.Gameplay;
+import towerDefense.TowerDefense;
 
 public abstract class Clickable extends GUI {
 	protected float collisionWidth, collisionHeight;
@@ -24,12 +25,12 @@ public abstract class Clickable extends GUI {
 				if (this.clicked) {
 					this.onRelease();
 				} else {
-					this.gameComponent.releaseAllClickablesExcept(this);
+					// this.gameComponent.releaseAllClickablesExcept(this);
 					this.onClick();
 
 				}
 
-				this.gameComponent.getSoundHandler().play("press");
+				TowerDefense.getSoundHandler().play("press");
 			}
 		}
 
