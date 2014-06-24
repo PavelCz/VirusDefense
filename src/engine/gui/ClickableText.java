@@ -2,13 +2,13 @@ package engine.gui;
 
 import org.newdawn.slick.Color;
 
-import towerDefense.Gameplay;
+import engine.GameComponent;
 import engine.graphics.Text;
 
 public class ClickableText extends Clickable {
 	private Text text;
 
-	public ClickableText(float x, float y, String text, float globalScale, Gameplay game, boolean stayClicked) {
+	public ClickableText(float x, float y, String text, float globalScale, GameComponent game, boolean stayClicked) {
 		super(x, y, game, stayClicked);
 		this.text = new Text(15, text, Color.white, globalScale);
 		this.collisionWidth = this.text.getWidth();
