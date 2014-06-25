@@ -66,7 +66,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
 		long passedTime = System.nanoTime() - time;
-		System.out.println(passedTime / 1000000000.0);
+		//System.out.println(passedTime / 1000000000.0);
 	}
 
 	private void initSounds() {
