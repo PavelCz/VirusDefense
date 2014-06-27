@@ -12,7 +12,7 @@ public class TowerDefenseApplet extends AppletGameContainer {
 	private static final long serialVersionUID = -4460920747922375285L;
 
 	public TowerDefenseApplet() {
-		final TowerDefense game = new TowerDefense();
+		final TowerDefense game = new TowerDefense(true);
 		AppGameContainer appGameContainer;
 		try {
 			appGameContainer = new AppGameContainer(game, 800, 600, false);
