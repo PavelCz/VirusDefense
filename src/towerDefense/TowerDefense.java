@@ -40,11 +40,13 @@ public class TowerDefense extends BasicGame implements MusicListener {
 	private Scores scores;
 
 	private boolean quitGame = false;
+	private static boolean applet;
 
 	private int mode;
 
-	public TowerDefense() {
+	public TowerDefense(boolean applet) {
 		super("Virus Defense");
+		TowerDefense.applet = applet;
 	}
 
 	@Override
@@ -66,7 +68,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
 		long passedTime = System.nanoTime() - time;
-		//System.out.println(passedTime / 1000000000.0);
+		// System.out.println(passedTime / 1000000000.0);
 	}
 
 	private void initSounds() {
@@ -297,6 +299,10 @@ public class TowerDefense extends BasicGame implements MusicListener {
 	public void musicSwapped(Music arg0, Music arg1) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public static boolean isApplet() {
+		return applet;
 	}
 
 }
