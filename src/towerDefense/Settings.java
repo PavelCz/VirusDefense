@@ -68,6 +68,7 @@ public class Settings extends GameComponent {
 		fieldsX += fieldWidth + 5;
 
 		this.apply = new ClickableText(fieldsX, fieldsY, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
+		this.apply.setColor(Color.black);
 		this.clickables.add(this.apply);
 		this.guiElements.add(this.apply);
 
@@ -80,6 +81,7 @@ public class Settings extends GameComponent {
 		fieldsY += this.widthField.getHeight();
 		this.fullscreen = new ClickableText(fieldsX, fieldsY, "Toggle fullscreen", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(),
 				false);
+		this.fullscreen.setColor(Color.black);
 		this.clickables.add(this.fullscreen);
 		this.guiElements.add(this.fullscreen);
 
@@ -91,7 +93,7 @@ public class Settings extends GameComponent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.supportedResolutionsText = new StaticText(0, 0, (int) 15, Color.white, "Supported Fullscreen\nResolutions:");
+		this.supportedResolutionsText = new StaticText(0, 0, (int) 15, Color.black, "Supported Fullscreen\nResolutions:");
 
 		this.guiElements.add(this.supportedResolutionsText);
 
@@ -100,6 +102,7 @@ public class Settings extends GameComponent {
 		for (int i = 0; i < this.resolutionClickables.length; ++i) {
 			this.resolutionClickables[i] = new ClickableText(0, 0, supportedResolutions[i][0] + " x " + supportedResolutions[i][1],
 					Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
+			this.resolutionClickables[i].setColor(Color.black);
 			this.clickables.add(this.resolutionClickables[i]);
 			this.guiElements.add(this.resolutionClickables[i]);
 
