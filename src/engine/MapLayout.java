@@ -13,7 +13,7 @@ public class MapLayout {
 
 	public MapLayout(String mapLayoutPath,  int tileLength, String picture) {
 		MapLayoutFromImage mapLayout = new MapLayoutFromImage("data/files/maps/" +mapLayoutPath);
-		this.picture = new Sprite(picture);
+		this.picture = new Sprite(picture, 1.2f);
 		this.path = mapLayout.getPath();
 		this.waypoints = mapLayout.getStartingPoint();
 		this.numberTilesWidth = this.path[0].length;
