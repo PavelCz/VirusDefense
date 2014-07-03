@@ -15,6 +15,7 @@ public class Scores extends GameComponent {
 		super(game);
 
 		SetGameModeButton back = new SetGameModeButton(0, TowerDefense.getHeight() - 20, "Back", this.game, TowerDefense.MODE_MENU);
+		back.setColor(Color.black);
 		this.clickables.add(back);
 		this.guiElements.add(back);
 
@@ -34,6 +35,7 @@ public class Scores extends GameComponent {
 		StaticText scores = new StaticText(0, 0, Color.white, scoreString);
 		scores.setPosition((TowerDefense.getWidth() - scores.getWidth()) / 2,
 				(TowerDefense.getHeight() - scores.getActualHeight()) / 2);
+		scores.setColor(Color.black);
 		this.guiElements.add(scores);
 
 	}
