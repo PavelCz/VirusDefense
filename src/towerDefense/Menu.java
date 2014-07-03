@@ -11,6 +11,7 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.TextField;
 
 import engine.GameComponent;
+import engine.graphics.Background;
 import engine.gui.ExitClickable;
 import engine.gui.GoToSettingsButton;
 import engine.gui.SetGameModeButton;
@@ -18,6 +19,7 @@ import engine.gui.StartClickable;
 import engine.gui.StaticText;
 
 public class Menu extends GameComponent {
+
 	private TextField t;
 	// private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.6");
 	private StaticText lostWonMessage;
@@ -33,6 +35,7 @@ public class Menu extends GameComponent {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
+		this.background = new Background(1f, "viren.jpg", this.game.getGameplay());
 
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.guiElements.add(this.pausedMessage);
@@ -102,6 +105,7 @@ public class Menu extends GameComponent {
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		super.render(container, graphics);
 		this.t.render(container, graphics);
+
 		// this.version.draw();
 	}
 
