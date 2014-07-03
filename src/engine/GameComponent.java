@@ -25,6 +25,7 @@ public abstract class GameComponent {
 
 	public GameComponent(TowerDefense game) {
 		this.game = game;
+		this.background = new Background(1.1f, "defaultBackground.jpg", this.game.getGameplay());
 
 		this.guiElements = new ArrayList<GUI>();
 		this.clickables = new ArrayList<Clickable>();
