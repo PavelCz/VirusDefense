@@ -46,16 +46,16 @@ public class Menu extends GameComponent {
 		this.resumeButton = new SetGameModeButton(0, 0, "Resume game", this.game, TowerDefense.MODE_GAME);
 		this.clickables.add(this.resumeButton);
 		this.guiElements.add(this.resumeButton);
-		int y = TowerDefense.getHeight() / 2 - this.resumeButton.getTextHeight();
+		int y = TowerDefense.getHeight() / 2 - this.resumeButton.getTextHeight() * 2;
 		this.resumeButton.setX(TowerDefense.getWidth() / 2 - this.resumeButton.getWidth() / 2);
-		this.resumeButton.setY(y - this.resumeButton.getTextHeight() - 1);
+		this.resumeButton.setY(y - 1);
 		this.resumeButton.setVisible(false);
 		this.resumeButton.deactivate();
-
+		y += this.resumeButton.getTextHeight();
 		this.startButton = new StartClickable(0, 0, this.game, container);
 		this.clickables.add(this.startButton);
 		this.guiElements.add(this.startButton);
-		y = TowerDefense.getHeight() / 2 - this.startButton.getTextHeight();
+		y += this.startButton.getTextHeight();
 		this.startButton.setX(TowerDefense.getWidth() / 2 - this.startButton.getWidth() / 2);
 		this.startButton.setY(y);
 		y += this.startButton.getTextHeight() + 1;
