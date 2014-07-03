@@ -68,6 +68,7 @@ public class Menu extends GameComponent {
 		y += this.startButton.getTextHeight() + 1;
 
 		SetGameModeButton scores = new SetGameModeButton(0, 0, "Highscores", this.game, TowerDefense.MODE_SCORES);
+		scores.setColor(Color.white);
 		this.clickables.add(scores);
 		this.guiElements.add(scores);
 		scores.setX(TowerDefense.getWidth() / 2 - scores.getWidth() / 2);
