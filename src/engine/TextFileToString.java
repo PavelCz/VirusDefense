@@ -18,7 +18,7 @@ public class TextFileToString {
 			if (TowerDefense.isApplet()) {
 				f = new File("./data/files/" + path);
 			} else {
-				f = new File("src/data/files/" + path);
+				f = new File("./data/files/" + path);
 			}
 
 			BufferedReader reader = new BufferedReader(new FileReader(f));
