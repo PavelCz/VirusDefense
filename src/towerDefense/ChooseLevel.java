@@ -18,7 +18,7 @@ public class ChooseLevel extends GameComponent {
 
 	private Button button, left, right;
 	private int page, lastPage;
-	private StaticText title = new StaticText(0, 0, 20, Color.white, "Choose a level");
+	private StaticText title = new StaticText(0, 0, 20, Color.black, "Choose a level");
 
 	private Level currentLevel;
 
