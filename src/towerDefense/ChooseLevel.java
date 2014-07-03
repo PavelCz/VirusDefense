@@ -36,8 +36,8 @@ public class ChooseLevel extends GameComponent {
 
 		this.currentLevel = this.levelHandler.get(this.page);
 		Sprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
-		Sprite leftSprite = new Sprite("left.png", 2.5f);
-		Sprite rightSprite = new Sprite("right.png", 2.5f);
+		Sprite leftSprite = new Sprite("left.png", 0.07f);
+		Sprite rightSprite = new Sprite("right.png", 0.07f);
 
 		float leftX = TowerDefense.getWidth() / 4 - leftSprite.getWidth() / 2;
 		float leftY = TowerDefense.getHeight() / 2 - leftSprite.getHeight() / 2;
@@ -47,8 +47,8 @@ public class ChooseLevel extends GameComponent {
 		float buttonY = TowerDefense.getHeight() / 2 - currentPreviewPicture.getHeight() / 2;
 
 		this.button = new Button(buttonX, buttonY, currentPreviewPicture, currentPreviewPicture, game.getGameplay(), false);
-		this.left = new Button(leftX, leftY, leftSprite, new Sprite("leftClicked.png", 2.5f), game.getGameplay(), false);
-		this.right = new Button(rightX, rightY, rightSprite, new Sprite("rightClicked.png", 2.5f), game.getGameplay(), false);
+		this.left = new Button(leftX, leftY, leftSprite, new Sprite("leftClicked.png", 0.065f), game.getGameplay(), false);
+		this.right = new Button(rightX, rightY, rightSprite, new Sprite("rightClicked.png", 0.065f), game.getGameplay(), false);
 
 		SetGameModeButton back = new SetGameModeButton(0, 0, "Back", this.game, TowerDefense.MODE_MENU);
 		back.setX(0);
