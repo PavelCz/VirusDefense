@@ -202,7 +202,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 	public static void writeSettingsToFile() {
 		PrintWriter writer;
 		try {
-			writer = new PrintWriter("data/files/settings.txt", "UTF-8");
+			writer = new PrintWriter("./data/files/settings.txt", "UTF-8");
 			writer.println(TowerDefense.getWidth());
 			writer.println(TowerDefense.getHeight());
 			if (TowerDefense.isFULLSCREEN()) {
