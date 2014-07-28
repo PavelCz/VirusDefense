@@ -22,7 +22,7 @@ import engine.TextFileToString;
 
 public class TowerDefense extends BasicGame implements MusicListener {
 
-	protected SoundHandler soundHandler = new SoundHandler();
+	protected static SoundHandler soundHandler = new SoundHandler();
 	public static final int MODE_MENU = 0;
 	public static final int MODE_GAME = 1;
 	public static final int MODE_MAPS = 2;
@@ -40,15 +40,19 @@ public class TowerDefense extends BasicGame implements MusicListener {
 	private Scores scores;
 
 	private boolean quitGame = false;
+	private static boolean applet;
 
 	private int mode;
 
-	public TowerDefense() {
+	public TowerDefense(boolean applet) {
 		super("Virus Defense");
+		TowerDefense.applet = applet;
 	}
 
 	@Override
 	public void init(GameContainer container) {
+		container.setShowFPS(false);
+		long time = System.nanoTime();
 		if (!container.isFullscreen()) {/* "./data/graphics/icons/icon24.png", (this may be necessary for other platforms(mac)) */
 			String[] icons = { "./data/graphics/icons/icon16.png", "./data/graphics/icons/icon32.png" };
 			try {
@@ -60,25 +64,24 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		}
 		this.initSounds();
 		TowerDefense.updateDimensions(container);
-		this.gameplay = new Gameplay(this);
 		this.reinitMenu(container);
 		this.reinitChooseLevel(container);
-		this.settings = new Settings(this, container);
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
-		this.scores = new Scores(this);
+		long passedTime = System.nanoTime() - time;
+		// System.out.println(passedTime / 1000000000.0);
 	}
 
 	private void initSounds() {
-		this.soundHandler.addWav("press");
-		this.soundHandler.add("place", "place.wav");
-		this.soundHandler.addWav("bad");
-		this.soundHandler.addWav("death");
-		this.soundHandler.addWav("spawn");
+		TowerDefense.soundHandler.addWav("press");
+		TowerDefense.soundHandler.add("place", "place.wav");
+		TowerDefense.soundHandler.addWav("bad");
+		TowerDefense.soundHandler.addWav("death");
+		TowerDefense.soundHandler.addWav("spawn");
 
-		this.soundHandler.addWav("explode");
-		this.soundHandler.addWav("shotT1");
-		this.soundHandler.addWav("shotT2");
+		TowerDefense.soundHandler.addWav("explode");
+		TowerDefense.soundHandler.addWav("shotT1");
+		TowerDefense.soundHandler.addWav("shotT2");
 	}
 
 	@Override
@@ -90,13 +93,12 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		if (this.mode == TowerDefense.MODE_GAME) {
 			this.currentGameComponent = this.gameplay;
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
-			if (this.currentGameComponent != this.settings) {
-				this.currentGameComponent = this.maps;
-			}
+			this.currentGameComponent = this.maps;
 
 		} else if (this.mode == TowerDefense.MODE_SETTINGS) {
 			if (this.currentGameComponent != this.settings) {
-				this.settings.activate(container);
+				// this.settings.activate(container);
+				this.settings = new Settings(this, container);
 			}
 			this.currentGameComponent = this.settings;
 		} else if (this.mode == TowerDefense.MODE_MENU) {
@@ -105,6 +107,9 @@ public class TowerDefense extends BasicGame implements MusicListener {
 			}
 			this.currentGameComponent = this.menu;
 		} else if (this.mode == TowerDefense.MODE_SCORES) {
+			if (this.currentGameComponent != this.scores) {
+				this.scores = new Scores(this);
+			}
 			this.currentGameComponent = this.scores;
 		}
 		this.currentGameComponent.update(container, delta);
@@ -125,8 +130,8 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		this.quitGame = true;
 	}
 
-	public SoundHandler getSoundHandler() {
-		return this.soundHandler;
+	public static SoundHandler getSoundHandler() {
+		return TowerDefense.soundHandler;
 	}
 
 	public static int getHeight() {
@@ -147,14 +152,14 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		this.gameplay.setLevel(level);
 	}
 
-	public void initGameplay(GameContainer container) {
-
-		try {
-			this.gameplay.init(container);
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void initGameplay(GameContainer container, Level level) {
+		this.gameplay = new Gameplay(this, level, container);
+		// try {
+		// this.gameplay.init(container);
+		// } catch (SlickException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		this.currentGameComponent = this.gameplay;
 	}
 
@@ -198,7 +203,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 	public static void writeSettingsToFile() {
 		PrintWriter writer;
 		try {
-			writer = new PrintWriter("./src/data/files/settings.txt", "UTF-8");
+			writer = new PrintWriter("./data/files/settings.txt", "UTF-8");
 			writer.println(TowerDefense.getWidth());
 			writer.println(TowerDefense.getHeight());
 			if (TowerDefense.isFULLSCREEN()) {
@@ -241,7 +246,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 
 		PrintWriter writer;
 		try {
-			writer = new PrintWriter("./src/data/files/score.txt", "UTF-8");
+			writer = new PrintWriter("data/files/score.txt", "UTF-8");
 			for (int i = 0; i < scores.length; ++i) {
 				writer.println(scores[i][0] + ", " + scores[i][1]);
 			}
@@ -261,7 +266,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 
 	public void reinitComponents(GameContainer container) {
 		TowerDefense.updateDimensions(container);
-		this.gameplay = new Gameplay(this);
+		// this.gameplay = new Gameplay(this);
 		this.reinitMenu(container);
 		this.reinitChooseLevel(container);
 		// this.settings = new Settings(this, container);
@@ -295,6 +300,10 @@ public class TowerDefense extends BasicGame implements MusicListener {
 	public void musicSwapped(Music arg0, Music arg1) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public static boolean isApplet() {
+		return applet;
 	}
 
 }

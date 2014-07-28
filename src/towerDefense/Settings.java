@@ -21,7 +21,7 @@ import org.newdawn.slick.gui.TextField;
 import engine.GameComponent;
 import engine.gui.Clickable;
 import engine.gui.ClickableText;
-import engine.gui.GoToMenuButton;
+import engine.gui.SetGameModeButton;
 import engine.gui.StaticText;
 
 public class Settings extends GameComponent {
@@ -30,7 +30,7 @@ public class Settings extends GameComponent {
 	private TextField heightField;
 	private ClickableText apply;
 	private StaticText warning;
-	private GoToMenuButton back;
+	private SetGameModeButton back;
 	private ClickableText fullscreen;
 	private StaticText supportedResolutionsText;
 	private ClickableText[] resolutionClickables;
@@ -40,18 +40,18 @@ public class Settings extends GameComponent {
 	public Settings(TowerDefense game, GameContainer container) {
 		super(game);
 
-		this.back = new GoToMenuButton(0, 0, "Back", this.game);
+		this.back = new SetGameModeButton(0, 0, "Back", this.game, TowerDefense.MODE_MENU);
 		this.clickables.add(this.back);
 		this.guiElements.add(this.back);
 
 		this.back.setX(0);
 		this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
 
+		TrueTypeFont ttt = new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true);
 		int fieldsX = 0;
 		int fieldsY = 100;
 		int fieldWidth = 50;
-		this.widthField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), fieldsX, fieldsY,
-				fieldWidth, 25);
+		this.widthField = new TextField(container, ttt, fieldsX, fieldsY, fieldWidth, 25);
 		this.widthField.setText(TowerDefense.getWidth() + "");
 		this.widthField.setBorderColor(Color.gray);
 		this.widthField.setBackgroundColor(Color.lightGray);
@@ -59,8 +59,7 @@ public class Settings extends GameComponent {
 		this.widthField.setCursorPos(this.widthField.getWidth());
 		fieldsX += fieldWidth;
 
-		this.heightField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), fieldsX, fieldsY,
-				fieldWidth, 25);
+		this.heightField = new TextField(container, ttt, fieldsX, fieldsY, fieldWidth, 25);
 		this.heightField.setText(TowerDefense.getHeight() + "");
 		this.heightField.setBorderColor(Color.gray);
 		this.heightField.setBackgroundColor(Color.lightGray);
@@ -69,6 +68,7 @@ public class Settings extends GameComponent {
 		fieldsX += fieldWidth + 5;
 
 		this.apply = new ClickableText(fieldsX, fieldsY, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
+		this.apply.setColor(Color.black);
 		this.clickables.add(this.apply);
 		this.guiElements.add(this.apply);
 
@@ -81,6 +81,7 @@ public class Settings extends GameComponent {
 		fieldsY += this.widthField.getHeight();
 		this.fullscreen = new ClickableText(fieldsX, fieldsY, "Toggle fullscreen", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(),
 				false);
+		this.fullscreen.setColor(Color.black);
 		this.clickables.add(this.fullscreen);
 		this.guiElements.add(this.fullscreen);
 
@@ -92,7 +93,7 @@ public class Settings extends GameComponent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.supportedResolutionsText = new StaticText(0, 0, (int) 15, Color.white, "Supported Fullscreen\nResolutions:");
+		this.supportedResolutionsText = new StaticText(0, 0, (int) 15, Color.black, "Supported Fullscreen\nResolutions:");
 
 		this.guiElements.add(this.supportedResolutionsText);
 
@@ -101,6 +102,7 @@ public class Settings extends GameComponent {
 		for (int i = 0; i < this.resolutionClickables.length; ++i) {
 			this.resolutionClickables[i] = new ClickableText(0, 0, supportedResolutions[i][0] + " x " + supportedResolutions[i][1],
 					Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
+			this.resolutionClickables[i].setColor(Color.black);
 			this.clickables.add(this.resolutionClickables[i]);
 			this.guiElements.add(this.resolutionClickables[i]);
 
@@ -277,8 +279,10 @@ public class Settings extends GameComponent {
 
 		List<int[]> resolutionsList = new ArrayList<int[]>();
 		// copies the resolutions int a List of arrays
+		// TODO: this is the reason the game takes so long to start up
+		int[] resolution = new int[2];
 		for (DisplayMode displayMode : modes) {
-			int[] resolution = new int[2];
+
 			resolution[0] = displayMode.getWidth();
 			resolution[1] = displayMode.getHeight();
 			boolean contained = false;

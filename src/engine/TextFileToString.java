@@ -7,12 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import towerDefense.TowerDefense;
+
 public class TextFileToString {
 
 	public static List<String> getLines(String path) {
 		List<String> list = new ArrayList<String>();
 		try {
-			File f = new File("./src/data/files/" + path);
+			File f;
+			if (TowerDefense.isApplet()) {
+				f = new File("src/data/files/" + path);
+			} else {
+				f = new File("src/data/files/" + path);
+			}
 
 			BufferedReader reader = new BufferedReader(new FileReader(f));
 

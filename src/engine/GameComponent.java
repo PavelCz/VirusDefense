@@ -10,11 +10,12 @@ import org.newdawn.slick.SlickException;
 
 import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
+import engine.graphics.Background;
 import engine.gui.Clickable;
 import engine.gui.GUI;
 
 public abstract class GameComponent {
-
+	protected Background background;
 	protected List<GUI> guiElements;
 	protected List<Clickable> clickables;
 	protected boolean mouseWasClicked;
@@ -24,6 +25,7 @@ public abstract class GameComponent {
 
 	public GameComponent(TowerDefense game) {
 		this.game = game;
+		this.background = new Background(1.1f, "defaultBackground.jpg", this.game.getGameplay());
 
 		this.guiElements = new ArrayList<GUI>();
 		this.clickables = new ArrayList<Clickable>();
@@ -43,6 +45,9 @@ public abstract class GameComponent {
 	}
 
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		if (this.background != null) {
+			this.background.draw();
+		}
 		this.renderGUI();
 	}
 

@@ -11,19 +11,20 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.TextField;
 
 import engine.GameComponent;
+import engine.graphics.Background;
 import engine.gui.ExitClickable;
-import engine.gui.GoToGameButton;
-import engine.gui.GoToScoreButton;
 import engine.gui.GoToSettingsButton;
+import engine.gui.SetGameModeButton;
 import engine.gui.StartClickable;
 import engine.gui.StaticText;
 
 public class Menu extends GameComponent {
+
 	private TextField t;
 	// private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.6");
 	private StaticText lostWonMessage;
 	private StartClickable startButton;
-	private GoToGameButton resumeButton;
+	private SetGameModeButton resumeButton;
 	GoToSettingsButton settings;
 	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.white, "VIRUS DEFENSE");
 
@@ -34,6 +35,7 @@ public class Menu extends GameComponent {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
+		this.background = new Background(1f, "viren.jpg", this.game.getGameplay());
 
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.guiElements.add(this.pausedMessage);
@@ -41,19 +43,20 @@ public class Menu extends GameComponent {
 		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.red, "");
 		this.guiElements.add(this.lostWonMessage);
 
-		this.resumeButton = new GoToGameButton(0, 0, "Resume game", this.game);
+		this.resumeButton = new SetGameModeButton(0, 0, "Resume game", this.game, TowerDefense.MODE_GAME);
 		this.clickables.add(this.resumeButton);
 		this.guiElements.add(this.resumeButton);
-		int y = TowerDefense.getHeight() / 2 - this.resumeButton.getTextHeight();
+		int y = TowerDefense.getHeight() / 2 + TowerDefense.getHeight() / 8 - this.resumeButton.getTextHeight();
 		this.resumeButton.setX(TowerDefense.getWidth() / 2 - this.resumeButton.getWidth() / 2);
-		this.resumeButton.setY(y - this.resumeButton.getTextHeight() - 1);
+		this.resumeButton.setY(y - 1);
+		this.resumeButton.setColor(Color.white);
 		this.resumeButton.setVisible(false);
 		this.resumeButton.deactivate();
 
 		this.startButton = new StartClickable(0, 0, this.game, container);
 		this.clickables.add(this.startButton);
 		this.guiElements.add(this.startButton);
-		y = TowerDefense.getHeight() / 2 - this.startButton.getTextHeight();
+		y += this.startButton.getTextHeight();
 		this.startButton.setX(TowerDefense.getWidth() / 2 - this.startButton.getWidth() / 2);
 		this.startButton.setY(y);
 		y += this.startButton.getTextHeight() + 1;
@@ -65,7 +68,8 @@ public class Menu extends GameComponent {
 		this.settings.setY(y);
 		y += this.startButton.getTextHeight() + 1;
 
-		GoToScoreButton scores = new GoToScoreButton(0, 0, "Highscores", this.game);
+		SetGameModeButton scores = new SetGameModeButton(0, 0, "Highscores", this.game, TowerDefense.MODE_SCORES);
+		scores.setColor(Color.white);
 		this.clickables.add(scores);
 		this.guiElements.add(scores);
 		scores.setX(TowerDefense.getWidth() / 2 - scores.getWidth() / 2);
@@ -103,6 +107,7 @@ public class Menu extends GameComponent {
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		super.render(container, graphics);
 		this.t.render(container, graphics);
+
 		// this.version.draw();
 	}
 
@@ -124,6 +129,7 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.settings.deactivate();
 		this.settings.setColor(Color.lightGray);
+		this.lostWonMessage.setVisible(false);
 	}
 
 	public void setStartMenu() {
@@ -134,6 +140,7 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.settings.activate();
 		this.settings.setColor(Color.white);
+		this.lostWonMessage.setVisible(true);
 	}
 
 	// public void deactivate() {

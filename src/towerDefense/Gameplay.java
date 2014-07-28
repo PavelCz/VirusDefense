@@ -81,14 +81,21 @@ public class Gameplay extends GameComponent {
 	// Tests:
 
 	//
-	public Gameplay(TowerDefense game) {
+	public Gameplay(TowerDefense game, Level level, GameContainer container) {
 		super(game);
-
+		this.currentLevel = level;
+		try {
+			this.init(container);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
+		this.currentLevel.setGame(this);
 		container.getInput().clearKeyPressedRecord();
 		this.initDefaults();
 		Gameplay.camera = new Camera(0, 0, this);
@@ -244,17 +251,17 @@ public class Gameplay extends GameComponent {
 		} else if (this.mode == -1) {
 			new Sprite("Game Over.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE);
 		}
-		for (int i = 0; i < this.towers.length; ++i) {
-			for (int j = 0; j < this.towers[0].length; ++j) {
-				if (this.towers[i][j] != null) {
-					Tower currentTower = this.towers[i][j];
-					new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.white).draw(
-							(currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE
-									- Gameplay.getCameraX(), (currentTower.getY() * this.currentTileLength + DEFAULT_SIZE / 2)
-									* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
-				}
-			}
-		}
+		// for (int i = 0; i < this.towers.length; ++i) {
+		// for (int j = 0; j < this.towers[0].length; ++j) {
+		// if (this.towers[i][j] != null) {
+		// Tower currentTower = this.towers[i][j];
+		// new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.white).draw(
+		// (currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE
+		// - Gameplay.getCameraX(), (currentTower.getY() * this.currentTileLength + DEFAULT_SIZE / 2)
+		// * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
+		// }
+		// }
+		// }
 	}
 
 	private void renderHealthBars(GameContainer container, Graphics graphics) {

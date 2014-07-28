@@ -23,11 +23,9 @@ public class Bomb extends Projectile implements Drawable {
 		String[] animation = new String[20];
 		for (int i = 0; i <= 8;) {
 			animation[i] = "shoot/Frame000" + ++i + ".png";
-			System.out.println(animation[i - 1]);
 		}
 		for (int i = 9; i <= 19;) {
 			animation[i] = "shoot/Frame00" + ++i + ".png";
-			System.out.println(animation[i - 1]);
 		}
 
 		float durationToTarget = distance / this.speed;

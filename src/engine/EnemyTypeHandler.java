@@ -13,16 +13,18 @@ import towerDefense.Gameplay;
  */
 public class EnemyTypeHandler {
 	private List<EnemyType> enemyTypes;
+	private Gameplay game;
 
 	public EnemyTypeHandler(Gameplay game, String enemies) {
 		this.enemyTypes = new ArrayList<EnemyType>();
-		this.initEnemyTypes(game, TextFileToString.getLines("enemies/" + enemies));
+		this.initEnemyTypes(TextFileToString.getLines("enemies/" + enemies));
+		this.game = game;
 	}
 
-	private void initEnemyTypes(Gameplay game, List<String> lines) {
+	private void initEnemyTypes(List<String> lines) {
 		for (String line : lines) {
 			String[] parts = line.split(", ");
-			this.enemyTypes.add(new EnemyType(Integer.parseInt(parts[0]), Float.parseFloat(parts[1]), parts[2], game, Integer
+			this.enemyTypes.add(new EnemyType(Integer.parseInt(parts[0]), Float.parseFloat(parts[1]), parts[2], Integer
 					.parseInt(parts[3]), Integer.parseInt(parts[4]), Float.parseFloat(parts[5])));
 		}
 
@@ -42,6 +44,11 @@ public class EnemyTypeHandler {
 	 * @return return a new Enemy with the properties that the specified EnemyType has
 	 */
 	public Enemy createEnemy(int type) {
-		return this.enemyTypes.get(type).createEnemy();
+		return this.enemyTypes.get(type).createEnemy(this.game);
 	}
+
+	public void setGame(Gameplay game) {
+		this.game = game;
+	}
+
 }

@@ -2,15 +2,17 @@ package engine.gui;
 
 import org.newdawn.slick.Color;
 
-import towerDefense.Gameplay;
+import engine.GameComponent;
 import engine.graphics.Text;
 
 public class ClickableText extends Clickable {
 	private Text text;
+	private Color savedColor;
 
-	public ClickableText(float x, float y, String text, float globalScale, Gameplay game, boolean stayClicked) {
+	public ClickableText(float x, float y, String text, float globalScale, GameComponent game, boolean stayClicked) {
 		super(x, y, game, stayClicked);
 		this.text = new Text(15, text, Color.white, globalScale);
+		this.savedColor = Color.white;
 		this.collisionWidth = this.text.getWidth();
 		this.collisionHeight = this.text.getTextHeight();
 	}
@@ -53,7 +55,7 @@ public class ClickableText extends Clickable {
 
 	@Override
 	public void onUnHover() {
-		this.text.setColor(Color.white);
+		this.text.setColor(this.savedColor);
 
 	}
 
@@ -91,6 +93,7 @@ public class ClickableText extends Clickable {
 
 	public void setColor(Color color) {
 		this.text.setColor(color);
+		this.savedColor = color;
 
 	}
 
