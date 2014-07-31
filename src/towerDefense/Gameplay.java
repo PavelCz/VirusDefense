@@ -10,6 +10,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
 import towerDefense.towers.RocketFastTower;
@@ -251,17 +252,17 @@ public class Gameplay extends GameComponent {
 		} else if (this.mode == -1) {
 			new Sprite("Game Over.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE);
 		}
-		// for (int i = 0; i < this.towers.length; ++i) {
-		// for (int j = 0; j < this.towers[0].length; ++j) {
-		// if (this.towers[i][j] != null) {
-		// Tower currentTower = this.towers[i][j];
-		// new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.white).draw(
-		// (currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE
-		// - Gameplay.getCameraX(), (currentTower.getY() * this.currentTileLength + DEFAULT_SIZE / 2)
-		// * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
-		// }
-		// }
-		// }
+		for (int i = 0; i < this.towers.length; ++i) {
+			for (int j = 0; j < this.towers[0].length; ++j) {
+				if (this.towers[i][j] != null) {
+					Tower currentTower = this.towers[i][j];
+					new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.white).draw(
+							(currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE
+									- Gameplay.getCameraX(), (currentTower.getY() * this.currentTileLength + DEFAULT_SIZE / 2)
+									* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
+				}
+			}
+		}
 	}
 
 	private void renderHealthBars(GameContainer container, Graphics graphics) {
