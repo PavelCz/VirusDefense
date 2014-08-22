@@ -1,5 +1,5 @@
 
-<!-- dropdown menu start -->
+<!-- things i added -->
 #menu {
   font-size:14px;
   position:absolute;  
@@ -52,6 +52,11 @@
 .topmenu:hover ul {
   display:block;  
   z-index:500;
+}
+
+a.disabled {
+   pointer-events: none;
+   cursor: default;
 }
 
 <!-- dropdown menu end -->
