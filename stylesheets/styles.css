@@ -18,7 +18,7 @@
 
 .topmenu a {
   float:left;
-  width:110px;
+  width:relative;
   text-align:center;
 }
 
@@ -27,11 +27,11 @@
 }
 
 .topmenu a, .submenu a{
-  padding:1px 5px;
-  border:1px solid #C37000;
+  padding:0px 0px;
+  border:0px solid #C37000;
   border-collapse:collapse;
   color:#C37000;
-  font-weight:bold;
+  font-weight:none;
   text-decoration:none;
   background-color:#7F4800;
   margin:0;  
@@ -39,7 +39,7 @@
 
 .submenu a{
   font-size:12px;
-  width:110px;
+  width:a.width;
   position:relative;
   clear:both; /* special IE6 */
 }
