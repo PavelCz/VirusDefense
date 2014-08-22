@@ -54,10 +54,6 @@
   z-index:500;
 }
 
-a.disabled {
-   pointer-events: none;
-   cursor: default;
-}
 
 <!-- dropdown menu end -->
 
