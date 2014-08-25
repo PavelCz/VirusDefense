@@ -18,22 +18,22 @@
 	
 	<!-- spoiler -->
 	<script type="text/javascript" src="../jquery-1.4.2.js"></script>
-		<script type="text/javascript">
-		/* <![CDATA[ */
-		$(document).ready(function(){
-			var zuklapptext = "Hide all releases";
-			var aufklapptext = "Show all releases";
-			$(".pre-spoiler").children("input").toggle(
-				function(){
-					this.value = zuklapptext;
-					$(this).parent().children(".spoiler").first().slideDown();
-				}, function(){
-					this.value = aufklapptext;
-					$(this).parent().children(".spoiler").first().slideUp();
-				});
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	$(document).ready(function(){
+		var zuklapptext = "Hide all releases";
+		var aufklapptext = "Show all releases";
+		$(".pre-spoiler").children("input").toggle(
+			function(){
+				this.value = zuklapptext;
+				$(this).parent().children(".spoiler").first().slideDown();
+			}, function(){
+			this.value = aufklapptext;
+				$(this).parent().children(".spoiler").first().slideUp();
 			});
-		/* ]]> */
-	</script>
+		});
+	/* ]]> */
+</script>
 	
   	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 		<script> 
