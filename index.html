@@ -15,29 +15,19 @@
     <link rel="stylesheet" href="stylesheets/ie.css">
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    
+    <script type="text/javascript" src="../jquery-1.4.2.js"></script>
+		<script> 
+		$(function(){
+			$("#header").load("header.html"); <!-- could also be located in head.html -->
+			$("#footer").load("footer.html");
+		});
+	</script>
+	
+    <div id="header"></div>
 
   </head>
    <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="http://valep42.github.io/VirusDefense" >Home</a></li>
-          <li class="fork"><a href="http://valep42.github.io/VirusDefense/archive">Archive</a></li>
-      	  <li class="fork"><a href="http://valep42.github.io/VirusDefense/downloads">Downloads</a></li> 
-      <div id="menu">
-	    <ul>
-	      <li class="topmenu">
-	        <a href="https://github.com/Valep42/VirusDefense-libGDX-port">View On GitHub</a>
-	        <ul>
-	          <li class="submenu"><a href="https://github.com/Valep42/VirusDefense-libGDX-port/wiki">Wiki</a></li>
-	          <li class="submenu"><a href="https://github.com/Valep42/VirusDefense-libGDX-port/releases">Releases</a></li>
-	        </ul>
-	      </li>
-	      
-	    </ul>
-	  </div> 
-  
-        </nav>
-      </div><!-- end header -->
 
     <div class="wrapper">
 
@@ -66,12 +56,6 @@ It is based on a game using <a href="http://slick.ninjacave.com/">Slick2d</a> (d
 </p>
 <h3>
 
-<div id ="title">
-    <hr>
-    <span class="credits left">Project maintained by <a href="https://github.com/Valep42">Valep42</a></span>
-    <span class="credits right">Hosted on GitHub Pages &mdash; Based on a theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-          </section>  
+<div id="footer"></div>
   </body>
 </html>
