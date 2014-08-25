@@ -2,10 +2,12 @@
 <html>
   <head>
   	
-    
+    <title>Archive - Virus Defense</title>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> <!-- must be before include -->
+    <script src="../javascripts/respond.js"></script> <!-- position may change, but can't be in head.html -->
     <link rel="stylesheet" href="../stylesheets/styles.css">
+    
     <!-- include files -->
     <script type="text/javascript" src="../jquery-1.4.2.js"></script>
 		<script> 
@@ -16,56 +18,27 @@
 		});
 	</script>
 	
-	
-	<script src="../javascripts/respond.js"></script> <!-- position may change, but can't be in head.html -->
-	
-	
-    <title>Archive - Virus Defense</title>
-   
-    
-    
-    
- 	
-	
-	
-	
-	 <div id="heady"></div>
-  
-	
-	<script type="text/javascript" src="../jquery-1.4.2.js"></script>
-		<script> 
-		$(function(){
-		});
-	</script>
+	<div id="heady"></div>
 	
 	<!-- spoiler -->
 	
 	<script type="text/javascript">
-	/* <![CDATA[ */
-	$(document).ready(function(){
-		var zuklapptext = "Hide all releases";
-		var aufklapptext = "Show all releases";
-		$(".pre-spoiler").children("input").toggle(
-			function(){
-				this.value = zuklapptext;
-				$(this).parent().children(".spoiler").first().slideDown();
-			}, function(){
-			this.value = aufklapptext;
-				$(this).parent().children(".spoiler").first().slideUp();
-			});
+		/* <![CDATA[ */
+		$(document).ready(function(){
+			var zuklapptext = "Hide all releases";
+			var aufklapptext = "Show all releases";
+			$(".pre-spoiler").children("input").toggle(
+				function(){
+					this.value = zuklapptext;
+					$(this).parent().children(".spoiler").first().slideDown();
+				}, function(){
+					this.value = aufklapptext;
+					$(this).parent().children(".spoiler").first().slideUp();
+				});
 		});
-	/* ]]> */
-</script>
+		/* ]]> */
+	</script>
 	
-  	
-	
-  
-   
-   
-	
-	
-	
-
 </head>
   
    <body>
