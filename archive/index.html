@@ -16,7 +16,24 @@
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-
+<!-- spoiler -->
+<script type="text/javascript" src="../jquery-1.4.2.js"></script>
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	$(document).ready(function(){
+		var zuklapptext = "Hide";
+		var aufklapptext = "Show";
+		$(".pre-spoiler").children("input").toggle(
+			function(){
+				this.value = zuklapptext;
+				$(this).parent().children(".spoiler").first().slideDown();
+			}, function(){
+				this.value = aufklapptext;
+				$(this).parent().children(".spoiler").first().slideUp();
+			});
+		});
+	/* ]]> */
+</script>
 
   </head>
   
@@ -61,12 +78,9 @@ The original GitHub project also includes the files of this website </p>
 <a href="https://github.com/Valep42/VirusDefense/releases/download/v0.6/Virus.Defense.7z">Latest runnable jar</a> <br>
 <a href="https://github.com/Valep42/VirusDefense/archive/v0.7.zip">Latest source release</a>
 
-
-<div id="spoiler" style="display:none;">der versteckte Text</div>
-<button onclick="document.all.spoiler.style.display=''">SPOILER</button>
-
-
-<br>--------------------------<br>
+<div class="pre-spoiler">
+	<input name="button" type="button" value="Show">
+   <div class="spoiler" style="display: none;">
 <a href="https://github.com/Valep42/VirusDefense/releases/tag/v0.7">v0.7</a> <- latest release <br>
 <a href="https://github.com/Valep42/VirusDefense/releases/tag/v0.6">v0.6</a> <- latest runnable jar <br>
 <a href="https://github.com/Valep42/VirusDefense/releases/tag/v0.5">v0.5</a><br>
@@ -74,7 +88,8 @@ The original GitHub project also includes the files of this website </p>
 <a href="https://github.com/Valep42/VirusDefense/releases/tag/v0.3">v0.3</a><br>
 <a href="https://github.com/Valep42/VirusDefense/releases/tag/v0.3">v0.2</a><br>
 <a href="https://github.com/Valep42/VirusDefense/releases/tag/v0.3">v0.1</a><br>
-
+</div>
+</div> 
 </p>
 
 <h3>
