@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
 <!-- spoiler -->
-<script type="text/javascript" src="../jquery-1.4.2.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script type="text/javascript">
 	/* <![CDATA[ */
 	$(document).ready(function(){
@@ -34,30 +34,16 @@
 		});
 	/* ]]> */
 </script>
-
+<script> 
+$(function(){
+  $("#header").load("header.html"); 
+  $("#footer").load("footer.html"); 
+});
+</script> 
   </head>
   
    <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="http://valep42.github.io/VirusDefense" >Home</a></li>
-          <li class="fork"><a href="http://valep42.github.io/VirusDefense/archive">Archive</a></li>
-      	  <li class="fork"><a href="http://valep42.github.io/VirusDefense/downloads">Downloads</a></li> 
-      <div id="menu">
-	    <ul>
-	      <li class="topmenu">
-	        <a href="https://github.com/Valep42/VirusDefense-libGDX-port">View On GitHub</a>
-	        <ul>
-	          <li class="submenu"><a href="https://github.com/Valep42/VirusDefense-libGDX-port/wiki">Wiki</a></li>
-	          <li class="submenu"><a href="https://github.com/Valep42/VirusDefense-libGDX-port/releases">Releases</a></li>
-	        </ul>
-	      </li>
-	      
-	    </ul>
-	  </div> 
-  
-        </nav>
-      </div><!-- end header -->
+      <div id="header"></div>
 
     <div class="wrapper">
 
