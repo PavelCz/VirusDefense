@@ -733,7 +733,7 @@ dt {
 #header nav ul ul {
 float: left;
     display: none;
-    position: absolute; top: 30px;
+    position: absolute; top: 40px;
 }
 
 
@@ -749,7 +749,7 @@ float: left;
 #header nav ul ul li {
 	background-color:#434343;
     width:ul.width;
-    float:left;
+    float:none;
     position: relative;
     border-bottom:none;
   	line-height: 30px;
@@ -757,7 +757,7 @@ float: left;
 
 
 #header nav ul li a {
-
+	float: left;
   display:block;
   color: white;
   padding: 0px 10px;
