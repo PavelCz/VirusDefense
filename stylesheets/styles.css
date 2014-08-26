@@ -1,25 +1,4 @@
 
-<!-- things i added color:#353535-->
-
-
-/* The Dropdown Styles */
-/* =================== */
-  
-/* Hide Dropdowns by Default */
-#header nav ul ul {
-    display: none;
-    position: absolute; top: 58px;
-}
-     
-/* Display Dropdowns on Hover */
-#header nav ul li:hover > ul {
-    display:list-item;
-}
-     
-
- 
-<!-- dropdown menu end -->
-<!-- things i added end -->
 @font-face {
   font-family: 'OpenSansLight';
   src: url("../fonts/OpenSans-Light-webfont.eot");
@@ -772,6 +751,7 @@ display: none
 }
 #header nav ul li a:hover {
   color: #ffcc00;
+  display:list-item;
 }
 #header nav li.fork {
   float: left;
@@ -787,6 +767,59 @@ display: none
   margin-right: 10px;
   font-size: 11px;
 }
+
+
+<!-- things i added color:#353535-->
+nav ul {
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: absolute;
+    display:block;
+    }
+     
+nav ul li {
+    float:left;
+    display:list-item;
+    list-style: none; 
+    
+    }
+  
+nav ul li a {
+    padding:15px 10px;  
+     
+    font-size:20px;
+    text-decoration:none;
+}
+  
+li a:hover {  }
+
+/* The Dropdown Styles */
+/* =================== */
+  
+/* Hide Dropdowns by Default */
+nav ul ul {
+    display: none;
+    position: absolute; top: 58px;
+}
+     
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+    
+}
+     
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+	background-color:#64abfb;
+	display:block;
+    width:170px;
+    float:none;
+    position: relative;
+    border-bottom:none;
+}
+ 
+<!-- dropdown menu end -->
+<!-- things i added end -->
 
 section {
   max-width: 650px;
