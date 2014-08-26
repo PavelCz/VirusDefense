@@ -725,7 +725,7 @@ dt {
     
 #header nav ul li {
     float:left;
-    display:list-item;
+    display:block;
     list-style: none; 
     
 }
