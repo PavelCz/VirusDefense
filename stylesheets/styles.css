@@ -15,6 +15,9 @@
 #header li.topmenu {
   float:left;
 }
+#header li.submenu {
+  float:left;
+}
 
 .topmenu a {
   float:left;
