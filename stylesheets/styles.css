@@ -32,11 +32,7 @@ nav ul ul {
     position: absolute; top: 58px;
 }
      
-/* Display Dropdowns on Hover */
-#header nav ul li:hover > ul {
-    
-  display:list-item;
-}
+
      
 /* Fisrt Tier Dropdown */
 nav ul ul li {
@@ -770,6 +766,8 @@ dt {
   background: blue;
   margin: 6px auto;
 }
+
+
 #header nav ul li {
   font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
@@ -779,6 +777,11 @@ dt {
   line-height: 18px;
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
   font-size: 14px;
+}
+/* Display Dropdowns on Hover */
+#header nav ul li:hover > ul {
+    
+  display:list-item;
 }
 
 #header nav ul ul li{
