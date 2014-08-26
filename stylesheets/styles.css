@@ -747,10 +747,10 @@ dt {
 
 /* First Tier Dropdown */
 #header nav ul ul li {
-display: block;
+	display: block;
 	background-color:#434343;
     width:ul.width;
-    float:left;
+    float:none;
     position: relative;
     border-bottom:none;
   	line-height: 30px;
