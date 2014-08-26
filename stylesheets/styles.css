@@ -783,7 +783,7 @@ dt {
   list-style: none;
   display: inline;
   color: white;
-  line-height: 50px;
+  line-height: 18px;
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
   font-size: 14px;
 }
