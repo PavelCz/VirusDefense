@@ -713,8 +713,10 @@ dt {
 }
 
      
-nav ul li {
-    
+#header nav ul li {
+    float:left;
+    display:list-item;
+    list-style: none; 
     
     }
   
@@ -761,17 +763,7 @@ li a:hover {  }
     position: absolute; top: 58px;
 }
 
-#header nav ul li {
-float:left;
-    display:list-item;
-  font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  list-style: none;
-  color: white;
-  line-height: 18px;
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
-  font-size: 14px;
-}
+
 /* Display Dropdowns on Hover */
 #header nav ul li:hover > ul {
 	display:list-item;
