@@ -759,7 +759,7 @@ dt {
 #header {
   z-index: 100;
   left: 0;
-  top: -30px; <!-- position of top of header box -->
+  top: 0px; <!-- position of top of header box -->
   height: 60px;
   width: 100%;
   position: fixed;
@@ -789,7 +789,7 @@ dt {
 }
 #header nav li a {
   color: white;
-  padding: 120px 6px;
+  padding: 20px 6px;
   margin-top: 12px;
   line-height: 18px;
   font-size: 18px;
