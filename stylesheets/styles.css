@@ -768,6 +768,7 @@ dt {
     float:none;
     position: relative;
     border-bottom:none;
+  line-height: 50px;
 }
 
 
