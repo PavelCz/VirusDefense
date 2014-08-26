@@ -12,10 +12,10 @@
   padding:1px;
 }
 
-#header li.topmenu {
+#menu li.topmenu {
   float:left;
 }
-#header li.submenu {
+#menu li.submenu {
   line-height:12px;
 }
 
