@@ -33,7 +33,7 @@ nav ul ul {
      
 /* Display Dropdowns on Hover */
 nav ul li:hover > ul {
-    
+     display:list-item;
 }
      
 /* Fisrt Tier Dropdown */
