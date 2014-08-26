@@ -34,7 +34,7 @@ nav ul ul {
 }
      
 /* Display Dropdowns on Hover */
-#header nav ul li:hover {
+nav ul li:hover > ul {
     display:list-item;
 }
      
