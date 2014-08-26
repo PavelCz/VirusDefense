@@ -746,7 +746,7 @@ dt {
 
 /* First Tier Dropdown */
 #header nav ul ul li {
-	background-color:#353535;
+	background-color:#CECECE;
     width:ul.width;
     float:none;
     position: relative;
