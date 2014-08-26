@@ -41,7 +41,7 @@ border:0px solid #353535;
   background-color:#353535;
   font-size:12px;
   width:a.width;
-  position:relative;
+  position:0;
   clear:both; /* special IE6 */
 }
 
