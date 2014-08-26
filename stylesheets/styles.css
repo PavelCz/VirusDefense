@@ -34,7 +34,7 @@ nav ul ul {
 }
      
 /* Display Dropdowns on Hover */
-#header nav li:hover {
+#header nav ul li:hover {
     display:list-item;
 }
      
@@ -47,13 +47,7 @@ nav ul ul li {
     position: relative;
     border-bottom:none;
 }
-  
-/* Second, Third and more Tiers */
-nav ul ul ul li {
-    position: absolute relative;
-    top:-58px; 
-    left:170px;
-}
+ 
 <!-- dropdown menu end -->
 <!-- things i added end -->
 @font-face {
