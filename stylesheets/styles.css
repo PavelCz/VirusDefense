@@ -36,10 +36,9 @@ nav ul li:hover > ul {
      display:list-item;
 }
      
-/* Fisrt Tier Dropdown */
+/* First Tier Dropdown */
 nav ul ul li {
 	background-color:#64abfb;
-	display:block;
     width:170px;
     float:none;
     position: relative;
