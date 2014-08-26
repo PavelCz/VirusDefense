@@ -738,7 +738,6 @@ dt {
 
 /* Display Dropdowns on Hover */
 #header nav ul li:hover > ul {
-	height:50px!important;
 	display:list-item;
 	
 }
@@ -767,7 +766,6 @@ dt {
   text-align: center;
 }
 #header nav ul li a:hover {
-height:50px!important;
   color: #ffcc00;
 }
 
