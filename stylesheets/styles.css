@@ -1,18 +1,18 @@
 
 <!-- things i added -->
-#menu {
+#menu2 {
   font-size:14px;
   position:absolute;  
 }
 
-#menu ul {
+#menu2 ul {
   list-style-type:none;
   list-style-image:none;
   margin:0px;
   padding:1px;
 }
 
-#menu li.topmenu {
+#menu2 li.topmenu {
   float:left;
 }
 
@@ -46,7 +46,7 @@
   clear:both; /* special IE6 */
 }
 
-#menu a:hover, .topmenu.on a {
+#menu2 a:hover, .topmenu.on a {
 }
 
 .topmenu:hover ul {
