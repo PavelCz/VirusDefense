@@ -37,7 +37,7 @@ nav ul ul {
 /* Fisrt Tier Dropdown */
 nav ul ul li {
 	background-color:#64abfb;
-	display:block;
+	display:text;
     width:170px;
     float:none;
     position: relative;
