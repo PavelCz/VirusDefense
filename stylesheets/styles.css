@@ -40,6 +40,7 @@ border:0px solid #353535;
   text-decoration:none;
   background-color:#353535;
   font-size:12px;
+  line-height:12px;
   width:a.width;
   position:relative;
   clear:both; /* special IE6 */
