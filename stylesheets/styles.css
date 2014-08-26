@@ -46,8 +46,6 @@ border:0px solid #C37000;
 }
 
 #menu a:hover, .topmenu.on a {
-  color:#4C4C4C;
-  background-color:#ffddbb !important;
 }
 
 .topmenu:hover ul {
