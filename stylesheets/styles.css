@@ -33,12 +33,12 @@
 }
 
 .submenu a{
-border:0px solid #000000;
+border:0px solid #353535;
   border-collapse:collapse;
-  color:#000000;
+  color:#353535;
   font-weight:none;
   text-decoration:none;
-  background-color:#00000;
+  background-color:#353535;
   font-size:12px;
   width:a.width;
   position:relative;
