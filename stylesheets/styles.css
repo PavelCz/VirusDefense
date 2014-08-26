@@ -694,6 +694,57 @@ dt {
   font-family: 'OpenSansSemibold', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   font-weight: normal;
 }
+<!-- things i added color:#353535-->
+nav ul {
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: absolute;
+    display:block;
+    }
+     
+nav ul li {
+    float:left;
+    display:list-item;
+    list-style: none; 
+    
+    }
+  
+nav ul li a {
+    padding:15px 10px;  
+     
+    font-size:20px;
+    text-decoration:none;
+}
+  
+li a:hover {  }
+
+/* The Dropdown Styles */
+/* =================== */
+  
+/* Hide Dropdowns by Default */
+nav ul ul {
+    display: none;
+    position: absolute; top: 58px;
+}
+     
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+    
+}
+     
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+	background-color:#64abfb;
+	display:block;
+    width:170px;
+    float:none;
+    position: relative;
+    border-bottom:none;
+}
+ 
+<!-- dropdown menu end -->
+<!-- things i added end -->
 
 #header {
   z-index: 100;
@@ -769,57 +820,7 @@ display: none
 }
 
 
-<!-- things i added color:#353535-->
-nav ul {
-    padding:0;
-    margin:0;
-    list-style: none;
-    position: absolute;
-    display:block;
-    }
-     
-nav ul li {
-    float:left;
-    display:list-item;
-    list-style: none; 
-    
-    }
-  
-nav ul li a {
-    padding:15px 10px;  
-     
-    font-size:20px;
-    text-decoration:none;
-}
-  
-li a:hover {  }
 
-/* The Dropdown Styles */
-/* =================== */
-  
-/* Hide Dropdowns by Default */
-nav ul ul {
-    display: none;
-    position: absolute; top: 58px;
-}
-     
-/* Display Dropdowns on Hover */
-nav ul li:hover > ul {
-    
-}
-     
-/* Fisrt Tier Dropdown */
-nav ul ul li {
-	background-color:#64abfb;
-	display:block;
-    width:170px;
-    float:none;
-    position: relative;
-    border-bottom:none;
-}
- 
-<!-- dropdown menu end -->
-<!-- things i added end -->
 
 section {
   max-width: 650px;
