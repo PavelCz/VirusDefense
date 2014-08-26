@@ -713,7 +713,10 @@ dt {
 }
 
      
-
+nav ul li {
+    
+    
+    }
   
 nav ul li a {
     padding:15px 10px;  
@@ -759,6 +762,8 @@ li a:hover {  }
 }
 
 #header nav ul li {
+float:left;
+    display:list-item;
   font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   list-style: none;
