@@ -768,7 +768,7 @@ dt {
     float:none;
     position: relative;
     border-bottom:none;
-  line-height: 50px;
+  line-height: 20px;
 }
 
 
@@ -776,7 +776,7 @@ dt {
   color: white;
   padding: 0px 6px;
   margin-top: 12px;
-  line-height: 18px;
+  line-height: 20px;
   font-size: 18px;
   text-align: center;
 }
