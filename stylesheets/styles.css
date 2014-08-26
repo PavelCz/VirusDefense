@@ -694,7 +694,7 @@ dt {
   font-family: 'OpenSansSemibold', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   font-weight: normal;
 }
-
+li a:hover {  }
 #header {
   z-index: 100;
   left: 0;
