@@ -758,7 +758,7 @@ dt {
 
 #header nav ul ul {
     display: none;
-    position: relative; top: 58px;
+    position: absolute; top: 58px;
 }
 
 #header nav ul li {
