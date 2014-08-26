@@ -716,7 +716,7 @@ dt {
   z-index: 100;
   left: 0;
   top: 0px; <!-- position of top of header box -->
-  height: 30px;
+  height: 32px;
   width: 100%;
   position: fixed;
   background: url(../images/nav-bg.gif) #353535;
