@@ -789,11 +789,11 @@ dt {
   margin-right: 10px;
   font-size: 11px;
 }
-
-/* Change this in order to change the Dropdown symbol */
-#header li > a:after { content: ''; } 
+<
+/* Change this in order to change the Dropdown symbol 
+#header li > a:after { content: 'wurst'; } 
 #header li > a:only-child:after { content: ''; }
-
+*/
 
 
 
