@@ -786,7 +786,12 @@ dt {
 }
 #header nav li a {
   color: white;
-  
+  padding: 10px 12px;
+  margin-top: 6px;
+  line-height: 14px;
+  font-size: 14px;
+  display: inline-block;
+  text-align: center;
 }
 #header nav li a:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #749619), color-stop(100%, #527f0e));
