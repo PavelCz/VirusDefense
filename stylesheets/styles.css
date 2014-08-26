@@ -772,7 +772,6 @@ dt {
   font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   list-style: none;
-  display: inline;
   color: white;
   line-height: 18px;
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
