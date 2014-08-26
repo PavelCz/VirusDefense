@@ -15,9 +15,6 @@
 #menu li.topmenu {
   float:left;
 }
-#menu li.submenu {
-  line-height:12px;
-}
 
 .topmenu a {
   float:left;
