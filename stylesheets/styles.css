@@ -16,10 +16,8 @@ nav ul li {
     }
   
 nav ul li a {
-    display:block;
     padding:15px 10px;  
      
-    color:#FFF;
     font-size:20px;
     text-decoration:none;
 }
