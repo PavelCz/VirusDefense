@@ -1,60 +1,62 @@
 
 <!-- things i added -->
-#menu2 {
-  font-size:14px;
-  position:absolute;  
-}
-
-#menu2 ul {
-  list-style-type:none;
-  list-style-image:none;
-  margin:0px;
-  padding:1px;
-}
-
-#menu2 li.topmenu {
-  float:left;
-}
-
-.topmenu a {
-  float:left;
-  width:relative;
-  text-align:center;
-}
-
-.topmenu ul{
-  display:none;
-}
-
-.topmenu a, .submenu a{
-  padding:0px 0px;
+nav ul {
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: relative;
+    display:block;
+    }
+     
+nav ul li {
+    float:left;
+    display:list-item;
+    list-style: none; 
+     
+    background-color:#64abfb;
+    border-bottom: 5px solid #2ecc71;
+    }
   
-  margin:0;  
+nav ul li a {
+    display:block;
+    padding:15px 10px;  
+     
+    color:#FFF;
+    font-size:20px;
+    text-decoration:none;
+    font-family: 'Bree Serif', 'serif';
 }
+  
+li a:hover { background-color: #2ecc71; }
 
-.submenu a{
-  border:0px solid #353535;
-  border-collapse:collapse;
-  color:#353535;
-  font-weight:none;
-  text-decoration:none;
-  background-color:#353535;
-  font-size:12px;
-  line-height:12px;
-  width:a.width;
-  position:relative;
-  clear:both; /* special IE6 */
+/* The Dropdown Styles */
+/* =================== */
+  
+/* Hide Dropdowns by Default */
+nav ul ul {
+    display: none;
+    position: absolute; top: 58px;
 }
-
-#menu2 a:hover, .topmenu.on a {
+     
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+    display:list-item;
 }
-
-.topmenu:hover ul {
-  display:block;  
-  z-index:500;
+     
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+    width:170px;
+    float:none;
+    position: relative;
+    border-bottom:none;
 }
-
-
+  
+/* Second, Third and more Tiers */
+nav ul ul ul li {
+    position: absolute relative;
+    top:-58px; 
+    left:170px;
+}
 <!-- dropdown menu end -->
 <!-- things i added end -->
 @font-face {
