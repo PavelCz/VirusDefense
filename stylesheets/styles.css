@@ -759,7 +759,7 @@ dt {
 #header {
   z-index: 100;
   left: 0;
-  top: -20px; <!-- position of top of header box -->
+  top: -30px; <!-- position of top of header box -->
   height: 60px;
   width: 100%;
   position: fixed;
