@@ -1,27 +1,5 @@
 <!-- things i added color:#353535-->
-nav ul {
-    padding:0;
-    margin:0;
-    list-style: none;
-    position: absolute;
-    display:block;
-    }
-     
-nav ul li {
-    float:left;
-    display:list-item;
-    list-style: none; 
-    
-    }
-  
-nav ul li a {
-    padding:15px 10px;  
-     
-    font-size:20px;
-    text-decoration:none;
-}
-  
-li a:hover {  }
+
 
 /* The Dropdown Styles */
 /* =================== */
@@ -734,6 +712,23 @@ dt {
   font-weight: normal;
 }
 
+     
+nav ul li {
+    float:left;
+    display:list-item;
+    list-style: none; 
+    
+    }
+  
+nav ul li a {
+    padding:15px 10px;  
+     
+    font-size:20px;
+    text-decoration:none;
+}
+  
+li a:hover {  }
+
 #header {
   z-index: 100;
   left: 0;
@@ -755,6 +750,13 @@ dt {
   background: blue;
   margin: 6px auto;
 }
+#header nav ul {
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: relative;
+    display:block;
+    }
 
 #header nav ul ul {
     display: none;
