@@ -1,10 +1,50 @@
+nav ul {
+    padding:0;
+    margin:0;
+    list-style: none;
+    position: absolute;
+    display:block;
+    }
+     
+nav ul li {
+    float:left;
+    display:list-item;
+    list-style: none; 
+    
+    }
+  
+nav ul li a {
+    padding:15px 10px;  
+     
+    font-size:20px;
+    text-decoration:none;
+}
+  
+li a:hover {  }
+
+/* The Dropdown Styles */
+/* =================== */
+  
+/* Hide Dropdowns by Default */
+nav ul ul {
+    display: none;
+    position: absolute; top: 58px;
+}
+     
+/* Display Dropdowns on Hover */
 nav ul li:hover > ul {
     
 }
-
-
-li a:hover {  }
-
+     
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+	background-color:#64abfb;
+	display:block;
+    width:170px;
+    float:none;
+    position: relative;
+    border-bottom:none;
+}
 
 
 @font-face {
