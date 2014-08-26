@@ -12,9 +12,7 @@ nav ul li {
     float:left;
     display:list-item;
     list-style: none; 
-     
-    background-color:#64abfb;
-    border-bottom: 5px solid #2ecc71;
+    
     }
   
 nav ul li a {
