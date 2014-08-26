@@ -28,16 +28,17 @@
 
 .topmenu a, .submenu a{
   padding:0px 0px;
-  border:0px solid #C37000;
+  
+  margin:0;  
+}
+
+.submenu a{
+border:0px solid #C37000;
   border-collapse:collapse;
   color:#C37000;
   font-weight:none;
   text-decoration:none;
   background-color:#7F4800;
-  margin:0;  
-}
-
-.submenu a{
   font-size:12px;
   width:a.width;
   position:relative;
