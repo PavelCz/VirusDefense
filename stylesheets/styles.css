@@ -16,7 +16,7 @@
   float:left;
 }
 #header li.submenu {
-  float:left;
+  line-height:12px;
 }
 
 .topmenu a {
@@ -36,7 +36,7 @@
 }
 
 .submenu a{
-border:0px solid #353535;
+  border:0px solid #353535;
   border-collapse:collapse;
   color:#353535;
   font-weight:none;
