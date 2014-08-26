@@ -725,9 +725,8 @@ dt {
     
 #header nav ul li {
     float:left;
-    display:block;
+    display:list-item;
     list-style: none; 
-    height:40px;
     
 }
     
@@ -758,6 +757,8 @@ dt {
 
 
 #header nav ul li a {
+
+  display:block;
   color: white;
   padding: 0px 10px;
   margin-top: 12px;
