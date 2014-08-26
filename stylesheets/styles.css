@@ -773,7 +773,7 @@ dt {
   background: blue;
   margin: 6px auto;
 }
-#header nav li {
+#header nav ul li {
   font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   list-style: none;
@@ -784,7 +784,7 @@ dt {
   font-size: 14px;
 }
 
-#header nav li li{
+#header nav ul ul li{
 display: none
   font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
@@ -797,7 +797,7 @@ display: none
 }
 
 
-#header nav li a {
+#header nav ul li a {
   color: white;
   padding: 0px 6px;
   margin-top: 12px;
@@ -806,7 +806,7 @@ display: none
   display: inline-block;
   text-align: center;
 }
-#header nav li a:hover {
+#header nav ul li a:hover {
   color: #ffcc00;
 }
 #header nav li.fork {
