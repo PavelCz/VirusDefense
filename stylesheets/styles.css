@@ -713,12 +713,7 @@ dt {
 }
 
      
-#header nav ul li {
-    float:left;
-    display:list-item;
-    list-style: none; 
-    
-    }
+
   
 nav ul li a {
     padding:15px 10px;  
@@ -756,8 +751,15 @@ li a:hover {  }
     list-style: none;
     position: relative;
     display:block;
-    }
-
+}
+    
+#header nav ul li {
+    float:left;
+    display:list-item;
+    list-style: none; 
+    
+}
+    
 #header nav ul ul {
     display: none;
     position: absolute; top: 58px;
