@@ -758,7 +758,7 @@ dt {
 
 #header nav ul ul {
     display: none;
-    position: absolute; top: 58px;
+    position: relative; top: 58px;
 }
 
 #header nav ul li {
@@ -772,8 +772,7 @@ dt {
 }
 /* Display Dropdowns on Hover */
 #header nav ul li:hover > ul {
-    
-  display:list-item;
+	display:list-item;
 }
 
 
