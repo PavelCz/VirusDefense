@@ -35,8 +35,8 @@ nav ul ul {
 
      
 /* Fisrt Tier Dropdown */
-nav ul ul li {
-	background-color:#64abfb;
+#header nav ul ul li {
+	background-color:#353535;
 	display:text;
     width:170px;
     float:none;
@@ -806,6 +806,8 @@ display: none
 #header nav ul li a:hover {
   color: #ffcc00;
 }
+
+
 #header nav li.fork {
   float: left;
   margin-left: 0px;
