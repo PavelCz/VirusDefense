@@ -751,7 +751,7 @@ dt {
     float:none;
     position: relative;
     border-bottom:none;
-  	line-height: 40px;
+  	line-height: 30px;
 }
 
 
@@ -764,7 +764,6 @@ dt {
   line-height: 30px;
   font-size: 18px;
   text-align: center;
-  height:100;
 }
 #header nav ul li a:hover {
   color: #ffcc00;
