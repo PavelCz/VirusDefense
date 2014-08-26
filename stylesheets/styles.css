@@ -731,6 +731,7 @@ dt {
 }
     
 #header nav ul ul {
+float: left;
     display: none;
     position: absolute; top: 30px;
 }
