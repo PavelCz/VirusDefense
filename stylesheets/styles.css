@@ -34,7 +34,7 @@ nav ul ul {
 }
      
 /* Display Dropdowns on Hover */
-nav ul li:hover > ul {
+#header nav li:hover {
     display:list-item;
 }
      
@@ -785,6 +785,7 @@ dt {
 }
 
 #header nav li li{
+display: none
   font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   list-style: none;
