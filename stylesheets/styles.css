@@ -713,12 +713,7 @@ dt {
 }
 
      
-nav ul li {
-    float:left;
-    display:list-item;
-    list-style: none; 
-    
-    }
+
   
 nav ul li a {
     padding:15px 10px;  
