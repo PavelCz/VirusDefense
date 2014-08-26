@@ -738,7 +738,9 @@ dt {
 
 /* Display Dropdowns on Hover */
 #header nav ul li:hover > ul {
+	height:50px!important;
 	display:list-item;
+	
 }
 
 
