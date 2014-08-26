@@ -749,7 +749,7 @@ float: left;
 #header nav ul ul li {
 	background-color:#434343;
     width:ul.width;
-    float:none;
+    float:left;
     position: relative;
     border-bottom:none;
   	line-height: 30px;
