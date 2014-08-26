@@ -34,15 +34,7 @@ nav ul ul {
      
 
      
-/* Fisrt Tier Dropdown */
-#header nav ul ul li {
-	background-color:#353535;
-	display:text;
-    width:170px;
-    float:none;
-    position: relative;
-    border-bottom:none;
-}
+
  
 <!-- dropdown menu end -->
 <!-- things i added end -->
@@ -783,15 +775,16 @@ dt {
   display:list-item;
 }
 
-#header nav ul ul li{
-display: none
-  font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  list-style: none;
-  color: white;
-  line-height: 18px;
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
-  font-size: 14px;
+
+
+/* First Tier Dropdown */
+#header nav ul ul li {
+	background-color:#353535;
+	display:text;
+    width:170px;
+    float:none;
+    position: relative;
+    border-bottom:none;
 }
 
 
