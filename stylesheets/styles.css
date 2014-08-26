@@ -791,7 +791,7 @@ dt {
 }
 
 /* Change this in order to change the Dropdown symbol */
-#header li > a:after { content: ' »'; } 
+#header li > a:after { content: ' ->'; } 
 #header li > a:only-child:after { content: ''; }
 
 
