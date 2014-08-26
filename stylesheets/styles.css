@@ -51,7 +51,7 @@ border:0px solid #353535;
 
 .topmenu:hover ul {
   display:block;  
-  z-index:500;
+  z-index:250;
 }
 
 
