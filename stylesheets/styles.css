@@ -747,7 +747,7 @@ dt {
 	display:list-item;
 	
 }
-#header ul > li {
+#header ul > nav ul li {
 	width:li.width;
 }
 
