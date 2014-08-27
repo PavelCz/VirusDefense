@@ -748,7 +748,7 @@ dt {
 	
 }
 #header ul li > ul {
-	width:li.width; /* also width of the drop down menu */
+	width:inherit; /* also width of the drop down menu */
 }
 
 
