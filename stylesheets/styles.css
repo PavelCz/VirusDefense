@@ -731,7 +731,7 @@ dt {
 }
     
 #header nav ul ul {
-width: ul.width;
+/*width: ul.width;  width of the drop down menu */
 	float: left;
     display: none;
     position: absolute; top: 30px;
@@ -745,6 +745,7 @@ width: ul.width;
 /* Display Dropdowns on Hover */
 #header nav ul li:hover > ul {
 	display:list-item;
+	width:200px;
 	
 }
 
