@@ -753,7 +753,6 @@ dt {
 #header nav ul ul li {
 	display: block;
 	background-color:#434343;
-    width:200;
     float:none;
     position: relative;
     border-bottom:none;
